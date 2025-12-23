@@ -70,33 +70,33 @@
                 android:textColor="@color/text_light" />
         </FrameLayout>
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_secondary_rounded"
-            android:gravity="center_vertical"
-            android:layout_marginBottom="8dp"
-            android:padding="16dp">
+        <!--        <LinearLayout-->
+        <!--            android:orientation="vertical"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="@drawable/bg_secondary_rounded"-->
+        <!--            android:gravity="center_vertical"-->
+        <!--            android:layout_marginBottom="8dp"-->
+        <!--            android:padding="16dp">-->
 
-            <TextView
-                android:text="Change Theme"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="8dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/text_light" />
+        <!--            <TextView-->
+        <!--                android:text="Change Theme"-->
+        <!--                android:textSize="16sp"-->
+        <!--                android:textStyle="bold"-->
+        <!--                android:layout_marginBottom="8dp"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:textColor="@color/text_light" />-->
 
-            <LinearLayout
-                android:id="@+id/themes_container"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:background="@drawable/bg_secondary_rounded"></LinearLayout>
+        <!--&lt;!&ndash;            <LinearLayout&ndash;&gt;-->
+        <!--&lt;!&ndash;                android:id="@+id/themes_container"&ndash;&gt;-->
+        <!--&lt;!&ndash;                android:orientation="horizontal"&ndash;&gt;-->
+        <!--&lt;!&ndash;                android:layout_width="match_parent"&ndash;&gt;-->
+        <!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+        <!--&lt;!&ndash;                android:gravity="center_vertical"&ndash;&gt;-->
+        <!--&lt;!&ndash;                android:background="@drawable/bg_secondary_rounded"></LinearLayout>&ndash;&gt;-->
 
-        </LinearLayout>
+        <!--        </LinearLayout>-->
 
         <LinearLayout
             android:id="@+id/close_button"

@@ -54,7 +54,7 @@ class SettingsActivity : Activity() {
             )
         }
 
-        setupThemeBoxes()
+//        setupThemeBoxes()
     }
 
     // Helper to bind a click listener
@@ -71,63 +71,60 @@ class SettingsActivity : Activity() {
         }
     }
 
-    private fun setupThemeBoxes() {
-        val themesContainer = findViewById<LinearLayout>(R.id.themes_container)
-
-        val themeColors = mapOf(
-            R.style.Theme_Mako_Obsidian to R.color.bg_theme_obsidian,
-            R.style.Theme_Mako_Clay to R.color.bg_theme_clay,
-            R.style.Theme_Mako_Emerald to R.color.bg_theme_emerald,
-            R.style.Theme_Mako_Night to R.color.bg_theme_night
-        )
-
-        val prefs = getSharedPreferences("prefs", MODE_PRIVATE)
-        val currentTheme = prefs.getInt("theme", R.style.Theme_Mako_Obsidian)
+//    private fun setupThemeBoxes() {
+//        val themesContainer = findViewById<LinearLayout>(R.id.themes_container)
 //
-        themesContainer.removeAllViews()
-
-        themeColors.forEach { (styleRes, colorRes) ->
-
-            // Outer frame with gray border
-            val frame = FrameLayout(this).apply {
-                layoutParams = LinearLayout.LayoutParams(
-                    resources.getDimensionPixelSize(R.dimen.theme_box_size),
-                    resources.getDimensionPixelSize(R.dimen.theme_box_size)
-                ).apply {
-                    setPadding(8, 8, 8, 8)
-                    marginEnd = resources.getDimensionPixelSize(R.dimen.theme_box_margin)
-                }
-
-                // Use mutate() to avoid shared drawable issues
-                background = resources.getDrawable(R.drawable.bg_theme_box, theme).mutate()
-            }
-
-            // Inner colored view
-            val fill = View(this).apply {
-                layoutParams = FrameLayout.LayoutParams(
-                    FrameLayout.LayoutParams.MATCH_PARENT,
-                    FrameLayout.LayoutParams.MATCH_PARENT
-                )
-                val color = resources.getColor(colorRes, theme)
-                setBackgroundColor(color)
-            }
-
-            frame.addView(fill)
-
-            frame.setOnClickListener {
-                prefs.edit().putInt("theme", styleRes).apply()
-
-                // Restart MainActivity with clear top to reload theme
-                val intent = Intent(this, MainActivity::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
-
-                //finish() // Close SettingsActivity
-            }
-
-            themesContainer.addView(frame)
-        }
-    }
-
-
+//        val themeColors = mapOf(
+//            R.style.Theme_Mako_Obsidian to R.color.bg_theme_obsidian,
+//            R.style.Theme_Mako_Clay to R.color.bg_theme_clay,
+//            R.style.Theme_Mako_Emerald to R.color.bg_theme_emerald,
+//            R.style.Theme_Mako_Night to R.color.bg_theme_night
+//        )
+//
+//        val prefs = getSharedPreferences("prefs", MODE_PRIVATE)
+//        val currentTheme = prefs.getInt("theme", R.style.Theme_Mako_Obsidian)
+////
+//        themesContainer.removeAllViews()
+//
+//        themeColors.forEach { (styleRes, colorRes) ->
+//
+//            // Outer frame with gray border
+//            val frame = FrameLayout(this).apply {
+//                layoutParams = LinearLayout.LayoutParams(
+//                    resources.getDimensionPixelSize(R.dimen.theme_box_size),
+//                    resources.getDimensionPixelSize(R.dimen.theme_box_size)
+//                ).apply {
+//                    setPadding(8, 8, 8, 8)
+//                    marginEnd = resources.getDimensionPixelSize(R.dimen.theme_box_margin)
+//                }
+//
+//                // Use mutate() to avoid shared drawable issues
+//                background = resources.getDrawable(R.drawable.bg_theme_box, theme).mutate()
+//            }
+//
+//            // Inner colored view
+//            val fill = View(this).apply {
+//                layoutParams = FrameLayout.LayoutParams(
+//                    FrameLayout.LayoutParams.MATCH_PARENT,
+//                    FrameLayout.LayoutParams.MATCH_PARENT
+//                )
+//                val color = resources.getColor(colorRes, theme)
+//                setBackgroundColor(color)
+//            }
+//
+//            frame.addView(fill)
+//
+//            frame.setOnClickListener {
+//                prefs.edit().putInt("theme", styleRes).apply()
+//
+//                val intent = Intent(this, MainActivity::class.java)
+//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+//                startActivity(intent)
+//
+//                finish()
+//            }
+//
+//            themesContainer.addView(frame)
+//        }
+//    }
 }
