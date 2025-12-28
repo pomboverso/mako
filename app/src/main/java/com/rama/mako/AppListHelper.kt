@@ -63,6 +63,7 @@ class AppListHelper(
                 val favIcon = view.findViewById<ImageView>(R.id.favorite_icon)
                 val closeButton = view.findViewById<View>(R.id.close_button)
                 val actions = view.findViewById<View>(R.id.actions_container)
+                val bottomBorder = view.findViewById<View>(R.id.favorite_bottom_border)
 
                 label.text = app.loadLabel(pm)
 
@@ -99,6 +100,18 @@ class AppListHelper(
                     }
                 }
 
+                // Check if this is the last favorite app in the list
+                val isFavorite = favIcon.isSelected
+                val isLastFavorite = isFavorite && (
+                        position == apps.size - 1 || !prefs.getBoolean(
+                            getItem(position + 1)!!.activityInfo.packageName,
+                            false
+                        )
+                        )
+
+                // Show bottom border only for the last favorite
+                bottomBorder.visibility = if (isLastFavorite) View.VISIBLE else View.GONE
+
                 // Long press → show actions
                 view.setOnLongClickListener {
                     openActionsFor = pkg
@@ -116,6 +129,10 @@ class AppListHelper(
                         .apply()
 
                     sortApps()
+                    notifyDataSetChanged()
+
+                    // close menu after set an item as favorite
+                    openActionsFor = null
                     notifyDataSetChanged()
                 }
 
