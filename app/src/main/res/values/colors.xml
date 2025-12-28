@@ -8,6 +8,23 @@
     <color name="tertiary_bg">#322f1b</color>
     <color name="accent">#abd68e</color>
     <color name="accent_secondary">#cdc58b</color>
+    <color name="star_color">#cdc58b</color>
+    <color name="star_bg">#322f1b</color>
     <color name="danger">#ff7e80</color>
     <color name="input_color">#343</color>
 </resources>
+
+    <!-- light mode-->
+    <!--<resources>-->
+    <!--    <color name="bg_color">#efefef</color>-->
+    <!--    <color name="foreground_color">#141417</color>-->
+    <!--    &lt;!&ndash; UI &ndash;&gt;-->
+    <!--    <color name="secondary_bg">#e8e8e8</color>-->
+    <!--    <color name="tertiary_bg">#eae5d3</color>-->
+    <!--    <color name="accent">#588655</color>-->
+    <!--    <color name="accent_secondary">#d9b854</color>-->
+    <!--    <color name="star_color">#d9b854</color>-->
+    <!--    <color name="star_bg">#eae5d3</color>-->
+    <!--    <color name="danger">#e86a6d</color>-->
+    <!--    <color name="input_color">#343</color>-->
+    <!--</resources>-->

@@ -1,9 +1,93 @@
-<?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/text1"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:textColor="@color/foreground_color"
-    android:padding="8dp"
-    android:textSize="16sp"
-    android:gravity="start" />
+    android:layout_height="wrap_content">
+
+    <!-- Divider, hidden by default -->
+    <View
+        android:id="@+id/favorite_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#aaa"
+        android:visibility="gone" />
+
+    <!-- Horizontal row -->
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical">
+
+        <!-- Open app button -->
+        <TextView
+            android:id="@+id/open_app_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:textColor="@color/foreground_color"
+            android:textSize="16sp"
+            android:gravity="start|center_vertical" />
+
+        <!-- Actions container -->
+        <FrameLayout
+            android:id="@+id/actions_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:visibility="gone"
+            android:background="@color/star_bg">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:gravity="center_vertical">
+
+                <FrameLayout
+                    android:id="@+id/favorite_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:id="@+id/favorite_icon"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/star_toggle" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/close_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/close" />
+                </FrameLayout>
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/favorite_bottom_border"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/star_color"
+        android:text="* * * * * * * * * * * * * * * * * * *"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:gravity="start|center_vertical"
+        android:visibility="gone" />
+</LinearLayout>

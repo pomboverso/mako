@@ -2,17 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/root"
     android:orientation="vertical"
-    android:textColor="@color/foreground_color"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/bgColor"
-    android:padding="32dp">
+    android:padding="32dp"
+    android:textColor="?attr/foregroundColor">
 
+    <!-- Top container -->
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <!-- Time + Settings -->
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -28,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="start|center_vertical"
-                android:textColor="@color/foreground_color" />
+                android:textColor="?attr/foregroundColor" />
 
             <FrameLayout
                 android:id="@+id/settings_button"
@@ -45,28 +47,29 @@
             </FrameLayout>
         </LinearLayout>
 
+        <!-- Date -->
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:paddingBottom="4dp"
             android:layout_height="wrap_content"
+            android:paddingBottom="4dp"
             android:gravity="center_vertical">
 
             <ImageView
-                android:layout_width="12sp"
+                android:layout_width="12dp"
                 android:layout_height="12dp"
-                android:layout_marginEnd="4sp"
+                android:layout_marginEnd="4dp"
                 android:src="@drawable/calendar_today" />
-
 
             <TextView
                 android:id="@+id/date"
-                android:textColor="@color/foreground_color"
                 android:textSize="12sp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="?attr/foregroundColor" />
         </LinearLayout>
 
+        <!-- Battery -->
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -75,20 +78,21 @@
             android:gravity="center_vertical">
 
             <ImageView
-                android:layout_width="12sp"
+                android:layout_width="12dp"
                 android:layout_height="12dp"
-                android:layout_marginEnd="4sp"
+                android:layout_marginEnd="4dp"
                 android:src="@drawable/battery_full_alt" />
 
             <TextView
                 android:id="@+id/battery"
-                android:textColor="@color/foreground_color"
                 android:textSize="12sp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="?attr/foregroundColor" />
         </LinearLayout>
     </LinearLayout>
 
+    <!-- App List -->
     <ListView
         android:id="@+id/appList"
         android:layout_width="match_parent"

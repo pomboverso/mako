@@ -11,8 +11,8 @@ android {
         applicationId = "com.rama.mako"
         minSdk = 26
         targetSdk = 36
-        versionCode = 4
-        versionName = "20251228"
+        versionCode = 5
+        versionName = "20251229"
 
         // Required for instrumentation tests
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

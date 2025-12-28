@@ -20,7 +20,7 @@
             android:layout_marginBottom="16dp" />
 
         <TextView
-            android:text="@string/app_long_name"
+            android:text="@string/app_name"
             android:textSize="22sp"
             android:textStyle="bold"
             android:layout_width="wrap_content"

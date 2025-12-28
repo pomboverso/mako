@@ -96,7 +96,7 @@ class MainActivity : Activity() {
             Toast.makeText(this, "No clock app found", Toast.LENGTH_SHORT).show()
         }
 
-        // Settings
+        // Settings button
         findViewById<View>(R.id.settings_button).setOnClickListener {
             startActivity(Intent(this, SettingsActivity::class.java))
         }
