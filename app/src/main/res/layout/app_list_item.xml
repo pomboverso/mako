@@ -1,8 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/bg_color">
+    android:layout_height="wrap_content">
 
     <!-- Divider, hidden by default -->
     <View
@@ -14,6 +13,8 @@
 
     <!-- Horizontal row -->
     <LinearLayout
+        android:id="@+id/app_row"
+        android:background="@android:color/transparent"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,6 +41,7 @@
         <FrameLayout
             android:id="@+id/empty_space"
             android:layout_width="0dp"
+            android:background="@android:color/transparent"
             android:layout_height="match_parent"
             android:layout_weight="1" />
 

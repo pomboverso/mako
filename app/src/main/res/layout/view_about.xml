@@ -80,7 +80,7 @@
             android:focusable="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp"
+            android:padding="16dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/bg_button_rounded"
             android:gravity="center">
@@ -107,7 +107,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:padding="8dp"
+            android:padding="16dp"
             android:background="@drawable/bg_button_rounded"
             android:gravity="center">
 
@@ -133,7 +133,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:padding="8dp"
+            android:padding="16dp"
             android:background="@drawable/bg_button_danger"
             android:gravity="center">
 
