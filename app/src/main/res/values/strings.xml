@@ -16,4 +16,7 @@
     <string name="change_wallpaper">Change OS Wallpaper</string>
     <string name="about">About Mako</string>
     <string name="edit_apps">Edit Apps</string>
+    <string name="show_battery">Show battery</string>
+    <string name="show_date">Show date</string>
+    <string name="show_clock">Show clock</string>
 </resources>

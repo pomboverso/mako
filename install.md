@@ -6,7 +6,7 @@
 ./gradlew connectedAndroidTest
 ```
 
-## Build for multiple architectures
+## Build
 
 ```sh
 ./gradlew assembleRelease
