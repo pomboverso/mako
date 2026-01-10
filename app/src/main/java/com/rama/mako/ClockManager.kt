@@ -4,10 +4,9 @@ import android.content.SharedPreferences
 import android.os.Handler
 import android.os.Looper
 import android.widget.TextView
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.time.format.TextStyle
 import java.util.Locale
+import android.text.format.DateFormat
+import java.util.Calendar
 
 class ClockManager(
     private val timeTextView: TextView,
@@ -15,34 +14,34 @@ class ClockManager(
     private val prefs: SharedPreferences
 ) {
     private val handler = Handler(Looper.getMainLooper())
-
-    private val timeFormatter =
-        DateTimeFormatter.ofPattern("HH:mm")
-
-    private val dateFormatter =
-        DateTimeFormatter.ofPattern("yyyy-MM-dd")
+    private val calendar = Calendar.getInstance()
 
     private val runnable = object : Runnable {
         override fun run() {
             val showClock = prefs.getBoolean("show_clock", true)
             val showDate = prefs.getBoolean("show_date", true)
 
-            val now = LocalDateTime.now()
+            calendar.timeInMillis = System.currentTimeMillis()
             val locale = Locale.getDefault()
 
             if (showClock) {
-                timeTextView.text = now.format(timeFormatter)
+                val timeFormat = DateFormat.getTimeFormat(timeTextView.context)
+                timeTextView.text = timeFormat.format(calendar.time)
             }
 
             if (showDate) {
-                val weekday = now.dayOfWeek
-                    .getDisplayName(TextStyle.FULL, locale)
+                val dateFormat = DateFormat.getDateFormat(dateTextView.context)
+                val weekday = calendar.getDisplayName(
+                    Calendar.DAY_OF_WEEK,
+                    Calendar.LONG,
+                    locale
+                ) ?: ""
 
-                val dayOfYear = now.dayOfYear
-                val totalDays = now.toLocalDate().lengthOfYear()
+                val dayOfYear = calendar.get(Calendar.DAY_OF_YEAR)
+                val totalDays = calendar.getActualMaximum(Calendar.DAY_OF_YEAR)
 
                 dateTextView.text =
-                    "$weekday :: ${now.format(dateFormatter)} :: $dayOfYear/$totalDays"
+                    "$weekday :: ${dateFormat.format(calendar.time)} :: $dayOfYear/$totalDays"
                         .uppercase(locale)
             }
 
@@ -53,4 +52,5 @@ class ClockManager(
     fun start() = handler.post(runnable)
     fun stop() = handler.removeCallbacks(runnable)
 }
+
 

@@ -39,8 +39,12 @@
     <string name="charge_wireless">Inalámbrica</string>
 
     <!-- Formatting -->
-    <string name="battery_temp">%1$d°F</string>
-    <string name="battery_temp_labeled">%1$d°F (%2$s)</string>
     <string name="battery_status_power">%1$s %2$dx</string>
     <string name="battery_status_power_type">%1$s (%2$s) %3$dx</string>
+    
+    <string name="unit_celsius">C</string>
+    <string name="unit_fahrenheit">F</string>
+
+    <string name="battery_temp">%1$d°%2$s</string>
+    <string name="battery_temp_labeled">%1$d°%2$s (%3$s)</string>
 </resources>
