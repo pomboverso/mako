@@ -28,7 +28,6 @@ class MainActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.view_home)
 
         val root = findViewById<View>(R.id.root)
@@ -55,7 +54,6 @@ class MainActivity : Activity() {
         // ─────────────────────────────────────
         clockManager = ClockManager(timeText, dateText, prefs)
         clockManager.start()
-
         timeText.setOnClickListener { openSystemClock() }
 
         // ─────────────────────────────────────
@@ -63,9 +61,7 @@ class MainActivity : Activity() {
         // ─────────────────────────────────────
         batteryHelper = BatteryManagerHelper(
             context = this,
-            callback = { status ->
-                batteryText.text = status
-            },
+            callback = { status -> batteryText.text = status },
             prefs = prefs
         )
         batteryHelper.register()
@@ -96,19 +92,13 @@ class MainActivity : Activity() {
         val showClock = prefs.getBoolean("show_clock", true)
         val showDate = prefs.getBoolean("show_date", true)
         val showBattery = prefs.getBoolean("show_battery", true)
-        val showChargeStatus = prefs.getBoolean("show_charge_status", true)
 
-        timeText.visibility =
-            if (showClock) View.VISIBLE else View.GONE
-
-        findViewById<View>(R.id.date_row).visibility =
-            if (showDate) View.VISIBLE else View.GONE
-
+        timeText.visibility = if (showClock) View.VISIBLE else View.GONE
+        findViewById<View>(R.id.date_row).visibility = if (showDate) View.VISIBLE else View.GONE
         findViewById<View>(R.id.battery_row).visibility =
             if (showBattery) View.VISIBLE else View.GONE
-        batteryHelper.setShowChargeStatus(showChargeStatus)
     }
-    
+
     // ─────────────────────────────────────
     // Open system clock safely
     // ─────────────────────────────────────

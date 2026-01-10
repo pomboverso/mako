@@ -52,6 +52,5 @@
     <string name="clock_24">24-hour</string>
     <string name="clock_12">12-hour (AM/PM)</string>
 
-    <string name="show_charge_status">Show charging status</string>
     <string name="show_year_day">Show day of the year</string>
 </resources>
