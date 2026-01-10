@@ -28,35 +28,50 @@ class BatteryManagerHelper(
             // Temperature label
             val tempLabel = when {
                 tempF <= 113 -> ""            // normal
-                tempF in 114..140 -> "Warm"
-                tempF in 141..158 -> "Hot"
-                else -> "Critical"
+                tempF in 114..140 -> context.getString(R.string.temp_warm)
+                tempF in 141..158 -> context.getString(R.string.temp_hot)
+                else -> context.getString(R.string.temp_critical)
             }
 
             // Charging status
             val status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1)
             val statusText = when (status) {
-                BatteryManager.BATTERY_STATUS_CHARGING -> "Charging"
-                BatteryManager.BATTERY_STATUS_DISCHARGING -> "Discharging"
-                BatteryManager.BATTERY_STATUS_FULL -> "Full"
-                BatteryManager.BATTERY_STATUS_NOT_CHARGING -> "Not charging"
-                else -> "Unknown"
+                BatteryManager.BATTERY_STATUS_CHARGING ->
+                    context.getString(R.string.status_charging)
+
+                BatteryManager.BATTERY_STATUS_DISCHARGING ->
+                    context.getString(R.string.status_discharging)
+
+                BatteryManager.BATTERY_STATUS_FULL ->
+                    context.getString(R.string.status_full)
+
+                BatteryManager.BATTERY_STATUS_NOT_CHARGING ->
+                    context.getString(R.string.status_not_charging)
+
+                else ->
+                    context.getString(R.string.status_unknown)
             }
 
             // Charging type
             val chargePlug = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1)
-            val chargeType = if (status == BatteryManager.BATTERY_STATUS_CHARGING ||
+            val chargeType = if (
+                status == BatteryManager.BATTERY_STATUS_CHARGING ||
                 status == BatteryManager.BATTERY_STATUS_FULL
             ) {
                 when (chargePlug) {
-                    BatteryManager.BATTERY_PLUGGED_USB -> "USB"
-                    BatteryManager.BATTERY_PLUGGED_AC -> "AC"
-                    BatteryManager.BATTERY_PLUGGED_WIRELESS -> "Wireless"
+                    BatteryManager.BATTERY_PLUGGED_USB ->
+                        context.getString(R.string.charge_usb)
+
+                    BatteryManager.BATTERY_PLUGGED_AC ->
+                        context.getString(R.string.charge_ac)
+
+                    BatteryManager.BATTERY_PLUGGED_WIRELESS ->
+                        context.getString(R.string.charge_wireless)
+
                     else -> ""
                 }
-            } else {
-                ""
-            }
+            } else ""
+
 
             // Current in mA (may be negative if discharging)
             val bm = context.getSystemService(Context.BATTERY_SERVICE) as BatteryManager
@@ -73,17 +88,41 @@ class BatteryManagerHelper(
 
             // Build status + x
             val statusFinal = when {
-                statusText == "Full" -> "Full"
-                statusText == "Charging" && chargeType.isNotEmpty() -> "$statusText ($chargeType) ${powerX}x"
-                statusText == "Charging" -> "$statusText ${powerX}x"
-                statusText == "Discharging" -> "$statusText ${powerX}x"
+                statusText == context.getString(R.string.status_full) ->
+                    statusText
+
+                statusText == context.getString(R.string.status_charging) &&
+                        chargeType.isNotEmpty() ->
+                    context.getString(
+                        R.string.battery_status_power_type,
+                        statusText,
+                        chargeType,
+                        powerX
+                    )
+
+                statusText == context.getString(R.string.status_charging) ||
+                        statusText == context.getString(R.string.status_discharging) ->
+                    context.getString(
+                        R.string.battery_status_power,
+                        statusText,
+                        powerX
+                    )
+
                 else -> statusText
             }
 
             if (level >= 0 && scale > 0) {
                 val levelPct = (level * 100 / scale.toFloat()).toInt()
                 val tempDisplay =
-                    if (tempLabel.isNotEmpty()) "$tempF°F ($tempLabel)" else "$tempF°F"
+                    if (tempLabel.isNotEmpty()) {
+                        context.getString(
+                            R.string.battery_temp_labeled,
+                            tempF,
+                            tempLabel
+                        )
+                    } else {
+                        context.getString(R.string.battery_temp, tempF)
+                    }
 
                 // Build info list
                 val infoParts = listOf(
@@ -92,7 +131,9 @@ class BatteryManagerHelper(
                     statusFinal
                 )
 
-                val info = infoParts.joinToString(" :: ")
+                val info = infoParts.joinToString(
+                    " :: "
+                )
                 callback(info)
             }
         }

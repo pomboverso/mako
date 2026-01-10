@@ -92,7 +92,7 @@
                 android:layout_marginEnd="8dp" />
 
             <TextView
-                android:text="@string/app_repo"
+                android:text="github.com/jmiguelrivas/mako"
                 android:textSize="16sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

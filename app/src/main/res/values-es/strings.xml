@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">Mako</string>
+    <string name="app_long_name">Lanzador Mako</string>
+    <string name="app_description">
+        Un lanzador de Android ligero y sin distracciones, centrado en la privacidad y totalmente en el dispositivo, diseñado para el enfoque y la simplicidad.
+    </string>
+    <string name="icon_block_desc">Sin tareas en segundo plano</string>
+    <string name="icon_ads_desc">Sin anuncios</string>
+    <string name="icon_location_desc">Sin rastreadores</string>
+    <string name="icon_offline_desc">Funciona sin conexión</string>
+    <string name="icon_license_desc">Licencia GPLv3</string>
+    <string name="app_creator">Miguel Rivas</string>
+    <string name="author_app_creator">Autor: Miguel Rivas</string>
+    <string name="close">Cerrar</string>
+    <string name="set_default">Establecer lanzador como predeterminado</string>
+    <string name="refresh_launcher">Actualizar lanzador</string>
+    <string name="change_wallpaper">Cambiar fondo del sistema</string>
+    <string name="about">Acerca de Mako</string>
+    <string name="edit_apps">Editar aplicaciones</string>
+    <string name="show_battery">Mostrar batería</string>
+    <string name="show_date">Mostrar fecha</string>
+    <string name="show_clock">Mostrar reloj</string>
+
+    <!-- Temperature labels -->
+    <string name="temp_warm">Elevada</string>
+    <string name="temp_hot">Caliente</string>
+    <string name="temp_critical">Crítico</string>
+
+    <!-- Battery status -->
+    <string name="status_charging">Cargando</string>
+    <string name="status_discharging">Descargando</string>
+    <string name="status_full">Completa</string>
+    <string name="status_not_charging">No cargando</string>
+    <string name="status_unknown">Desconocido</string>
+
+    <!-- Charging types -->
+    <string name="charge_usb">USB</string>
+    <string name="charge_ac">CA</string>
+    <string name="charge_wireless">Inalámbrica</string>
+
+    <!-- Formatting -->
+    <string name="battery_temp">%1$d°F</string>
+    <string name="battery_temp_labeled">%1$d°F (%2$s)</string>
+    <string name="battery_status_power">%1$s %2$dx</string>
+    <string name="battery_status_power_type">%1$s (%2$s) %3$dx</string>
+</resources>

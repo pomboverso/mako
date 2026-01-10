@@ -7,7 +7,6 @@
     <string name="icon_location_desc">No Trackers</string>
     <string name="icon_offline_desc">Works Offline</string>
     <string name="icon_license_desc">License GPLv3</string>
-    <string name="app_repo">github.com/jmiguelrivas/mako</string>
     <string name="app_creator">Miguel Rivas</string>
     <string name="author_app_creator">Author: Miguel Rivas</string>
     <string name="close">Close</string>
@@ -19,4 +18,27 @@
     <string name="show_battery">Show battery</string>
     <string name="show_date">Show date</string>
     <string name="show_clock">Show clock</string>
+
+    <!-- Temperature labels -->
+    <string name="temp_warm">Warm</string>
+    <string name="temp_hot">Hot</string>
+    <string name="temp_critical">Critical</string>
+
+    <!-- Battery status -->
+    <string name="status_charging">Charging</string>
+    <string name="status_discharging">Discharging</string>
+    <string name="status_full">Full</string>
+    <string name="status_not_charging">Not charging</string>
+    <string name="status_unknown">Unknown</string>
+
+    <!-- Charging types -->
+    <string name="charge_usb">USB</string>
+    <string name="charge_ac">AC</string>
+    <string name="charge_wireless">Wireless</string>
+
+    <!-- Formatting -->
+    <string name="battery_temp">%1$d°F</string>
+    <string name="battery_temp_labeled">%1$d°F (%2$s)</string>
+    <string name="battery_status_power">%1$s %2$dx</string>
+    <string name="battery_status_power_type">%1$s (%2$s) %3$dx</string>
 </resources>
