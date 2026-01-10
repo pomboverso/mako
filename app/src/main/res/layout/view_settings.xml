@@ -89,75 +89,132 @@
                 android:textColor="@color/foreground_color" />
         </FrameLayout>
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:padding="16dp"
+            android:orientation="vertical"
             android:layout_marginBottom="8dp"
             android:background="@drawable/bg_secondary_rounded"
             android:gravity="center_vertical">
 
             <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/show_clock"
-                android:textSize="16sp"
-                android:textColor="@color/foreground_color" />
-
-            <Switch
-                android:id="@+id/toggle_clock"
+                android:id="@+id/temp_unit_label"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:textSize="16sp"
+                android:textColor="@color/foreground_color"
+                android:text="@string/clock_format"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/clock_format_group"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/clock_none"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/foreground_color"
+                    android:text="@string/clock_none" />
+
+                <RadioButton
+                    android:id="@+id/clock_system"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/foreground_color"
+                    android:text="@string/clock_system" />
+
+                <RadioButton
+                    android:id="@+id/clock_24"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/foreground_color"
+                    android:text="@string/clock_24" />
+
+                <RadioButton
+                    android:id="@+id/clock_12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/foreground_color"
+                    android:text="@string/clock_12" />
+            </RadioGroup>
         </LinearLayout>
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:padding="16dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/bg_secondary_rounded"
             android:gravity="center_vertical">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/show_date"
-                android:textSize="16sp"
-                android:textColor="@color/foreground_color" />
-
-            <Switch
-                android:id="@+id/toggle_date"
+            <CheckBox
+                android:id="@+id/show_date"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/foreground_color"
+                android:text="@string/show_date" />
+        </FrameLayout>
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:padding="16dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/bg_secondary_rounded"
             android:gravity="center_vertical">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/show_battery"
-                android:textSize="16sp"
-                android:textColor="@color/foreground_color" />
-
-            <Switch
-                android:id="@+id/toggle_battery"
+            <CheckBox
+                android:id="@+id/show_year_day"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/foreground_color"
+                android:text="@string/show_year_day" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bg_secondary_rounded"
+            android:gravity="center_vertical">
+
+            <CheckBox
+                android:id="@+id/show_battery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/foreground_color"
+                android:text="@string/show_battery" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bg_secondary_rounded"
+            android:gravity="center_vertical">
+
+            <CheckBox
+                android:id="@+id/show_charge_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/foreground_color"
+                android:text="@string/show_charge_status" />
+        </FrameLayout>
 
         <FrameLayout
             android:id="@+id/about_button"

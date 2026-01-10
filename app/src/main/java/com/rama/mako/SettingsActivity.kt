@@ -5,8 +5,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
+import android.widget.CheckBox
 import android.widget.Toast
-import android.widget.Switch
+import android.widget.RadioGroup
 
 class SettingsActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,20 +57,57 @@ class SettingsActivity : Activity() {
             startActivity(intent)
         }
 
-        // Toggle Clock
+        // Clock
         val prefs = getSharedPreferences("settings", MODE_PRIVATE)
-        val toggleClock = findViewById<Switch>(R.id.toggle_clock)
+        val clockFormatGroup = findViewById<RadioGroup>(R.id.clock_format_group)
 
-        toggleClock.isChecked = prefs.getBoolean("show_clock", true)
+        // ---- RESTORE STATE FIRST ----
+        val showClock = prefs.getBoolean("show_clock", true)
+        val clockFormat = prefs.getString("clock_format", "system")
 
-        toggleClock.setOnCheckedChangeListener { _, isChecked ->
-            prefs.edit()
-                .putBoolean("show_clock", isChecked)
-                .apply()
+        when {
+            !showClock -> clockFormatGroup.check(R.id.clock_none)
+            clockFormat == "24" -> clockFormatGroup.check(R.id.clock_24)
+            clockFormat == "12" -> clockFormatGroup.check(R.id.clock_12)
+            else -> clockFormatGroup.check(R.id.clock_system)
         }
 
+        // ---- THEN ATTACH LISTENER ----
+        clockFormatGroup.setOnCheckedChangeListener { _, checkedId ->
+            when (checkedId) {
+                R.id.clock_none -> {
+                    prefs.edit()
+                        .putBoolean("show_clock", false)
+                        .remove("clock_format")
+                        .apply()
+                }
+
+                R.id.clock_system -> {
+                    prefs.edit()
+                        .putBoolean("show_clock", true)
+                        .putString("clock_format", "system")
+                        .apply()
+                }
+
+                R.id.clock_24 -> {
+                    prefs.edit()
+                        .putBoolean("show_clock", true)
+                        .putString("clock_format", "24")
+                        .apply()
+                }
+
+                R.id.clock_12 -> {
+                    prefs.edit()
+                        .putBoolean("show_clock", true)
+                        .putString("clock_format", "12")
+                        .apply()
+                }
+            }
+        }
+
+
         // Toggle Date
-        val toggleDate = findViewById<Switch>(R.id.toggle_date)
+        val toggleDate = findViewById<CheckBox>(R.id.show_date)
         toggleDate.isChecked = prefs.getBoolean("show_date", true)
 
         toggleDate.setOnCheckedChangeListener { _, isChecked ->
@@ -78,13 +116,33 @@ class SettingsActivity : Activity() {
                 .apply()
         }
 
+        // Toggle Day of The Year
+        val toggleYearDay = findViewById<CheckBox>(R.id.show_year_day)
+        toggleYearDay.isChecked = prefs.getBoolean("show_year_day", true)
+
+        toggleYearDay.setOnCheckedChangeListener { _, isChecked ->
+            prefs.edit()
+                .putBoolean("show_year_day", isChecked)
+                .apply()
+        }
+
         // Toggle Battery
-        val toggleBattery = findViewById<Switch>(R.id.toggle_battery)
+        val toggleBattery = findViewById<CheckBox>(R.id.show_battery)
         toggleBattery.isChecked = prefs.getBoolean("show_battery", true)
 
         toggleBattery.setOnCheckedChangeListener { _, isChecked ->
             prefs.edit()
                 .putBoolean("show_battery", isChecked)
+                .apply()
+        }
+
+        // Toggle Charge Status
+        val toggleChargingStatus = findViewById<CheckBox>(R.id.show_charge_status)
+        toggleChargingStatus.isChecked = prefs.getBoolean("show_charge_status", true)
+
+        toggleChargingStatus.setOnCheckedChangeListener { _, isChecked ->
+            prefs.edit()
+                .putBoolean("show_charge_status", isChecked)
                 .apply()
         }
     }
