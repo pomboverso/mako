@@ -61,6 +61,20 @@
                 android:gravity="center_vertical">
 
                 <FrameLayout
+                    android:id="@+id/rename_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:layout_width="24sp"
+                        android:layout_height="24sp"
+                        android:src="@drawable/edit_fill" />
+                </FrameLayout>
+
+                <FrameLayout
                     android:id="@+id/favorite_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

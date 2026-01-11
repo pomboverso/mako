@@ -26,6 +26,20 @@ class AppListHelper(
     private val prefs =
         context.getSharedPreferences("favorites", Context.MODE_PRIVATE)
 
+    private val namePrefs =
+        context.getSharedPreferences("app_names", Context.MODE_PRIVATE)
+
+    private fun getCustomName(pkg: String): String? =
+        namePrefs.getString(pkg, null)
+
+    private fun setCustomName(pkg: String, name: String) {
+        namePrefs.edit().putString(pkg, name).apply()
+    }
+
+    private fun clearCustomName(pkg: String) {
+        namePrefs.edit().remove(pkg).apply()
+    }
+
     private val pm = context.packageManager
     private val apps = mutableListOf<ResolveInfo>()
 
@@ -68,10 +82,15 @@ class AppListHelper(
             compareByDescending<ResolveInfo> {
                 prefs.getBoolean(it.activityInfo.packageName, false)
             }.thenBy {
-                it.loadLabel(pm).toString().lowercase()
+                val pkg = it.activityInfo.packageName
+                getCustomName(pkg)
+                    ?: it.loadLabel(pm).toString()
+            }.thenBy {
+                it.activityInfo.packageName
             }
         )
     }
+
 
     private fun isFavorite(pkg: String): Boolean =
         prefs.getBoolean(pkg, false)
@@ -127,6 +146,34 @@ class AppListHelper(
         context.startActivity(intent)
     }
 
+    private fun showRenameDialog(app: ResolveInfo) {
+        val pkg = app.activityInfo.packageName
+        val currentName =
+            getCustomName(pkg) ?: app.loadLabel(pm).toString()
+
+        val input = android.widget.EditText(context).apply {
+            setText(currentName)
+            setSelection(text.length)
+        }
+
+        android.app.AlertDialog.Builder(context)
+            .setTitle("Rename app")
+            .setView(input)
+            .setPositiveButton("Save") { _, _ ->
+                val newName = input.text.toString().trim()
+                if (newName.isNotEmpty()) {
+                    setCustomName(pkg, newName)
+                    refresh()
+                }
+            }
+            .setNegativeButton("Cancel", null)
+            .setNeutralButton("Reset") { _, _ ->
+                clearCustomName(pkg)
+                refresh()
+            }
+            .show()
+    }
+
     // ------------------------------------------------------------------------
     // Adapter
     // ------------------------------------------------------------------------
@@ -161,11 +208,14 @@ class AppListHelper(
                 val settingsButton =
                     view.findViewById<View>(R.id.settings_button)
 
+                val renameButton = view.findViewById<View>(R.id.rename_button)
+
                 // ----------------------------------------------------------------
                 // Bind
                 // ----------------------------------------------------------------
 
-                label.text = app.loadLabel(pm)
+                val customName = getCustomName(pkg)
+                label.text = customName ?: app.loadLabel(pm)
 
                 favIcon.isSelected = isFavorite(pkg)
 
@@ -207,6 +257,10 @@ class AppListHelper(
 
                 closeButton.setOnClickListener {
                     closeRowActions()
+                }
+
+                renameButton.setOnClickListener {
+                    showRenameDialog(app)
                 }
 
                 return view
