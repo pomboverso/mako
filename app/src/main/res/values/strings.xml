@@ -54,8 +54,12 @@
 
     <string name="show_year_day">Show day of the year</string>
 
-    <string name="rename_app">Renombrar aplicación</string>
-    <string name="save">Guardar</string>
-    <string name="reset">Restablecer</string>
-    <string name="cancel">Cancelar</string>
+    <string name="rename_app">Rename app</string>
+    <string name="save">Save</string>
+    <string name="reset">Reset</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="add_to_favorites">Add to favorites</string>
+    <string name="remove_from_favorites">Remove from favorites</string>
+    <string name="open_settings">Open App Settings</string>
 </resources>

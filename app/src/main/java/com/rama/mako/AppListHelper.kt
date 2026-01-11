@@ -1,6 +1,5 @@
 package com.rama.mako
 
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ResolveInfo
@@ -10,13 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView
 import android.widget.ArrayAdapter
-import android.widget.EditText
-import android.widget.FrameLayout
-import android.widget.ImageView
 import android.widget.ListView
+import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
-import com.rama.mako.utils.dp
 
 class AppListHelper(
     private val context: Context,
@@ -33,23 +29,10 @@ class AppListHelper(
     private val namePrefs =
         context.getSharedPreferences("app_names", Context.MODE_PRIVATE)
 
-    private fun getCustomName(pkg: String): String? =
-        namePrefs.getString(pkg, null)
-
-    private fun setCustomName(pkg: String, name: String) {
-        namePrefs.edit().putString(pkg, name).apply()
-    }
-
-    private fun clearCustomName(pkg: String) {
-        namePrefs.edit().remove(pkg).apply()
-    }
-
     private val pm = context.packageManager
     private val apps = mutableListOf<ResolveInfo>()
 
     private lateinit var adapter: ArrayAdapter<ResolveInfo>
-
-    private var openActionsFor: String? = null
 
     // ------------------------------------------------------------------------
     // Public API
@@ -63,7 +46,6 @@ class AppListHelper(
     }
 
     fun refresh() {
-        openActionsFor = null
         loadApps()
         sortApps()
         adapter.notifyDataSetChanged()
@@ -84,13 +66,10 @@ class AppListHelper(
     private fun sortApps() {
         apps.sortWith(
             compareByDescending<ResolveInfo> {
-                prefs.getBoolean(it.activityInfo.packageName, false)
+                isFavorite(it.activityInfo.packageName)
             }.thenBy {
                 val pkg = it.activityInfo.packageName
-                getCustomName(pkg)
-                    ?: it.loadLabel(pm).toString()
-            }.thenBy {
-                it.activityInfo.packageName
+                (getCustomName(pkg) ?: it.loadLabel(pm).toString()).lowercase()
             }
         )
     }
@@ -102,8 +81,15 @@ class AppListHelper(
         prefs.edit().putBoolean(pkg, value).apply()
     }
 
-    private fun removeFavorite(pkg: String) {
-        prefs.edit().remove(pkg).apply()
+    private fun getCustomName(pkg: String): String? =
+        namePrefs.getString(pkg, null)
+
+    private fun setCustomName(pkg: String, name: String) {
+        namePrefs.edit().putString(pkg, name).apply()
+    }
+
+    private fun clearCustomName(pkg: String) {
+        namePrefs.edit().remove(pkg).apply()
     }
 
     // ------------------------------------------------------------------------
@@ -112,31 +98,13 @@ class AppListHelper(
 
     private fun launchApp(pkg: String) {
         val intent = pm.getLaunchIntentForPackage(pkg)
-
         if (intent != null) {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             context.startActivity(intent)
         } else {
-            Toast.makeText(
-                context,
-                "Unable to launch app",
-                Toast.LENGTH_SHORT
-            ).show()
-
-            removeFavorite(pkg)
-            openActionsFor = null
+            Toast.makeText(context, "Unable to launch app", Toast.LENGTH_SHORT).show()
             refresh()
         }
-    }
-
-    private fun openRowActions(pkg: String) {
-        openActionsFor = pkg
-        adapter.notifyDataSetChanged()
-    }
-
-    private fun closeRowActions() {
-        openActionsFor = null
-        adapter.notifyDataSetChanged()
     }
 
     private fun openAppSettings(pkg: String) {
@@ -149,28 +117,57 @@ class AppListHelper(
         context.startActivity(intent)
     }
 
+    private fun showContextMenu(anchor: View, app: ResolveInfo) {
+        val pkg = app.activityInfo.packageName
+
+        val popup = PopupMenu(context, anchor)
+        popup.menuInflater.inflate(R.menu.app_context_menu, popup.menu)
+
+        popup.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.action_rename -> {
+                    showRenameDialog(app)
+                    true
+                }
+
+                R.id.action_favorite -> {
+                    setFavorite(pkg, !isFavorite(pkg))
+                    refresh()
+                    true
+                }
+
+                R.id.action_settings -> {
+                    openAppSettings(pkg)
+                    true
+                }
+
+                else -> false
+            }
+        }
+
+        forceShowIcons(popup)
+        popup.show()
+    }
+
     private fun showRenameDialog(app: ResolveInfo) {
         val pkg = app.activityInfo.packageName
         val currentName =
             getCustomName(pkg) ?: app.loadLabel(pm).toString()
 
-        val input = EditText(context).apply {
+        val input = android.widget.EditText(context).apply {
             setText(currentName)
             setSelection(text.length)
-            layoutParams = ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-            )
+            maxLines = 1
+            setSingleLine(true)
         }
 
-        val container = FrameLayout(context).apply {
-            val padding = context.dp(16)
+        val container = android.widget.FrameLayout(context).apply {
+            val padding = (16 * context.resources.displayMetrics.density).toInt()
             setPadding(padding, padding, padding, padding)
-
             addView(input)
         }
 
-        AlertDialog.Builder(context)
+        android.app.AlertDialog.Builder(context)
             .setTitle(context.getString(R.string.rename_app))
             .setView(container)
             .setPositiveButton(context.getString(R.string.save)) { _, _ ->
@@ -200,7 +197,6 @@ class AppListHelper(
             R.id.open_app_button,
             apps
         ) {
-
             override fun getView(
                 position: Int,
                 convertView: View?,
@@ -210,75 +206,23 @@ class AppListHelper(
                 val app = getItem(position) ?: return view
 
                 val pkg = app.activityInfo.packageName
-
                 val label = view.findViewById<TextView>(R.id.open_app_button)
                 val emptySpace = view.findViewById<View>(R.id.empty_space)
-                val actions = view.findViewById<View>(R.id.actions_container)
-
-                val favButton = view.findViewById<View>(R.id.favorite_button)
-                val favIcon = view.findViewById<ImageView>(R.id.favorite_icon)
-                val closeButton = view.findViewById<View>(R.id.close_button)
                 val bottomBorder =
                     view.findViewById<View>(R.id.favorite_bottom_border)
-                val settingsButton =
-                    view.findViewById<View>(R.id.settings_button)
 
-                val renameButton = view.findViewById<View>(R.id.rename_button)
-
-                // ----------------------------------------------------------------
-                // Bind
-                // ----------------------------------------------------------------
-
-                val customName = getCustomName(pkg)
-                label.text = customName ?: app.loadLabel(pm)
-
-                favIcon.isSelected = isFavorite(pkg)
-
-                actions.visibility =
-                    if (openActionsFor == pkg) View.VISIBLE else View.GONE
-
-                label.visibility =
-                    if (openActionsFor == pkg) View.GONE else View.VISIBLE
+                val defaultLabel = app.loadLabel(pm).toString()
+                label.text = getCustomName(pkg) ?: defaultLabel
 
                 bottomBorder.visibility =
                     if (isLastFavorite(position)) View.VISIBLE else View.GONE
-
-                // ----------------------------------------------------------------
-                // Clicks
-                // ----------------------------------------------------------------
 
                 label.setOnClickListener { launchApp(pkg) }
                 emptySpace.setOnClickListener { launchApp(pkg) }
 
                 label.setOnLongClickListener {
-                    openRowActions(pkg)
+                    showContextMenu(it, app)
                     true
-                }
-
-                emptySpace.setOnLongClickListener {
-                    context.startActivity(
-                        Intent(context, SettingsActivity::class.java)
-                    )
-                    true
-                }
-
-                settingsButton.setOnClickListener {
-                    openAppSettings(pkg)
-                }
-
-                favButton.setOnClickListener {
-                    val newState = !favIcon.isSelected
-                    favIcon.isSelected = newState
-                    setFavorite(pkg, newState)
-                    refresh()
-                }
-
-                closeButton.setOnClickListener {
-                    closeRowActions()
-                }
-
-                renameButton.setOnClickListener {
-                    showRenameDialog(app)
                 }
 
                 return view
@@ -287,7 +231,6 @@ class AppListHelper(
             private fun isLastFavorite(position: Int): Boolean {
                 val current = getItem(position) ?: return false
                 val pkg = current.activityInfo.packageName
-
                 if (!isFavorite(pkg)) return false
 
                 val next = apps.getOrNull(position + 1)
@@ -305,18 +248,10 @@ class AppListHelper(
 
     private fun setupScrollListener() {
         listView.setOnScrollListener(object : AbsListView.OnScrollListener {
-
             override fun onScrollStateChanged(
                 view: AbsListView?,
                 scrollState: Int
-            ) {
-                if (scrollState != AbsListView.OnScrollListener.SCROLL_STATE_IDLE &&
-                    openActionsFor != null
-                ) {
-                    openActionsFor = null
-                    adapter.notifyDataSetChanged()
-                }
-            }
+            ) = Unit
 
             override fun onScroll(
                 view: AbsListView?,
@@ -325,5 +260,21 @@ class AppListHelper(
                 totalItemCount: Int
             ) = Unit
         })
+    }
+
+    // ------------------------------------------------------------------------
+    // Utils
+    // ------------------------------------------------------------------------
+
+    private fun forceShowIcons(popup: PopupMenu) {
+        try {
+            val field = PopupMenu::class.java.getDeclaredField("mPopup")
+            field.isAccessible = true
+            val menuPopupHelper = field.get(popup)
+            menuPopupHelper.javaClass
+                .getDeclaredMethod("setForceShowIcon", Boolean::class.java)
+                .invoke(menuPopupHelper, true)
+        } catch (_: Exception) {
+        }
     }
 }
