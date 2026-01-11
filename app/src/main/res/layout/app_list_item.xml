@@ -18,6 +18,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="64dp"
         android:gravity="center_vertical">
 
         <!-- App label -->
@@ -32,25 +33,15 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
-                android:paddingEnd="12dp"
                 android:textSize="32sp"
                 android:textColor="@color/foreground_color" />
         </FrameLayout>
-
-        <!-- Empty space for global settings long press -->
-        <FrameLayout
-            android:id="@+id/empty_space"
-            android:layout_width="0dp"
-            android:background="@android:color/transparent"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
 
         <!-- Actions container -->
         <FrameLayout
             android:id="@+id/actions_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="4dp"
             android:visibility="gone"
             android:background="@color/star_bg">
 
@@ -64,13 +55,13 @@
                     android:id="@+id/rename_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="4dp"
+                    android:padding="14dp"
                     android:clickable="true"
                     android:focusable="true">
 
                     <ImageView
-                        android:layout_width="24sp"
-                        android:layout_height="24sp"
+                        android:layout_width="32sp"
+                        android:layout_height="32sp"
                         android:src="@drawable/edit_fill" />
                 </FrameLayout>
 
@@ -78,14 +69,14 @@
                     android:id="@+id/favorite_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="4dp"
+                    android:padding="14dp"
                     android:clickable="true"
                     android:focusable="true">
 
                     <ImageView
                         android:id="@+id/favorite_icon"
-                        android:layout_width="24sp"
-                        android:layout_height="24sp"
+                        android:layout_width="32sp"
+                        android:layout_height="32sp"
                         android:src="@drawable/star_toggle" />
                 </FrameLayout>
 
@@ -93,13 +84,13 @@
                     android:id="@+id/settings_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="4dp"
+                    android:padding="14dp"
                     android:clickable="true"
                     android:focusable="true">
 
                     <ImageView
-                        android:layout_width="24sp"
-                        android:layout_height="24sp"
+                        android:layout_width="32sp"
+                        android:layout_height="32sp"
                         android:src="@drawable/settings" />
                 </FrameLayout>
 
@@ -107,17 +98,25 @@
                     android:id="@+id/close_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="4dp"
+                    android:padding="14dp"
                     android:clickable="true"
                     android:focusable="true">
 
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
                         android:src="@drawable/close" />
                 </FrameLayout>
             </LinearLayout>
         </FrameLayout>
+
+        <!-- Empty space for global settings long press -->
+        <FrameLayout
+            android:id="@+id/empty_space"
+            android:layout_width="0dp"
+            android:background="@android:color/transparent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
     </LinearLayout>
 
     <!-- Optional bottom border for last favorite -->

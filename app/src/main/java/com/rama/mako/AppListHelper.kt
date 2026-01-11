@@ -1,5 +1,6 @@
 package com.rama.mako
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ResolveInfo
@@ -9,10 +10,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView
 import android.widget.ArrayAdapter
+import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
+import com.rama.mako.utils.dp
 
 class AppListHelper(
     private val context: Context,
@@ -91,7 +95,6 @@ class AppListHelper(
         )
     }
 
-
     private fun isFavorite(pkg: String): Boolean =
         prefs.getBoolean(pkg, false)
 
@@ -151,28 +154,40 @@ class AppListHelper(
         val currentName =
             getCustomName(pkg) ?: app.loadLabel(pm).toString()
 
-        val input = android.widget.EditText(context).apply {
+        val input = EditText(context).apply {
             setText(currentName)
             setSelection(text.length)
+            layoutParams = ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
         }
 
-        android.app.AlertDialog.Builder(context)
-            .setTitle("Rename app")
-            .setView(input)
-            .setPositiveButton("Save") { _, _ ->
+        val container = FrameLayout(context).apply {
+            val padding = context.dp(16)
+            setPadding(padding, padding, padding, padding)
+
+            addView(input)
+        }
+
+        AlertDialog.Builder(context)
+            .setTitle(context.getString(R.string.rename_app))
+            .setView(container)
+            .setPositiveButton(context.getString(R.string.save)) { _, _ ->
                 val newName = input.text.toString().trim()
                 if (newName.isNotEmpty()) {
                     setCustomName(pkg, newName)
                     refresh()
                 }
             }
-            .setNegativeButton("Cancel", null)
-            .setNeutralButton("Reset") { _, _ ->
+            .setNegativeButton(context.getString(R.string.cancel), null)
+            .setNeutralButton(context.getString(R.string.reset)) { _, _ ->
                 clearCustomName(pkg)
                 refresh()
             }
             .show()
     }
+
 
     // ------------------------------------------------------------------------
     // Adapter
@@ -221,6 +236,9 @@ class AppListHelper(
 
                 actions.visibility =
                     if (openActionsFor == pkg) View.VISIBLE else View.GONE
+
+                label.visibility =
+                    if (openActionsFor == pkg) View.GONE else View.VISIBLE
 
                 bottomBorder.visibility =
                     if (isLastFavorite(position)) View.VISIBLE else View.GONE
