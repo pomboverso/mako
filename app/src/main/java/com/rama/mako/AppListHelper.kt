@@ -135,7 +135,7 @@ class AppListHelper(
     // ------------------------------------------------------------------------
     // Context menu
     // ------------------------------------------------------------------------
-    private fun showContextMenu(anchor: View, app: ResolveInfo, favIcon: ImageView) {
+    private fun showContextMenu(anchor: View, app: ResolveInfo) {
         val pkg = app.activityInfo.packageName
         val isFav = isFavorite(pkg)
 
@@ -156,7 +156,6 @@ class AppListHelper(
                 R.id.action_favorite -> {
                     val newState = !isFavorite(pkg)
                     setFavorite(pkg, newState)
-                    favIcon.isSelected = newState
                     refresh()
                     true
                 }
@@ -193,16 +192,6 @@ class AppListHelper(
                 val emptySpace = view.findViewById<View>(R.id.empty_space)
                 val bottomBorder = view.findViewById<View>(R.id.favorite_bottom_border)
 
-                // Add a small favorite icon to the right (optional)
-                val favIcon = ImageView(context).apply {
-                    setImageResource(R.drawable.star_toggle)
-                    isSelected = isFavorite(pkg)
-                    layoutParams = ViewGroup.LayoutParams(
-                        (32 * context.resources.displayMetrics.density).toInt(),
-                        (32 * context.resources.displayMetrics.density).toInt()
-                    )
-                }
-
                 emptySpace.setOnLongClickListener {
                     context.startActivity(
                         Intent(context, SettingsActivity::class.java)
@@ -221,7 +210,7 @@ class AppListHelper(
                 emptySpace.setOnClickListener { launchApp(pkg) }
 
                 label.setOnLongClickListener {
-                    showContextMenu(it, app, favIcon)
+                    showContextMenu(it, app)
                     true
                 }
 

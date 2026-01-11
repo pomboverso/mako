@@ -7,7 +7,7 @@
     <item
         android:id="@+id/action_favorite"
         android:title="@string/add_to_favorites"
-        android:icon="@drawable/star_toggle" />
+        android:icon="@drawable/star_fill" />
 
     <item
         android:id="@+id/action_settings"
