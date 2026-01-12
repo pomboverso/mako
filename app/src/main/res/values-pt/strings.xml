@@ -54,4 +54,13 @@
     <string name="clock_24">24 horas</string>
     <string name="clock_12">12 horas (AM/PM)</string>
     <string name="show_year_day">Mostrar dia do ano</string>
+
+    <string name="rename_app">Renomear aplicativo</string>
+    <string name="save">Salvar</string>
+    <string name="reset">Redefinir</string>
+    <string name="cancel">Cancelar</string>
+
+    <string name="add_to_favorites">Adicionar aos favoritos</string>
+    <string name="remove_from_favorites">Remover dos favoritos</string>
+    <string name="open_settings">Abrir configurações do app</string>
 </resources>

@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
+import com.rama.mako.utils.dp
 
 class MainActivity : Activity() {
 
@@ -23,20 +24,20 @@ class MainActivity : Activity() {
         getSharedPreferences("settings", MODE_PRIVATE)
     }
 
-    private fun dp(value: Int): Int =
-        (value * resources.displayMetrics.density).toInt()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.view_home)
 
+        val padding = dp(16)
+
         val root = findViewById<View>(R.id.root)
         root.setOnApplyWindowInsetsListener { view, insets ->
             view.setPadding(
-                insets.systemWindowInsetLeft + dp(16),
-                insets.systemWindowInsetTop + dp(16),
-                insets.systemWindowInsetRight + dp(16),
-                insets.systemWindowInsetBottom + dp(16)
+                insets.systemWindowInsetLeft + padding,
+                insets.systemWindowInsetTop + padding,
+                insets.systemWindowInsetRight + padding,
+                insets.systemWindowInsetBottom + padding
             )
             insets
         }
