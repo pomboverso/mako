@@ -44,6 +44,28 @@ class AppListHelper(
     // ------------------------------------------------------------------------
     // Data
     // ------------------------------------------------------------------------
+
+    private fun sanitizeSystemLabel(raw: String): String {
+        return raw
+            // Remove emojis & decorative symbols only
+            .replace(Regex("[\\p{So}\\p{Cn}]"), "")
+            // Remove notification-style punctuation spam
+            .replace(Regex("[!?.]{2,}"), "")
+            // Normalize whitespace
+            .replace(Regex("\\s+"), " ")
+            .trim()
+    }
+
+    private fun getDisplayName(app: ResolveInfo): String {
+        val pkg = app.activityInfo.packageName
+
+        getCustomName(pkg)?.let { return it }
+
+        // Only sanitize system-provided labels
+        val systemLabel = app.loadLabel(pm).toString()
+        return sanitizeSystemLabel(systemLabel)
+    }
+
     private fun loadApps() {
         val intent = Intent(Intent.ACTION_MAIN).apply {
             addCategory(Intent.CATEGORY_LAUNCHER)
@@ -55,10 +77,7 @@ class AppListHelper(
     private fun sortApps() {
         apps.sortWith(
             compareByDescending<ResolveInfo> { isFavorite(it.activityInfo.packageName) }
-                .thenBy {
-                    val pkg = it.activityInfo.packageName
-                    (getCustomName(pkg) ?: it.loadLabel(pm).toString()).lowercase()
-                }
+                .thenBy { getDisplayName(it).lowercase() }
         )
     }
 
@@ -99,7 +118,7 @@ class AppListHelper(
 
     private fun showRenameDialog(app: ResolveInfo) {
         val pkg = app.activityInfo.packageName
-        val currentName = getCustomName(pkg) ?: app.loadLabel(pm).toString()
+        val currentName = getCustomName(pkg) ?: getDisplayName(app)
 
         val input = EditText(context).apply {
             setText(currentName)
@@ -121,7 +140,6 @@ class AppListHelper(
                 val newName = input.text.toString().trim()
                 if (newName.isNotEmpty()) {
                     setCustomName(pkg, newName)
-                    refresh()
                 }
             }
             .setNegativeButton(context.getString(R.string.cancel), null)
@@ -200,7 +218,7 @@ class AppListHelper(
                 }
 
                 // Set label
-                label.text = getCustomName(pkg) ?: app.loadLabel(pm).toString()
+                label.text = getDisplayName(app)
 
                 bottomBorder.visibility =
                     if (isLastFavorite(position)) View.VISIBLE else View.GONE
