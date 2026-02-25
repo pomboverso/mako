@@ -61,7 +61,6 @@
 
     <string name="mako_url" translatable="false">github.com/jmiguelrivas/mako</string>
 
-    <string name="add_to_favorites">Add to favorites</string>
-    <string name="remove_from_favorites">Remove from favorites</string>
+    <string name="add_to_favorites">Add to group...</string>
     <string name="open_settings">Open App Settings</string>
 </resources>

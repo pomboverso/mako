@@ -60,7 +60,6 @@
     <string name="reset">Redefinir</string>
     <string name="cancel">Cancelar</string>
 
-    <string name="add_to_favorites">Adicionar aos favoritos</string>
-    <string name="remove_from_favorites">Remover dos favoritos</string>
+    <string name="add_to_favorites">Adicionar ao grupo...</string>
     <string name="open_settings">Abrir configurações do app</string>
 </resources>

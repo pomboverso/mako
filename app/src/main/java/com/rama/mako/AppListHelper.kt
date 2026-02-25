@@ -150,19 +150,42 @@ class AppListHelper(
             .show()
     }
 
+    private fun showGroupsDialog(app: ResolveInfo) {
+        val pkg = app.activityInfo.packageName
+
+        val view = View.inflate(context, R.layout.layout_dialog_groups, null)
+
+        val dialog = AlertDialog.Builder(context)
+            .setView(view)
+            .setCancelable(true)
+            .create()
+
+        // Example: you can wire buttons inside the layout
+//        val btnConfirm = view.findViewById<Button>(R.id.btn_confirm)
+        val btnCancel = view.findViewById<LinearLayout>(R.id.close_button)
+
+//        btnConfirm?.setOnClickListener {
+//            // Here you can decide what “favorite group” means
+//            setFavorite(pkg, true)
+//            refresh()
+//            dialog.dismiss()
+//        }
+
+        btnCancel?.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
     // ------------------------------------------------------------------------
     // Context menu
     // ------------------------------------------------------------------------
     private fun showContextMenu(anchor: View, app: ResolveInfo) {
         val pkg = app.activityInfo.packageName
-        val isFav = isFavorite(pkg)
 
         val popup = PopupMenu(context, anchor)
         popup.menuInflater.inflate(R.menu.app_context_menu, popup.menu)
-
-        // Update favorite menu title based on current state
-        popup.menu.findItem(R.id.action_favorite)?.title =
-            context.getString(if (isFav) R.string.remove_from_favorites else R.string.add_to_favorites)
 
         popup.setOnMenuItemClickListener { item ->
             when (item.itemId) {
@@ -172,9 +195,7 @@ class AppListHelper(
                 }
 
                 R.id.action_favorite -> {
-                    val newState = !isFavorite(pkg)
-                    setFavorite(pkg, newState)
-                    refresh()
+                    showGroupsDialog(app)
                     true
                 }
 
@@ -208,7 +229,6 @@ class AppListHelper(
 
                 val label = view.findViewById<TextView>(R.id.open_app_button)
                 val emptySpace = view.findViewById<View>(R.id.empty_space)
-                val bottomBorder = view.findViewById<View>(R.id.favorite_bottom_border)
 
                 emptySpace.setOnLongClickListener {
                     context.startActivity(
@@ -220,9 +240,6 @@ class AppListHelper(
                 // Set label
                 label.text = getDisplayName(app)
 
-                bottomBorder.visibility =
-                    if (isLastFavorite(position)) View.VISIBLE else View.GONE
-
                 // Clicks
                 label.setOnClickListener { launchApp(pkg) }
                 emptySpace.setOnClickListener { launchApp(pkg) }
@@ -233,15 +250,6 @@ class AppListHelper(
                 }
 
                 return view
-            }
-
-            private fun isLastFavorite(position: Int): Boolean {
-                val current = getItem(position) ?: return false
-                val pkg = current.activityInfo.packageName
-                if (!isFavorite(pkg)) return false
-
-                val next = apps.getOrNull(position + 1)
-                return next == null || !isFavorite(next.activityInfo.packageName)
             }
         }
 
