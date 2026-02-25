@@ -19,15 +19,21 @@ class AppListHelper(
     private val listView: ListView
 ) {
 
-    private val prefs = context.getSharedPreferences("favorites", Context.MODE_PRIVATE)
+    private val groupPrefs = context.getSharedPreferences("groups", Context.MODE_PRIVATE)
+    private val groupsListPrefs = context.getSharedPreferences("groups_list", Context.MODE_PRIVATE)
+
+    // pkg -> group name
+    private fun getGroup(pkg: String): String? = groupPrefs.getString(pkg, null)
+
+    private fun setGroup(pkg: String, group: String?) {
+        groupPrefs.edit().putString(pkg, group).apply()
+    }
+
     private val namePrefs = context.getSharedPreferences("app_names", Context.MODE_PRIVATE)
     private val pm = context.packageManager
     private val apps = mutableListOf<ResolveInfo>()
     private lateinit var adapter: ArrayAdapter<ResolveInfo>
 
-    // ------------------------------------------------------------------------
-    // Public API
-    // ------------------------------------------------------------------------
     fun setup() {
         loadApps()
         sortApps()
@@ -40,10 +46,6 @@ class AppListHelper(
         sortApps()
         adapter.notifyDataSetChanged()
     }
-
-    // ------------------------------------------------------------------------
-    // Data
-    // ------------------------------------------------------------------------
 
     private fun sanitizeSystemLabel(raw: String): String {
         return raw
@@ -76,14 +78,9 @@ class AppListHelper(
 
     private fun sortApps() {
         apps.sortWith(
-            compareByDescending<ResolveInfo> { isFavorite(it.activityInfo.packageName) }
+            compareBy<ResolveInfo> { getGroup(it.activityInfo.packageName) ?: "zzz" }
                 .thenBy { getDisplayName(it).lowercase() }
         )
-    }
-
-    private fun isFavorite(pkg: String) = prefs.getBoolean(pkg, false)
-    private fun setFavorite(pkg: String, value: Boolean) {
-        prefs.edit().putBoolean(pkg, value).apply()
     }
 
     private fun getCustomName(pkg: String): String? = namePrefs.getString(pkg, null)
@@ -92,9 +89,15 @@ class AppListHelper(
 
     private fun clearCustomName(pkg: String) = namePrefs.edit().remove(pkg).apply()
 
-    // ------------------------------------------------------------------------
-    // Actions
-    // ------------------------------------------------------------------------
+    private fun getGroups(): MutableList<String> {
+        return groupsListPrefs.getStringSet("groups", mutableSetOf("Default"))!!
+            .toMutableList()
+    }
+
+    private fun saveGroups(groups: List<String>) {
+        groupsListPrefs.edit().putStringSet("groups", groups.toSet()).apply()
+    }
+
     private fun launchApp(pkg: String) {
         val intent = pm.getLaunchIntentForPackage(pkg)
         if (intent != null) {
@@ -154,24 +157,84 @@ class AppListHelper(
         val pkg = app.activityInfo.packageName
 
         val view = View.inflate(context, R.layout.layout_dialog_groups, null)
-
         val dialog = AlertDialog.Builder(context)
             .setView(view)
             .setCancelable(true)
             .create()
 
-        // Example: you can wire buttons inside the layout
-//        val btnConfirm = view.findViewById<Button>(R.id.btn_confirm)
-        val btnCancel = view.findViewById<LinearLayout>(R.id.close_button)
+        val closeBtn = view.findViewById<View>(R.id.close_button)
+        val addGroupBtn = view.findViewById<View>(R.id.activate_button)
+        val editToggle = view.findViewById<CheckBox>(R.id.toggle_edit)
 
-//        btnConfirm?.setOnClickListener {
-//            // Here you can decide what “favorite group” means
-//            setFavorite(pkg, true)
-//            refresh()
-//            dialog.dismiss()
-//        }
+        val container = view.findViewById<LinearLayout>(R.id.groups)
 
-        btnCancel?.setOnClickListener {
+        var groups = getGroups()
+        val currentGroup = getGroup(pkg)
+
+        fun renderGroups(editMode: Boolean = false) {
+            container.removeAllViews()
+
+            val radioGroup = RadioGroup(context)
+
+            groups.forEach { group ->
+                val row = LinearLayout(context).apply {
+                    orientation = LinearLayout.HORIZONTAL
+                    setPadding(16, 16, 16, 16)
+                }
+
+                val radio = RadioButton(context).apply {
+                    text = group
+                    isChecked = group == currentGroup
+                }
+
+                row.addView(radio)
+
+                // (optional future drag handle)
+                if (editMode) {
+                    val drag = TextView(context).apply {
+                        text = "≡"
+                        textSize = 18f
+                    }
+                    row.addView(drag)
+                }
+
+                radio.setOnClickListener {
+                    setGroup(pkg, group)
+                    refresh()
+                    dialog.dismiss()
+                }
+
+                radioGroup.addView(row)
+            }
+
+            container.addView(radioGroup)
+        }
+
+        renderGroups(false)
+
+        editToggle.setOnCheckedChangeListener { _, isChecked ->
+            renderGroups(isChecked)
+        }
+
+        addGroupBtn.setOnClickListener {
+            val input = EditText(context)
+
+            AlertDialog.Builder(context)
+                .setTitle("New group")
+                .setView(input)
+                .setPositiveButton("Add") { _, _ ->
+                    val newGroup = input.text.toString().trim()
+                    if (newGroup.isNotEmpty()) {
+                        groups.add(newGroup)
+                        saveGroups(groups)
+                        renderGroups(editToggle.isChecked)
+                    }
+                }
+                .setNegativeButton("Cancel", null)
+                .show()
+        }
+
+        closeBtn.setOnClickListener {
             dialog.dismiss()
         }
 
