@@ -303,7 +303,7 @@ class AppListHelper(
 
                     is ListItem.App -> {
                         val view =
-                            convertView ?: View.inflate(context, R.layout.app_list_item, null)
+                            convertView ?: View.inflate(context, R.layout.list_item_app, null)
                         val app = item.info
                         val pkg = app.activityInfo.packageName
 

@@ -1,18 +1,48 @@
 package com.rama.mako.activities
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
+import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.RadioGroup
 import android.widget.Toast
 import com.rama.mako.BaseFullscreenActivity
 import com.rama.mako.R
 import com.rama.mako.widgets.WdCheckbox
 
-class SettingsActivity : BaseFullscreenActivity() {
-
+class SettingsActivity : BaseFullscreenActivity(
+) {
     private val prefs by lazy { getSharedPreferences("settings", MODE_PRIVATE) }
+
+    private val groupPrefs by lazy { getSharedPreferences("groups", MODE_PRIVATE) }
+    private val groupsListPrefs by lazy {
+        getSharedPreferences(
+            "groups_list",
+            MODE_PRIVATE
+        )
+    }
+
+    private fun getGroups(): MutableList<String> {
+        return groupsListPrefs.getStringSet("groups", mutableSetOf("Default"))!!
+            .toMutableList()
+    }
+
+    private fun renameGroup(oldName: String, newName: String) {
+        val all = groupPrefs.all.toMutableMap()
+
+        val editor = groupPrefs.edit()
+
+        all.forEach { (pkg, group) ->
+            if (group == oldName) {
+                editor.putString(pkg, newName)
+            }
+        }
+
+        editor.apply()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,6 +108,50 @@ class SettingsActivity : BaseFullscreenActivity() {
         bindWdCheckbox(R.id.show_date, "show_date", false, dependentViewId = R.id.show_year_day)
         bindWdCheckbox(R.id.show_year_day, "show_year_day", false)
         bindWdCheckbox(R.id.show_battery, "show_battery", false)
+
+        // Set Groups
+        val groupsContainer = findViewById<LinearLayout>(R.id.groups)
+        val groups = getGroups()
+
+        groups.forEachIndexed { index, group ->
+
+            val row = layoutInflater.inflate(
+                R.layout.list_item_group,
+                groupsContainer,
+                false
+            )
+
+            val edit = row.findViewById<EditText>(R.id.group_name)
+            edit.setText(group)
+
+            edit.addTextChangedListener(object : android.text.TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+                override fun afterTextChanged(s: android.text.Editable?) {
+                    val oldName = groups[index]
+                    val newName = s?.toString() ?: return
+
+                    if (oldName != newName) {
+                        renameGroup(oldName, newName)
+                        groups[index] = newName
+
+                        groupsListPrefs.edit()
+                            .putStringSet("groups", groups.toSet())
+                            .apply()
+                    }
+                }
+            })
+
+            groupsContainer.addView(row)
+        }
     }
 
     // Helper to bind a checkbox to SharedPreferences

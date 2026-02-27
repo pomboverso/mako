@@ -1,0 +1,24 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/app_row"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16sp"
+    android:gravity="center_vertical">
+
+    <FrameLayout
+        android:layout_width="32sp"
+        android:layout_height="match_parent"
+        android:background="#ff0" />
+
+    <EditText
+        android:id="@+id/group_name"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <FrameLayout
+        android:layout_width="32sp"
+        android:layout_height="match_parent"
+        android:background="#0ff" />
+</LinearLayout>
