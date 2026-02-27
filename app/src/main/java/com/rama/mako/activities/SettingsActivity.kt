@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
+import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.RadioGroup
@@ -41,6 +42,23 @@ class SettingsActivity : BaseFullscreenActivity(
             }
         }
 
+        editor.apply()
+    }
+
+    private fun deleteGroup(groupName: String) {
+        // Remove from group list
+        val groups = getGroups()
+        if (!groups.contains(groupName)) return
+        groups.remove(groupName)
+        groupsListPrefs.edit().putStringSet("groups", groups.toSet()).apply()
+
+        // Move apps in this group to "Ungrouped"
+        val editor = groupPrefs.edit()
+        groupPrefs.all.forEach { (pkg, group) ->
+            if (group == groupName) {
+                editor.putString(pkg, getString(R.string.ungrouped_label))
+            }
+        }
         editor.apply()
     }
 
@@ -114,7 +132,6 @@ class SettingsActivity : BaseFullscreenActivity(
         val groups = getGroups()
 
         groups.forEachIndexed { index, group ->
-
             val row = layoutInflater.inflate(
                 R.layout.list_item_group,
                 groupsContainer,
@@ -122,6 +139,8 @@ class SettingsActivity : BaseFullscreenActivity(
             )
 
             val edit = row.findViewById<EditText>(R.id.group_name)
+            val deleteBtn = row.findViewById<Button>(R.id.delete_group)
+
             edit.setText(group)
 
             edit.addTextChangedListener(object : android.text.TextWatcher {
@@ -134,21 +153,24 @@ class SettingsActivity : BaseFullscreenActivity(
                 }
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
                 override fun afterTextChanged(s: android.text.Editable?) {
                     val oldName = groups[index]
-                    val newName = s?.toString() ?: return
+                    val newName = s?.toString()?.trim() ?: return
 
                     if (oldName != newName) {
                         renameGroup(oldName, newName)
                         groups[index] = newName
-
-                        groupsListPrefs.edit()
-                            .putStringSet("groups", groups.toSet())
-                            .apply()
+                        groupsListPrefs.edit().putStringSet("groups", groups.toSet()).apply()
                     }
                 }
             })
+
+            deleteBtn.setOnClickListener {
+                val oldName = groups[index]
+                deleteGroup(oldName)
+                groups.removeAt(index)
+                groupsContainer.removeView(row)
+            }
 
             groupsContainer.addView(row)
         }
