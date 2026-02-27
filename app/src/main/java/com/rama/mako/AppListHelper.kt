@@ -180,14 +180,12 @@ class AppListHelper(
 
         val closeBtn = view.findViewById<View>(R.id.close_button)
         val addGroupBtn = view.findViewById<View>(R.id.activate_button)
-        val editToggle = view.findViewById<CheckBox>(R.id.toggle_edit)
-
         val container = view.findViewById<LinearLayout>(R.id.groups)
 
         var groups = getGroups()
         val currentGroup = getGroup(pkg)
 
-        fun renderGroups(editMode: Boolean = false) {
+        fun renderGroups() {
             container.removeAllViews()
 
             val radioGroup = RadioGroup(context)
@@ -195,7 +193,6 @@ class AppListHelper(
             groups.forEach { group ->
                 val row = LinearLayout(context).apply {
                     orientation = LinearLayout.HORIZONTAL
-                    setPadding(16, 16, 16, 16)
                 }
 
                 val radio = RadioButton(context).apply {
@@ -204,15 +201,6 @@ class AppListHelper(
                 }
 
                 row.addView(radio)
-
-                // (optional future drag handle)
-                if (editMode) {
-                    val drag = TextView(context).apply {
-                        text = "≡"
-                        textSize = 18f
-                    }
-                    row.addView(drag)
-                }
 
                 radio.setOnClickListener {
                     setGroup(pkg, group)
@@ -226,11 +214,7 @@ class AppListHelper(
             container.addView(radioGroup)
         }
 
-        renderGroups(false)
-
-        editToggle.setOnCheckedChangeListener { _, isChecked ->
-            renderGroups(isChecked)
-        }
+        renderGroups()
 
         addGroupBtn.setOnClickListener {
             val input = EditText(context)
@@ -243,7 +227,7 @@ class AppListHelper(
                     if (newGroup.isNotEmpty()) {
                         groups.add(newGroup)
                         saveGroups(groups)
-                        renderGroups(editToggle.isChecked)
+                        renderGroups()
                     }
                 }
                 .setNegativeButton("Cancel", null)

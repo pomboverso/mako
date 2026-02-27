@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="16dp"
+    android:paddingStart="24dp"
     android:background="@drawable/bg_secondary_rounded">
 
     <TextView
