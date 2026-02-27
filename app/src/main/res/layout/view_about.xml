@@ -41,31 +41,31 @@
             android:gravity="start"
             android:orientation="vertical">
 
-            <com.rama.mako.activities.ListItemActivity
+            <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:icon="@drawable/ads_click"
                 app:text="@string/icon_ads_desc" />
 
-            <com.rama.mako.activities.ListItemActivity
+            <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:icon="@drawable/block"
                 app:text="@string/icon_block_desc" />
 
-            <com.rama.mako.activities.ListItemActivity
+            <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:icon="@drawable/location_on"
                 app:text="@string/icon_location_desc" />
 
-            <com.rama.mako.activities.ListItemActivity
+            <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:icon="@drawable/signal_wifi_off"
                 app:text="@string/icon_offline_desc" />
 
-            <com.rama.mako.activities.ListItemActivity
+            <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:icon="@drawable/shield"

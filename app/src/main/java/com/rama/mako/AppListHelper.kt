@@ -172,7 +172,7 @@ class AppListHelper(
     private fun showGroupsDialog(app: ResolveInfo) {
         val pkg = app.activityInfo.packageName
 
-        val view = View.inflate(context, R.layout.layout_dialog_groups, null)
+        val view = View.inflate(context, R.layout.dialog_groups, null)
         val dialog = AlertDialog.Builder(context)
             .setView(view)
             .setCancelable(true)
@@ -310,7 +310,8 @@ class AppListHelper(
 
                 return when (item) {
                     is ListItem.Header -> {
-                        val view = convertView ?: View.inflate(context, R.layout.list_header, null)
+                        val view =
+                            convertView ?: View.inflate(context, R.layout.app_list_header, null)
                         val text = view.findViewById<TextView>(R.id.header_text)
                         text.text = "------- " + item.title.uppercase()
                         view

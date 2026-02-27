@@ -1,4 +1,4 @@
-package com.rama.mako.activities
+package com.rama.mako.widgets
 
 import android.content.Context
 import android.util.AttributeSet
@@ -8,7 +8,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.rama.mako.R
 
-class ListItemActivity @JvmOverloads constructor(
+class WdLabel @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -19,7 +19,7 @@ class ListItemActivity @JvmOverloads constructor(
 
     init {
         // Inflate the XML layout
-        LayoutInflater.from(context).inflate(R.layout.list_item, this, true)
+        LayoutInflater.from(context).inflate(R.layout.wd_label, this, true)
         iconImage = findViewById(R.id.icon_image)
         iconText = findViewById(R.id.icon_text)
 
