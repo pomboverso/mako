@@ -2,6 +2,10 @@
     <attr name="bgColor" format="color" />
     <attr name="foregroundColor" format="color" />
 
+    <declare-styleable name="WdCheckbox">
+        <attr name="labelText" format="string" />
+    </declare-styleable>
+
     <declare-styleable name="ListItem">
         <attr name="text" format="string" />
         <attr name="icon" format="reference" />

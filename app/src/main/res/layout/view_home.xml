@@ -11,7 +11,8 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp">
 
         <Button
             android:id="@+id/time"
@@ -19,7 +20,6 @@
             android:background="@android:color/transparent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="4dp"
             android:textColor="?attr/foregroundColor" />
 
         <!-- Date -->
@@ -51,7 +51,6 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="16dp"
             android:gravity="center_vertical">
 
             <ImageView
@@ -68,7 +67,7 @@
                 android:textColor="?attr/foregroundColor" />
         </LinearLayout>
     </LinearLayout>
-    
+
     <!-- App List -->
     <ListView
         android:id="@+id/appList"

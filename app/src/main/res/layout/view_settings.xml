@@ -147,57 +147,23 @@
             </RadioGroup>
         </LinearLayout>
 
-        <FrameLayout
+        <com.rama.mako.widgets.WdCheckbox
+            android:id="@+id/show_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/bg_secondary_rounded"
-            android:gravity="center_vertical">
+            app:labelText="@string/show_date" />
 
-            <CheckBox
-                android:id="@+id/show_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textColor="@color/foreground_color"
-                android:text="@string/show_date" />
-        </FrameLayout>
-
-        <FrameLayout
+        <com.rama.mako.widgets.WdCheckbox
+            android:id="@+id/show_year_day"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/bg_secondary_rounded"
-            android:gravity="center_vertical">
+            app:labelText="@string/show_year_day" />
 
-            <CheckBox
-                android:id="@+id/show_year_day"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textColor="@color/foreground_color"
-                android:text="@string/show_year_day" />
-        </FrameLayout>
-
-        <FrameLayout
+        <com.rama.mako.widgets.WdCheckbox
+            android:id="@+id/show_battery"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/bg_secondary_rounded"
-            android:gravity="center_vertical">
-
-            <CheckBox
-                android:id="@+id/show_battery"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textColor="@color/foreground_color"
-                android:text="@string/show_battery" />
-        </FrameLayout>
-
+            app:labelText="@string/show_battery" />
 
         <FrameLayout
             android:id="@+id/about_button"

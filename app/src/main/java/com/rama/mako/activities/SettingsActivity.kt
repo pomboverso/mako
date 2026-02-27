@@ -4,11 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
-import android.widget.CheckBox
 import android.widget.RadioGroup
 import android.widget.Toast
 import com.rama.mako.BaseFullscreenActivity
 import com.rama.mako.R
+import com.rama.mako.widgets.WdCheckbox
 
 class SettingsActivity : BaseFullscreenActivity() {
 
@@ -75,17 +75,29 @@ class SettingsActivity : BaseFullscreenActivity() {
         }
 
         // Checkboxes (without charge status)
-        bindCheckBox(R.id.show_date, "show_date", false)
-        bindCheckBox(R.id.show_year_day, "show_year_day", false)
-        bindCheckBox(R.id.show_battery, "show_battery", false)
+        bindWdCheckbox(R.id.show_date, "show_date", false, dependentViewId = R.id.show_year_day)
+        bindWdCheckbox(R.id.show_year_day, "show_year_day", false)
+        bindWdCheckbox(R.id.show_battery, "show_battery", false)
     }
 
     // Helper to bind a checkbox to SharedPreferences
-    private fun bindCheckBox(checkBoxId: Int, prefKey: String, defaultValue: Boolean) {
-        val checkBox = findViewById<CheckBox>(checkBoxId)
-        checkBox.isChecked = prefs.getBoolean(prefKey, defaultValue)
-        checkBox.setOnCheckedChangeListener { _, isChecked ->
-            prefs.edit().putBoolean(prefKey, isChecked).apply()
+    private fun bindWdCheckbox(
+        wdCheckboxId: Int,
+        prefKey: String,
+        defaultValue: Boolean,
+        dependentViewId: Int? = null
+    ) {
+        val wdCheckbox = findViewById<WdCheckbox>(wdCheckboxId)
+        val dependentView = dependentViewId?.let { findViewById<View>(it) }
+
+        // Initialize state
+        val isChecked = prefs.getBoolean(prefKey, defaultValue)
+        wdCheckbox.setChecked(isChecked)
+        dependentView?.visibility = if (isChecked) View.VISIBLE else View.GONE
+
+        wdCheckbox.setOnCheckedChangeListener { checked ->
+            prefs.edit().putBoolean(prefKey, checked).apply()
+            dependentView?.visibility = if (checked) View.VISIBLE else View.GONE
         }
     }
 
