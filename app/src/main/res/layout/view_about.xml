@@ -44,7 +44,7 @@
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:icon="@drawable/ads_click"
+                app:icon="@drawable/icon_ads_click"
                 app:text="@string/icon_ads_desc" />
 
             <com.rama.mako.widgets.WdLabel
@@ -56,72 +56,26 @@
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:icon="@drawable/location_on"
+                app:icon="@drawable/icon_location_on"
                 app:text="@string/icon_location_desc" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:icon="@drawable/signal_wifi_off"
+                app:icon="@drawable/icon_signal_wifi_off"
                 app:text="@string/icon_offline_desc" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:icon="@drawable/shield"
+                app:icon="@drawable/icon_shield"
                 app:text="@string/icon_license_desc" />
-        </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/repo_button"
-            android:orientation="horizontal"
-            android:clickable="true"
-            android:focusable="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/bg_button_rounded"
-            android:gravity="center">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/computer"
-                android:layout_marginEnd="8dp" />
-
-            <TextView
-                android:text="@string/mako_url"
-                android:textSize="16sp"
-                android:layout_width="wrap_content"
+            <com.rama.mako.widgets.WdLabel
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/bg_color" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/creator_button"
-            android:orientation="horizontal"
-            android:clickable="true"
-            android:focusable="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:padding="16dp"
-            android:background="@drawable/bg_button_rounded"
-            android:gravity="center">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/person"
-                android:layout_marginEnd="8dp" />
-
-            <TextView
-                android:text="@string/author_app_creator"
-                android:textSize="16sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/bg_color" />
+                app:icon="@drawable/icon_computer"
+                app:text="@string/mako_url" />
         </LinearLayout>
 
         <LinearLayout

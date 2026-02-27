@@ -35,7 +35,7 @@
                 android:layout_width="16sp"
                 android:layout_height="16sp"
                 android:layout_marginEnd="4dp"
-                android:src="@drawable/calendar_today" />
+                android:src="@drawable/icon_calendar_today" />
 
             <TextView
                 android:id="@+id/date"
@@ -57,7 +57,7 @@
                 android:layout_width="16sp"
                 android:layout_height="16sp"
                 android:layout_marginEnd="4dp"
-                android:src="@drawable/battery_full_alt" />
+                android:src="@drawable/icon_battery_full_alt" />
 
             <TextView
                 android:id="@+id/battery"

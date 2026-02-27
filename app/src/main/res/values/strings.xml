@@ -1,4 +1,49 @@
 <resources>
+    <!-- Global -->
+    <string name="close">Go Back</string>
+    
+    <!-- Main -->
+    <string name="ungrouped_label">Ungrouped</string>
+
+    <!-- Main :: Temperature labels -->
+    <string name="temp_warm">Warm</string>
+    <string name="temp_hot">Hot</string>
+    <string name="temp_critical">Critical</string>
+
+    <!-- Main :: Battery status -->
+    <string name="status_charging">Charging</string>
+    <string name="status_discharging">Discharging</string>
+    <string name="status_full">Full</string>
+    <string name="status_not_charging">Not charging</string>
+    <string name="status_unknown">Unknown</string>
+
+    <!-- Main :: Charging types -->
+    <string name="charge_usb">USB</string>
+    <string name="charge_ac">AC</string>
+    <string name="charge_wireless">Wireless</string>
+
+    <!-- Main :: Formatting -->
+    <string name="battery_status_power">%1$s %2$dx</string>
+    <string name="battery_status_power_type">%1$s (%2$s) %3$dx</string>
+    <string name="unit_celsius">C</string>
+    <string name="unit_fahrenheit">F</string>
+    <string name="battery_temp">%1$d°%2$s</string>
+    <string name="battery_temp_labeled">%1$d°%2$s (%3$s)</string>
+    <string name="clock_format">Clock Settings</string>
+    <string name="clock_none">Hide clock</string>
+    <string name="clock_system">System default</string>
+    <string name="clock_24">24-hour</string>
+    <string name="clock_12">12-hour (AM/PM)</string>
+
+    <!-- Main :: Popup/Dialog -->
+    <string name="rename_app">Rename app</string>
+    <string name="add_to_favorites">Add to group...</string>
+    <string name="open_settings">App settings...</string>
+    <string name="save">Save</string>
+    <string name="reset">Reset</string>
+    <string name="cancel">Cancel</string>
+
+    <!-- APP / About -->
     <string name="app_name">Mako</string>
     <string name="app_long_name">Mako Launcher</string>
     <string name="app_description">A lightweight, distraction-free Android launcher that’s privacy-first and entirely on-device, designed for focus and simplicity.</string>
@@ -9,61 +54,17 @@
     <string name="icon_license_desc">License GPLv3</string>
     <string name="app_creator">Miguel Rivas</string>
     <string name="author_app_creator">Author: Miguel Rivas</string>
-    <string name="close">Close</string>
-    <string name="set_default">Set Launcher as Default</string>
-    <string name="refresh_launcher">Refresh Launcher</string>
-    <string name="change_wallpaper">Change OS Wallpaper</string>
+    <string name="mako_url" translatable="false">github.com/jmiguelrivas/mako</string>
+
+    <!-- Settings -->
+    <string name="settings">Settings</string>
+    <string name="set_default">Set Launcher as default</string>
+    <string name="refresh_launcher">Refresh launcher</string>
+    <string name="change_wallpaper">Change OS wallpaper</string>
     <string name="about">About Mako</string>
-    <string name="edit_apps">Edit Apps</string>
+    <string name="edit_apps">Edit apps</string>
     <string name="show_battery">Show battery</string>
     <string name="show_date">Show date</string>
     <string name="show_clock">Show clock</string>
-
-    <!-- Temperature labels -->
-    <string name="temp_warm">Warm</string>
-    <string name="temp_hot">Hot</string>
-    <string name="temp_critical">Critical</string>
-
-    <!-- Battery status -->
-    <string name="status_charging">Charging</string>
-    <string name="status_discharging">Discharging</string>
-    <string name="status_full">Full</string>
-    <string name="status_not_charging">Not charging</string>
-    <string name="status_unknown">Unknown</string>
-
-    <!-- Charging types -->
-    <string name="charge_usb">USB</string>
-    <string name="charge_ac">AC</string>
-    <string name="charge_wireless">Wireless</string>
-
-    <!-- Formatting -->
-    <string name="battery_status_power">%1$s %2$dx</string>
-    <string name="battery_status_power_type">%1$s (%2$s) %3$dx</string>
-
-    <string name="unit_celsius">C</string>
-    <string name="unit_fahrenheit">F</string>
-
-    <string name="battery_temp">%1$d°%2$s</string>
-    <string name="battery_temp_labeled">%1$d°%2$s (%3$s)</string>
-
-    <string name="clock_format">Clock Settings</string>
-    <string name="clock_none">Hide clock</string>
-    <string name="clock_system">System default</string>
-    <string name="clock_24">24-hour</string>
-    <string name="clock_12">12-hour (AM/PM)</string>
-
     <string name="show_year_day">Show day of the year</string>
-
-    <string name="rename_app">Rename app</string>
-    <string name="save">Save</string>
-    <string name="reset">Reset</string>
-    <string name="cancel">Cancel</string>
-
-    <string name="mako_url" translatable="false">github.com/jmiguelrivas/mako</string>
-
-    <string name="add_to_favorites">Add to group...</string>
-    <string name="open_settings">App settings...</string>
-
-    <string name="ungrouped_label">Ungrouped</string>
-
 </resources>

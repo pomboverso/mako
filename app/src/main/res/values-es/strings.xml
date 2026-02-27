@@ -65,4 +65,6 @@
     <string name="open_settings">Ajustes de la aplicación...</string>
 
     <string name="ungrouped_label">Sin grupo</string>
+
+    <string name="settings">Configuraciones</string>
 </resources>

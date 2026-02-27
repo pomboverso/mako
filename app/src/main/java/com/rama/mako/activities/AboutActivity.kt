@@ -23,24 +23,6 @@ class AboutActivity : BaseFullscreenActivity() {
         val root = findViewById<View>(android.R.id.content)
         applyEdgeToEdgePadding(root)
 
-        val repoButton = findViewById<LinearLayout>(R.id.repo_button)
-        repoButton.setOnClickListener {
-            val intent = Intent(
-                Intent.ACTION_VIEW,
-                Uri.parse("https://github.com/jmiguelrivas/mako")
-            )
-            startActivity(intent)
-        }
-
-        val creatorButton = findViewById<LinearLayout>(R.id.creator_button)
-        creatorButton.setOnClickListener {
-            val intent = Intent(
-                Intent.ACTION_VIEW,
-                Uri.parse("https://github.com/jmiguelrivas")
-            )
-            startActivity(intent)
-        }
-
         val closeButton = findViewById<View>(R.id.close_button)
         closeButton.setOnClickListener {
             finish()

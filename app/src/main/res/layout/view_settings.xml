@@ -12,6 +12,15 @@
         android:layout_height="wrap_content"
         android:gravity="start">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16sp"
+            android:textSize="32sp"
+            android:textColor="@color/foreground_color"
+            android:text="@string/settings"
+            android:textStyle="bold" />
+
         <FrameLayout
             android:id="@+id/activate_button"
             android:layout_width="match_parent"
