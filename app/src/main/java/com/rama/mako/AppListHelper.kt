@@ -101,7 +101,7 @@ class AppListHelper(
     private fun clearCustomName(pkg: String) = namePrefs.edit().remove(pkg).apply()
 
     private fun getGroups(): MutableList<String> {
-        return groupsListPrefs.getStringSet("groups", mutableSetOf("Default"))!!
+        return groupsListPrefs.getStringSet("groups", mutableSetOf("------ Favorites"))!!
             .toMutableList()
     }
 
@@ -179,7 +179,6 @@ class AppListHelper(
             .create()
 
         val closeBtn = view.findViewById<View>(R.id.close_button)
-        val addGroupBtn = view.findViewById<View>(R.id.activate_button)
         val container = view.findViewById<LinearLayout>(R.id.groups)
 
         var groups = getGroups()
@@ -215,24 +214,6 @@ class AppListHelper(
         }
 
         renderGroups()
-
-        addGroupBtn.setOnClickListener {
-            val input = EditText(context)
-
-            AlertDialog.Builder(context)
-                .setTitle("New group")
-                .setView(input)
-                .setPositiveButton("Add") { _, _ ->
-                    val newGroup = input.text.toString().trim()
-                    if (newGroup.isNotEmpty()) {
-                        groups.add(newGroup)
-                        saveGroups(groups)
-                        renderGroups()
-                    }
-                }
-                .setNegativeButton("Cancel", null)
-                .show()
-        }
 
         closeBtn.setOnClickListener {
             dialog.dismiss()
@@ -297,7 +278,7 @@ class AppListHelper(
                         val view =
                             convertView ?: View.inflate(context, R.layout.app_list_header, null)
                         val text = view.findViewById<TextView>(R.id.header_text)
-                        text.text = "------- " + item.title.uppercase()
+                        text.text = item.title.uppercase()
                         view
                     }
 

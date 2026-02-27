@@ -1,9 +1,9 @@
 <resources>
     <!-- Global -->
     <string name="close">Go Back</string>
-    
+
     <!-- Main -->
-    <string name="ungrouped_label">Ungrouped</string>
+    <string name="ungrouped_label">------ Ungrouped</string>
 
     <!-- Main :: Temperature labels -->
     <string name="temp_warm">Warm</string>

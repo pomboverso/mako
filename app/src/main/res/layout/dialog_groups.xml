@@ -26,13 +26,6 @@
         android:background="@drawable/bg_secondary_rounded"
         android:focusableInTouchMode="true"></LinearLayout>
 
-    <com.rama.mako.widgets.WdButton
-        android:id="@+id/activate_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="+ Add New Group" />
-
     <com.rama.mako.widgets.WdButtonNav
         android:id="@+id/close_button"
         android:layout_width="match_parent"

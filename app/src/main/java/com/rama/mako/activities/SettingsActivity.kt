@@ -7,6 +7,7 @@ import android.provider.Settings
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RadioGroup
 import android.widget.Toast
@@ -28,7 +29,7 @@ class SettingsActivity : BaseFullscreenActivity(
     }
 
     private fun getGroups(): MutableList<String> {
-        return groupsListPrefs.getStringSet("groups", mutableSetOf("Default"))!!
+        return groupsListPrefs.getStringSet("groups", mutableSetOf("------ Favorites"))!!
             .toMutableList()
     }
 
@@ -66,7 +67,7 @@ class SettingsActivity : BaseFullscreenActivity(
     private fun addGroupRow(group: String, container: LinearLayout, groups: MutableList<String>) {
         val row = layoutInflater.inflate(R.layout.list_item_group, container, false)
         val edit = row.findViewById<EditText>(R.id.group_name)
-        val deleteBtn = row.findViewById<Button>(R.id.delete_group)
+        val deleteBtn = row.findViewById<ImageView>(R.id.delete_group)
 
         edit.setText(group)
 
@@ -159,9 +160,9 @@ class SettingsActivity : BaseFullscreenActivity(
         }
 
         // Checkboxes (without charge status)
-        bindWdCheckbox(R.id.show_date, "show_date", false, dependentViewId = R.id.show_year_day)
-        bindWdCheckbox(R.id.show_year_day, "show_year_day", false)
-        bindWdCheckbox(R.id.show_battery, "show_battery", false)
+        bindWdCheckbox(R.id.show_date, "show_date", true, dependentViewId = R.id.show_year_day)
+        bindWdCheckbox(R.id.show_year_day, "show_year_day", true)
+        bindWdCheckbox(R.id.show_battery, "show_battery", true)
 
         // Set Groups
         val groupsContainer = findViewById<LinearLayout>(R.id.groups)
@@ -175,7 +176,7 @@ class SettingsActivity : BaseFullscreenActivity(
             )
 
             val edit = row.findViewById<EditText>(R.id.group_name)
-            val deleteBtn = row.findViewById<Button>(R.id.delete_group)
+            val deleteBtn = row.findViewById<ImageView>(R.id.delete_group)
 
             edit.setText(group)
 
@@ -216,7 +217,7 @@ class SettingsActivity : BaseFullscreenActivity(
             val groupsContainer = findViewById<LinearLayout>(R.id.groups)
             val groups = getGroups()
 
-            val defaultName = "New Group"
+            val defaultName = "------ New Group"
             // Ensure unique default name
             var newName = defaultName
             var counter = 1
