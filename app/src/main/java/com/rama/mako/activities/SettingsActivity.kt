@@ -12,6 +12,7 @@ import android.widget.RadioGroup
 import android.widget.Toast
 import com.rama.mako.BaseFullscreenActivity
 import com.rama.mako.R
+import com.rama.mako.widgets.WdButton
 import com.rama.mako.widgets.WdCheckbox
 
 class SettingsActivity : BaseFullscreenActivity(
@@ -60,6 +61,41 @@ class SettingsActivity : BaseFullscreenActivity(
             }
         }
         editor.apply()
+    }
+
+    private fun addGroupRow(group: String, container: LinearLayout, groups: MutableList<String>) {
+        val row = layoutInflater.inflate(R.layout.list_item_group, container, false)
+        val edit = row.findViewById<EditText>(R.id.group_name)
+        val deleteBtn = row.findViewById<Button>(R.id.delete_group)
+
+        edit.setText(group)
+
+        edit.addTextChangedListener(object : android.text.TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: android.text.Editable?) {
+                val oldName = edit.tag as String
+                val newName = s?.toString()?.trim() ?: return
+                if (oldName != newName) {
+                    renameGroup(oldName, newName)
+                    val index = groups.indexOf(oldName)
+                    if (index != -1) groups[index] = newName
+                    groupsListPrefs.edit().putStringSet("groups", groups.toSet()).apply()
+                    edit.tag = newName
+                }
+            }
+        })
+
+        deleteBtn.setOnClickListener {
+            deleteGroup(edit.text.toString())
+            groups.remove(edit.text.toString())
+            container.removeView(row)
+        }
+
+        // Track original name
+        edit.tag = group
+
+        container.addView(row)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -173,6 +209,28 @@ class SettingsActivity : BaseFullscreenActivity(
             }
 
             groupsContainer.addView(row)
+        }
+
+        val addGroupBtn = findViewById<WdButton>(R.id.add_group)
+        addGroupBtn.setOnClickListener {
+            val groupsContainer = findViewById<LinearLayout>(R.id.groups)
+            val groups = getGroups()
+
+            val defaultName = "New Group"
+            // Ensure unique default name
+            var newName = defaultName
+            var counter = 1
+            while (groups.contains(newName)) {
+                counter++
+                newName = "$defaultName $counter"
+            }
+
+            // Add to SharedPreferences list
+            groups.add(newName)
+            groupsListPrefs.edit().putStringSet("groups", groups.toSet()).apply()
+
+            // Add the row dynamically
+            addGroupRow(newName, groupsContainer, groups)
         }
     }
 
