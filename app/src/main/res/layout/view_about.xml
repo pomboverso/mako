@@ -78,25 +78,10 @@
                 app:text="@string/mako_url" />
         </LinearLayout>
 
-        <LinearLayout
+        <com.rama.mako.widgets.WdButtonNav
             android:id="@+id/close_button"
-            android:orientation="horizontal"
-            android:clickable="true"
-            android:focusable="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:padding="16dp"
-            android:background="@drawable/bg_button_danger"
-            android:gravity="center">
-
-            <TextView
-                android:text="@string/close"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/bg_color" />
-        </LinearLayout>
+            android:text="@string/close" />
     </LinearLayout>
 </ScrollView>

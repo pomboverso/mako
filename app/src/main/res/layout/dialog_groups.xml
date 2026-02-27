@@ -34,43 +34,16 @@
             android:text="Edit Groups" />
     </FrameLayout>
 
-    <FrameLayout
+    <com.rama.mako.widgets.WdButton
         android:id="@+id/activate_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        android:padding="16dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/bg_secondary_rounded"
-        android:gravity="center_vertical">
+        android:text="+ Add New Group" />
 
-        <TextView
-            android:text="+ Add New Group"
-            android:textSize="16sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/foreground_color" />
-    </FrameLayout>
-
-    <LinearLayout
+    <com.rama.mako.widgets.WdButtonNav
         android:id="@+id/close_button"
-        android:orientation="horizontal"
-        android:clickable="true"
-        android:focusable="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:padding="16dp"
-        android:background="@drawable/bg_button_danger"
-        android:gravity="center">
-
-        <TextView
-            android:text="@string/close"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/bg_color" />
-    </LinearLayout>
+        android:text="@string/close" />
 </LinearLayout>

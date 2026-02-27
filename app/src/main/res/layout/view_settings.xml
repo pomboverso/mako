@@ -134,81 +134,33 @@
             android:text="Others"
             android:textStyle="bold" />
 
-        <FrameLayout
+        <com.rama.mako.widgets.WdButton
             android:id="@+id/activate_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clickable="true"
-            android:focusable="true"
-            android:padding="16dp"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/bg_secondary_rounded"
-            android:gravity="center_vertical">
+            android:text="@string/set_default" />
 
-            <TextView
-                android:text="@string/set_default"
-                android:textSize="16sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/foreground_color" />
-        </FrameLayout>
-
-        <FrameLayout
+        <com.rama.mako.widgets.WdButton
             android:id="@+id/reset_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clickable="true"
-            android:focusable="true"
-            android:padding="16dp"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/bg_secondary_rounded"
-            android:gravity="center_vertical">
+            android:text="@string/refresh_launcher" />
 
-            <TextView
-                android:text="@string/refresh_launcher"
-                android:textSize="16sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/foreground_color" />
-        </FrameLayout>
-
-        <FrameLayout
+        <com.rama.mako.widgets.WdButton
             android:id="@+id/change_apps_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clickable="true"
-            android:focusable="true"
-            android:padding="16dp"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/bg_secondary_rounded"
-            android:gravity="center_vertical">
+            android:text="@string/edit_apps" />
 
-            <TextView
-                android:text="@string/edit_apps"
-                android:textSize="16sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/foreground_color" />
-        </FrameLayout>
-
-        <FrameLayout
+        <com.rama.mako.widgets.WdButton
             android:id="@+id/wallpaper_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clickable="true"
-            android:focusable="true"
-            android:padding="16dp"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/bg_secondary_rounded"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:text="@string/change_wallpaper"
-                android:textSize="16sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/foreground_color" />
-        </FrameLayout>
+            android:text="@string/change_wallpaper" />
 
         <com.rama.mako.widgets.WdButtonNav
             android:id="@+id/about_button"
@@ -217,25 +169,10 @@
             android:layout_marginBottom="8dp"
             android:text="@string/about" />
 
-        <LinearLayout
+        <com.rama.mako.widgets.WdButtonNav
             android:id="@+id/close_button"
-            android:orientation="horizontal"
-            android:clickable="true"
-            android:focusable="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16sp"
-            android:padding="16sp"
-            android:background="@drawable/bg_button_danger"
-            android:gravity="center">
-
-            <TextView
-                android:text="@string/close"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/bg_color" />
-        </LinearLayout>
+            android:text="@string/close" />
     </LinearLayout>
 </ScrollView>
