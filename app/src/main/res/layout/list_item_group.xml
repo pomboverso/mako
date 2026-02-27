@@ -6,13 +6,11 @@
     android:layout_marginBottom="16sp"
     android:gravity="center">
 
-    <ImageView
-        android:id="@+id/drag_handle"
-        android:layout_width="24sp"
-        android:layout_height="match_parent"
-        android:padding="0dp"
-        android:src="@drawable/icon_drag_handle"
-        android:contentDescription="drag handle" />
+    <EditText
+        android:id="@+id/group_index"
+        android:layout_width="32sp"
+        android:textSize="16sp"
+        android:layout_height="wrap_content" />
 
     <EditText
         android:id="@+id/group_name"

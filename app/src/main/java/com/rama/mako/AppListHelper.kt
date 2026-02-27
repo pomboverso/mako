@@ -47,39 +47,35 @@ class AppListHelper(
     }
 
     private fun buildItems() {
-        val intent = Intent(Intent.ACTION_MAIN).apply {
-            addCategory(Intent.CATEGORY_LAUNCHER)
-        }
-
+        val intent = Intent(Intent.ACTION_MAIN).apply { addCategory(Intent.CATEGORY_LAUNCHER) }
         val allApps = pm.queryIntentActivities(intent, 0)
+        val settingsPrefs = context.getSharedPreferences("settings", Context.MODE_PRIVATE)
+        val ungroupedLabel = context.getString(R.string.ungrouped_label)
 
-        // group apps
-        val grouped = allApps
-            .groupBy { app ->
-                getGroup(app.activityInfo.packageName)
-                    ?: context.getString(R.string.ungrouped_label)
-            }
-            .filterKeys { groupName ->
-                // Always show ungrouped apps
-                if (groupName == context.getString(R.string.ungrouped_label)) return@filterKeys true
-                // Check visibility flag
-                context.getSharedPreferences("settings", Context.MODE_PRIVATE)
-                    .getBoolean("group_visibility_$groupName", true)
-            }
-            .toSortedMap()
+        val groups = getGroups() // this is already in the order the user wants
+
+        // Build group -> apps map
+        val groupedMap = allApps.groupBy { app ->
+            getGroup(app.activityInfo.packageName) ?: ungroupedLabel
+        }
 
         items.clear()
 
-        grouped.forEach { (groupName, groupApps) ->
-            // add header
+        // Add groups in the order of `groups` list
+        groups.forEach { groupName ->
+            if (!groupedMap.containsKey(groupName)) return@forEach
+            if (!settingsPrefs.getBoolean("group_visibility_$groupName", true)) return@forEach
+
             items.add(ListItem.Header(groupName))
+            groupedMap[groupName]!!.sortedBy { getDisplayName(it).lowercase() }
+                .forEach { items.add(ListItem.App(it)) }
+        }
 
-            // sort apps inside group
-            val sortedApps = groupApps.sortedBy { getDisplayName(it).lowercase() }
-
-            sortedApps.forEach {
-                items.add(ListItem.App(it))
-            }
+        // Finally add ungrouped apps (if any)
+        groupedMap[ungroupedLabel]?.let { ungroupedApps ->
+            items.add(ListItem.Header(ungroupedLabel))
+            ungroupedApps.sortedBy { getDisplayName(it).lowercase() }
+                .forEach { items.add(ListItem.App(it)) }
         }
     }
 

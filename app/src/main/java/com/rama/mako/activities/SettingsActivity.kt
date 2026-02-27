@@ -1,11 +1,10 @@
 package com.rama.mako.activities
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
-import android.widget.Button
+import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -64,60 +63,90 @@ class SettingsActivity : BaseFullscreenActivity(
         editor.apply()
     }
 
+    private fun updateIndices(container: LinearLayout, groups: List<String>) {
+        for (i in 0 until container.childCount) {
+            val row = container.getChildAt(i)
+            val indexEdit = row.findViewById<EditText>(R.id.group_index)
+            indexEdit.setText((i + 1).toString())
+        }
+    }
+
     private fun addGroupRow(group: String, container: LinearLayout, groups: MutableList<String>) {
         val row = layoutInflater.inflate(R.layout.list_item_group, container, false)
-        val edit = row.findViewById<EditText>(R.id.group_name)
+        val indexEdit = row.findViewById<EditText>(R.id.group_index)
+        val nameEdit = row.findViewById<EditText>(R.id.group_name)
         val deleteBtn = row.findViewById<ImageView>(R.id.delete_group)
         val toggleBtn = row.findViewById<ImageView>(R.id.toggle_visibility)
 
-        edit.setText(group)
-        edit.tag = group // Track original name
+        // Set group name
+        nameEdit.setText(group)
+        nameEdit.tag = group
 
-        // Text change listener
-        edit.addTextChangedListener(object : android.text.TextWatcher {
+        // Set initial visibility icon
+        val isVisible = prefs.getBoolean("group_visibility_$group", true)
+        toggleBtn.setImageResource(
+            if (isVisible) R.drawable.icon_visibility else R.drawable.icon_visibility_off
+        )
+
+        // Set initial index
+        val currentIndex = groups.indexOf(group)
+        indexEdit.setText((currentIndex + 1).toString()) // 1-based index
+
+        // When name changes
+        nameEdit.addTextChangedListener(object : android.text.TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: android.text.Editable?) {
-                val oldName = edit.tag as String
+                val oldName = nameEdit.tag as String
                 val newName = s?.toString()?.trim() ?: return
                 if (oldName != newName) {
                     renameGroup(oldName, newName)
                     val index = groups.indexOf(oldName)
                     if (index != -1) groups[index] = newName
                     groupsListPrefs.edit().putStringSet("groups", groups.toSet()).apply()
-
-                    // Update tag for future edits
-                    edit.tag = newName
-
-                    // Preserve visibility key when renaming
-                    val visible = prefs.getBoolean("group_visibility_$oldName", true)
-                    prefs.edit().remove("group_visibility_$oldName")
-                        .putBoolean("group_visibility_$newName", visible)
-                        .apply()
+                    nameEdit.tag = newName
                 }
             }
         })
 
-        // Delete button
-        deleteBtn.setOnClickListener {
-            val groupName = edit.text.toString()
-            deleteGroup(groupName)
-            groups.remove(groupName)
-            container.removeView(row)
-        }
-
-        // Toggle visibility button
-        val isVisible = prefs.getBoolean("group_visibility_$group", true)
-        toggleBtn.setImageResource(
-            if (isVisible) R.drawable.icon_visibility else R.drawable.icon_visibility_off
-        )
-
+        // Toggle visibility
         toggleBtn.setOnClickListener {
-            val newVisibility = !prefs.getBoolean("group_visibility_${edit.text}", true)
-            prefs.edit().putBoolean("group_visibility_${edit.text}", newVisibility).apply()
+            val newVisibility = !prefs.getBoolean("group_visibility_$group", true)
+            prefs.edit().putBoolean("group_visibility_$group", newVisibility).apply()
             toggleBtn.setImageResource(
                 if (newVisibility) R.drawable.icon_visibility else R.drawable.icon_visibility_off
             )
+        }
+
+        // Delete group
+        deleteBtn.setOnClickListener {
+            deleteGroup(nameEdit.text.toString())
+            groups.remove(nameEdit.text.toString())
+            container.removeView(row)
+            updateIndices(container, groups)
+        }
+
+        // Reorder on index change (on focus lost)
+        indexEdit.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) {
+                val newIndexInput = indexEdit.text.toString().toIntOrNull()
+                val oldIndex = groups.indexOf(nameEdit.text.toString())
+                if (newIndexInput != null) {
+                    val newIndex = (newIndexInput - 1).coerceIn(0, groups.size - 1)
+                    if (newIndex != oldIndex) {
+                        val groupName = groups.removeAt(oldIndex)
+                        groups.add(newIndex, groupName)
+
+                        container.removeView(row)
+                        container.addView(row, newIndex)
+                        updateIndices(container, groups)
+                        groupsListPrefs.edit().putStringSet("groups", groups.toSet()).apply()
+                    }
+                } else {
+                    // Reset to current index if input invalid
+                    indexEdit.setText((oldIndex + 1).toString())
+                }
+            }
         }
 
         container.addView(row)
@@ -183,7 +212,7 @@ class SettingsActivity : BaseFullscreenActivity(
             }
         }
 
-        // Checkboxes (without charge status)
+        // Checkboxes
         bindWdCheckbox(R.id.show_date, "show_date", true, dependentViewId = R.id.show_year_day)
         bindWdCheckbox(R.id.show_year_day, "show_year_day", true)
         bindWdCheckbox(R.id.show_battery, "show_battery", true)
@@ -192,15 +221,13 @@ class SettingsActivity : BaseFullscreenActivity(
         val groupsContainer = findViewById<LinearLayout>(R.id.groups)
         val groups = getGroups()
 
-        // Existing groups
         groups.forEach { group ->
             addGroupRow(group, groupsContainer, groups)
         }
 
-        // Add button
         val addGroupBtn = findViewById<WdButton>(R.id.add_group)
         addGroupBtn.setOnClickListener {
-            var defaultName = "------ New Group"
+            val defaultName = "------ New Group"
             var newName = defaultName
             var counter = 1
             while (groups.contains(newName)) {
@@ -208,11 +235,12 @@ class SettingsActivity : BaseFullscreenActivity(
                 newName = "$defaultName $counter"
             }
 
+            // Add to SharedPreferences list
             groups.add(newName)
             groupsListPrefs.edit().putStringSet("groups", groups.toSet()).apply()
-
             prefs.edit().putBoolean("group_visibility_$newName", true).apply()
 
+            // Add the new row
             addGroupRow(newName, groupsContainer, groups)
         }
     }
