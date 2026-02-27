@@ -21,6 +21,119 @@
             android:text="@string/settings"
             android:textStyle="bold" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8sp"
+            android:textSize="16sp"
+            android:textColor="@color/foreground_color"
+            android:text="Clock"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:orientation="vertical"
+            android:layout_marginBottom="8sp"
+            android:background="@drawable/bg_secondary_rounded"
+            android:gravity="center_vertical">
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/clock_format_group"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/clock_none"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/foreground_color"
+                    android:text="@string/clock_none" />
+
+                <RadioButton
+                    android:id="@+id/clock_system"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/foreground_color"
+                    android:text="@string/clock_system" />
+
+                <RadioButton
+                    android:id="@+id/clock_24"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/foreground_color"
+                    android:text="@string/clock_24" />
+
+                <RadioButton
+                    android:id="@+id/clock_12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/foreground_color"
+                    android:text="@string/clock_12" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8sp"
+            android:textSize="16sp"
+            android:textColor="@color/foreground_color"
+            android:text="Date and Battery"
+            android:textStyle="bold" />
+
+        <com.rama.mako.widgets.WdCheckbox
+            android:id="@+id/show_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:text="@string/show_date" />
+
+        <com.rama.mako.widgets.WdCheckbox
+            android:id="@+id/show_year_day"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:text="@string/show_year_day" />
+
+        <com.rama.mako.widgets.WdCheckbox
+            android:id="@+id/show_battery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:text="@string/show_battery" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8sp"
+            android:textSize="16sp"
+            android:textColor="@color/foreground_color"
+            android:text="Groups"
+            android:textStyle="bold" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="16dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bg_secondary_rounded"
+            android:gravity="center_vertical"></FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8sp"
+            android:textSize="16sp"
+            android:textColor="@color/foreground_color"
+            android:text="Others"
+            android:textStyle="bold" />
+
         <FrameLayout
             android:id="@+id/activate_button"
             android:layout_width="match_parent"
@@ -97,101 +210,12 @@
                 android:textColor="@color/foreground_color" />
         </FrameLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:orientation="vertical"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/bg_secondary_rounded"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:id="@+id/temp_unit_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:textSize="16sp"
-                android:textColor="@color/foreground_color"
-                android:text="@string/clock_format"
-                android:textStyle="bold" />
-
-            <RadioGroup
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/clock_format_group"
-                android:orientation="vertical">
-
-                <RadioButton
-                    android:id="@+id/clock_none"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textColor="@color/foreground_color"
-                    android:text="@string/clock_none" />
-
-                <RadioButton
-                    android:id="@+id/clock_system"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textColor="@color/foreground_color"
-                    android:text="@string/clock_system" />
-
-                <RadioButton
-                    android:id="@+id/clock_24"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textColor="@color/foreground_color"
-                    android:text="@string/clock_24" />
-
-                <RadioButton
-                    android:id="@+id/clock_12"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textColor="@color/foreground_color"
-                    android:text="@string/clock_12" />
-            </RadioGroup>
-        </LinearLayout>
-
-        <com.rama.mako.widgets.WdCheckbox
-            android:id="@+id/show_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:labelText="@string/show_date" />
-
-        <com.rama.mako.widgets.WdCheckbox
-            android:id="@+id/show_year_day"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:labelText="@string/show_year_day" />
-
-        <com.rama.mako.widgets.WdCheckbox
-            android:id="@+id/show_battery"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:labelText="@string/show_battery" />
-
-        <FrameLayout
+        <com.rama.mako.widgets.WdButtonNav
             android:id="@+id/about_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clickable="true"
-            android:focusable="true"
-            android:padding="16dp"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/bg_secondary_rounded"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:text="@string/about"
-                android:textSize="16sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/foreground_color" />
-        </FrameLayout>
+            android:text="@string/about" />
 
         <LinearLayout
             android:id="@+id/close_button"
@@ -200,8 +224,8 @@
             android:focusable="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:padding="16dp"
+            android:layout_marginBottom="16sp"
+            android:padding="16sp"
             android:background="@drawable/bg_button_danger"
             android:gravity="center">
 

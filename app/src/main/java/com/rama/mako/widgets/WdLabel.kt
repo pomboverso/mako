@@ -18,23 +18,32 @@ class WdLabel @JvmOverloads constructor(
     private val iconText: TextView
 
     init {
-        // Inflate the XML layout
         LayoutInflater.from(context).inflate(R.layout.wd_label, this, true)
         iconImage = findViewById(R.id.icon_image)
         iconText = findViewById(R.id.icon_text)
 
-        // Read custom attributes from XML
-        attrs?.let {
-            val typedArray = context.obtainStyledAttributes(it, R.styleable.ListItem, 0, 0)
-            val text = typedArray.getString(R.styleable.ListItem_text)
-            val iconRes = typedArray.getResourceId(R.styleable.ListItem_icon, 0)
+        attrs?.let { setAttrs(context, it) }
+    }
 
-            iconText.text = text
-            if (iconRes != 0) {
-                iconImage.setImageResource(iconRes)
+    private fun setAttrs(context: Context, attrs: AttributeSet) {
+        for (i in 0 until attrs.attributeCount) {
+            val name = attrs.getAttributeName(i)
+            val value = attrs.getAttributeValue(i)
+            when (name) {
+                "text" -> iconText.text = context.getString(attrs.getAttributeResourceValue(i, 0))
+                "icon" -> {
+                    val resId = attrs.getAttributeResourceValue(i, 0)
+                    if (resId != 0) iconImage.setImageResource(resId)
+                }
             }
-
-            typedArray.recycle()
         }
+    }
+
+    fun setText(text: String) {
+        iconText.text = text
+    }
+
+    fun setIcon(resId: Int) {
+        iconImage.setImageResource(resId)
     }
 }
