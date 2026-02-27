@@ -21,6 +21,7 @@
     <com.rama.mako.widgets.WdButton
         android:id="@+id/yes_button"
         android:layout_width="match_parent"
+        android:layout_marginBottom="8sp"
         android:layout_height="wrap_content"
         android:text="Yes" />
 
