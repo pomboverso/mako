@@ -1,6 +1,5 @@
-package com.rama.mako
+package com.rama.mako.activities
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
@@ -8,8 +7,10 @@ import android.view.View
 import android.widget.CheckBox
 import android.widget.RadioGroup
 import android.widget.Toast
+import com.rama.mako.BaseFullscreenActivity
+import com.rama.mako.R
 
-class SettingsActivity : Activity() {
+class SettingsActivity : BaseFullscreenActivity() {
 
     private val prefs by lazy { getSharedPreferences("settings", MODE_PRIVATE) }
 
@@ -17,20 +18,10 @@ class SettingsActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.view_settings)
 
-        // Adjust for status bar insets
-        findViewById<View>(android.R.id.content).setOnApplyWindowInsetsListener { v, insets ->
-            v.setPadding(
-                v.paddingLeft,
-                insets.systemWindowInsetTop,
-                v.paddingRight,
-                v.paddingBottom
-            )
-            insets
-        }
+        val root = findViewById<View>(android.R.id.content)
+        applyEdgeToEdgePadding(root)
 
-        // ─────────────────────────────────────
         // Setup buttons
-        // ─────────────────────────────────────
         setupButton(R.id.about_button) { startActivity(Intent(this, AboutActivity::class.java)) }
         setupButton(R.id.close_button) { finish() }
 
@@ -49,12 +40,10 @@ class SettingsActivity : Activity() {
         }
 
         findViewById<View>(R.id.change_apps_button).setOnClickListener {
-            startActivity(Intent(android.provider.Settings.ACTION_APPLICATION_SETTINGS))
+            startActivity(Intent(Settings.ACTION_APPLICATION_SETTINGS))
         }
 
-        // ─────────────────────────────────────
         // Clock radio buttons
-        // ─────────────────────────────────────
         val clockFormatGroup = findViewById<RadioGroup>(R.id.clock_format_group)
 
         // Restore saved state
@@ -85,17 +74,13 @@ class SettingsActivity : Activity() {
             }
         }
 
-        // ─────────────────────────────────────
         // Checkboxes (without charge status)
-        // ─────────────────────────────────────
-        bindCheckBox(R.id.show_date, "show_date", true)
-        bindCheckBox(R.id.show_year_day, "show_year_day", true)
-        bindCheckBox(R.id.show_battery, "show_battery", true)
+        bindCheckBox(R.id.show_date, "show_date", false)
+        bindCheckBox(R.id.show_year_day, "show_year_day", false)
+        bindCheckBox(R.id.show_battery, "show_battery", false)
     }
 
-    // ─────────────────────────────────────
     // Helper to bind a checkbox to SharedPreferences
-    // ─────────────────────────────────────
     private fun bindCheckBox(checkBoxId: Int, prefKey: String, defaultValue: Boolean) {
         val checkBox = findViewById<CheckBox>(checkBoxId)
         checkBox.isChecked = prefs.getBoolean(prefKey, defaultValue)
@@ -104,16 +89,12 @@ class SettingsActivity : Activity() {
         }
     }
 
-    // ─────────────────────────────────────
     // Helper to bind a click listener
-    // ─────────────────────────────────────
     private fun setupButton(id: Int, action: () -> Unit) {
         findViewById<View>(id).setOnClickListener { action() }
     }
 
-    // ─────────────────────────────────────
     // Safely open an intent
-    // ─────────────────────────────────────
     private fun openIntent(intent: Intent, errorMsg: String) {
         if (intent.resolveActivity(packageManager) != null) {
             startActivity(intent)

@@ -1,12 +1,12 @@
-package com.rama.mako
+package com.rama.mako.activities
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.rama.mako.R
 
 class ListItemActivity @JvmOverloads constructor(
     context: Context,

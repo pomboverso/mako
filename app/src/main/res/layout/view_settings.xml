@@ -10,8 +10,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="start"
-        android:padding="32dp">
+        android:gravity="start">
 
         <FrameLayout
             android:id="@+id/activate_button"

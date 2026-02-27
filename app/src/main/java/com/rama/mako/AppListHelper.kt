@@ -11,8 +11,8 @@ import android.view.ViewGroup
 import android.widget.*
 import android.widget.PopupMenu
 import android.widget.TextView
-import android.widget.ImageView
 import android.widget.Toast
+import com.rama.mako.activities.SettingsActivity
 
 class AppListHelper(
     private val context: Context,
@@ -31,20 +31,46 @@ class AppListHelper(
 
     private val namePrefs = context.getSharedPreferences("app_names", Context.MODE_PRIVATE)
     private val pm = context.packageManager
-    private val apps = mutableListOf<ResolveInfo>()
-    private lateinit var adapter: ArrayAdapter<ResolveInfo>
+
+    private val items = mutableListOf<ListItem>()
+    private lateinit var adapter: ArrayAdapter<ListItem>
 
     fun setup() {
-        loadApps()
-        sortApps()
+        buildItems()
         setupAdapter()
         setupScrollListener()
     }
 
     fun refresh() {
-        loadApps()
-        sortApps()
+        buildItems()
         adapter.notifyDataSetChanged()
+    }
+
+    private fun buildItems() {
+        val intent = Intent(Intent.ACTION_MAIN).apply {
+            addCategory(Intent.CATEGORY_LAUNCHER)
+        }
+
+        val allApps = pm.queryIntentActivities(intent, 0)
+
+        // group apps
+        val grouped = allApps.groupBy { app ->
+            getGroup(app.activityInfo.packageName) ?: context.getString(R.string.ungrouped_label)
+        }.toSortedMap()
+
+        items.clear()
+
+        grouped.forEach { (groupName, groupApps) ->
+            // add header
+            items.add(ListItem.Header(groupName))
+
+            // sort apps inside group
+            val sortedApps = groupApps.sortedBy { getDisplayName(it).lowercase() }
+
+            sortedApps.forEach {
+                items.add(ListItem.App(it))
+            }
+        }
     }
 
     private fun sanitizeSystemLabel(raw: String): String {
@@ -66,21 +92,6 @@ class AppListHelper(
         // Only sanitize system-provided labels
         val systemLabel = app.loadLabel(pm).toString()
         return sanitizeSystemLabel(systemLabel)
-    }
-
-    private fun loadApps() {
-        val intent = Intent(Intent.ACTION_MAIN).apply {
-            addCategory(Intent.CATEGORY_LAUNCHER)
-        }
-        apps.clear()
-        apps.addAll(pm.queryIntentActivities(intent, 0))
-    }
-
-    private fun sortApps() {
-        apps.sortWith(
-            compareBy<ResolveInfo> { getGroup(it.activityInfo.packageName) ?: "zzz" }
-                .thenBy { getDisplayName(it).lowercase() }
-        )
     }
 
     private fun getCustomName(pkg: String): String? = namePrefs.getString(pkg, null)
@@ -151,6 +162,11 @@ class AppListHelper(
                 refresh()
             }
             .show()
+    }
+
+    private sealed class ListItem {
+        data class Header(val title: String) : ListItem()
+        data class App(val info: ResolveInfo) : ListItem()
     }
 
     private fun showGroupsDialog(app: ResolveInfo) {
@@ -241,9 +257,6 @@ class AppListHelper(
         dialog.show()
     }
 
-    // ------------------------------------------------------------------------
-    // Context menu
-    // ------------------------------------------------------------------------
     private fun showContextMenu(anchor: View, app: ResolveInfo) {
         val pkg = app.activityInfo.packageName
 
@@ -275,44 +288,63 @@ class AppListHelper(
         popup.show()
     }
 
-    // ------------------------------------------------------------------------
-    // Adapter
-    // ------------------------------------------------------------------------
     private fun setupAdapter() {
-        adapter = object : ArrayAdapter<ResolveInfo>(
+        adapter = object : ArrayAdapter<ListItem>(
             context,
-            R.layout.app_list_item,
-            R.id.open_app_button,
-            apps
+            0,
+            items
         ) {
+
+            override fun getViewTypeCount() = 2
+
+            override fun getItemViewType(position: Int): Int {
+                return when (getItem(position)) {
+                    is ListItem.Header -> 0
+                    is ListItem.App -> 1
+                    else -> 1
+                }
+            }
+
             override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-                val view = super.getView(position, convertView, parent)
-                val app = getItem(position) ?: return view
-                val pkg = app.activityInfo.packageName
+                val item = getItem(position)!!
 
-                val label = view.findViewById<TextView>(R.id.open_app_button)
-                val emptySpace = view.findViewById<View>(R.id.empty_space)
+                return when (item) {
+                    is ListItem.Header -> {
+                        val view = convertView ?: View.inflate(context, R.layout.list_header, null)
+                        val text = view.findViewById<TextView>(R.id.header_text)
+                        text.text = "------- " + item.title.uppercase()
+                        view
+                    }
 
-                emptySpace.setOnLongClickListener {
-                    context.startActivity(
-                        Intent(context, SettingsActivity::class.java)
-                    )
-                    true
+                    is ListItem.App -> {
+                        val view =
+                            convertView ?: View.inflate(context, R.layout.app_list_item, null)
+                        val app = item.info
+                        val pkg = app.activityInfo.packageName
+
+                        val label = view.findViewById<TextView>(R.id.open_app_button)
+                        val emptySpace = view.findViewById<View>(R.id.empty_space)
+
+                        label.text = getDisplayName(app)
+
+                        label.setOnClickListener { launchApp(pkg) }
+                        emptySpace.setOnClickListener { launchApp(pkg) }
+
+                        label.setOnLongClickListener {
+                            showContextMenu(it, app)
+                            true
+                        }
+
+                        emptySpace.setOnLongClickListener {
+                            context.startActivity(
+                                Intent(context, SettingsActivity::class.java)
+                            )
+                            true
+                        }
+
+                        view
+                    }
                 }
-
-                // Set label
-                label.text = getDisplayName(app)
-
-                // Clicks
-                label.setOnClickListener { launchApp(pkg) }
-                emptySpace.setOnClickListener { launchApp(pkg) }
-
-                label.setOnLongClickListener {
-                    showContextMenu(it, app)
-                    true
-                }
-
-                return view
             }
         }
 

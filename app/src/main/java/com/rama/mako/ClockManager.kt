@@ -27,7 +27,7 @@ class ClockManager(
             calendar.timeInMillis = System.currentTimeMillis()
             val locale = Locale.getDefault()
 
-            // ---- CLOCK ----
+            // Clock
             if (showClock) {
                 timeTextView.visibility = View.VISIBLE
 
@@ -45,7 +45,7 @@ class ClockManager(
                 timeTextView.visibility = View.GONE
             }
 
-            // ---- DATE ----
+            // Date
             if (showDate) {
                 dateTextView.visibility = View.VISIBLE
 

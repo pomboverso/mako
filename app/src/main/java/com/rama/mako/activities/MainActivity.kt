@@ -1,15 +1,18 @@
-package com.rama.mako
+package com.rama.mako.activities
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
-import com.rama.mako.utils.dp
+import com.rama.mako.AppListHelper
+import com.rama.mako.BaseFullscreenActivity
+import com.rama.mako.BatteryManagerHelper
+import com.rama.mako.ClockManager
+import com.rama.mako.R
 
-class MainActivity : Activity() {
+class MainActivity : BaseFullscreenActivity() {
 
     private lateinit var timeText: TextView
     private lateinit var dateText: TextView
@@ -24,42 +27,27 @@ class MainActivity : Activity() {
         getSharedPreferences("settings", MODE_PRIVATE)
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.view_home)
 
-        val padding = dp(32)
-
         val root = findViewById<View>(R.id.root)
-        root.setOnApplyWindowInsetsListener { view, insets ->
-            view.setPadding(
-                insets.systemWindowInsetLeft + padding,
-                insets.systemWindowInsetTop + padding,
-                insets.systemWindowInsetRight + padding,
-                insets.systemWindowInsetBottom + padding
-            )
-            insets
-        }
+        applyEdgeToEdgePadding(root)
 
-        // ─────────────────────────────────────
         // Views
-        // ─────────────────────────────────────
         timeText = findViewById(R.id.time)
         dateText = findViewById(R.id.date)
         batteryText = findViewById(R.id.battery)
         listView = findViewById(R.id.appList)
 
-        // ─────────────────────────────────────
+
         // Clock
-        // ─────────────────────────────────────
         clockManager = ClockManager(timeText, dateText, prefs)
         clockManager.start()
         timeText.setOnClickListener { openSystemClock() }
 
-        // ─────────────────────────────────────
+
         // Battery
-        // ─────────────────────────────────────
         batteryHelper = BatteryManagerHelper(
             context = this,
             callback = { status -> batteryText.text = status },
@@ -67,9 +55,8 @@ class MainActivity : Activity() {
         )
         batteryHelper.register()
 
-        // ─────────────────────────────────────
+
         // App List
-        // ─────────────────────────────────────
         appListHelper = AppListHelper(this, listView)
         appListHelper.setup()
     }
@@ -86,9 +73,8 @@ class MainActivity : Activity() {
         clockManager.stop()
     }
 
-    // ─────────────────────────────────────
+
     // Settings sync (row visibility only)
-    // ─────────────────────────────────────
     private fun syncSettings() {
         val showClock = prefs.getBoolean("show_clock", true)
         val showDate = prefs.getBoolean("show_date", true)
@@ -100,9 +86,8 @@ class MainActivity : Activity() {
             if (showBattery) View.VISIBLE else View.GONE
     }
 
-    // ─────────────────────────────────────
+
     // Open system clock safely
-    // ─────────────────────────────────────
     private fun openSystemClock() {
         val pm = packageManager
         val intents = listOf(

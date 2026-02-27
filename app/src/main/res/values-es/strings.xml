@@ -62,5 +62,7 @@
     <string name="cancel">Cancelar</string>
 
     <string name="add_to_favorites">Añadir al grupo...</string>
-    <string name="open_settings">Abrir ajustes de la aplicación</string>
+    <string name="open_settings">Ajustes de la aplicación...</string>
+
+    <string name="ungrouped_label">Sin grupo</string>
 </resources>

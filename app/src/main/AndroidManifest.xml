@@ -17,15 +17,15 @@
         android:theme="@style/Theme.Mako">
 
         <activity
-            android:name=".AboutActivity"
+            android:name=".activities.AboutActivity"
             android:label="About" />
 
         <activity
-            android:name=".SettingsActivity"
+            android:name=".activities.SettingsActivity"
             android:label="Settings" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:exported="true"
             android:launchMode="singleTask">
             <intent-filter>

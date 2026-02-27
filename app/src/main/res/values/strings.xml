@@ -62,5 +62,8 @@
     <string name="mako_url" translatable="false">github.com/jmiguelrivas/mako</string>
 
     <string name="add_to_favorites">Add to group...</string>
-    <string name="open_settings">Open App Settings</string>
+    <string name="open_settings">App settings...</string>
+
+    <string name="ungrouped_label">Ungrouped</string>
+
 </resources>
