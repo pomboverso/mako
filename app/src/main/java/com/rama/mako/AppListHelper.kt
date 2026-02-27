@@ -54,9 +54,19 @@ class AppListHelper(
         val allApps = pm.queryIntentActivities(intent, 0)
 
         // group apps
-        val grouped = allApps.groupBy { app ->
-            getGroup(app.activityInfo.packageName) ?: context.getString(R.string.ungrouped_label)
-        }.toSortedMap()
+        val grouped = allApps
+            .groupBy { app ->
+                getGroup(app.activityInfo.packageName)
+                    ?: context.getString(R.string.ungrouped_label)
+            }
+            .filterKeys { groupName ->
+                // Always show ungrouped apps
+                if (groupName == context.getString(R.string.ungrouped_label)) return@filterKeys true
+                // Check visibility flag
+                context.getSharedPreferences("settings", Context.MODE_PRIVATE)
+                    .getBoolean("group_visibility_$groupName", true)
+            }
+            .toSortedMap()
 
         items.clear()
 

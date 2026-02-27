@@ -176,10 +176,7 @@ class SettingsActivity : BaseFullscreenActivity(
             )
 
             val edit = row.findViewById<EditText>(R.id.group_name)
-            val deleteBtn = row.findViewById<ImageView>(R.id.delete_group)
-
             edit.setText(group)
-
             edit.addTextChangedListener(object : android.text.TextWatcher {
                 override fun beforeTextChanged(
                     s: CharSequence?,
@@ -202,11 +199,31 @@ class SettingsActivity : BaseFullscreenActivity(
                 }
             })
 
+            val deleteBtn = row.findViewById<ImageView>(R.id.delete_group)
             deleteBtn.setOnClickListener {
                 val oldName = groups[index]
                 deleteGroup(oldName)
                 groups.removeAt(index)
                 groupsContainer.removeView(row)
+            }
+
+            val toggleBtn = row.findViewById<ImageView>(R.id.toggle_visibility)
+            val isVisible = prefs.getBoolean("group_visibility_$group", true)
+
+            // Set the correct icon initially
+            toggleBtn.setImageResource(
+                if (isVisible) R.drawable.icon_visibility else R.drawable.icon_visibility_off
+            )
+
+            toggleBtn.setOnClickListener {
+                // Flip the saved visibility state
+                val newVisibility = !prefs.getBoolean("group_visibility_$group", true)
+                prefs.edit().putBoolean("group_visibility_$group", newVisibility).apply()
+
+                // Update the icon only
+                toggleBtn.setImageResource(
+                    if (newVisibility) R.drawable.icon_visibility else R.drawable.icon_visibility_off
+                )
             }
 
             groupsContainer.addView(row)
@@ -229,6 +246,9 @@ class SettingsActivity : BaseFullscreenActivity(
             // Add to SharedPreferences list
             groups.add(newName)
             groupsListPrefs.edit().putStringSet("groups", groups.toSet()).apply()
+
+            // Make sure group is visible by default
+            prefs.edit().putBoolean("group_visibility_$newName", true).apply()
 
             // Add the row dynamically
             addGroupRow(newName, groupsContainer, groups)
