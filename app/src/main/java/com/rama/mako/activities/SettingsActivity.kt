@@ -68,9 +68,12 @@ class SettingsActivity : BaseFullscreenActivity(
         val row = layoutInflater.inflate(R.layout.list_item_group, container, false)
         val edit = row.findViewById<EditText>(R.id.group_name)
         val deleteBtn = row.findViewById<ImageView>(R.id.delete_group)
+        val toggleBtn = row.findViewById<ImageView>(R.id.toggle_visibility)
 
         edit.setText(group)
+        edit.tag = group // Track original name
 
+        // Text change listener
         edit.addTextChangedListener(object : android.text.TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
@@ -82,19 +85,40 @@ class SettingsActivity : BaseFullscreenActivity(
                     val index = groups.indexOf(oldName)
                     if (index != -1) groups[index] = newName
                     groupsListPrefs.edit().putStringSet("groups", groups.toSet()).apply()
+
+                    // Update tag for future edits
                     edit.tag = newName
+
+                    // Preserve visibility key when renaming
+                    val visible = prefs.getBoolean("group_visibility_$oldName", true)
+                    prefs.edit().remove("group_visibility_$oldName")
+                        .putBoolean("group_visibility_$newName", visible)
+                        .apply()
                 }
             }
         })
 
+        // Delete button
         deleteBtn.setOnClickListener {
-            deleteGroup(edit.text.toString())
-            groups.remove(edit.text.toString())
+            val groupName = edit.text.toString()
+            deleteGroup(groupName)
+            groups.remove(groupName)
             container.removeView(row)
         }
 
-        // Track original name
-        edit.tag = group
+        // Toggle visibility button
+        val isVisible = prefs.getBoolean("group_visibility_$group", true)
+        toggleBtn.setImageResource(
+            if (isVisible) R.drawable.icon_visibility else R.drawable.icon_visibility_off
+        )
+
+        toggleBtn.setOnClickListener {
+            val newVisibility = !prefs.getBoolean("group_visibility_${edit.text}", true)
+            prefs.edit().putBoolean("group_visibility_${edit.text}", newVisibility).apply()
+            toggleBtn.setImageResource(
+                if (newVisibility) R.drawable.icon_visibility else R.drawable.icon_visibility_off
+            )
+        }
 
         container.addView(row)
     }
@@ -168,74 +192,15 @@ class SettingsActivity : BaseFullscreenActivity(
         val groupsContainer = findViewById<LinearLayout>(R.id.groups)
         val groups = getGroups()
 
-        groups.forEachIndexed { index, group ->
-            val row = layoutInflater.inflate(
-                R.layout.list_item_group,
-                groupsContainer,
-                false
-            )
-
-            val edit = row.findViewById<EditText>(R.id.group_name)
-            edit.setText(group)
-            edit.addTextChangedListener(object : android.text.TextWatcher {
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int
-                ) {
-                }
-
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-                override fun afterTextChanged(s: android.text.Editable?) {
-                    val oldName = groups[index]
-                    val newName = s?.toString()?.trim() ?: return
-
-                    if (oldName != newName) {
-                        renameGroup(oldName, newName)
-                        groups[index] = newName
-                        groupsListPrefs.edit().putStringSet("groups", groups.toSet()).apply()
-                    }
-                }
-            })
-
-            val deleteBtn = row.findViewById<ImageView>(R.id.delete_group)
-            deleteBtn.setOnClickListener {
-                val oldName = groups[index]
-                deleteGroup(oldName)
-                groups.removeAt(index)
-                groupsContainer.removeView(row)
-            }
-
-            val toggleBtn = row.findViewById<ImageView>(R.id.toggle_visibility)
-            val isVisible = prefs.getBoolean("group_visibility_$group", true)
-
-            // Set the correct icon initially
-            toggleBtn.setImageResource(
-                if (isVisible) R.drawable.icon_visibility else R.drawable.icon_visibility_off
-            )
-
-            toggleBtn.setOnClickListener {
-                // Flip the saved visibility state
-                val newVisibility = !prefs.getBoolean("group_visibility_$group", true)
-                prefs.edit().putBoolean("group_visibility_$group", newVisibility).apply()
-
-                // Update the icon only
-                toggleBtn.setImageResource(
-                    if (newVisibility) R.drawable.icon_visibility else R.drawable.icon_visibility_off
-                )
-            }
-
-            groupsContainer.addView(row)
+        // Existing groups
+        groups.forEach { group ->
+            addGroupRow(group, groupsContainer, groups)
         }
 
+        // Add button
         val addGroupBtn = findViewById<WdButton>(R.id.add_group)
         addGroupBtn.setOnClickListener {
-            val groupsContainer = findViewById<LinearLayout>(R.id.groups)
-            val groups = getGroups()
-
-            val defaultName = "------ New Group"
-            // Ensure unique default name
+            var defaultName = "------ New Group"
             var newName = defaultName
             var counter = 1
             while (groups.contains(newName)) {
@@ -243,14 +208,11 @@ class SettingsActivity : BaseFullscreenActivity(
                 newName = "$defaultName $counter"
             }
 
-            // Add to SharedPreferences list
             groups.add(newName)
             groupsListPrefs.edit().putStringSet("groups", groups.toSet()).apply()
 
-            // Make sure group is visible by default
             prefs.edit().putBoolean("group_visibility_$newName", true).apply()
 
-            // Add the row dynamically
             addGroupRow(newName, groupsContainer, groups)
         }
     }
