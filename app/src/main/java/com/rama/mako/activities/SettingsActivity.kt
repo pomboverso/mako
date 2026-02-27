@@ -9,6 +9,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RadioGroup
+import android.widget.TextView
 import android.widget.Toast
 import com.rama.mako.BaseFullscreenActivity
 import com.rama.mako.R
@@ -118,12 +119,44 @@ class SettingsActivity : BaseFullscreenActivity(
             )
         }
 
-        // Delete group
         deleteBtn.setOnClickListener {
-            deleteGroup(nameEdit.text.toString())
-            groups.remove(nameEdit.text.toString())
-            container.removeView(row)
-            updateIndices(container, groups)
+            val groupName = nameEdit.text.toString()
+
+            // Inflate your custom dialog layout
+            val dialogView = layoutInflater.inflate(R.layout.dialog_confirmation, null)
+            val dialog = android.app.Dialog(this)
+            dialog.setContentView(dialogView)
+            dialog.setCancelable(true)
+
+            // Get buttons and title
+            val title = dialogView.findViewById<TextView>(R.id.title)
+            val yesButton = dialogView.findViewById<WdButton>(R.id.yes_button)
+            val noButton = dialogView.findViewById<WdButton>(R.id.no_button)
+
+            title.text =
+                "Are you sure you want to delete this group?\nThis action cannot be undone."
+
+            // Yes -> delete the group
+            yesButton.setOnClickListener {
+                deleteGroup(groupName)
+                groups.remove(groupName)
+                container.removeView(row)
+                updateIndices(container, groups)
+                dialog.dismiss()
+            }
+
+            // No -> just dismiss
+            noButton.setOnClickListener {
+                dialog.dismiss()
+            }
+
+            dialog.show()
+
+            // Make dialog full width
+            dialog.window?.setLayout(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
         }
 
         // Reorder on index change (on focus lost)
