@@ -29,7 +29,10 @@ class SettingsActivity : BaseFullscreenActivity(
     }
 
     private fun getGroups(): MutableList<String> {
-        return groupsListPrefs.getStringSet("groups", mutableSetOf("------ Favorites"))!!
+        return groupsListPrefs
+            .getStringSet("groups", mutableSetOf("------ Favorites"))!!
+            .toMutableList()
+            .sortedBy { it.lowercase() }
             .toMutableList()
     }
 
@@ -64,17 +67,8 @@ class SettingsActivity : BaseFullscreenActivity(
         editor.apply()
     }
 
-    private fun updateIndices(container: LinearLayout, groups: List<String>) {
-        for (i in 0 until container.childCount) {
-            val row = container.getChildAt(i)
-            val indexEdit = row.findViewById<EditText>(R.id.group_index)
-            indexEdit.setText((i + 1).toString())
-        }
-    }
-
     private fun addGroupRow(group: String, container: LinearLayout, groups: MutableList<String>) {
         val row = layoutInflater.inflate(R.layout.list_item_group, container, false)
-        val indexEdit = row.findViewById<EditText>(R.id.group_index)
         val nameEdit = row.findViewById<EditText>(R.id.group_name)
         val deleteBtn = row.findViewById<ImageView>(R.id.delete_group)
         val toggleBtn = row.findViewById<ImageView>(R.id.toggle_visibility)
@@ -89,10 +83,6 @@ class SettingsActivity : BaseFullscreenActivity(
             if (isVisible) R.drawable.icon_visibility else R.drawable.icon_visibility_off
         )
 
-        // Set initial index
-        val currentIndex = groups.indexOf(group)
-        indexEdit.setText((currentIndex + 1).toString()) // 1-based index
-
         // When name changes
         nameEdit.addTextChangedListener(object : android.text.TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -104,6 +94,7 @@ class SettingsActivity : BaseFullscreenActivity(
                     renameGroup(oldName, newName)
                     val index = groups.indexOf(oldName)
                     if (index != -1) groups[index] = newName
+                    groups.sortBy { it.lowercase() }
                     groupsListPrefs.edit().putStringSet("groups", groups.toSet()).apply()
                     nameEdit.tag = newName
                 }
@@ -141,7 +132,6 @@ class SettingsActivity : BaseFullscreenActivity(
                 deleteGroup(groupName)
                 groups.remove(groupName)
                 container.removeView(row)
-                updateIndices(container, groups)
                 dialog.dismiss()
             }
 
@@ -157,29 +147,6 @@ class SettingsActivity : BaseFullscreenActivity(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
             )
-        }
-
-        // Reorder on index change (on focus lost)
-        indexEdit.setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus) {
-                val newIndexInput = indexEdit.text.toString().toIntOrNull()
-                val oldIndex = groups.indexOf(nameEdit.text.toString())
-                if (newIndexInput != null) {
-                    val newIndex = (newIndexInput - 1).coerceIn(0, groups.size - 1)
-                    if (newIndex != oldIndex) {
-                        val groupName = groups.removeAt(oldIndex)
-                        groups.add(newIndex, groupName)
-
-                        container.removeView(row)
-                        container.addView(row, newIndex)
-                        updateIndices(container, groups)
-                        groupsListPrefs.edit().putStringSet("groups", groups.toSet()).apply()
-                    }
-                } else {
-                    // Reset to current index if input invalid
-                    indexEdit.setText((oldIndex + 1).toString())
-                }
-            }
         }
 
         container.addView(row)
@@ -268,13 +235,19 @@ class SettingsActivity : BaseFullscreenActivity(
                 newName = "$defaultName $counter"
             }
 
-            // Add to SharedPreferences list
+            // Add + sort
             groups.add(newName)
+            groups.sortBy { it.lowercase() }
+
+            // Save
             groupsListPrefs.edit().putStringSet("groups", groups.toSet()).apply()
             prefs.edit().putBoolean("group_visibility_$newName", true).apply()
 
-            // Add the new row
-            addGroupRow(newName, groupsContainer, groups)
+            // Rebuild UI in sorted order
+            groupsContainer.removeAllViews()
+            groups.forEach { g ->
+                addGroupRow(g, groupsContainer, groups)
+            }
         }
     }
 

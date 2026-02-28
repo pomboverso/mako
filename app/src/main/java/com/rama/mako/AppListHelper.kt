@@ -107,7 +107,10 @@ class AppListHelper(
     private fun clearCustomName(pkg: String) = namePrefs.edit().remove(pkg).apply()
 
     private fun getGroups(): MutableList<String> {
-        return groupsListPrefs.getStringSet("groups", mutableSetOf("------ Favorites"))!!
+        return groupsListPrefs
+            .getStringSet("groups", mutableSetOf("------ Favorites"))!!
+            .toMutableList()
+            .sortedBy { it.lowercase() }
             .toMutableList()
     }
 
