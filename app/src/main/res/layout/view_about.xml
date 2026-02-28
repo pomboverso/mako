@@ -78,6 +78,12 @@
                 app:text="@string/mako_url" />
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/disabled"
+            android:layout_marginVertical="16sp" />
+
         <com.rama.mako.widgets.WdButton
             android:id="@+id/close_button"
             android:layout_width="match_parent"
