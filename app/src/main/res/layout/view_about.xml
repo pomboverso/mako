@@ -16,7 +16,7 @@
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:src="@drawable/mako"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="16sp" />
 
         <TextView
             android:text="@string/app_name"
@@ -31,7 +31,7 @@
             android:textSize="16sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="16sp"
             android:textAlignment="center"
             android:textColor="@color/foreground_color" />
 
@@ -78,10 +78,11 @@
                 app:text="@string/mako_url" />
         </LinearLayout>
 
-        <com.rama.mako.widgets.WdButtonNav
+        <com.rama.mako.widgets.WdButton
             android:id="@+id/close_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/button_primary_color"
             android:text="@string/close" />
     </LinearLayout>
 </ScrollView>

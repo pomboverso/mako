@@ -6,10 +6,12 @@ import android.content.Intent
 import android.content.pm.ResolveInfo
 import android.net.Uri
 import android.provider.Settings
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import com.rama.mako.activities.SettingsActivity
+import com.rama.mako.widgets.WdButton
 
 class AppListHelper(
     private val context: Context,
@@ -111,38 +113,54 @@ class AppListHelper(
         val pkg = app.activityInfo.packageName
         val currentName = getCustomName(pkg) ?: getDisplayName(app)
 
-        val input = EditText(context).apply {
-            setText(currentName)
-            setSelection(text.length)
-            maxLines = 1
-            setSingleLine(true)
-        }
+        // Inflate your custom layout
+        val view = LayoutInflater.from(context).inflate(R.layout.dialog_rename_app, null)
+        FontManager.applyFont(context, view)
 
-        val container = FrameLayout(context).apply {
-            val padding = (16 * context.resources.displayMetrics.density).toInt()
-            setPadding(padding, padding, padding, padding)
-            addView(input)
-        }
+        val input =
+            view.findViewById<EditText>(/* your EditText id if you add one */ R.id.edit_text)
+        val yesButton = view.findViewById<WdButton>(R.id.yes_button)
+        val resetButton = view.findViewById<WdButton>(R.id.reset_button)
+        val noButton = view.findViewById<WdButton>(R.id.no_button)
 
-        AlertDialog.Builder(context)
-            .setTitle(context.getString(R.string.rename_app))
-            .setView(container)
-            .setPositiveButton(context.getString(R.string.save)) { _, _ ->
-                val newName = input.text.toString().trim()
-                if (newName.isNotEmpty()) setCustomName(pkg, newName)
-            }
-            .setNegativeButton(context.getString(R.string.cancel), null)
-            .setNeutralButton(context.getString(R.string.reset)) { _, _ ->
-                clearCustomName(pkg)
+        // Set current name
+        input.setText(currentName)
+        input.setSelection(input.text.length)
+
+        val dialog = AlertDialog.Builder(context)
+            .setView(view)
+            .create()
+
+        // SAVE
+        yesButton.setOnClickListener {
+            val newName = input.text.toString().trim()
+            if (newName.isNotEmpty()) {
+                setCustomName(pkg, newName)
                 refresh()
             }
-            .show()
+            dialog.dismiss()
+        }
+
+        // RESET
+        resetButton.setOnClickListener {
+            clearCustomName(pkg)
+            refresh()
+            dialog.dismiss()
+        }
+
+        // CANCEL
+        noButton.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 
     private fun showGroupsDialog(app: ResolveInfo) {
         val pkg = app.activityInfo.packageName
 
         val view = View.inflate(context, R.layout.dialog_groups, null)
+        FontManager.applyFont(context, view)
         val dialog = AlertDialog.Builder(context)
             .setView(view)
             .setCancelable(true)
@@ -164,6 +182,7 @@ class AppListHelper(
                     text = group
                     isChecked = group == currentGroup
                 }
+                FontManager.applyFont(context, radio)
 
                 row.addView(radio)
                 radio.setOnClickListener {

@@ -14,6 +14,7 @@
         android:textSize="32sp"
         android:textColor="@color/foreground_color"
         android:text="Select Group"
+        android:gravity="center"
         android:textStyle="bold" />
 
     <LinearLayout
@@ -23,12 +24,13 @@
         android:layout_marginBottom="8sp"
         android:padding="16sp"
         android:orientation="vertical"
-        android:background="@drawable/bg_secondary_rounded"
+        android:background="@color/secondary_bg"
         android:focusableInTouchMode="true"></LinearLayout>
 
-    <com.rama.mako.widgets.WdButtonNav
+    <com.rama.mako.widgets.WdButton
         android:id="@+id/close_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/button_primary_color"
         android:text="@string/close" />
 </LinearLayout>

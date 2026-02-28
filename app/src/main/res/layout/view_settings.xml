@@ -27,16 +27,57 @@
             android:layout_marginBottom="8sp"
             android:textSize="16sp"
             android:textColor="@color/foreground_color"
+            android:text="Global"
+            android:textStyle="bold" />
+
+        <com.rama.mako.widgets.WdButton
+            android:id="@+id/activate_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8sp"
+            android:background="@color/button_secondary_color"
+            android:text="@string/set_default" />
+
+        <com.rama.mako.widgets.WdButton
+            android:id="@+id/reset_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8sp"
+            android:background="@color/button_secondary_color"
+            android:text="@string/refresh_launcher" />
+
+        <com.rama.mako.widgets.WdButton
+            android:id="@+id/change_apps_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8sp"
+            android:background="@color/button_secondary_color"
+            android:text="@string/edit_apps" />
+
+        <com.rama.mako.widgets.WdButton
+            android:id="@+id/wallpaper_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8sp"
+            android:background="@color/button_secondary_color"
+            android:text="@string/change_wallpaper" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8sp"
+            android:textSize="16sp"
+            android:textColor="@color/foreground_color"
             android:text="Clock"
             android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
+            android:padding="16sp"
             android:orientation="vertical"
             android:layout_marginBottom="8sp"
-            android:background="@drawable/bg_secondary_rounded"
+            android:background="@color/secondary_bg"
             android:gravity="center_vertical">
 
             <RadioGroup
@@ -137,64 +178,37 @@
             android:layout_marginBottom="8sp"
             android:padding="16sp"
             android:orientation="vertical"
-            android:background="@drawable/bg_secondary_rounded"
+            android:background="@color/secondary_bg"
             android:focusableInTouchMode="true"></LinearLayout>
 
         <com.rama.mako.widgets.WdButton
             android:id="@+id/add_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="8sp"
+            android:background="@color/button_secondary_color"
             android:text="+ Add New Group" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/disabled"
             android:layout_marginBottom="8sp"
-            android:textSize="16sp"
-            android:textColor="@color/foreground_color"
-            android:text="Others"
-            android:textStyle="bold" />
+            android:layout_marginVertical="8sp" />
 
         <com.rama.mako.widgets.WdButton
-            android:id="@+id/activate_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="@string/set_default" />
-
-        <com.rama.mako.widgets.WdButton
-            android:id="@+id/reset_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="@string/refresh_launcher" />
-
-        <com.rama.mako.widgets.WdButton
-            android:id="@+id/change_apps_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="@string/edit_apps" />
-
-        <com.rama.mako.widgets.WdButton
-            android:id="@+id/wallpaper_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="@string/change_wallpaper" />
-
-        <com.rama.mako.widgets.WdButtonNav
             android:id="@+id/about_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="8sp"
+            android:background="@color/button_primary_color"
             android:text="@string/about" />
 
-        <com.rama.mako.widgets.WdButtonNav
+        <com.rama.mako.widgets.WdButton
             android:id="@+id/close_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/button_primary_color"
             android:text="@string/close" />
     </LinearLayout>
 </ScrollView>

@@ -5,23 +5,23 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/bg_secondary_rounded"
+        android:padding="8sp"
+        android:layout_marginBottom="8sp"
+        android:background="@color/secondary_bg"
         android:gravity="center_vertical">
 
         <FrameLayout
             android:id="@+id/icon_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:background="@drawable/bg_tertiary_rounded"
-            android:layout_marginEnd="8dp">
+            android:padding="12sp"
+            android:background="@color/tertiary_bg"
+            android:layout_marginEnd="8sp">
 
             <ImageView
                 android:id="@+id/icon_image"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="24sp"
+                android:layout_height="24sp"
                 android:contentDescription="@string/icon_block_desc" />
         </FrameLayout>
 

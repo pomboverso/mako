@@ -5,14 +5,16 @@
     android:focusable="true"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp"
-    android:paddingStart="24dp"
-    android:background="@drawable/bg_secondary_rounded">
+    android:padding="16sp"
+    android:paddingStart="24sp"
+    android:gravity="center">
 
     <TextView
         android:id="@+id/button_label"
         android:textSize="16sp"
+        android:textAllCaps="true"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/foreground_color" />
+        android:textColor="@color/bg_color" />
 </LinearLayout>

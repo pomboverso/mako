@@ -9,8 +9,11 @@
     <color name="accent">#abd68e</color>
     <color name="accent_secondary">#cdc58b</color>
     <color name="accent_tertiary">#DCD07C</color>
-    <color name="star_color">#cdc58b</color>
-    <color name="star_bg">#322f1b</color>
-    <color name="danger">#ff7e80</color>
-    <color name="input_color">#343</color>
+    <color name="disabled">#888</color>
+
+    <!-- INPUTS -->
+    <color name="button_primary_color">#459984</color>
+    <color name="button_secondary_color">#6194AF</color>
+    <color name="button_danger">#DC6364</color>
+
 </resources>
