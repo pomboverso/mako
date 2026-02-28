@@ -288,6 +288,7 @@ class AppListHelper(
                             convertView ?: View.inflate(context, R.layout.app_list_header, null)
                         val text = view.findViewById<TextView>(R.id.header_text)
                         text.text = item.title.uppercase()
+                        FontManager.applyFont(context, text)
                         view
                     }
 
@@ -316,7 +317,7 @@ class AppListHelper(
                             )
                             true
                         }
-
+                        FontManager.applyFont(context, label)
                         view
                     }
                 }

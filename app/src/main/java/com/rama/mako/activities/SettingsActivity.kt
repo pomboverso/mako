@@ -11,12 +11,12 @@ import android.widget.LinearLayout
 import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
-import com.rama.mako.BaseFullscreenActivity
+import com.rama.mako.CsActivity
 import com.rama.mako.R
 import com.rama.mako.widgets.WdButton
 import com.rama.mako.widgets.WdCheckbox
 
-class SettingsActivity : BaseFullscreenActivity(
+class SettingsActivity : CsActivity(
 ) {
     private val prefs by lazy { getSharedPreferences("settings", MODE_PRIVATE) }
 
@@ -216,6 +216,9 @@ class SettingsActivity : BaseFullscreenActivity(
         bindWdCheckbox(R.id.show_date, "show_date", true, dependentViewId = R.id.show_year_day)
         bindWdCheckbox(R.id.show_year_day, "show_year_day", true)
         bindWdCheckbox(R.id.show_battery, "show_battery", true)
+        bindWdCheckbox(R.id.use_pixel_font, "use_pixel_font", false) {
+            refreshFont()
+        }
 
         // Set Groups
         val groupsContainer = findViewById<LinearLayout>(R.id.groups)
@@ -256,12 +259,12 @@ class SettingsActivity : BaseFullscreenActivity(
         wdCheckboxId: Int,
         prefKey: String,
         defaultValue: Boolean,
-        dependentViewId: Int? = null
+        dependentViewId: Int? = null,
+        onChange: ((Boolean) -> Unit)? = null
     ) {
         val wdCheckbox = findViewById<WdCheckbox>(wdCheckboxId)
         val dependentView = dependentViewId?.let { findViewById<View>(it) }
 
-        // Initialize state
         val isChecked = prefs.getBoolean(prefKey, defaultValue)
         wdCheckbox.setChecked(isChecked)
         dependentView?.visibility = if (isChecked) View.VISIBLE else View.GONE
@@ -269,6 +272,7 @@ class SettingsActivity : BaseFullscreenActivity(
         wdCheckbox.setOnCheckedChangeListener { checked ->
             prefs.edit().putBoolean(prefKey, checked).apply()
             dependentView?.visibility = if (checked) View.VISIBLE else View.GONE
+            onChange?.invoke(checked)
         }
     }
 

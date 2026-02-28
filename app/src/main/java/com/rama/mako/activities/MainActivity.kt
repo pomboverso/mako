@@ -7,12 +7,12 @@ import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
 import com.rama.mako.AppListHelper
-import com.rama.mako.BaseFullscreenActivity
+import com.rama.mako.CsActivity
 import com.rama.mako.BatteryManagerHelper
 import com.rama.mako.ClockManager
 import com.rama.mako.R
 
-class MainActivity : BaseFullscreenActivity() {
+class MainActivity : CsActivity() {
 
     private lateinit var timeText: TextView
     private lateinit var dateText: TextView

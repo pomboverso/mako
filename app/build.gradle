@@ -13,21 +13,17 @@ android {
         targetSdk = 36
         versionCode = 20
         versionName = "26." + "." + versionCode.toString()
-
-        testInstrumentationRunner = "android.test.InstrumentationTestRunner"
     }
 
     dependenciesInfo {
         includeInApk = false
-        includeInApk = false
         includeInBundle = false
     }
 
-    applicationVariants.all {
-        variant ->
-            variant.outputs.all {
-                output -> outputFileName = "mako_${versionName}.apk"
-            }
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            outputFileName = "mako_${versionName}.apk"
+        }
     }
 
     buildTypes {
@@ -59,7 +55,4 @@ android {
 
 dependencies {
     implementation(libs.androidx.core.ktx)
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }

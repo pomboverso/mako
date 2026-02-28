@@ -2,13 +2,10 @@ package com.rama.mako.activities
 
 import android.os.Bundle
 import android.view.View
-import android.content.Intent
-import android.net.Uri
-import android.widget.LinearLayout
-import com.rama.mako.BaseFullscreenActivity
+import com.rama.mako.CsActivity
 import com.rama.mako.R
 
-class AboutActivity : BaseFullscreenActivity() {
+class AboutActivity : CsActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

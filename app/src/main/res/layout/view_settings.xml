@@ -112,6 +112,21 @@
             android:layout_marginBottom="8sp"
             android:textSize="16sp"
             android:textColor="@color/foreground_color"
+            android:text="Styles"
+            android:textStyle="bold" />
+
+        <com.rama.mako.widgets.WdCheckbox
+            android:id="@+id/use_pixel_font"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:text="Use Pixel Font (Jersey 25 Regular)" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8sp"
+            android:textSize="16sp"
+            android:textColor="@color/foreground_color"
             android:text="Groups"
             android:textStyle="bold" />
 

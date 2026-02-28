@@ -9,10 +9,13 @@ import android.view.WindowInsetsController
 import android.view.WindowManager
 import com.rama.mako.utils.dp
 
-abstract class BaseFullscreenActivity : Activity() {
+abstract class CsActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val root = findViewById<View>(android.R.id.content)
+        FontManager.applyFont(this, root)
 
         // Allow drawing behind system bars
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -30,6 +33,16 @@ abstract class BaseFullscreenActivity : Activity() {
             window.attributes.layoutInDisplayCutoutMode =
                 WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val root = findViewById<View>(android.R.id.content)
+        FontManager.applyFont(this, root)
+    }
+
+    fun refreshFont() {
+        recreate()
     }
 
     protected fun applyEdgeToEdgePadding(root: View) {
