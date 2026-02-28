@@ -44,37 +44,37 @@
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:icon="@drawable/icon_ads_click"
+                app:icon="@drawable/icon_octagon_check_solid"
                 app:text="@string/icon_ads_desc" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:icon="@drawable/block"
+                app:icon="@drawable/icon_octagon_check_solid"
                 app:text="@string/icon_block_desc" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:icon="@drawable/icon_location_on"
+                app:icon="@drawable/icon_octagon_check_solid"
                 app:text="@string/icon_location_desc" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:icon="@drawable/icon_signal_wifi_off"
+                app:icon="@drawable/icon_octagon_check_solid"
                 app:text="@string/icon_offline_desc" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:icon="@drawable/icon_shield"
+                app:icon="@drawable/icon_octagon_check_solid"
                 app:text="@string/icon_license_desc" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:icon="@drawable/icon_computer"
+                app:icon="@drawable/icon_github"
                 app:text="@string/mako_url" />
         </LinearLayout>
 

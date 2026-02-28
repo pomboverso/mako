@@ -122,15 +122,15 @@ class SettingsActivity : CsActivity() {
 
         // Visibility
         toggleBtn.setImageResource(
-            if (groupsManager.isGroupVisible(group)) R.drawable.icon_visibility
-            else R.drawable.icon_visibility_off
+            if (groupsManager.isGroupVisible(group)) R.drawable.icon_eye
+            else R.drawable.icon_eye_cross
         )
         toggleBtn.setOnClickListener {
             val newVisibility = !groupsManager.isGroupVisible(group)
             groupsManager.setGroupVisibility(group, newVisibility)
             toggleBtn.setImageResource(
-                if (newVisibility) R.drawable.icon_visibility
-                else R.drawable.icon_visibility_off
+                if (newVisibility) R.drawable.icon_eye
+                else R.drawable.icon_eye_cross
             )
         }
 
