@@ -6,6 +6,7 @@ import android.provider.Settings
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RadioGroup
@@ -142,21 +143,22 @@ class SettingsActivity : CsActivity() {
         val row = layoutInflater.inflate(R.layout.list_item_group, container, false)
         FontManager.applyFont(this, row)
         val nameEdit = row.findViewById<EditText>(R.id.group_name)
-        val deleteBtn = row.findViewById<ImageView>(R.id.delete_group)
-        val toggleBtn = row.findViewById<ImageView>(R.id.toggle_visibility)
+        val deleteBtn = row.findViewById<FrameLayout>(R.id.delete_group)
+        val toggleBtn = row.findViewById<FrameLayout>(R.id.toggle_visibility)
+        val toggleBtnImg = row.findViewById<ImageView>(R.id.toggle_visibility_img)
 
         nameEdit.setText(group)
         nameEdit.tag = group
 
         // Visibility toggle
-        toggleBtn.setImageResource(
+        toggleBtnImg.setImageResource(
             if (prefs.isGroupVisible(group)) R.drawable.icon_eye
             else R.drawable.icon_eye_cross
         )
         toggleBtn.setOnClickListener {
             val newVisibility = !prefs.isGroupVisible(group)
             prefs.setBoolean("group_visibility_$group", newVisibility)
-            toggleBtn.setImageResource(
+            toggleBtnImg.setImageResource(
                 if (newVisibility) R.drawable.icon_eye else R.drawable.icon_eye_cross
             )
         }
