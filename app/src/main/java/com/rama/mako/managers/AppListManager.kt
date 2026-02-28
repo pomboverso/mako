@@ -50,7 +50,7 @@ class AppListManager(
         val intent = Intent(Intent.ACTION_MAIN).apply { addCategory(Intent.CATEGORY_LAUNCHER) }
         val allApps = pm.queryIntentActivities(intent, 0)
         val settingsPrefs = context.getSharedPreferences("settings", Context.MODE_PRIVATE)
-        val ungroupedLabel = context.getString(R.string.ungrouped_label)
+        val ungroupedLabel = context.getString(R.string.ungrouped_header)
 
         val groups = groupsManager.getGroups()
 
@@ -106,7 +106,11 @@ class AppListManager(
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             context.startActivity(intent)
         } else {
-            Toast.makeText(context, "Unable to launch app", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                context,
+                context.getString(R.string.unable_launch_app_toast),
+                Toast.LENGTH_SHORT
+            ).show()
             refresh()
         }
     }

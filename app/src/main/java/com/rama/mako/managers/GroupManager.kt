@@ -8,8 +8,8 @@ class GroupsManager(private val context: Context) {
     private val groupPrefs = context.getSharedPreferences("groups", Context.MODE_PRIVATE)
     private val groupsListPrefs = context.getSharedPreferences("groups_list", Context.MODE_PRIVATE)
     private val settingsPrefs = context.getSharedPreferences("settings", Context.MODE_PRIVATE)
-    private val defaultGroup = "------ Favorites"
-    private val ungroupedLabel = context.getString(R.string.ungrouped_label)
+    private val defaultGroup = context.getString(R.string.favorites_header)
+    private val ungroupedLabel = context.getString(R.string.ungrouped_header)
 
     fun getGroups(): MutableList<String> {
         return groupsListPrefs

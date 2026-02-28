@@ -1,9 +1,18 @@
 <resources>
+    <!-- <string name=""></string> -->
+
     <!-- Global -->
     <string name="close">Go Back</string>
 
     <!-- Main -->
-    <string name="ungrouped_label">------ Ungrouped</string>
+    <string name="ungrouped_header">------ Ungrouped</string>
+    <string name="favorites_header">------ Favorites</string>
+    <string name="new_group_header">------ New Group</string>
+    <string name="new_group_header_count">------ New Group %d</string>
+    <string name="no_clock_app_found_label">No clock app found</string>
+    <string name="unable_open_settings_toast">Unable to open launcher settings</string>
+    <string name="unable_open_wallpaper_app_toast">No wallpaper app available</string>
+    <string name="unable_launch_app_toast">Unable to launch app</string>
 
     <!-- Main :: Temperature labels -->
     <string name="temp_warm">Warm</string>
@@ -63,7 +72,7 @@
     <string name="clock_system">System default</string>
     <string name="clock_24">24-hour</string>
     <string name="clock_12">12-hour (AM/PM)</string>
-    
+
     <!-- Popup :: Context Menu App -->
     <string name="rename_app">Rename app</string>
     <string name="add_to_favorites">Add to group...</string>

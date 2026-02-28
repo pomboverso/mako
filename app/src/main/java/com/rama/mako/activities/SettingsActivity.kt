@@ -34,13 +34,13 @@ class SettingsActivity : CsActivity() {
         setupButton(R.id.activate_button) {
             openIntent(
                 Intent(Settings.ACTION_HOME_SETTINGS),
-                "Unable to open launcher settings"
+                getString(R.string.unable_open_settings_toast)
             )
         }
         setupButton(R.id.wallpaper_button) {
             openIntent(
                 Intent(Intent.ACTION_SET_WALLPAPER),
-                "No wallpaper app available"
+                getString(R.string.unable_open_wallpaper_app_toast)
             )
         }
 
@@ -92,11 +92,15 @@ class SettingsActivity : CsActivity() {
         groups.forEach { group -> addGroupRow(group, groupsContainer, groups) }
 
         findViewById<WdButton>(R.id.add_group).setOnClickListener {
-            var newName = "------ New Group"
+            var newName = getString(R.string.new_group_header)
             var counter = 1
+
             while (groups.contains(newName)) {
                 counter++
-                newName = "------ New Group $counter"
+                newName = getString(
+                    R.string.new_group_header_count,
+                    counter
+                )
             }
 
             groups.add(newName)

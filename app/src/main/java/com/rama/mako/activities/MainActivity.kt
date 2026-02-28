@@ -104,6 +104,7 @@ class MainActivity : CsActivity() {
             }
         }
 
-        Toast.makeText(this, "No clock app found", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, getString(R.string.no_clock_app_found_label), Toast.LENGTH_SHORT)
+            .show()
     }
 }
