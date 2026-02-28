@@ -5,7 +5,6 @@
     android:layout_height="wrap_content"
     android:gravity="center_vertical">
 
-    <!-- App label -->
     <TextView
         android:id="@+id/open_app_button"
         android:layout_width="wrap_content"
@@ -15,8 +14,7 @@
         android:paddingEnd="12sp"
         android:textSize="32sp"
         android:textColor="@color/foreground_color" />
-
-    <!-- Empty space -->
+    
     <FrameLayout
         android:id="@+id/empty_space"
         android:layout_width="0dp"

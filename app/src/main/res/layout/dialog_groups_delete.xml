@@ -8,29 +8,27 @@
     android:focusableInTouchMode="true">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8sp"
-        android:textSize="32sp"
+        android:layout_marginBottom="16sp"
+        android:textSize="18sp"
         android:textColor="@color/foreground_color"
-        android:text="Select Group"
+        android:text="@string/delete_group_title"
         android:gravity="center"
         android:textStyle="bold" />
 
-    <LinearLayout
-        android:id="@+id/groups"
+    <com.rama.mako.widgets.WdButton
+        android:id="@+id/yes_button"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:layout_marginBottom="8sp"
-        android:padding="16sp"
-        android:orientation="vertical"
-        android:background="@color/secondary_bg"
-        android:focusableInTouchMode="true"></LinearLayout>
+        android:layout_height="wrap_content"
+        android:background="@color/button_danger"
+        android:text="@string/delete_group" />
 
     <com.rama.mako.widgets.WdButton
-        android:id="@+id/close_button"
+        android:id="@+id/no_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/button_primary_color"
-        android:text="@string/close" />
+        android:text="@string/cancel" />
 </LinearLayout>

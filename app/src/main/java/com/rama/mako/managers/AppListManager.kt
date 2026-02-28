@@ -169,7 +169,7 @@ class AppListManager(
     private fun showGroupsDialog(app: ResolveInfo) {
         val pkg = app.activityInfo.packageName
 
-        val view = View.inflate(context, R.layout.dialog_groups, null)
+        val view = View.inflate(context, R.layout.dialog_groups_add, null)
         FontManager.applyFont(context, view)
         val dialog = AlertDialog.Builder(context)
             .setView(view)

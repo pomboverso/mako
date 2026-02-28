@@ -4,7 +4,7 @@
     <color name="foreground_color">#CCCCCC</color>
 
     <!-- UI -->
-    <color name="secondary_bg">#1f1f21</color>
+    <color name="secondary_bg">#1f1f29</color>
     <color name="tertiary_bg">#322f1b</color>
     <color name="accent">#abd68e</color>
     <color name="accent_secondary">#cdc58b</color>

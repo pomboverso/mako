@@ -13,7 +13,7 @@
         android:layout_marginBottom="16sp"
         android:textSize="32sp"
         android:textColor="@color/foreground_color"
-        android:text="Rename App"
+        android:text="@string/rename_app"
         android:gravity="center"
         android:textStyle="bold" />
 
@@ -41,7 +41,7 @@
         android:layout_marginBottom="8sp"
         android:layout_height="wrap_content"
         android:background="@color/button_danger"
-        android:text="Save" />
+        android:text="@string/save" />
 
     <com.rama.mako.widgets.WdButton
         android:id="@+id/reset_button"
@@ -49,12 +49,12 @@
         android:layout_marginBottom="8sp"
         android:layout_height="wrap_content"
         android:background="@color/button_danger"
-        android:text="Reset" />
+        android:text="@string/reset" />
 
     <com.rama.mako.widgets.WdButton
         android:id="@+id/no_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/button_primary_color"
-        android:text="Cancel" />
+        android:text="@string/cancel" />
 </LinearLayout>

@@ -9,7 +9,6 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RadioGroup
-import android.widget.TextView
 import android.widget.Toast
 import com.rama.mako.CsActivity
 import com.rama.mako.managers.FontManager
@@ -155,18 +154,15 @@ class SettingsActivity : CsActivity() {
 
         // Delete
         deleteBtn.setOnClickListener {
-            val dialogView = layoutInflater.inflate(R.layout.dialog_confirmation, null)
+            val dialogView = layoutInflater.inflate(R.layout.dialog_groups_delete, null)
             FontManager.applyFont(this, dialogView)
             val dialog = android.app.Dialog(this)
             dialog.setContentView(dialogView)
             dialog.setCancelable(true)
 
-            val title = dialogView.findViewById<TextView>(R.id.title)
             val yesButton = dialogView.findViewById<WdButton>(R.id.yes_button)
             val noButton = dialogView.findViewById<WdButton>(R.id.no_button)
 
-            title.text =
-                "Are you sure you want to delete this group?\nThis action cannot be undone."
             yesButton.setOnClickListener {
                 val groupName = nameEdit.text.toString()
                 groupsManager.deleteGroup(groupName)

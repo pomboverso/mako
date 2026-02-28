@@ -8,28 +8,29 @@
     android:focusableInTouchMode="true">
 
     <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16sp"
-        android:textSize="18sp"
+        android:layout_marginBottom="8sp"
+        android:textSize="32sp"
         android:textColor="@color/foreground_color"
-        android:text="Are you sure?"
+        android:text="@string/select_group"
         android:gravity="center"
         android:textStyle="bold" />
 
-    <com.rama.mako.widgets.WdButton
-        android:id="@+id/yes_button"
+    <LinearLayout
+        android:id="@+id/groups"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginBottom="8sp"
-        android:layout_height="wrap_content"
-        android:background="@color/button_danger"
-        android:text="Yes" />
+        android:padding="16sp"
+        android:orientation="vertical"
+        android:background="@color/secondary_bg"
+        android:focusableInTouchMode="true"></LinearLayout>
 
     <com.rama.mako.widgets.WdButton
-        android:id="@+id/no_button"
+        android:id="@+id/close_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/button_primary_color"
-        android:text="No" />
+        android:text="@string/cancel" />
 </LinearLayout>

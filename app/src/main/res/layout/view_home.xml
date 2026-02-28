@@ -7,7 +7,6 @@
     android:background="?attr/bgColor"
     android:textColor="?attr/foregroundColor">
 
-    <!-- Top container -->
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -22,7 +21,6 @@
             android:layout_height="wrap_content"
             android:textColor="?attr/foregroundColor" />
 
-        <!-- Date -->
         <LinearLayout
             android:id="@+id/date_row"
             android:orientation="horizontal"
@@ -45,7 +43,6 @@
                 android:textColor="?attr/foregroundColor" />
         </LinearLayout>
 
-        <!-- Battery -->
         <LinearLayout
             android:id="@+id/battery_row"
             android:orientation="horizontal"
@@ -67,8 +64,7 @@
                 android:textColor="?attr/foregroundColor" />
         </LinearLayout>
     </LinearLayout>
-
-    <!-- App List -->
+    
     <ListView
         android:id="@+id/appList"
         android:layout_width="match_parent"

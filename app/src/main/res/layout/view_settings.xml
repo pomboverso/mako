@@ -27,7 +27,7 @@
             android:layout_marginBottom="8sp"
             android:textSize="16sp"
             android:textColor="@color/foreground_color"
-            android:text="Global"
+            android:text="@string/global_header"
             android:textStyle="bold" />
 
         <com.rama.mako.widgets.WdButton
@@ -68,7 +68,7 @@
             android:layout_marginBottom="8sp"
             android:textSize="16sp"
             android:textColor="@color/foreground_color"
-            android:text="Clock"
+            android:text="@string/clock_header"
             android:textStyle="bold" />
 
         <LinearLayout
@@ -126,7 +126,7 @@
             android:layout_marginBottom="8sp"
             android:textSize="16sp"
             android:textColor="@color/foreground_color"
-            android:text="Date and Battery"
+            android:text="@string/date_header"
             android:textStyle="bold" />
 
         <com.rama.mako.widgets.WdCheckbox
@@ -153,14 +153,14 @@
             android:layout_marginBottom="8sp"
             android:textSize="16sp"
             android:textColor="@color/foreground_color"
-            android:text="Styles"
+            android:text="@string/styles_header"
             android:textStyle="bold" />
 
         <com.rama.mako.widgets.WdCheckbox
             android:id="@+id/use_pixel_font"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:text="Use Pixel Font (Jersey 25 Regular)" />
+            app:text="@string/pixel_font_label" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -168,7 +168,7 @@
             android:layout_marginBottom="8sp"
             android:textSize="16sp"
             android:textColor="@color/foreground_color"
-            android:text="Groups"
+            android:text="@string/groups_header"
             android:textStyle="bold" />
 
         <LinearLayout
@@ -187,7 +187,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8sp"
             android:background="@color/button_secondary_color"
-            android:text="+ Add New Group" />
+            android:text="@string/add_group_label" />
 
         <View
             android:layout_width="match_parent"
