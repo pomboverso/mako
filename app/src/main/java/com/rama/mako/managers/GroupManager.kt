@@ -1,6 +1,7 @@
-package com.rama.mako
+package com.rama.mako.managers
 
 import android.content.Context
+import com.rama.mako.R
 
 class GroupsManager(private val context: Context) {
 

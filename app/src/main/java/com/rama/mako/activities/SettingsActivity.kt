@@ -12,9 +12,9 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import com.rama.mako.CsActivity
-import com.rama.mako.FontManager
+import com.rama.mako.managers.FontManager
 import com.rama.mako.R
-import com.rama.mako.GroupsManager
+import com.rama.mako.managers.GroupsManager
 import com.rama.mako.widgets.WdButton
 import com.rama.mako.widgets.WdCheckbox
 

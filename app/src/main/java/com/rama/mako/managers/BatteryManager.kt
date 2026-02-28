@@ -1,4 +1,4 @@
-package com.rama.mako
+package com.rama.mako.managers
 
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -6,11 +6,12 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.SharedPreferences
 import android.os.BatteryManager
+import com.rama.mako.R
 import java.util.Locale
 import kotlin.math.abs
 import kotlin.math.roundToInt
 
-class BatteryManagerHelper(
+class BatteryManager(
     private val context: Context,
     private val callback: (String) -> Unit,
     private val prefs: SharedPreferences
@@ -97,7 +98,7 @@ class BatteryManagerHelper(
 
                 else -> statusText
             }
-            
+
             // Final output
             val infoParts = listOf(levelPct.toString() + "%", tempDisplay, statusFinal)
             callback(infoParts.joinToString(" :: "))

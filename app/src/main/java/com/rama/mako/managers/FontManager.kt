@@ -1,4 +1,4 @@
-package com.rama.mako
+package com.rama.mako.managers
 
 import android.content.Context
 import android.graphics.Typeface

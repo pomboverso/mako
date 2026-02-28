@@ -1,4 +1,4 @@
-package com.rama.mako
+package com.rama.mako.managers
 
 import android.content.SharedPreferences
 import android.os.Handler
@@ -6,6 +6,7 @@ import android.os.Looper
 import android.text.format.DateFormat
 import android.view.View
 import android.widget.TextView
+import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
@@ -38,7 +39,7 @@ class ClockManager(
                 }
 
                 val pattern = if (use24h) "HH:mm" else "hh:mm a"
-                val formatter = java.text.SimpleDateFormat(pattern, locale)
+                val formatter = SimpleDateFormat(pattern, locale)
 
                 timeTextView.text = formatter.format(calendar.time)
             } else {

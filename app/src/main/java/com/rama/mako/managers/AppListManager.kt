@@ -1,4 +1,4 @@
-package com.rama.mako
+package com.rama.mako.managers
 
 import android.app.AlertDialog
 import android.content.Context
@@ -9,11 +9,21 @@ import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.AbsListView
+import android.widget.ArrayAdapter
+import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.ListView
+import android.widget.PopupMenu
+import android.widget.RadioButton
+import android.widget.RadioGroup
+import android.widget.TextView
+import android.widget.Toast
+import com.rama.mako.R
 import com.rama.mako.activities.SettingsActivity
 import com.rama.mako.widgets.WdButton
 
-class AppListHelper(
+class AppListManager(
     private val context: Context,
     private val listView: ListView
 ) {
@@ -231,28 +241,40 @@ class AppListHelper(
 
     private fun setupAdapter() {
         adapter = object : ArrayAdapter<ListItem>(context, 0, items) {
+
             override fun getViewTypeCount() = 2
+
             override fun getItemViewType(position: Int) = when (getItem(position)) {
                 is ListItem.Header -> 0
                 is ListItem.App -> 1
                 else -> 1
             }
 
+            override fun isEnabled(position: Int): Boolean {
+                return getItem(position) is ListItem.App
+            }
+
+            override fun areAllItemsEnabled(): Boolean = false
+
             override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
                 val item = getItem(position)!!
                 return when (item) {
                     is ListItem.Header -> {
-                        val view =
-                            convertView ?: View.inflate(context, R.layout.app_list_header, null)
+                        val view = convertView
+                            ?: View.inflate(context, R.layout.app_list_header, null)
+
                         val text = view.findViewById<TextView>(R.id.header_text)
                         text.text = item.title.uppercase()
+
                         FontManager.applyFont(context, text)
+
                         view
                     }
 
                     is ListItem.App -> {
-                        val view =
-                            convertView ?: View.inflate(context, R.layout.list_item_app, null)
+                        val view = convertView
+                            ?: View.inflate(context, R.layout.list_item_app, null)
+
                         val app = item.info
                         val pkg = app.activityInfo.packageName
 
@@ -270,6 +292,7 @@ class AppListHelper(
                         }
 
                         FontManager.applyFont(context, label)
+
                         view
                     }
                 }

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.WindowInsets
 import android.view.WindowInsetsController
 import android.view.WindowManager
+import com.rama.mako.managers.FontManager
 import com.rama.mako.utils.dp
 
 abstract class CsActivity : Activity() {
