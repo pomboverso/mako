@@ -1,70 +1,87 @@
 <resources>
-    <string name="app_name">Mako</string>
-    <string name="app_long_name">Lanzador Mako</string>
-    <string name="app_description">
-        Un lanzador de Android ligero y sin distracciones, centrado en la privacidad y totalmente en el dispositivo, diseñado para el enfoque y la simplicidad.
-    </string>
-    <string name="icon_block_desc">Sin tareas en segundo plano</string>
-    <string name="icon_ads_desc">Sin anuncios</string>
-    <string name="icon_location_desc">Sin rastreadores</string>
-    <string name="icon_offline_desc">Funciona sin conexión</string>
-    <string name="icon_license_desc">Licencia GPLv3</string>
-    <string name="app_creator">Miguel Rivas</string>
-    <string name="author_app_creator">Autor: Miguel Rivas</string>
-    <string name="close">Cerrar</string>
-    <string name="set_default">Establecer lanzador como predeterminado</string>
-    <string name="refresh_launcher">Actualizar lanzador</string>
-    <string name="change_wallpaper">Cambiar fondo del sistema</string>
-    <string name="about">Acerca de Mako</string>
-    <string name="edit_apps">Editar aplicaciones</string>
-    <string name="show_battery">Mostrar batería</string>
-    <string name="show_date">Mostrar fecha</string>
-    <string name="show_clock">Mostrar reloj</string>
+    <!-- Global -->
+    <string name="go_back_label">Cerrar</string>
+    <string name="ungrouped_header">------ Sin grupo</string>
+    <string name="favorites_header">------ Favoritos</string>
+    <string name="new_group_header">------ Nuevo grupo</string>
+    <string name="new_group_header_count">------ Nuevo grupo %d</string>
+    <string name="no_clock_app_found_label">No se encontró aplicación de reloj</string>
+    <string name="unable_open_settings_toast">No se pueden abrir los ajustes del lanzador</string>
+    <string name="unable_open_wallpaper_app_toast">No hay aplicación de fondo disponible</string>
+    <string name="unable_launch_app_toast">No se puede abrir la aplicación</string>
 
-    <!-- Temperature labels -->
-    <string name="temp_warm">Elevada</string>
+    <!-- Main :: Temperature labels -->
+    <string name="temp_warm">Templado</string>
     <string name="temp_hot">Caliente</string>
     <string name="temp_critical">Crítico</string>
 
-    <!-- Battery status -->
+    <!-- Main :: Battery status -->
     <string name="status_charging">Cargando</string>
     <string name="status_discharging">Descargando</string>
     <string name="status_full">Completa</string>
     <string name="status_not_charging">No cargando</string>
     <string name="status_unknown">Desconocido</string>
 
-    <!-- Charging types -->
+    <!-- Main :: Charging types -->
     <string name="charge_usb">USB</string>
     <string name="charge_ac">CA</string>
     <string name="charge_wireless">Inalámbrica</string>
 
-    <!-- Formatting -->
+    <!-- Main :: Formatting -->
     <string name="battery_status_power">%1$s %2$dx</string>
     <string name="battery_status_power_type">%1$s (%2$s) %3$dx</string>
-
     <string name="unit_celsius">C</string>
     <string name="unit_fahrenheit">F</string>
-
     <string name="battery_temp">%1$d°%2$s</string>
     <string name="battery_temp_labeled">%1$d°%2$s (%3$s)</string>
 
-    <string name="clock_format">Configuración del reloj</string>
+    <!-- APP / About -->
+    <string name="app_description">
+        Un lanzador de Android ligero y sin distracciones, centrado en la privacidad y totalmente en el dispositivo, diseñado para enfoque y simplicidad.
+    </string>
+    <string name="icon_block_desc">Sin tareas en segundo plano</string>
+    <string name="icon_ads_desc">Sin anuncios</string>
+    <string name="icon_location_desc">Sin rastreadores</string>
+    <string name="icon_offline_desc">Funciona sin conexión</string>
+    <string name="icon_license_desc">Licencia GPLv3</string>
+
+    <!-- Settings -->
+    <string name="settings">Configuración</string>
+    <string name="global_header">Global</string>
+    <string name="clock_header">Reloj</string>
+    <string name="date_header">Fecha y batería</string>
+    <string name="styles_header">Estilos</string>
+    <string name="groups_header">Grupos</string>
+    <string name="set_default">Establecer lanzador como predeterminado</string>
+    <string name="refresh_launcher">Actualizar lanzador</string>
+    <string name="change_wallpaper">Cambiar fondo del sistema</string>
+    <string name="about_mako_label">Acerca de Mako</string>
+    <string name="edit_apps">Editar aplicaciones</string>
+    <string name="show_battery">Mostrar batería</string>
+    <string name="show_date">Mostrar fecha</string>
+    <string name="show_clock">Mostrar reloj</string>
+    <string name="show_year_day">Mostrar día del año</string>
+    <string name="add_group_label">+ Añadir nuevo grupo</string>
+    <string name="pixel_font_label">Usar fuente Pixel (Jersey 25 Regular)</string>
     <string name="clock_none">Ocultar reloj</string>
     <string name="clock_system">Predeterminado del sistema</string>
     <string name="clock_24">24 horas</string>
     <string name="clock_12">12 horas (AM/PM)</string>
 
-    <string name="show_year_day">Mostrar día del año</string>
-
-    <string name="rename_app">Renombrar Aplicación</string>
-    <string name="save">Salvar</string>
-    <string name="reset">Resetear</string>
-    <string name="cancel">Cancelar</string>
-
+    <!-- Popup :: Context Menu App -->
+    <string name="rename_app">Renombrar aplicación</string>
     <string name="add_to_favorites">Añadir al grupo...</string>
     <string name="open_settings">Ajustes de la aplicación...</string>
 
-    <string name="ungrouped_header">------ Sin grupo</string>
+    <!-- Dialog -->
+    <string name="save">Guardar</string>
+    <string name="reset">Restablecer</string>
+    <string name="cancel">Cancelar</string>
 
-    <string name="settings">Configuraciones</string>
+    <!-- Dialog :: Rename App -->
+    <string name="select_group">Seleccionar grupo</string>
+
+    <!-- Dialog :: Delete Group -->
+    <string name="delete_group_title">¿Está seguro de eliminar este grupo?\nEsta acción no se puede deshacer.</string>
+    <string name="delete_group">Eliminar grupo</string>
 </resources>

@@ -200,13 +200,13 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8sp"
             android:background="@color/button_primary_color"
-            android:text="@string/about" />
+            android:text="@string/about_mako_label" />
 
         <com.rama.mako.widgets.WdButton
             android:id="@+id/close_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/button_primary_color"
-            android:text="@string/close" />
+            android:text="@string/go_back_label" />
     </LinearLayout>
 </ScrollView>

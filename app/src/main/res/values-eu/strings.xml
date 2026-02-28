@@ -1,0 +1,87 @@
+<resources>
+    <!-- Global -->
+    <string name="go_back_label">Itzuli</string>
+    <string name="ungrouped_header">------ Taldegabe</string>
+    <string name="favorites_header">------ Gustukoak</string>
+    <string name="new_group_header">------ Talde Berria</string>
+    <string name="new_group_header_count">------ Talde Berria %d</string>
+    <string name="no_clock_app_found_label">Ez da erloju aplikaziorik aurkitu</string>
+    <string name="unable_open_settings_toast">Ezin izan da hasierako ezarpenak ireki</string>
+    <string name="unable_open_wallpaper_app_toast">Ez dago horma-irudi aplikaziorik erabilgarri</string>
+    <string name="unable_launch_app_toast">Ezin izan da aplikazioa abiarazi</string>
+
+    <!-- Main :: Temperature labels -->
+    <string name="temp_warm">Bero</string>
+    <string name="temp_hot">Oso bero</string>
+    <string name="temp_critical">Larrialdi</string>
+
+    <!-- Main :: Battery status -->
+    <string name="status_charging">Kargatzen</string>
+    <string name="status_discharging">Deskargatzen</string>
+    <string name="status_full">Beteta</string>
+    <string name="status_not_charging">Ez kargatzen</string>
+    <string name="status_unknown">Ezezaguna</string>
+
+    <!-- Main :: Charging types -->
+    <string name="charge_usb">USB</string>
+    <string name="charge_ac">AC</string>
+    <string name="charge_wireless">Haririk gabe</string>
+
+    <!-- Main :: Formatting -->
+    <string name="battery_status_power">%1$s %2$dx</string>
+    <string name="battery_status_power_type">%1$s (%2$s) %3$dx</string>
+    <string name="unit_celsius">C</string>
+    <string name="unit_fahrenheit">F</string>
+    <string name="battery_temp">%1$d°%2$s</string>
+    <string name="battery_temp_labeled">%1$d°%2$s (%3$s)</string>
+
+    <!-- APP / About -->
+    <string name="app_description">
+        Androideko hasierako aplikazio arina eta distrakziorik gabekoa, pribatutasunean zentratua eta guztiz gailuan oinarritua, arreta eta sinpletasuna kontuan hartuta diseinatua.
+    </string>
+    <string name="icon_block_desc">Atzeko planoan ez dago zereginik</string>
+    <string name="icon_ads_desc">Iragarkiik gabe</string>
+    <string name="icon_location_desc">Jatorri ikerketarik gabe</string>
+    <string name="icon_offline_desc">Offline funtzionatzen du</string>
+    <string name="icon_license_desc">GPLv3 lizentzia</string>
+
+    <!-- Settings -->
+    <string name="settings">Ezarpenak</string>
+    <string name="global_header">Orokorra</string>
+    <string name="clock_header">Ordua</string>
+    <string name="date_header">Data eta bateria</string>
+    <string name="styles_header">Estiloak</string>
+    <string name="groups_header">Taldeak</string>
+    <string name="set_default">Hasierako aplikazio moduan ezarri</string>
+    <string name="refresh_launcher">Hasierako aplikazioa berritu</string>
+    <string name="change_wallpaper">Sistema horma-irudia aldatu</string>
+    <string name="about_mako_label">Makori buruz</string>
+    <string name="edit_apps">Aplikazioak editatu</string>
+    <string name="show_battery">Bateria erakutsi</string>
+    <string name="show_date">Data erakutsi</string>
+    <string name="show_clock">Ordua erakutsi</string>
+    <string name="show_year_day">Urteko eguna erakutsi</string>
+    <string name="add_group_label">+ Talde Berria Gehitu</string>
+    <string name="pixel_font_label">Pixel letra erabili (Jersey 25 Regular)</string>
+    <string name="clock_none">Ordua ez erakutsi</string>
+    <string name="clock_system">Sistemaren lehenetsia</string>
+    <string name="clock_24">24 ordu</string>
+    <string name="clock_12">12 ordu (AM/PM)</string>
+
+    <!-- Popup :: Context Menu App -->
+    <string name="rename_app">Aplikazioa berrizendatu</string>
+    <string name="add_to_favorites">Taldean gehitu...</string>
+    <string name="open_settings">Aplikazioaren ezarpenak...</string>
+
+    <!-- Dialog -->
+    <string name="save">Gorde</string>
+    <string name="reset">Berrezarri</string>
+    <string name="cancel">Utzi</string>
+
+    <!-- Dialog :: Rename App -->
+    <string name="select_group">Taldea hautatu</string>
+
+    <!-- Dialog :: Delete Group -->
+    <string name="delete_group_title">Ziur zaude talde hau ezabatu nahi duzula?\nEkintza hau ezin da atzera bota.</string>
+    <string name="delete_group">Taldea ezabatu</string>
+</resources>

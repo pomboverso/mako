@@ -2,9 +2,7 @@
     <!-- <string name=""></string> -->
 
     <!-- Global -->
-    <string name="close">Go Back</string>
-
-    <!-- Main -->
+    <string name="go_back_label">Go Back</string>
     <string name="ungrouped_header">------ Ungrouped</string>
     <string name="favorites_header">------ Favorites</string>
     <string name="new_group_header">------ New Group</string>
@@ -40,8 +38,7 @@
     <string name="battery_temp_labeled">%1$d°%2$s (%3$s)</string>
 
     <!-- APP / About -->
-    <string name="app_name">Mako</string>
-    <string name="app_long_name">Mako Launcher</string>
+    <string name="app_name" translatable="false">Mako</string>
     <string name="app_description">A lightweight, distraction-free Android launcher that’s privacy-first and entirely on-device, designed for focus and simplicity.</string>
     <string name="icon_block_desc">No Background Tasks</string>
     <string name="icon_ads_desc">No Ads</string>
@@ -60,7 +57,7 @@
     <string name="set_default">Set Launcher as default</string>
     <string name="refresh_launcher">Refresh launcher</string>
     <string name="change_wallpaper">Change OS wallpaper</string>
-    <string name="about">About Mako</string>
+    <string name="about_mako_label">About Mako</string>
     <string name="edit_apps">Edit apps</string>
     <string name="show_battery">Show battery</string>
     <string name="show_date">Show date</string>
