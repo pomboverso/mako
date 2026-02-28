@@ -1,4 +1,4 @@
-![Preview](https://raw.githubusercontent.com/jmiguelrivas/mako/refs/heads/master/fastlane/metadata/android/en-US/images/featureGraphic.png)
+![Preview](https://raw.githubusercontent.com/jmiguelrivas/mako/refs/heads/master/metadata/mako_preview.svg)
 
 # Mako
 
