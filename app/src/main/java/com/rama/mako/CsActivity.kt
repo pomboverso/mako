@@ -42,7 +42,8 @@ abstract class CsActivity : Activity() {
     }
 
     fun refreshFont() {
-        recreate()
+        val root = findViewById<View>(android.R.id.content)
+        FontManager.applyFont(this, root)
     }
 
     protected fun applyEdgeToEdgePadding(root: View) {

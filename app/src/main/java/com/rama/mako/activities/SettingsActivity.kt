@@ -121,12 +121,17 @@ class SettingsActivity : CsActivity() {
         nameEdit.tag = group
 
         // Visibility
-        val isVisible = groupsManager.isGroupVisible(group)
-        toggleBtn.setImageResource(if (isVisible) R.drawable.icon_visibility else R.drawable.icon_visibility_off)
+        toggleBtn.setImageResource(
+            if (groupsManager.isGroupVisible(group)) R.drawable.icon_visibility
+            else R.drawable.icon_visibility_off
+        )
         toggleBtn.setOnClickListener {
             val newVisibility = !groupsManager.isGroupVisible(group)
             groupsManager.setGroupVisibility(group, newVisibility)
-            toggleBtn.setImageResource(if (newVisibility) R.drawable.icon_visibility else R.drawable.icon_visibility_off)
+            toggleBtn.setImageResource(
+                if (newVisibility) R.drawable.icon_visibility
+                else R.drawable.icon_visibility_off
+            )
         }
 
         // Rename
@@ -136,12 +141,12 @@ class SettingsActivity : CsActivity() {
             override fun afterTextChanged(s: android.text.Editable?) {
                 val oldName = nameEdit.tag as String
                 val newName = s?.toString()?.trim() ?: return
-                if (oldName != newName) {
+                if (oldName != newName && newName.isNotEmpty()) {
+                    // Rename in SharedPreferences
                     groupsManager.renameGroup(oldName, newName)
+                    // Update in-memory list without sorting yet
                     val index = groups.indexOf(oldName)
                     if (index != -1) groups[index] = newName
-                    groups.sortBy { it.lowercase() }
-                    groupsManager.saveGroups(groups)
                     nameEdit.tag = newName
                 }
             }
@@ -161,8 +166,9 @@ class SettingsActivity : CsActivity() {
             title.text =
                 "Are you sure you want to delete this group?\nThis action cannot be undone."
             yesButton.setOnClickListener {
-                groupsManager.deleteGroup(nameEdit.text.toString())
-                groups.remove(nameEdit.text.toString())
+                val groupName = nameEdit.text.toString()
+                groupsManager.deleteGroup(groupName)
+                groups.remove(groupName)
                 container.removeView(row)
                 dialog.dismiss()
             }
@@ -188,14 +194,20 @@ class SettingsActivity : CsActivity() {
     ) {
         val wdCheckbox = findViewById<WdCheckbox>(wdCheckboxId)
         val dependentView = dependentViewId?.let { findViewById<View>(it) }
-        val isChecked = prefs.getBoolean(prefKey, defaultValue)
 
+        // Guard to prevent firing listener during initialization
+        var initializing = true
+
+        val isChecked = prefs.getBoolean(prefKey, defaultValue)
         wdCheckbox.setChecked(isChecked)
         dependentView?.visibility = if (isChecked) View.VISIBLE else View.GONE
 
+        initializing = false
+
         wdCheckbox.setOnCheckedChangeListener { checked ->
+            if (initializing) return@setOnCheckedChangeListener
             prefs.edit().putBoolean(prefKey, checked).apply()
-            dependentView?.visibility = if (checked) View.VISIBLE else View.GONE
+            dependentView?.let { it.visibility = if (checked) View.VISIBLE else View.GONE }
             onChange?.invoke(checked)
         }
     }
