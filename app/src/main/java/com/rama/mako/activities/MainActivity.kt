@@ -6,11 +6,12 @@ import android.view.View
 import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
-import com.rama.mako.managers.AppListManager
 import com.rama.mako.CsActivity
+import com.rama.mako.R
+import com.rama.mako.managers.AppListManager
 import com.rama.mako.managers.BatteryManager
 import com.rama.mako.managers.ClockManager
-import com.rama.mako.R
+import com.rama.mako.managers.PrefsManager
 
 class MainActivity : CsActivity() {
 
@@ -20,12 +21,10 @@ class MainActivity : CsActivity() {
     private lateinit var listView: ListView
 
     private lateinit var clockManager: ClockManager
-    private lateinit var batteryHelper: BatteryManager
+    private lateinit var batteryManager: BatteryManager
     private lateinit var appListManager: AppListManager
 
-    private val prefs by lazy {
-        getSharedPreferences("settings", MODE_PRIVATE)
-    }
+    private lateinit var prefs: PrefsManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,29 +33,28 @@ class MainActivity : CsActivity() {
         val root = findViewById<View>(R.id.root)
         applyEdgeToEdgePadding(root)
 
-        // Views
+        // --- Prefs ---
+        prefs = PrefsManager.getInstance(this)
+
+        // --- Views ---
         timeText = findViewById(R.id.time)
         dateText = findViewById(R.id.date)
         batteryText = findViewById(R.id.battery)
         listView = findViewById(R.id.appList)
 
-
-        // Clock
-        clockManager = ClockManager(timeText, dateText, prefs)
+        // --- Clock ---
+        clockManager = ClockManager(timeText, dateText, this) // now uses PrefsManager internally
         clockManager.start()
         timeText.setOnClickListener { openSystemClock() }
 
-
-        // Battery
-        batteryHelper = BatteryManager(
+        // --- Battery ---
+        batteryManager = BatteryManager(
             context = this,
             callback = { status -> batteryText.text = status },
-            prefs = prefs
         )
-        batteryHelper.register()
+        batteryManager.register()
 
-
-        // App List
+        // --- App List ---
         appListManager = AppListManager(this, listView)
         appListManager.setup()
     }
@@ -69,25 +67,20 @@ class MainActivity : CsActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        batteryHelper.unregister()
+        batteryManager.unregister()
         clockManager.stop()
     }
 
-
-    // Settings sync (row visibility only)
+    // --- Settings sync (row visibility only) ---
     private fun syncSettings() {
-        val showClock = prefs.getBoolean("show_clock", true)
-        val showDate = prefs.getBoolean("show_date", true)
-        val showBattery = prefs.getBoolean("show_battery", true)
-
-        timeText.visibility = if (showClock) View.VISIBLE else View.GONE
-        findViewById<View>(R.id.date_row).visibility = if (showDate) View.VISIBLE else View.GONE
+        timeText.visibility = if (prefs.isClockVisible()) View.VISIBLE else View.GONE
+        findViewById<View>(R.id.date_row).visibility =
+            if (prefs.getBoolean("show_date", true)) View.VISIBLE else View.GONE
         findViewById<View>(R.id.battery_row).visibility =
-            if (showBattery) View.VISIBLE else View.GONE
+            if (prefs.getBoolean("show_battery", true)) View.VISIBLE else View.GONE
     }
 
-
-    // Open system clock safely
+    // --- Open system clock safely ---
     private fun openSystemClock() {
         val pm = packageManager
         val intents = listOf(

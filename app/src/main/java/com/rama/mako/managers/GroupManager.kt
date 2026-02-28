@@ -3,41 +3,46 @@ package com.rama.mako.managers
 import android.content.Context
 import com.rama.mako.R
 
-class GroupsManager(private val context: Context) {
+class GroupsManager(context: Context) {
 
-    private val groupPrefs = context.getSharedPreferences("groups", Context.MODE_PRIVATE)
-    private val groupsListPrefs = context.getSharedPreferences("groups_list", Context.MODE_PRIVATE)
-    private val settingsPrefs = context.getSharedPreferences("settings", Context.MODE_PRIVATE)
+    private val prefs = PrefsManager.getInstance(context)
     private val defaultGroup = context.getString(R.string.favorites_header)
     private val ungroupedLabel = context.getString(R.string.ungrouped_header)
 
+    // --- Groups List ---
+
     fun getGroups(): MutableList<String> {
-        return groupsListPrefs
-            .getStringSet("groups", mutableSetOf(defaultGroup))!!
+        return prefs.getStringSet("groups", mutableSetOf(defaultGroup))
             .toMutableList()
             .sortedBy { it.lowercase() }
             .toMutableList()
     }
 
     fun saveGroups(groups: List<String>) {
-        groupsListPrefs.edit().putStringSet("groups", groups.toSet()).apply()
+        prefs.setStringSet("groups", groups.toSet())
     }
 
+    // --- App -> Group Mapping ---
+
     fun getGroup(pkg: String): String? {
-        return groupPrefs.getString(pkg, null)
+        return prefs.getStringSet("app_group_map_$pkg", mutableSetOf())?.firstOrNull()
     }
 
     fun setGroup(pkg: String, group: String?) {
-        groupPrefs.edit().putString(pkg, group).apply()
+        if (group != null) {
+            prefs.setStringSet("app_group_map_$pkg", setOf(group))
+        } else {
+            prefs.setStringSet("app_group_map_$pkg", emptySet())
+        }
     }
 
     fun renameGroup(oldName: String, newName: String) {
-        val editor = groupPrefs.edit()
-        groupPrefs.all.forEach { (pkg, group) ->
-            if (group == oldName) editor.putString(pkg, newName)
+        // Update apps in the group
+        getAllAppGroups().forEach { (pkg, group) ->
+            if (group == oldName) setGroup(pkg, newName)
         }
-        editor.apply()
 
+        // Update groups list
         val groups = getGroups()
         val index = groups.indexOf(oldName)
         if (index != -1) groups[index] = newName
@@ -45,25 +50,35 @@ class GroupsManager(private val context: Context) {
     }
 
     fun deleteGroup(groupName: String) {
-        // Remove from list
+        // Remove group from list
         val groups = getGroups()
         if (!groups.contains(groupName)) return
         groups.remove(groupName)
         saveGroups(groups)
 
         // Move apps to ungrouped
-        val editor = groupPrefs.edit()
-        groupPrefs.all.forEach { (pkg, group) ->
-            if (group == groupName) editor.putString(pkg, ungroupedLabel)
+        getAllAppGroups().forEach { (pkg, group) ->
+            if (group == groupName) setGroup(pkg, ungroupedLabel)
         }
-        editor.apply()
     }
 
+    // --- Group Visibility ---
+
     fun isGroupVisible(group: String): Boolean {
-        return settingsPrefs.getBoolean("group_visibility_$group", true)
+        return prefs.isGroupVisible(group)
     }
 
     fun setGroupVisibility(group: String, visible: Boolean) {
-        settingsPrefs.edit().putBoolean("group_visibility_$group", visible).apply()
+        prefs.setGroupVisible(group, visible)
+    }
+
+    // --- Helper to get all stored app->group mappings ---
+    private fun getAllAppGroups(): Map<String, String> {
+        val allKeys = prefs.getStringSet("all_apps", emptySet()) // optional central tracking
+        val map = mutableMapOf<String, String>()
+        allKeys.forEach { pkg ->
+            getGroup(pkg)?.let { group -> map[pkg] = group }
+        }
+        return map
     }
 }

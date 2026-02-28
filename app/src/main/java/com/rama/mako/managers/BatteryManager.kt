@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.content.SharedPreferences
 import android.os.BatteryManager
 import com.rama.mako.R
 import java.util.Locale
@@ -13,22 +12,23 @@ import kotlin.math.roundToInt
 
 class BatteryManager(
     private val context: Context,
-    private val callback: (String) -> Unit,
-    private val prefs: SharedPreferences
+    private val callback: (String) -> Unit
 ) {
+    private val prefs = PrefsManager.getInstance(context)
+
     private val FAHRENHEIT_COUNTRIES = setOf("US", "BS", "BZ", "KY", "PW")
 
     private val batteryReceiver = object : BroadcastReceiver() {
         override fun onReceive(ctx: Context?, intent: Intent?) {
             if (intent == null) return
 
-            // Battery level
+            // --- Battery level ---
             val level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1)
             val scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1)
             if (level < 0 || scale <= 0) return
             val levelPct = (level * 100 / scale.toFloat()).toInt()
 
-            // Temperature (Celsius/Fahrenheit)
+            // --- Temperature ---
             val tempC = intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, -1) / 10
             val tempLabel = when {
                 tempC <= 45 -> ""
@@ -40,9 +40,7 @@ class BatteryManager(
             val useFahrenheit = Locale.getDefault().country in FAHRENHEIT_COUNTRIES
             val (temperatureValue, unitRes) = if (useFahrenheit) {
                 (tempC * 9 / 5 + 32) to R.string.unit_fahrenheit
-            } else {
-                tempC to R.string.unit_celsius
-            }
+            } else tempC to R.string.unit_celsius
             val unit = context.getString(unitRes)
 
             val tempDisplay = if (tempLabel.isNotEmpty()) {
@@ -51,7 +49,7 @@ class BatteryManager(
                 context.getString(R.string.battery_temp, temperatureValue, unit)
             }
 
-            // Charging status
+            // --- Charging status ---
             val status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1)
             val statusText = when (status) {
                 BatteryManager.BATTERY_STATUS_CHARGING -> context.getString(R.string.status_charging)
@@ -73,7 +71,7 @@ class BatteryManager(
                 }
             } else ""
 
-            // Power calculation
+            // --- Power calculation ---
             val bm = context.getSystemService(Context.BATTERY_SERVICE) as BatteryManager
             val currentMa = bm.getIntProperty(BatteryManager.BATTERY_PROPERTY_CURRENT_NOW) / 1000f
             val voltageMv = intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, -1)
@@ -81,7 +79,7 @@ class BatteryManager(
             val powerW = abs(voltageV * (currentMa / 1000f))
             val powerX = powerW.roundToInt()
 
-            // Format final status
+            // --- Format final status ---
             val statusFinal = when {
                 statusText == context.getString(R.string.status_full) -> statusText
                 statusText == context.getString(R.string.status_charging) && chargeType.isNotEmpty() ->
@@ -99,9 +97,14 @@ class BatteryManager(
                 else -> statusText
             }
 
-            // Final output
-            val infoParts = listOf(levelPct.toString() + "%", tempDisplay, statusFinal)
-            callback(infoParts.joinToString(" :: "))
+            // --- Final callback ---
+            callback(
+                listOf(
+                    levelPct.toString() + "%",
+                    tempDisplay,
+                    statusFinal
+                ).joinToString(" :: ")
+            )
         }
     }
 

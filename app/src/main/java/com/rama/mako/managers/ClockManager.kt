@@ -1,6 +1,5 @@
 package com.rama.mako.managers
 
-import android.content.SharedPreferences
 import android.os.Handler
 import android.os.Looper
 import android.text.format.DateFormat
@@ -13,22 +12,23 @@ import java.util.Locale
 class ClockManager(
     private val timeTextView: TextView,
     private val dateTextView: TextView,
-    private val prefs: SharedPreferences
+    context: android.content.Context
 ) {
+    private val prefs = PrefsManager.getInstance(context)
     private val handler = Handler(Looper.getMainLooper())
     private val calendar = Calendar.getInstance()
 
     private val runnable = object : Runnable {
         override fun run() {
-            val showClock = prefs.getBoolean("show_clock", true)
+            val showClock = prefs.isClockVisible()
+            val clockFormatPref = prefs.getClockFormat()
             val showDate = prefs.getBoolean("show_date", true)
-            val clockFormatPref = prefs.getString("clock_format", "system")
             val showYearDay = prefs.getBoolean("show_year_day", true)
 
             calendar.timeInMillis = System.currentTimeMillis()
             val locale = Locale.getDefault()
 
-            // Clock
+            // --- Clock ---
             if (showClock) {
                 timeTextView.visibility = View.VISIBLE
 
@@ -46,7 +46,7 @@ class ClockManager(
                 timeTextView.visibility = View.GONE
             }
 
-            // Date
+            // --- Date ---
             if (showDate) {
                 dateTextView.visibility = View.VISIBLE
 
@@ -59,20 +59,10 @@ class ClockManager(
 
                 val dayOfYear = calendar.get(Calendar.DAY_OF_YEAR)
                 val totalDays = calendar.getActualMaximum(Calendar.DAY_OF_YEAR)
-                val yearDay = if (showYearDay) {
-                    "$dayOfYear/$totalDays"
-                } else {
-                    null
-                }
+                val yearDay = if (showYearDay) "$dayOfYear/$totalDays" else null
 
-                val parts = listOfNotNull(
-                    weekday,
-                    dateFormat.format(calendar.time),
-                    yearDay
-                )
-
+                val parts = listOfNotNull(weekday, dateFormat.format(calendar.time), yearDay)
                 dateTextView.text = parts.joinToString(" :: ").uppercase(locale)
-
             } else {
                 dateTextView.visibility = View.GONE
             }

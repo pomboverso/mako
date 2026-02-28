@@ -1,7 +1,6 @@
 <resources>
     <!-- Global -->
     <string name="go_back_label">Itzuli</string>
-    <string name="ungrouped_header">------ Taldegabe</string>
     <string name="favorites_header">------ Gustukoak</string>
     <string name="new_group_header">------ Talde Berria</string>
     <string name="new_group_header_count">------ Talde Berria %d</string>

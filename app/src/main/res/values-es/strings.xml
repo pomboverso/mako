@@ -1,7 +1,6 @@
 <resources>
     <!-- Global -->
     <string name="go_back_label">Cerrar</string>
-    <string name="ungrouped_header">------ Sin grupo</string>
     <string name="favorites_header">------ Favoritos</string>
     <string name="new_group_header">------ Nuevo grupo</string>
     <string name="new_group_header_count">------ Nuevo grupo %d</string>

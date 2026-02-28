@@ -11,15 +11,16 @@ import android.widget.LinearLayout
 import android.widget.RadioGroup
 import android.widget.Toast
 import com.rama.mako.CsActivity
-import com.rama.mako.managers.FontManager
 import com.rama.mako.R
+import com.rama.mako.managers.FontManager
 import com.rama.mako.managers.GroupsManager
+import com.rama.mako.managers.PrefsManager
 import com.rama.mako.widgets.WdButton
 import com.rama.mako.widgets.WdCheckbox
 
 class SettingsActivity : CsActivity() {
 
-    private val prefs by lazy { getSharedPreferences("settings", MODE_PRIVATE) }
+    private val prefs by lazy { PrefsManager.getInstance(this) }
     private val groupsManager by lazy { GroupsManager(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +29,14 @@ class SettingsActivity : CsActivity() {
 
         applyEdgeToEdgePadding(findViewById(android.R.id.content))
 
-        // --- Setup basic buttons ---
+        setupBasicButtons()
+        setupClockFormat()
+        setupCheckboxes()
+        setupGroups()
+    }
+
+    // ------------------- Basic buttons -------------------
+    private fun setupBasicButtons() {
         setupButton(R.id.about_button) { startActivity(Intent(this, AboutActivity::class.java)) }
         setupButton(R.id.close_button) { finish() }
         setupButton(R.id.activate_button) {
@@ -53,40 +61,59 @@ class SettingsActivity : CsActivity() {
         findViewById<View>(R.id.change_apps_button).setOnClickListener {
             startActivity(Intent(Settings.ACTION_APPLICATION_SETTINGS))
         }
+    }
 
-        // --- Clock format ---
+    // ------------------- Clock format -------------------
+    private fun setupClockFormat() {
         val clockFormatGroup = findViewById<RadioGroup>(R.id.clock_format_group)
-        val showClock = prefs.getBoolean("show_clock", true)
-        val clockFormat = prefs.getString("clock_format", "system")
         when {
-            !showClock -> clockFormatGroup.check(R.id.clock_none)
-            clockFormat == "24" -> clockFormatGroup.check(R.id.clock_24)
-            clockFormat == "12" -> clockFormatGroup.check(R.id.clock_12)
+            !prefs.isClockVisible() -> clockFormatGroup.check(R.id.clock_none)
+            prefs.getClockFormat() == "24" -> clockFormatGroup.check(R.id.clock_24)
+            prefs.getClockFormat() == "12" -> clockFormatGroup.check(R.id.clock_12)
             else -> clockFormatGroup.check(R.id.clock_system)
         }
+
         clockFormatGroup.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
-                R.id.clock_none -> prefs.edit().putBoolean("show_clock", false)
-                    .remove("clock_format").apply()
-
-                R.id.clock_system -> prefs.edit().putBoolean("show_clock", true)
-                    .putString("clock_format", "system").apply()
-
-                R.id.clock_24 -> prefs.edit().putBoolean("show_clock", true)
-                    .putString("clock_format", "24").apply()
-
-                R.id.clock_12 -> prefs.edit().putBoolean("show_clock", true)
-                    .putString("clock_format", "12").apply()
+                R.id.clock_none -> prefs.setClockNone()
+                R.id.clock_system -> prefs.setClockSystem()
+                R.id.clock_24 -> prefs.setClock24()
+                R.id.clock_12 -> prefs.setClock12()
             }
         }
+    }
 
-        // --- Checkboxes ---
+    // ------------------- Checkboxes -------------------
+    private fun setupCheckboxes() {
         bindWdCheckbox(R.id.show_date, "show_date", true, dependentViewId = R.id.show_year_day)
         bindWdCheckbox(R.id.show_year_day, "show_year_day", true)
         bindWdCheckbox(R.id.show_battery, "show_battery", true)
         bindWdCheckbox(R.id.use_pixel_font, "use_pixel_font", false) { refreshFont() }
+    }
 
-        // --- Groups management ---
+    private fun bindWdCheckbox(
+        wdCheckboxId: Int,
+        prefKey: String,
+        defaultValue: Boolean,
+        dependentViewId: Int? = null,
+        onChange: ((Boolean) -> Unit)? = null
+    ) {
+        val wdCheckbox = findViewById<WdCheckbox>(wdCheckboxId)
+        val dependentView = dependentViewId?.let { findViewById<View>(it) }
+
+        val isChecked = prefs.getBoolean(prefKey, defaultValue)
+        wdCheckbox.setChecked(isChecked)
+        dependentView?.visibility = if (isChecked) View.VISIBLE else View.GONE
+
+        wdCheckbox.setOnCheckedChangeListener { checked ->
+            prefs.setBoolean(prefKey, checked)
+            dependentView?.visibility = if (checked) View.VISIBLE else View.GONE
+            onChange?.invoke(checked)
+        }
+    }
+
+    // ------------------- Groups management -------------------
+    private fun setupGroups() {
         val groupsContainer = findViewById<LinearLayout>(R.id.groups)
         val groups = groupsManager.getGroups().toMutableList()
         groups.forEach { group -> addGroupRow(group, groupsContainer, groups) }
@@ -97,16 +124,13 @@ class SettingsActivity : CsActivity() {
 
             while (groups.contains(newName)) {
                 counter++
-                newName = getString(
-                    R.string.new_group_header_count,
-                    counter
-                )
+                newName = getString(R.string.new_group_header_count, counter)
             }
 
             groups.add(newName)
             groups.sortBy { it.lowercase() }
             groupsManager.saveGroups(groups)
-            prefs.edit().putBoolean("group_visibility_$newName", true).apply()
+            prefs.setBoolean("group_visibility_$newName", true)
 
             // Rebuild UI
             groupsContainer.removeAllViews()
@@ -114,9 +138,9 @@ class SettingsActivity : CsActivity() {
         }
     }
 
-    // --- Add a single group row in the UI ---
     private fun addGroupRow(group: String, container: LinearLayout, groups: MutableList<String>) {
         val row = layoutInflater.inflate(R.layout.list_item_group, container, false)
+        FontManager.applyFont(this, row)
         val nameEdit = row.findViewById<EditText>(R.id.group_name)
         val deleteBtn = row.findViewById<ImageView>(R.id.delete_group)
         val toggleBtn = row.findViewById<ImageView>(R.id.toggle_visibility)
@@ -124,17 +148,16 @@ class SettingsActivity : CsActivity() {
         nameEdit.setText(group)
         nameEdit.tag = group
 
-        // Visibility
+        // Visibility toggle
         toggleBtn.setImageResource(
-            if (groupsManager.isGroupVisible(group)) R.drawable.icon_eye
+            if (prefs.isGroupVisible(group)) R.drawable.icon_eye
             else R.drawable.icon_eye_cross
         )
         toggleBtn.setOnClickListener {
-            val newVisibility = !groupsManager.isGroupVisible(group)
-            groupsManager.setGroupVisibility(group, newVisibility)
+            val newVisibility = !prefs.isGroupVisible(group)
+            prefs.setBoolean("group_visibility_$group", newVisibility)
             toggleBtn.setImageResource(
-                if (newVisibility) R.drawable.icon_eye
-                else R.drawable.icon_eye_cross
+                if (newVisibility) R.drawable.icon_eye else R.drawable.icon_eye_cross
             )
         }
 
@@ -146,9 +169,7 @@ class SettingsActivity : CsActivity() {
                 val oldName = nameEdit.tag as String
                 val newName = s?.toString()?.trim() ?: return
                 if (oldName != newName && newName.isNotEmpty()) {
-                    // Rename in SharedPreferences
                     groupsManager.renameGroup(oldName, newName)
-                    // Update in-memory list without sorting yet
                     val index = groups.indexOf(oldName)
                     if (index != -1) groups[index] = newName
                     nameEdit.tag = newName
@@ -156,7 +177,7 @@ class SettingsActivity : CsActivity() {
             }
         })
 
-        // Delete
+        // Delete group
         deleteBtn.setOnClickListener {
             val dialogView = layoutInflater.inflate(R.layout.dialog_groups_delete, null)
             FontManager.applyFont(this, dialogView)
@@ -186,40 +207,11 @@ class SettingsActivity : CsActivity() {
         container.addView(row)
     }
 
-    // --- Checkbox binding helper ---
-    private fun bindWdCheckbox(
-        wdCheckboxId: Int,
-        prefKey: String,
-        defaultValue: Boolean,
-        dependentViewId: Int? = null,
-        onChange: ((Boolean) -> Unit)? = null
-    ) {
-        val wdCheckbox = findViewById<WdCheckbox>(wdCheckboxId)
-        val dependentView = dependentViewId?.let { findViewById<View>(it) }
-
-        // Guard to prevent firing listener during initialization
-        var initializing = true
-
-        val isChecked = prefs.getBoolean(prefKey, defaultValue)
-        wdCheckbox.setChecked(isChecked)
-        dependentView?.visibility = if (isChecked) View.VISIBLE else View.GONE
-
-        initializing = false
-
-        wdCheckbox.setOnCheckedChangeListener { checked ->
-            if (initializing) return@setOnCheckedChangeListener
-            prefs.edit().putBoolean(prefKey, checked).apply()
-            dependentView?.let { it.visibility = if (checked) View.VISIBLE else View.GONE }
-            onChange?.invoke(checked)
-        }
-    }
-
-    // --- Button helper ---
+    // ------------------- Helpers -------------------
     private fun setupButton(id: Int, action: () -> Unit) {
         findViewById<View>(id).setOnClickListener { action() }
     }
 
-    // --- Safe intent launcher ---
     private fun openIntent(intent: Intent, errorMsg: String) {
         if (intent.resolveActivity(packageManager) != null) startActivity(intent)
         else Toast.makeText(this, errorMsg, Toast.LENGTH_SHORT).show()
