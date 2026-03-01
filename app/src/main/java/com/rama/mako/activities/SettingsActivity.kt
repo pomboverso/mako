@@ -34,6 +34,23 @@ class SettingsActivity : CsActivity() {
         setupClockFormat()
         setupCheckboxes()
         setupGroups()
+
+        val appOsSettingsBtn = findViewById<WdButton>(R.id.app_os_settings)
+        appOsSettingsBtn.setOnClickListener {
+            try {
+                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                    data = android.net.Uri.fromParts("package", packageName, null)
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                }
+                startActivity(intent)
+            } catch (e: Exception) {
+                Toast.makeText(
+                    this,
+                    getString(R.string.unable_open_settings_toast),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
     }
 
     // ------------------- Basic buttons -------------------

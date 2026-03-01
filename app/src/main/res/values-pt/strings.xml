@@ -71,6 +71,7 @@
     <string name="clock_system">Padrão do sistema</string>
     <string name="clock_24">24 horas</string>
     <string name="clock_12">12 horas (AM/PM)</string>
+    <string name="open_app_settings_label">Abrir configurações do aplicativo</string>
 
     <!-- Popup :: Context Menu App -->
     <string name="rename_app">Renomear aplicativo</string>

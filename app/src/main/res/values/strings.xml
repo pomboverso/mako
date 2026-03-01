@@ -81,7 +81,8 @@
     <string name="clock_system">System default</string>
     <string name="clock_24">24-hour</string>
     <string name="clock_12">12-hour (AM/PM)</string>
-
+    <string name="open_app_settings_label">Open app settings</string>
+    
     <!-- Popup :: Context Menu App -->
     <string name="rename_app">Rename app</string>
     <string name="add_to_favorites">Add to group...</string>

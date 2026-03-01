@@ -47,6 +47,14 @@
             android:text="@string/refresh_launcher" />
 
         <com.rama.mako.widgets.WdButton
+            android:id="@+id/app_os_settings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8sp"
+            android:background="@color/button_secondary_color"
+            android:text="@string/open_app_settings_label" />
+
+        <com.rama.mako.widgets.WdButton
             android:id="@+id/change_apps_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
