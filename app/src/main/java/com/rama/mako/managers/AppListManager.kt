@@ -41,24 +41,24 @@ class AppListManager(
         val intent = Intent(Intent.ACTION_MAIN).apply { addCategory(Intent.CATEGORY_LAUNCHER) }
         val allApps = pm.queryIntentActivities(intent, 0)
         val ungroupedLabel = context.getString(R.string.ungrouped_header)
-        val groups = groupsManager.getGroups()
+        val groups = groupsManager.getGroups().toMutableList() // existing groups
 
+        // Map apps to their group or ungrouped
         val groupedMap = allApps.groupBy { app ->
             groupsManager.getGroup(app.activityInfo.packageName) ?: ungroupedLabel
         }
 
         items.clear()
 
-        groups.forEach { groupName ->
-            val apps = groupedMap[groupName] ?: return@forEach
-            if (!groupsManager.isGroupVisible(groupName)) return@forEach
-            items.add(ListItem.Header(groupName))
-            apps.sortedBy { getDisplayName(it).lowercase() }.forEach { items.add(ListItem.App(it)) }
-        }
+        // Make a sorted list of all group names including unknown/deleted ones
+        val allGroupNames = (groupedMap.keys + groups).distinct().sortedBy { it.lowercase() }
 
-        groupedMap[ungroupedLabel]?.let { ungroupedApps ->
-            items.add(ListItem.Header(ungroupedLabel))
-            ungroupedApps.sortedBy { getDisplayName(it).lowercase() }
+        allGroupNames.forEach { groupName ->
+            val apps = groupedMap[groupName] ?: return@forEach
+            // Check visibility only for known groups; unknown ones are always visible
+            if (groups.contains(groupName) && !groupsManager.isGroupVisible(groupName)) return@forEach
+            items.add(ListItem.Header(groupName))
+            apps.sortedBy { getDisplayName(it).lowercase() }
                 .forEach { items.add(ListItem.App(it)) }
         }
     }
