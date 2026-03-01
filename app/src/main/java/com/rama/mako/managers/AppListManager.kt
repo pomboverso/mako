@@ -226,12 +226,15 @@ class AppListManager(
                         val pkg = app.activityInfo.packageName
 
                         val label = view.findViewById<TextView>(R.id.open_app_button)
+                        val timeDisplay = view.findViewById<TextView>(R.id.screen_time_display)
                         val emptySpace = view.findViewById<View>(R.id.empty_space)
                         label.text = getDisplayName(app)
 
+                        timeDisplay.setOnClickListener { launchApp(pkg) }
                         label.setOnClickListener { launchApp(pkg) }
                         emptySpace.setOnClickListener { launchApp(pkg) }
 
+                        timeDisplay.setOnLongClickListener { showContextMenu(it, app); true }
                         label.setOnLongClickListener { showContextMenu(it, app); true }
                         emptySpace.setOnLongClickListener {
                             context.startActivity(Intent(context, SettingsActivity::class.java))

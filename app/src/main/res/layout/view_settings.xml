@@ -153,6 +153,21 @@
             android:layout_marginBottom="8sp"
             android:textSize="16sp"
             android:textColor="@color/foreground_color"
+            android:text="Apps"
+            android:textStyle="bold" />
+
+        <com.rama.mako.widgets.WdCheckbox
+            android:id="@+id/enable_screen_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Show screen time" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8sp"
+            android:textSize="16sp"
+            android:textColor="@color/foreground_color"
             android:text="@string/styles_header"
             android:textStyle="bold" />
 

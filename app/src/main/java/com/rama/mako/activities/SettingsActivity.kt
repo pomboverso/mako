@@ -89,6 +89,7 @@ class SettingsActivity : CsActivity() {
         bindWdCheckbox(R.id.show_date, "show_date", true, dependentViewId = R.id.show_year_day)
         bindWdCheckbox(R.id.show_year_day, "show_year_day", true)
         bindWdCheckbox(R.id.show_battery, "show_battery", true)
+        bindWdCheckbox(R.id.screen_time_display, "show_screen_time", true)
         bindWdCheckbox(R.id.use_pixel_font, "use_pixel_font", false) { refreshFont() }
     }
 

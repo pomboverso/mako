@@ -11,10 +11,21 @@
         android:layout_height="wrap_content"
         android:paddingTop="12sp"
         android:paddingBottom="12sp"
-        android:paddingEnd="12sp"
         android:textSize="32sp"
+        android:text="App Label"
         android:textColor="@color/foreground_color" />
-    
+
+    <TextView
+        android:id="@+id/screen_time_display"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="12sp"
+        android:paddingBottom="12sp"
+        android:paddingStart="12sp"
+        android:textSize="16sp"
+        android:text="45m"
+        android:textColor="@color/accent_tertiary" />
+
     <FrameLayout
         android:id="@+id/empty_space"
         android:layout_width="0dp"
