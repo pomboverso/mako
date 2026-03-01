@@ -74,7 +74,7 @@ class GroupsManager(context: Context) {
 
     // --- Helper to get all stored app->group mappings ---
     private fun getAllAppGroups(): Map<String, String> {
-        val allKeys = prefs.getStringSet("all_apps", emptySet()) // optional central tracking
+        val allKeys = prefs.getStringSet("all_apps", emptySet())
         val map = mutableMapOf<String, String>()
         allKeys.forEach { pkg ->
             getGroup(pkg)?.let { group -> map[pkg] = group }

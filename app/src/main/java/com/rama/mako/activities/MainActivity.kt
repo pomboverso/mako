@@ -40,7 +40,7 @@ class MainActivity : CsActivity() {
         timeText = findViewById(R.id.time)
         dateText = findViewById(R.id.date)
         batteryText = findViewById(R.id.battery)
-        listView = findViewById(R.id.appList)
+        listView = findViewById(R.id.app_list)
 
         // --- Clock ---
         clockManager = ClockManager(timeText, dateText, this) // now uses PrefsManager internally
@@ -57,6 +57,12 @@ class MainActivity : CsActivity() {
         // --- App List ---
         appListManager = AppListManager(this, listView)
         appListManager.setup()
+
+        val emptySpaceDrawer = findViewById<View>(R.id.empty_space_drawer)
+        emptySpaceDrawer.setOnLongClickListener {
+            startActivity(Intent(this, SettingsActivity::class.java))
+            true
+        }
     }
 
     override fun onResume() {

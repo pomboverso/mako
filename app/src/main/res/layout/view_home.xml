@@ -64,13 +64,19 @@
                 android:textColor="?attr/foregroundColor" />
         </LinearLayout>
     </LinearLayout>
-    
+
     <ListView
-        android:id="@+id/appList"
+        android:id="@+id/app_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:dividerHeight="0dp"
+        android:divider="@null"
+        android:layout_weight="0" />
+
+    <FrameLayout
+        android:id="@+id/empty_space_drawer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:dividerHeight="0dp"
-        android:divider="@null" />
+        android:layout_weight="1" />
 
 </LinearLayout>
