@@ -189,7 +189,8 @@ class SettingsActivity : CsActivity() {
                 val newName = s?.toString()?.trim() ?: return
                 if (oldName != newName && newName.isNotEmpty()) {
                     groupsManager.renameGroup(oldName, newName)
-                    val index = groups.indexOf(oldName)
+                    val index =
+                        groups.indexOfFirst { it.trim().equals(oldName.trim(), ignoreCase = true) }
                     if (index != -1) groups[index] = newName
                     nameEdit.tag = newName
                 }

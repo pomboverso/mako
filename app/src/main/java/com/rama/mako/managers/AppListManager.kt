@@ -43,21 +43,21 @@ class AppListManager(
         val ungroupedLabel = context.getString(R.string.ungrouped_header)
         val existingGroups = groupsManager.getGroups().toMutableList() // known groups
 
-        // Map apps to their group
+        // Map apps to their group (keep unknown groups as they are)
         val groupedMap = allApps.groupBy { app ->
-            val group = groupsManager.getGroup(app.activityInfo.packageName)
-            // if the group doesn't exist anymore, assign to ungrouped
-            if (group != null && existingGroups.contains(group)) group else ungroupedLabel
+            groupsManager.getGroup(app.activityInfo.packageName) ?: ungroupedLabel
         }
 
         items.clear()
 
-        // Combine existing groups + ungrouped (to make sure headers appear in order)
-        val allGroupNames = (existingGroups + ungroupedLabel).distinct()
+        // Combine: known groups + any unknown groups from apps + ungrouped
+        val unknownGroups =
+            groupedMap.keys.filter { it != ungroupedLabel && !existingGroups.contains(it) }
+        val allGroupNames = (existingGroups + unknownGroups + ungroupedLabel).distinct()
 
         allGroupNames.forEach { groupName ->
             val apps = groupedMap[groupName] ?: return@forEach
-            // Only check visibility for known groups; ungrouped is always visible
+            // Only check visibility for known groups; ungrouped and unknown groups are always visible
             if (existingGroups.contains(groupName) && !groupsManager.isGroupVisible(groupName)) return@forEach
 
             items.add(ListItem.Header(groupName))

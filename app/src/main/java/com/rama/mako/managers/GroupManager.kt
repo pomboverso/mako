@@ -37,28 +37,38 @@ class GroupsManager(context: Context) {
     }
 
     fun renameGroup(oldName: String, newName: String) {
-        // Update apps in the group
+        val normalizedOld = oldName.trim()
+        val normalizedNew = newName.trim()
+
+        // --- Update all apps that belong to the old group ---
         getAllAppGroups().forEach { (pkg, group) ->
-            if (group == oldName) setGroup(pkg, newName)
+            if (group.trim().equals(normalizedOld, ignoreCase = true)) {
+                setGroup(pkg, normalizedNew)
+            }
         }
 
-        // Update groups list
-        val groups = getGroups()
-        val index = groups.indexOf(oldName)
-        if (index != -1) groups[index] = newName
+        // --- Update the groups list ---
+        val groups = getGroups().toMutableList()
+        val index = groups.indexOfFirst { it.trim().equals(normalizedOld, ignoreCase = true) }
+        if (index != -1) groups[index] = normalizedNew
+        else groups.add(normalizedNew) // If somehow the group didn't exist, add it
+
         saveGroups(groups.sortedBy { it.lowercase() })
     }
 
     fun deleteGroup(groupName: String) {
-        // Remove group from list
-        val groups = getGroups()
-        if (!groups.contains(groupName)) return
-        groups.remove(groupName)
+        val normalizedGroup = groupName.trim()
+
+        // --- Remove group from the list ---
+        val groups = getGroups().toMutableList()
+        groups.removeAll { it.trim().equals(normalizedGroup, ignoreCase = true) }
         saveGroups(groups)
 
-        // Move apps to ungrouped
+        // --- Move apps to ungrouped if they belonged to this group ---
         getAllAppGroups().forEach { (pkg, group) ->
-            if (group == groupName) setGroup(pkg, ungroupedLabel)
+            if (group.trim().equals(normalizedGroup, ignoreCase = true)) {
+                setGroup(pkg, ungroupedLabel)
+            }
         }
     }
 
