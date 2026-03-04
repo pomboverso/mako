@@ -83,6 +83,8 @@
     <string name="clock_24">24-hour</string>
     <string name="clock_12">12-hour (AM/PM)</string>
     <string name="open_app_settings_label">Open app settings</string>
+    <string name="show_battery_temperature">Show battery temperature</string>
+    <string name="show_battery_charge_status">Show battery charge status</string>
 
     <!-- Popup :: Context Menu App -->
     <string name="rename_app">Rename app</string>
@@ -103,5 +105,4 @@
     <!-- Dialog :: Delete Group -->
     <string name="delete_group_title">Are you sure you want to delete this group?\nThis action cannot be undone.</string>
     <string name="delete_group">Delete group</string>
-
 </resources>
