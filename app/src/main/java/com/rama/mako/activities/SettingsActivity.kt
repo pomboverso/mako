@@ -122,7 +122,6 @@ class SettingsActivity : CsActivity() {
         )
         bindWdCheckbox(R.id.show_battery_temperature, "show_battery_temperature", true)
         bindWdCheckbox(R.id.show_battery_charge_status, "show_battery_charge_status", true)
-        bindWdCheckbox(R.id.show_system_apps, "show_system-apps", false)
         bindWdCheckbox(R.id.use_pixel_font, "use_pixel_font", false) { refreshFont() }
     }
 

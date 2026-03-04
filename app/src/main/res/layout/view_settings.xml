@@ -153,13 +153,6 @@
             android:layout_height="wrap_content"
             android:text="@string/show_search_label" />
 
-        <com.rama.mako.widgets.WdCheckbox
-            android:id="@+id/show_system_apps"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:text="show_system_apps" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
