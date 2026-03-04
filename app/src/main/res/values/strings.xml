@@ -72,6 +72,7 @@
     <string name="about_mako_label">About Mako</string>
     <string name="edit_apps">Edit apps</string>
     <string name="show_battery">Show battery</string>
+    <string name="show_search_label">Show search button</string>
     <string name="show_date">Show date</string>
     <string name="show_clock">Show clock</string>
     <string name="show_year_day">Show day of the year</string>
@@ -95,6 +96,9 @@
 
     <!-- Dialog :: Rename App -->
     <string name="select_group">Select Group</string>
+
+    <!-- Dialog :: Search -->
+    <string name="search_apps_header">Search apps</string>
 
     <!-- Dialog :: Delete Group -->
     <string name="delete_group_title">Are you sure you want to delete this group?\nThis action cannot be undone.</string>

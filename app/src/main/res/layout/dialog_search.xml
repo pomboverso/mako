@@ -13,7 +13,7 @@
         android:layout_marginBottom="16sp"
         android:textSize="32sp"
         android:textColor="@color/foreground_color"
-        android:text="Search apps"
+        android:text="@string/search_apps_header"
         android:gravity="center"
         android:textStyle="bold" />
 

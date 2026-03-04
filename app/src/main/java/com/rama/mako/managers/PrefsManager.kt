@@ -19,6 +19,8 @@ class PrefsManager private constructor(context: Context) {
         }
     }
 
+    fun isSearchVisible(): Boolean = prefs.getBoolean("show_search", true)
+
     // Clock
     fun isClockVisible(): Boolean = prefs.getBoolean("show_clock", true)
     fun getClockFormat(): String? = prefs.getString("clock_format", "system")

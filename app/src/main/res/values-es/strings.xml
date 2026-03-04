@@ -61,6 +61,7 @@
     <string name="change_wallpaper">Cambiar fondo del sistema</string>
     <string name="about_mako_label">Acerca de Mako</string>
     <string name="edit_apps">Editar aplicaciones</string>
+    <string name="show_search_label">Mostrar botón de búsqueda</string>
     <string name="show_battery">Mostrar batería</string>
     <string name="show_date">Mostrar fecha</string>
     <string name="show_clock">Mostrar reloj</string>
@@ -85,6 +86,9 @@
 
     <!-- Dialog :: Rename App -->
     <string name="select_group">Seleccionar grupo</string>
+
+    <!-- Dialog :: Search -->
+    <string name="search_apps_header">Buscar aplicaciones</string>
 
     <!-- Dialog :: Delete Group -->
     <string name="delete_group_title">¿Está seguro de eliminar este grupo?\nEsta acción no se puede deshacer.</string>
