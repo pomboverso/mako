@@ -22,6 +22,10 @@ class PrefsManager private constructor(context: Context) {
     fun isSearchVisible(): Boolean = prefs.getBoolean("show_search", true)
     fun isClockVisible(): Boolean = prefs.getBoolean("show_clock", true)
     fun isBatteryVisible(): Boolean = prefs.getBoolean("show_battery", true)
+    fun isBatteryTemperatureVisible(): Boolean = prefs.getBoolean("show_battery_temperature", true)
+    fun isBatteryChargeStatusVisible(): Boolean =
+        prefs.getBoolean("show_battery_charge_status", true)
+
     fun isDateVisible(): Boolean = prefs.getBoolean("show_date", true)
     fun isYearDayVisible(): Boolean = prefs.getBoolean("show_year_day", true)
     fun showSystemApps(): Boolean = prefs.getBoolean("show_system_apps", true)
