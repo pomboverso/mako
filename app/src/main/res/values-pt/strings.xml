@@ -63,6 +63,7 @@
     <string name="edit_apps">Editar aplicativos</string>
     <string name="show_battery">Mostrar bateria</string>
     <string name="show_date">Mostrar data</string>
+    <string name="show_search_label">Mostrar botão de pesquisa</string>
     <string name="show_clock">Mostrar relógio</string>
     <string name="show_year_day">Mostrar dia do ano</string>
     <string name="add_group_label">+ Adicionar novo grupo</string>
@@ -85,6 +86,9 @@
 
     <!-- Dialog :: Rename App -->
     <string name="select_group">Selecionar grupo</string>
+
+    <!-- Dialog :: Search -->
+    <string name="search_apps_header">Pesquisar apps</string>
 
     <!-- Dialog :: Delete Group -->
     <string name="delete_group_title">Tem certeza de que deseja excluir este grupo?\nEsta ação não pode ser desfeita.</string>

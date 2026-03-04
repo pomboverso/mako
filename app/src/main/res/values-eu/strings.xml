@@ -61,6 +61,7 @@
     <string name="change_wallpaper">Sistema horma-irudia aldatu</string>
     <string name="about_mako_label">Makori buruz</string>
     <string name="edit_apps">Aplikazioak editatu</string>
+    <string name="show_search_label">Bilaketa botoia erakutsi</string>
     <string name="show_battery">Bateria erakutsi</string>
     <string name="show_date">Data erakutsi</string>
     <string name="show_clock">Ordua erakutsi</string>
@@ -85,6 +86,9 @@
 
     <!-- Dialog :: Rename App -->
     <string name="select_group">Taldea hautatu</string>
+
+    <!-- Dialog :: Search -->
+    <string name="search_apps_header">Aplikazioak bilatu</string>
 
     <!-- Dialog :: Delete Group -->
     <string name="delete_group_title">Ziur zaude talde hau ezabatu nahi duzula?\nEkintza hau ezin da atzera bota.</string>

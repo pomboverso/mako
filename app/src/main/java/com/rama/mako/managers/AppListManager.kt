@@ -77,6 +77,44 @@ class AppListManager(
         return prefs.getCustomName(pkg) ?: sanitizeSystemLabel(app.loadLabel(pm).toString())
     }
 
+    fun filter(query: String) {
+        val lowerQuery = query.lowercase()
+
+        // Rebuild items but only keep apps that match
+        val filteredItems = mutableListOf<ListItem>()
+
+        val intent = Intent(Intent.ACTION_MAIN).apply { addCategory(Intent.CATEGORY_LAUNCHER) }
+        val allApps = pm.queryIntentActivities(intent, 0)
+        val ungroupedLabel = context.getString(R.string.ungrouped_header)
+        val existingGroups = groupsManager.getGroups().toMutableList()
+
+        val groupedMap = allApps.groupBy { app ->
+            groupsManager.getGroup(app.activityInfo.packageName) ?: ungroupedLabel
+        }
+
+        val unknownGroups =
+            groupedMap.keys.filter { it != ungroupedLabel && !existingGroups.contains(it) }
+        val allGroupNames = (existingGroups + unknownGroups + ungroupedLabel).distinct()
+
+        allGroupNames.forEach { groupName ->
+            val apps = groupedMap[groupName] ?: return@forEach
+            if (existingGroups.contains(groupName) && !groupsManager.isGroupVisible(groupName)) return@forEach
+
+            // Filter apps by query
+            val matchedApps = apps.filter { getDisplayName(it).lowercase().contains(lowerQuery) }
+
+            if (matchedApps.isNotEmpty()) {
+                filteredItems.add(ListItem.Header(groupName))
+                matchedApps.sortedBy { getDisplayName(it).lowercase() }
+                    .forEach { filteredItems.add(ListItem.App(it)) }
+            }
+        }
+
+        items.clear()
+        items.addAll(filteredItems)
+        adapter.notifyDataSetChanged()
+    }
+
     private fun launchApp(pkg: String) {
         pm.getLaunchIntentForPackage(pkg)?.let {
             it.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

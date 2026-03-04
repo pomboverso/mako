@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16sp"
+    android:orientation="vertical"
+    android:background="@color/bg_color"
+    android:focusableInTouchMode="true">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16sp"
+        android:textSize="32sp"
+        android:textColor="@color/foreground_color"
+        android:text="@string/search_apps_header"
+        android:gravity="center"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8sp"
+        android:background="@color/bg_color">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="12sp">
+
+            <ImageView
+                android:layout_width="24sp"
+                android:layout_height="24sp"
+                android:layout_gravity="center"
+                android:src="@drawable/icon_search"
+                android:contentDescription="Search icon" />
+        </FrameLayout>
+
+        <EditText
+            android:id="@+id/search_field"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <FrameLayout
+            android:id="@+id/clear_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="12sp">
+
+            <ImageView
+                android:layout_width="24sp"
+                android:layout_height="24sp"
+                android:layout_gravity="center"
+                android:src="@drawable/icon_close"
+                android:contentDescription="Clear field button" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <com.rama.mako.widgets.WdButton
+        android:id="@+id/close_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/button_primary_color"
+        android:text="@string/go_back_label" />
+</LinearLayout>

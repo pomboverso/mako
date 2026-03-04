@@ -135,6 +135,12 @@
             android:layout_height="wrap_content"
             android:text="@string/show_battery" />
 
+        <com.rama.mako.widgets.WdCheckbox
+            android:id="@+id/show_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/show_search_label" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
