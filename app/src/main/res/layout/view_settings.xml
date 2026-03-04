@@ -145,7 +145,8 @@
             android:id="@+id/show_system_apps"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="string/show_system_apps" />
+            android:visibility="gone"
+            android:text="show_system_apps" />
 
         <TextView
             android:layout_width="wrap_content"

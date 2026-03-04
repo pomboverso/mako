@@ -107,7 +107,7 @@ class SettingsActivity : CsActivity() {
         bindWdCheckbox(R.id.show_search, "show_search", true)
         bindWdCheckbox(R.id.show_year_day, "show_year_day", true)
         bindWdCheckbox(R.id.show_battery, "show_battery", true)
-        bindWdCheckbox(R.id.show_system_apps, "show_system-apps", true)
+        bindWdCheckbox(R.id.show_system_apps, "show_system-apps", false)
         bindWdCheckbox(R.id.use_pixel_font, "use_pixel_font", false) { refreshFont() }
     }
 

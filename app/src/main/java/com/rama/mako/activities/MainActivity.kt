@@ -144,7 +144,7 @@ class MainActivity : CsActivity() {
         findViewById<View>(R.id.battery_row).visibility =
             if (prefs.isBatteryVisible()) View.VISIBLE else View.GONE
         findViewById<View>(R.id.search_btn).visibility =
-            if (!prefs.isSearchVisible()) View.VISIBLE else View.GONE
+            if (prefs.isSearchVisible()) View.VISIBLE else View.GONE
     }
 
     // --- Open system clock safely ---
