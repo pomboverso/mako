@@ -20,9 +20,19 @@ class PrefsManager private constructor(context: Context) {
     }
 
     fun isSearchVisible(): Boolean = prefs.getBoolean("show_search", true)
+    fun isClockVisible(): Boolean = prefs.getBoolean("show_clock", true)
+    fun isBatteryVisible(): Boolean = prefs.getBoolean("show_battery", true)
+    fun isBatteryTemperatureVisible(): Boolean = prefs.getBoolean("show_battery_temperature", true)
+    fun isBatteryChargeStatusVisible(): Boolean =
+        prefs.getBoolean("show_battery_charge_status", true)
+
+    fun isDateVisible(): Boolean = prefs.getBoolean("show_date", true)
+    fun isYearDayVisible(): Boolean = prefs.getBoolean("show_year_day", true)
+    fun showSystemApps(): Boolean = prefs.getBoolean("show_system_apps", true)
+    fun isGroupVisible(group: String): Boolean = prefs.getBoolean("group_visibility_$group", true)
 
     // Clock
-    fun isClockVisible(): Boolean = prefs.getBoolean("show_clock", true)
+
     fun getClockFormat(): String? = prefs.getString("clock_format", "system")
     fun setClockNone() = prefs.edit().putBoolean("show_clock", false).remove("clock_format").apply()
     fun setClockSystem() =
@@ -35,7 +45,6 @@ class PrefsManager private constructor(context: Context) {
         prefs.edit().putBoolean("show_clock", true).putString("clock_format", "12").apply()
 
     // Groups
-    fun isGroupVisible(group: String): Boolean = prefs.getBoolean("group_visibility_$group", true)
     fun setGroupVisible(group: String, visible: Boolean) =
         prefs.edit().putBoolean("group_visibility_$group", visible).apply()
 

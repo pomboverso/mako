@@ -128,6 +128,7 @@ class MainActivity : CsActivity() {
         super.onResume()
         syncSettings()
         appListManager.refresh()
+        batteryManager.forceUpdate()
     }
 
     override fun onDestroy() {
@@ -140,11 +141,11 @@ class MainActivity : CsActivity() {
     private fun syncSettings() {
         timeText.visibility = if (prefs.isClockVisible()) View.VISIBLE else View.GONE
         findViewById<View>(R.id.date_row).visibility =
-            if (prefs.getBoolean("show_date", true)) View.VISIBLE else View.GONE
+            if (prefs.isDateVisible()) View.VISIBLE else View.GONE
         findViewById<View>(R.id.battery_row).visibility =
-            if (prefs.getBoolean("show_battery", true)) View.VISIBLE else View.GONE
+            if (prefs.isBatteryVisible()) View.VISIBLE else View.GONE
         findViewById<View>(R.id.search_btn).visibility =
-            if (prefs.getBoolean("show_search", true)) View.VISIBLE else View.GONE
+            if (prefs.isSearchVisible()) View.VISIBLE else View.GONE
     }
 
     // --- Open system clock safely ---

@@ -15,23 +15,29 @@ class BatteryManager(
     private val callback: (String) -> Unit
 ) {
     private val prefs = PrefsManager.getInstance(context)
+    private var lastIntent: Intent? = null
 
     private val FAHRENHEIT_COUNTRIES = setOf("US", "BS", "BZ", "KY", "PW")
 
     private val batteryReceiver = object : BroadcastReceiver() {
         override fun onReceive(ctx: Context?, intent: Intent?) {
             if (intent == null) return
+            lastIntent = intent
+            updateDisplay(intent)
+        }
+    }
 
-            // --- Battery level ---
-            val level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1)
-            val scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1)
-            if (level < 0 || scale <= 0) return
-            val levelPct = (level * 100 / scale.toFloat()).toInt()
+    private fun updateDisplay(intent: Intent) {
+        // --- Existing code from onReceive ---
+        val level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1)
+        val scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1)
+        if (level < 0 || scale <= 0) return
+        val levelPct = (level * 100 / scale.toFloat()).toInt()
 
-            // --- Temperature ---
+        val tempDisplay: String? = if (prefs.isBatteryTemperatureVisible()) {
             val tempC = intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, -1) / 10
             val tempLabel = when {
-                tempC <= 45 -> ""
+                tempC <= 45 -> null
                 tempC in 46..60 -> context.getString(R.string.temp_warm)
                 tempC in 61..70 -> context.getString(R.string.temp_hot)
                 else -> context.getString(R.string.temp_critical)
@@ -43,13 +49,13 @@ class BatteryManager(
             } else tempC to R.string.unit_celsius
             val unit = context.getString(unitRes)
 
-            val tempDisplay = if (tempLabel.isNotEmpty()) {
-                context.getString(R.string.battery_temp_labeled, temperatureValue, unit, tempLabel)
-            } else {
-                context.getString(R.string.battery_temp, temperatureValue, unit)
-            }
+            tempLabel?.let {
+                context.getString(R.string.battery_temp_labeled, temperatureValue, unit, it)
+            } ?: context.getString(R.string.battery_temp, temperatureValue, unit)
+        } else null
 
-            // --- Charging status ---
+        // --- Charging status ---
+        val chargeStatus: String? = if (prefs.isBatteryChargeStatusVisible()) {
             val status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1)
             val statusText = when (status) {
                 BatteryManager.BATTERY_STATUS_CHARGING -> context.getString(R.string.status_charging)
@@ -67,22 +73,21 @@ class BatteryManager(
                     BatteryManager.BATTERY_PLUGGED_USB -> context.getString(R.string.charge_usb)
                     BatteryManager.BATTERY_PLUGGED_AC -> context.getString(R.string.charge_ac)
                     BatteryManager.BATTERY_PLUGGED_WIRELESS -> context.getString(R.string.charge_wireless)
-                    else -> ""
+                    else -> null
                 }
-            } else ""
+            } else null
 
-            // --- Power calculation ---
             val bm = context.getSystemService(Context.BATTERY_SERVICE) as BatteryManager
-            val currentMa = bm.getIntProperty(BatteryManager.BATTERY_PROPERTY_CURRENT_NOW) / 1000f
+            val currentMa =
+                bm.getIntProperty(BatteryManager.BATTERY_PROPERTY_CURRENT_NOW) / 1000f
             val voltageMv = intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, -1)
             val voltageV = voltageMv / 1000f
             val powerW = abs(voltageV * (currentMa / 1000f))
             val powerX = powerW.roundToInt()
 
-            // --- Format final status ---
-            val statusFinal = when {
+            when {
                 statusText == context.getString(R.string.status_full) -> statusText
-                statusText == context.getString(R.string.status_charging) && chargeType.isNotEmpty() ->
+                statusText == context.getString(R.string.status_charging) && !chargeType.isNullOrEmpty() ->
                     context.getString(
                         R.string.battery_status_power_type,
                         statusText,
@@ -96,16 +101,19 @@ class BatteryManager(
 
                 else -> statusText
             }
+        } else null
 
-            // --- Final callback ---
-            callback(
-                listOf(
-                    levelPct.toString() + "%",
-                    tempDisplay,
-                    statusFinal
-                ).joinToString(" :: ")
-            )
-        }
+        val displayString = listOfNotNull(
+            "$levelPct%",
+            tempDisplay,
+            chargeStatus
+        ).joinToString(" :: ")
+
+        callback(displayString)
+    }
+
+    fun forceUpdate() {
+        lastIntent?.let { updateDisplay(it) }
     }
 
     fun register() =

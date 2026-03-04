@@ -73,6 +73,8 @@
     <string name="clock_24">24 ordu</string>
     <string name="clock_12">12 ordu (AM/PM)</string>
     <string name="open_app_settings_label">Aplikazioaren ezarpenak irekitu</string>
+    <string name="show_battery_temperature">Bateria-tenperatura erakutsi</string>
+    <string name="show_battery_charge_status">Bateria-kargaren egoera erakutsi</string>
 
     <!-- Popup :: Context Menu App -->
     <string name="rename_app">Aplikazioa berrizendatu</string>

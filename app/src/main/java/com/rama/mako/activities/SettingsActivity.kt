@@ -103,30 +103,52 @@ class SettingsActivity : CsActivity() {
 
     // ------------------- Checkboxes -------------------
     private fun setupCheckboxes() {
-        bindWdCheckbox(R.id.show_date, "show_date", true, dependentViewId = R.id.show_year_day)
+        bindWdCheckbox(
+            R.id.show_date,
+            "show_date",
+            true,
+            dependentViewIds = listOf(R.id.show_year_day)
+        )
         bindWdCheckbox(R.id.show_search, "show_search", true)
         bindWdCheckbox(R.id.show_year_day, "show_year_day", true)
-        bindWdCheckbox(R.id.show_battery, "show_battery", true)
+        bindWdCheckbox(
+            R.id.show_battery,
+            "show_battery",
+            true,
+            dependentViewIds = listOf(
+                R.id.show_battery_temperature,
+                R.id.show_battery_charge_status
+            )
+        )
+        bindWdCheckbox(R.id.show_battery_temperature, "show_battery_temperature", true)
+        bindWdCheckbox(R.id.show_battery_charge_status, "show_battery_charge_status", true)
+        bindWdCheckbox(R.id.show_system_apps, "show_system-apps", false)
         bindWdCheckbox(R.id.use_pixel_font, "use_pixel_font", false) { refreshFont() }
     }
+
 
     private fun bindWdCheckbox(
         wdCheckboxId: Int,
         prefKey: String,
         defaultValue: Boolean,
-        dependentViewId: Int? = null,
+        dependentViewIds: List<Int>? = null,
         onChange: ((Boolean) -> Unit)? = null
     ) {
         val wdCheckbox = findViewById<WdCheckbox>(wdCheckboxId)
-        val dependentView = dependentViewId?.let { findViewById<View>(it) }
+
+        // Collect all dependent views in a list
+        val dependentViews: List<View>? = dependentViewIds?.map { findViewById<View>(it) }
 
         val isChecked = prefs.getBoolean(prefKey, defaultValue)
         wdCheckbox.setChecked(isChecked)
-        dependentView?.visibility = if (isChecked) View.VISIBLE else View.GONE
+
+        // Set initial visibility for all dependent views
+        dependentViews?.forEach { it.visibility = if (isChecked) View.VISIBLE else View.GONE }
 
         wdCheckbox.setOnCheckedChangeListener { checked ->
             prefs.setBoolean(prefKey, checked)
-            dependentView?.visibility = if (checked) View.VISIBLE else View.GONE
+            // Update visibility for all dependent views
+            dependentViews?.forEach { it.visibility = if (checked) View.VISIBLE else View.GONE }
             onChange?.invoke(checked)
         }
     }

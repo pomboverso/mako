@@ -73,6 +73,8 @@
     <string name="clock_24">24 horas</string>
     <string name="clock_12">12 horas (AM/PM)</string>
     <string name="open_app_settings_label">Abrir configurações do aplicativo</string>
+    <string name="show_battery_temperature">Mostrar temperatura da bateria</string>
+    <string name="show_battery_charge_status">Mostrar estado de carga da bateria</string>
 
     <!-- Popup :: Context Menu App -->
     <string name="rename_app">Renomear aplicativo</string>

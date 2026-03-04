@@ -3,6 +3,7 @@ package com.rama.mako.managers
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.net.Uri
 import android.provider.Settings
@@ -38,30 +39,51 @@ class AppListManager(
     }
 
     private fun buildItems() {
-        val intent = Intent(Intent.ACTION_MAIN).apply { addCategory(Intent.CATEGORY_LAUNCHER) }
-        val allApps = pm.queryIntentActivities(intent, 0)
-        val ungroupedLabel = context.getString(R.string.ungrouped_header)
-        val existingGroups = groupsManager.getGroups().toMutableList() // known groups
+        val intent = Intent(Intent.ACTION_MAIN).apply {
+            addCategory(Intent.CATEGORY_LAUNCHER)
+        }
 
-        // Map apps to their group (keep unknown groups as they are)
-        val groupedMap = allApps.groupBy { app ->
+        val allApps = pm.queryIntentActivities(intent, PackageManager.GET_DISABLED_COMPONENTS)
+        val showSystemApps = prefs.showSystemApps()
+
+        // Filter system apps if needed
+        val filteredApps = allApps.filter { resolveInfo ->
+            val isSystemApp =
+                (resolveInfo.activityInfo.applicationInfo.flags and
+                        android.content.pm.ApplicationInfo.FLAG_SYSTEM) != 0
+            showSystemApps || !isSystemApp
+        }
+
+        // Group apps by package name to avoid duplicates
+        val appsByPackage = filteredApps.groupBy { it.activityInfo.packageName }
+            .mapValues { entry -> entry.value.first() } // take first activity per package
+
+        val ungroupedLabel = context.getString(R.string.ungrouped_header)
+        val existingGroups = groupsManager.getGroups().toMutableList()
+
+        // Group apps by user-defined group
+        val groupedMap = appsByPackage.values.groupBy { app ->
             groupsManager.getGroup(app.activityInfo.packageName) ?: ungroupedLabel
         }
 
         items.clear()
 
-        // Combine: known groups + any unknown groups from apps + ungrouped
+        // Combine: known groups + unknown groups + ungrouped
         val unknownGroups =
             groupedMap.keys.filter { it != ungroupedLabel && !existingGroups.contains(it) }
         val allGroupNames = (existingGroups + unknownGroups + ungroupedLabel).distinct()
 
+        // Build final list
         allGroupNames.forEach { groupName ->
-            val apps = groupedMap[groupName] ?: return@forEach
-            // Only check visibility for known groups; ungrouped and unknown groups are always visible
-            if (existingGroups.contains(groupName) && !groupsManager.isGroupVisible(groupName)) return@forEach
+            val appsInGroup = groupedMap[groupName] ?: return@forEach
+
+            if (existingGroups.contains(groupName) &&
+                !groupsManager.isGroupVisible(groupName)
+            ) return@forEach
 
             items.add(ListItem.Header(groupName))
-            apps.sortedBy { getDisplayName(it).lowercase() }
+
+            appsInGroup.sortedBy { getDisplayName(it).lowercase() }
                 .forEach { items.add(ListItem.App(it)) }
         }
     }
