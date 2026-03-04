@@ -8,61 +8,85 @@
     android:textColor="?attr/foregroundColor">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="16sp">
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/time"
-            android:textSize="64sp"
-            android:background="@android:color/transparent"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingBottom="16sp">
+
+            <Button
+                android:id="@+id/time"
+                android:textSize="64sp"
+                android:background="@android:color/transparent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/foregroundColor" />
+
+            <LinearLayout
+                android:id="@+id/date_row"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="4sp"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="16sp"
+                    android:layout_height="16sp"
+                    android:layout_marginEnd="4sp"
+                    android:src="@drawable/icon_calendar_today" />
+
+                <TextView
+                    android:id="@+id/date"
+                    android:textSize="16sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?attr/foregroundColor" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/battery_row"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="16sp"
+                    android:layout_height="16sp"
+                    android:layout_marginEnd="4sp"
+                    android:src="@drawable/icon_battery_full_alt" />
+
+                <TextView
+                    android:id="@+id/battery"
+                    android:textSize="16sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?attr/foregroundColor" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/search_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="?attr/foregroundColor" />
-
-        <LinearLayout
-            android:id="@+id/date_row"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="4sp"
-            android:gravity="center_vertical">
+            android:clickable="true"
+            android:focusable="true"
+            android:elevation="8dp"
+            android:padding="12dp">
 
             <ImageView
-                android:layout_width="16sp"
-                android:layout_height="16sp"
-                android:layout_marginEnd="4sp"
-                android:src="@drawable/icon_calendar_today" />
-
-            <TextView
-                android:id="@+id/date"
-                android:textSize="16sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="?attr/foregroundColor" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/battery_row"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical">
-
-            <ImageView
-                android:layout_width="16sp"
-                android:layout_height="16sp"
-                android:layout_marginEnd="4sp"
-                android:src="@drawable/icon_battery_full_alt" />
-
-            <TextView
-                android:id="@+id/battery"
-                android:textSize="16sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="?attr/foregroundColor" />
-        </LinearLayout>
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:src="@drawable/icon_search"
+                android:contentDescription="Search button icon" />
+        </FrameLayout>
     </LinearLayout>
 
     <ListView
@@ -78,5 +102,4 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
-
 </LinearLayout>

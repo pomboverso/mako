@@ -53,56 +53,38 @@ abstract class CsActivity : Activity() {
 
         root.setOnApplyWindowInsetsListener { view, insets ->
 
-            val left: Int
-            val top: Int
-            val right: Int
-            val bottom: Int
-
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+
                 val sysBars = insets.getInsets(
                     WindowInsets.Type.systemBars() or WindowInsets.Type.displayCutout()
                 )
-                left = sysBars.left
-                top = sysBars.top
-                right = sysBars.right
-                bottom = sysBars.bottom
+
+                val ime = insets.getInsets(WindowInsets.Type.ime())
+
+                val bottomInset =
+                    if (insets.isVisible(WindowInsets.Type.ime()))
+                        ime.bottom
+                    else
+                        sysBars.bottom
+
+                view.setPadding(
+                    sysBars.left + paddingInline,
+                    sysBars.top + paddingBlock,
+                    sysBars.right + paddingInline,
+                    bottomInset + paddingBlock
+                )
+
             } else {
                 @Suppress("DEPRECATION")
-                left = insets.systemWindowInsetLeft
-                @Suppress("DEPRECATION")
-                top = insets.systemWindowInsetTop
-                @Suppress("DEPRECATION")
-                right = insets.systemWindowInsetRight
-                @Suppress("DEPRECATION")
-                bottom = insets.systemWindowInsetBottom
+                view.setPadding(
+                    insets.systemWindowInsetLeft + paddingInline,
+                    insets.systemWindowInsetTop + paddingBlock,
+                    insets.systemWindowInsetRight + paddingInline,
+                    insets.systemWindowInsetBottom + paddingBlock
+                )
             }
 
-            view.setPadding(
-                left + paddingInline,
-                top + paddingBlock,
-                right + paddingInline,
-                bottom + paddingBlock
-            )
-
             insets
-        }
-    }
-
-    protected fun hideSystemBars() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            val controller: WindowInsetsController? = window.insetsController
-            controller?.hide(WindowInsets.Type.systemBars())
-            controller?.systemBarsBehavior =
-                WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-        } else {
-            @Suppress("DEPRECATION")
-            window.decorView.systemUiVisibility =
-                (View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                        or View.SYSTEM_UI_FLAG_FULLSCREEN
-                        or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                        or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                        or View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
         }
     }
 }
