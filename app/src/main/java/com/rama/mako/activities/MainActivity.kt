@@ -128,6 +128,7 @@ class MainActivity : CsActivity() {
         super.onResume()
         syncSettings()
         appListManager.refresh()
+        batteryManager.forceUpdate()
     }
 
     override fun onDestroy() {
