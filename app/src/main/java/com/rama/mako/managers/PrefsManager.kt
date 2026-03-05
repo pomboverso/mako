@@ -28,11 +28,26 @@ class PrefsManager private constructor(context: Context) {
 
     fun isDateVisible(): Boolean = prefs.getBoolean("show_date", true)
     fun isYearDayVisible(): Boolean = prefs.getBoolean("show_year_day", true)
-    fun showSystemApps(): Boolean = prefs.getBoolean("show_system_apps", true)
     fun isGroupVisible(group: String): Boolean = prefs.getBoolean("group_visibility_$group", true)
 
-    // Clock
+    // Fonts
+    fun getFontStyle(): String? = prefs.getString("font_style", "system")
+    fun setFontSystem() =
+        prefs.edit().putString("font_style", "system").apply()
 
+    fun setFontQuicksand() =
+        prefs.edit().putString("font_style", "quicksand").apply()
+
+    fun setFontMontserrat() =
+        prefs.edit().putString("font_style", "montserrat").apply()
+
+    fun setFontRobotoslab() =
+        prefs.edit().putString("font_style", "robotoslab").apply()
+
+    fun setFontJersey() =
+        prefs.edit().putString("font_style", "jersey").apply()
+
+    // Clock
     fun getClockFormat(): String? = prefs.getString("clock_format", "system")
     fun setClockNone() = prefs.edit().putBoolean("show_clock", false).remove("clock_format").apply()
     fun setClockSystem() =

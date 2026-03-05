@@ -56,6 +56,73 @@
             android:layout_marginBottom="8sp"
             android:textSize="16sp"
             android:textColor="@color/foreground_color"
+            android:text="@string/font_style_header"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16sp"
+            android:orientation="vertical"
+            android:layout_marginBottom="8sp"
+            android:background="@color/secondary_bg"
+            android:gravity="center_vertical">
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/font_style_group"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/font_system"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/foreground_color"
+                    android:text="@string/system_label" />
+
+                <RadioButton
+                    android:id="@+id/font_jersey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/foreground_color"
+                    android:text="@string/font_jersey_label" />
+
+                <RadioButton
+                    android:id="@+id/font_quicksand"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/foreground_color"
+                    android:text="@string/font_quicksand_label" />
+
+                <RadioButton
+                    android:id="@+id/font_montserrat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/foreground_color"
+                    android:text="@string/font_montserrat_label" />
+
+                <RadioButton
+                    android:id="@+id/font_robotoslab"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/foreground_color"
+                    android:text="@string/font_robotoslab_label" />
+
+            </RadioGroup>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8sp"
+            android:textSize="16sp"
+            android:textColor="@color/foreground_color"
             android:text="@string/clock_header"
             android:textStyle="bold" />
 
@@ -88,7 +155,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:textColor="@color/foreground_color"
-                    android:text="@string/clock_system" />
+                    android:text="@string/system_label" />
 
                 <RadioButton
                     android:id="@+id/clock_24"
@@ -152,28 +219,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/show_search_label" />
-
-        <com.rama.mako.widgets.WdCheckbox
-            android:id="@+id/show_system_apps"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:text="show_system_apps" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8sp"
-            android:textSize="16sp"
-            android:textColor="@color/foreground_color"
-            android:text="@string/styles_header"
-            android:textStyle="bold" />
-
-        <com.rama.mako.widgets.WdCheckbox
-            android:id="@+id/use_pixel_font"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/pixel_font_label" />
 
         <TextView
             android:layout_width="wrap_content"

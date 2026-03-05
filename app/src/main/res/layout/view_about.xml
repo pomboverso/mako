@@ -96,40 +96,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/icon_octagon_check_solid"
-                android:text="@string/icon_license_desc" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8sp"
-                android:textSize="18sp"
-                android:textColor="@color/foreground_color"
-                android:text="@string/fonts_header"
-                android:textStyle="bold" />
-
-            <com.rama.mako.widgets.WdLabel
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:icon="@drawable/icon_user"
-                android:text="@string/jersey_creator" />
-
-            <com.rama.mako.widgets.WdLabel
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:icon="@drawable/icon_seedlings"
-                android:text="@string/jersey_product" />
-
-            <com.rama.mako.widgets.WdLabel
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:icon="@drawable/icon_github"
-                android:text="@string/jersey_url" />
-
-            <com.rama.mako.widgets.WdLabel
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:icon="@drawable/icon_octagon_check_solid"
-                android:text="@string/jersey_license_desc" />
+                android:text="@string/gpl3_desc" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -155,14 +122,131 @@
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:icon="@drawable/icon_octagon_check_solid"
+                android:text="@string/cc_4_desc" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8sp"
+                android:textSize="18sp"
+                android:textColor="@color/foreground_color"
+                android:text="@string/fonts_header"
+                android:textStyle="bold" />
+
+            <com.rama.mako.widgets.WdLabel
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/icon_user"
+                android:text="@string/jersey_creator" />
+
+            <com.rama.mako.widgets.WdLabel
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/icon_seedlings"
+                android:text="@string/font_jersey_label" />
+
+            <com.rama.mako.widgets.WdLabel
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:icon="@drawable/icon_github"
-                android:text="@string/hackernoon_url" />
+                android:text="@string/jersey_url" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/icon_octagon_check_solid"
-                android:text="@string/hackernoon_license_desc" />
+                android:text="@string/ofl_1_1_desc" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/disabled"
+                android:layout_marginVertical="16sp" />
+
+            <com.rama.mako.widgets.WdLabel
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/icon_user"
+                android:text="@string/montserrat_creator" />
+
+            <com.rama.mako.widgets.WdLabel
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/icon_seedlings"
+                android:text="@string/font_montserrat_label" />
+
+            <com.rama.mako.widgets.WdLabel
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/icon_github"
+                android:text="@string/montserrat_url" />
+
+            <com.rama.mako.widgets.WdLabel
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/icon_octagon_check_solid"
+                android:text="@string/ofl_1_1_desc" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/disabled"
+                android:layout_marginVertical="16sp" />
+
+            <com.rama.mako.widgets.WdLabel
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/icon_user"
+                android:text="@string/quicksand_creator" />
+
+            <com.rama.mako.widgets.WdLabel
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/icon_seedlings"
+                android:text="@string/font_quicksand_label" />
+
+            <com.rama.mako.widgets.WdLabel
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/icon_github"
+                android:text="@string/quicksand_url" />
+
+            <com.rama.mako.widgets.WdLabel
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/icon_octagon_check_solid"
+                android:text="@string/ofl_1_1_desc" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/disabled"
+                android:layout_marginVertical="16sp" />
+
+            <com.rama.mako.widgets.WdLabel
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/icon_user"
+                android:text="@string/robotoslab_creator" />
+
+            <com.rama.mako.widgets.WdLabel
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/icon_seedlings"
+                android:text="@string/font_robotoslab_label" />
+
+            <com.rama.mako.widgets.WdLabel
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/icon_github"
+                android:text="@string/robotoslab_url" />
+
+            <com.rama.mako.widgets.WdLabel
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/icon_octagon_check_solid"
+                android:text="@string/apache_2_desc" />
 
         </LinearLayout>
 

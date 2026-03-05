@@ -32,6 +32,7 @@ class SettingsActivity : CsActivity() {
 
         setupBasicButtons()
         setupClockFormat()
+        setupFontStyle()
         setupCheckboxes()
         setupGroups()
 
@@ -81,6 +82,29 @@ class SettingsActivity : CsActivity() {
         }
     }
 
+    // ------------------- Font style -------------------
+    private fun setupFontStyle() {
+        val fontStyleGroup = findViewById<RadioGroup>(R.id.font_style_group)
+        when {
+            prefs.getFontStyle() == "jersey" -> fontStyleGroup.check(R.id.font_jersey)
+            prefs.getFontStyle() == "montserrat" -> fontStyleGroup.check(R.id.font_montserrat)
+            prefs.getFontStyle() == "robotoslab" -> fontStyleGroup.check(R.id.font_robotoslab)
+            prefs.getClockFormat() == "quicksand" -> fontStyleGroup.check(R.id.font_quicksand)
+            else -> fontStyleGroup.check(R.id.font_system)
+        }
+
+        fontStyleGroup.setOnCheckedChangeListener { _, checkedId ->
+            when (checkedId) {
+                R.id.font_jersey -> prefs.setFontJersey()
+                R.id.font_quicksand -> prefs.setFontQuicksand()
+                R.id.font_robotoslab -> prefs.setFontRobotoslab()
+                R.id.font_montserrat -> prefs.setFontMontserrat()
+                R.id.font_system -> prefs.setFontSystem()
+            }
+            refreshFont()
+        }
+    }
+
     // ------------------- Clock format -------------------
     private fun setupClockFormat() {
         val clockFormatGroup = findViewById<RadioGroup>(R.id.clock_format_group)
@@ -122,8 +146,6 @@ class SettingsActivity : CsActivity() {
         )
         bindWdCheckbox(R.id.show_battery_temperature, "show_battery_temperature", true)
         bindWdCheckbox(R.id.show_battery_charge_status, "show_battery_charge_status", true)
-        bindWdCheckbox(R.id.show_system_apps, "show_system-apps", false)
-        bindWdCheckbox(R.id.use_pixel_font, "use_pixel_font", false) { refreshFont() }
     }
 
 

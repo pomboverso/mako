@@ -42,19 +42,15 @@
     <string name="icon_ads_desc">Sem anúncios</string>
     <string name="icon_location_desc">Sem rastreadores</string>
     <string name="icon_offline_desc">Funciona offline</string>
-    <string name="icon_license_desc">Licença GPLv3</string>
     <string name="app_header">Aplicativo</string>
     <string name="icons_header">Ícones</string>
     <string name="fonts_header">Fontes</string>
-    <string name="jersey_license_desc">Licença SIL Open Font (OFL) 1.1</string>
-    <string name="hackernoon_license_desc">Licença CC BY 4.0</string>
 
     <!-- Settings -->
     <string name="settings">Configurações</string>
     <string name="others_header">Outros</string>
     <string name="clock_header">Relógio</string>
     <string name="date_header">Data e bateria</string>
-    <string name="styles_header">Estilos</string>
     <string name="groups_header">Grupos</string>
     <string name="set_default">Definir lançador como padrão</string>
     <string name="refresh_launcher">Atualizar lançador</string>
@@ -67,14 +63,14 @@
     <string name="show_clock">Mostrar relógio</string>
     <string name="show_year_day">Mostrar dia do ano</string>
     <string name="add_group_label">+ Adicionar novo grupo</string>
-    <string name="pixel_font_label">Usar fonte Pixel (Jersey 25 Regular)</string>
     <string name="clock_none">Ocultar relógio</string>
-    <string name="clock_system">Padrão do sistema</string>
+    <string name="system_label">Padrão do sistema</string>
     <string name="clock_24">24 horas</string>
     <string name="clock_12">12 horas (AM/PM)</string>
     <string name="open_app_settings_label">Abrir configurações do aplicativo</string>
     <string name="show_battery_temperature">Mostrar temperatura da bateria</string>
     <string name="show_battery_charge_status">Mostrar estado de carga da bateria</string>
+    <string name="font_style_header">Estilo da fonte</string>
 
     <!-- Popup :: Context Menu App -->
     <string name="rename_app">Renomear aplicativo</string>
