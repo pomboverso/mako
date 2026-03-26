@@ -1,45 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:background="@color/bg_color">
+    android:orientation="vertical"
+    android:background="@color/bg_color"
+    android:gravity="center_horizontal">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal">
-
-        <ImageView
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:src="@drawable/mako"
-            android:layout_marginBottom="16sp" />
-
-        <TextView
-            android:text="@string/app_name"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/foreground_color" />
-
-        <TextView
-            android:text="@string/app_description"
-            android:textSize="16sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16sp"
-            android:textAlignment="center"
-            android:textColor="@color/foreground_color" />
+        android:gravity="start"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
         <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="start"
-            android:orientation="vertical">
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/mako"
+                android:layout_gravity="center"
+                android:layout_marginBottom="16sp" />
+
+            <TextView
+                android:text="@string/app_name"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/foreground_color" />
+
+            <TextView
+                android:text="@string/app_description"
+                android:textSize="16sp"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16sp"
+                android:textAlignment="center"
+                android:textColor="@color/foreground_color" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -253,20 +258,19 @@
                 android:layout_height="wrap_content"
                 android:icon="@drawable/icon_octagon_check_solid"
                 android:text="@string/apache_2_desc" />
-
         </LinearLayout>
+    </ScrollView>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/disabled"
-            android:layout_marginVertical="16sp" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/disabled"
+        android:layout_marginVertical="16sp" />
 
-        <com.rama.mako.widgets.WdButton
-            android:id="@+id/close_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/button_primary_color"
-            android:text="@string/go_back_label" />
-    </LinearLayout>
-</ScrollView>
+    <com.rama.mako.widgets.WdButton
+        android:id="@+id/close_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/button_primary_color"
+        android:text="@string/go_back_label" />
+</LinearLayout>

@@ -44,7 +44,7 @@
     <string name="icon_ads_desc">No Ads</string>
     <string name="icon_location_desc">No Trackers</string>
     <string name="icon_offline_desc">Works Offline</string>
-    <string name="mako_url" translatable="false">github.com/jmiguelrivas/mako</string>
+    <string name="mako_url" translatable="false">github.com/pomboverso/mako</string>
     <string name="app_header">App</string>
     <string name="icons_header">Icons</string>
     <string name="fonts_header">Fonts</string>
@@ -55,7 +55,7 @@
     <string name="cc_4_desc" translatable="false">CC 4.0</string>
 
     <string name="hackernoon_url" translatable="false">github.com/hackernoon/pixel-icon-library</string>
-    <string name="app_creator" translatable="false">Miguel Rivas</string>
+    <string name="app_creator" translatable="false">Pombo</string>
     <string name="hackernoon_creator" translatable="false">HackerNoon</string>
     <string name="hackernoon_product" translatable="false">Pixel Icon Library</string>
     <string name="jersey_creator" translatable="false">Sarah Cadigan-Fried</string>

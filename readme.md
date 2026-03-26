@@ -1,4 +1,4 @@
-![Preview](https://raw.githubusercontent.com/jmiguelrivas/mako/refs/heads/master/metadata/mako_preview.svg)
+![Preview](https://raw.githubusercontent.com/pomboverso/mako/refs/heads/master/metadata/mako_preview.svg)
 
 # Mako
 
@@ -15,7 +15,7 @@ distractions to a minimum by emphasizing clarity and intentional interaction.
 
 | Home                                                                                                                                         | Settings                                                                                                                                         | About                                                                                                                                         |
 |----------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
-| ![Home](https://raw.githubusercontent.com/jmiguelrivas/mako/refs/heads/master/fastlane/metadata/android/en-US/images/phoneScreenshots/1.png) | ![Settings](https://raw.githubusercontent.com/jmiguelrivas/mako/refs/heads/master/fastlane/metadata/android/en-US/images/phoneScreenshots/4.png) | ![About](https://raw.githubusercontent.com/jmiguelrivas/mako/refs/heads/master/fastlane/metadata/android/en-US/images/phoneScreenshots/5.png) |
+| ![Home](https://raw.githubusercontent.com/pomboverso/mako/refs/heads/master/fastlane/metadata/android/en-US/images/phoneScreenshots/1.png) | ![Settings](https://raw.githubusercontent.com/pomboverso/mako/refs/heads/master/fastlane/metadata/android/en-US/images/phoneScreenshots/4.png) | ![About](https://raw.githubusercontent.com/pomboverso/mako/refs/heads/master/fastlane/metadata/android/en-US/images/phoneScreenshots/5.png) |
 
 ---
 
@@ -51,7 +51,7 @@ No network access is required.
 
 * Available on **[F-Droid](https://f-droid.org/app/com.rama.mako)** for easy installation and
   updates.
-* Download the latest APK from the **[Releases page](https://github.com/jmiguelrivas/mako/releases)
+* Download the latest APK from the **[Releases page](https://github.com/pomboverso/mako/releases)
   ** or use **[Obtanium](https://github.com/ImranR98/Obtainium)** to get the newest version directly
   from the github releases.
 

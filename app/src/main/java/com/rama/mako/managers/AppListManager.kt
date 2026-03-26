@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.net.Uri
 import android.provider.Settings
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -173,6 +174,14 @@ class AppListManager(
         dialog.show()
     }
 
+    fun spToPx(sp: Float): Int {
+        return TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_SP,
+            sp,
+            context.resources.displayMetrics
+        ).toInt()
+    }
+
     private fun showGroupsDialog(app: ResolveInfo) {
         val pkg = app.activityInfo.packageName
         val view = View.inflate(context, R.layout.dialog_groups_add, null)
@@ -187,12 +196,27 @@ class AppListManager(
             val radioGroup = RadioGroup(context)
             val currentGroup = groupsManager.getGroup(pkg)
 
-            groupsManager.getGroups().forEach { group ->
-                val row = LinearLayout(context).apply { orientation = LinearLayout.HORIZONTAL }
+            val groups = groupsManager.getGroups()
+
+            groups.forEachIndexed { index, group ->
+                val isLast = index == groups.lastIndex
+
+                val row = LinearLayout(context).apply {
+                    orientation = LinearLayout.HORIZONTAL
+
+                    layoutParams = RadioGroup.LayoutParams(
+                        RadioGroup.LayoutParams.MATCH_PARENT,
+                        RadioGroup.LayoutParams.WRAP_CONTENT
+                    ).apply {
+                        bottomMargin = if (isLast) 0 else spToPx(8f)
+                    }
+                }
+
                 val radio = RadioButton(context).apply {
                     text = group
                     isChecked = group == currentGroup
                 }
+
                 FontManager.applyFont(context, radio)
 
                 radio.setOnClickListener {
@@ -200,6 +224,7 @@ class AppListManager(
                     refresh()
                     dialog.dismiss()
                 }
+
                 row.addView(radio)
                 radioGroup.addView(row)
             }
