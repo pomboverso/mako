@@ -61,12 +61,18 @@ class AppListManager(
 
         allGroupNames.forEach { groupName ->
             val apps = groupedMap[groupName] ?: return@forEach
+
+            if (groupName == ungroupedLabel && !prefs.hasUngroupedAppsVisible()) {
+                return@forEach
+            }
+
             // Only check visibility for known groups; ungrouped and unknown groups are always visible
             if (existingGroups.contains(groupName) && !groupsManager.isGroupVisible(groupName)) return@forEach
 
             if (prefs.isGroupHeaderVisible()) {
                 items.add(ListItem.Header(groupName))
             }
+
             apps.sortedBy { getDisplayName(it).lowercase() }
                 .forEach { items.add(ListItem.App(it)) }
         }

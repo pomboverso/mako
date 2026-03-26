@@ -29,6 +29,8 @@ class PrefsManager private constructor(context: Context) {
 
     fun isDateVisible(): Boolean = prefs.getBoolean("show_date", true)
     fun isGroupHeaderVisible(): Boolean = prefs.getBoolean("show_group_header", true)
+    fun hasUngroupedAppsVisible(): Boolean = prefs.getBoolean("show_ungrouped_apps", true)
+
     fun isYearDayVisible(): Boolean = prefs.getBoolean("show_year_day", true)
     fun isGroupVisible(group: String): Boolean = prefs.getBoolean("group_visibility_$group", true)
 

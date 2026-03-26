@@ -62,6 +62,12 @@
                 android:layout_height="wrap_content"
                 android:text="@string/show_group_header_label" />
 
+            <com.rama.mako.widgets.WdCheckbox
+                android:id="@+id/show_ungrouped_apps"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/show_ungrouped_apps_label" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
