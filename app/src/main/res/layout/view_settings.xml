@@ -227,11 +227,26 @@
                 android:layout_height="wrap_content"
                 android:text="@string/show_battery_charge_status" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8sp"
+                android:textSize="16sp"
+                android:textColor="@color/foreground_color"
+                android:text="@string/apps_header"
+                android:textStyle="bold" />
+
             <com.rama.mako.widgets.WdCheckbox
                 android:id="@+id/show_search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/show_search_label" />
+
+            <com.rama.mako.widgets.WdCheckbox
+                android:id="@+id/show_icons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/show_icons_label" />
 
             <TextView
                 android:layout_width="wrap_content"

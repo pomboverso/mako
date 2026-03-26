@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.provider.Settings
 import android.util.TypedValue
@@ -27,6 +28,7 @@ class AppListManager(
 
     private val items = mutableListOf<ListItem>()
     private lateinit var adapter: ArrayAdapter<ListItem>
+    private val iconCache = mutableMapOf<String, Drawable>()
 
     fun setup() {
         buildItems()
@@ -258,7 +260,6 @@ class AppListManager(
                 else -> false
             }
         }
-        forceShowIcons(popup)
         popup.show()
     }
 
@@ -276,6 +277,7 @@ class AppListManager(
 
             override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
                 val item = getItem(position)!!
+
                 return when (item) {
                     is ListItem.Header -> {
                         val view =
@@ -291,9 +293,25 @@ class AppListManager(
                             convertView ?: View.inflate(context, R.layout.list_item_app, null)
                         val app = item.info
                         val pkg = app.activityInfo.packageName
-
                         val label = view.findViewById<TextView>(R.id.open_app_button)
                         val emptySpace = view.findViewById<View>(R.id.empty_space)
+
+                        val icon = view.findViewById<ImageView>(R.id.app_icon)
+                        val showIcons = prefs.hasIconsVisible()
+
+                        if (showIcons) {
+                            val drawable = iconCache.getOrPut(pkg) {
+                                app.loadIcon(pm)
+                            }
+                            icon.setImageDrawable(drawable)
+                            icon.visibility = View.VISIBLE
+                            icon.setOnClickListener { launchApp(pkg) }
+                        } else {
+                            icon.visibility = View.GONE
+                            icon.setImageDrawable(null)
+                            icon.setOnClickListener(null)
+                        }
+
                         label.text = getDisplayName(app)
 
                         label.setOnClickListener { launchApp(pkg) }
@@ -325,18 +343,6 @@ class AppListManager(
                 totalItemCount: Int
             ) = Unit
         })
-    }
-
-    private fun forceShowIcons(popup: PopupMenu) {
-        try {
-            val field = PopupMenu::class.java.getDeclaredField("mPopup")
-            field.isAccessible = true
-            val menuPopupHelper = field.get(popup)
-            menuPopupHelper.javaClass
-                .getDeclaredMethod("setForceShowIcon", Boolean::class.java)
-                .invoke(menuPopupHelper, true)
-        } catch (_: Exception) {
-        }
     }
 
     private sealed class ListItem {

@@ -71,6 +71,7 @@
     <!-- Settings -->
     <string name="settings">Settings</string>
     <string name="others_header">Others</string>
+    <string name="apps_header">Applications</string>
     <string name="clock_header">Clock</string>
     <string name="date_header">Date and Battery</string>
     <string name="groups_header">Groups</string>
@@ -84,6 +85,7 @@
     <string name="show_date">Show date</string>
     <string name="show_clock">Show clock</string>
     <string name="show_year_day">Show day of the year</string>
+    <string name="show_icons_label">Show application icons</string>
     <string name="add_group_label">+ Add New Group</string>
     <string name="clock_none">Hide clock</string>
     <string name="system_label">System default</string>

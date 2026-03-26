@@ -134,6 +134,7 @@ class SettingsActivity : CsActivity() {
             dependentViewIds = listOf(R.id.show_year_day)
         )
         bindWdCheckbox(R.id.show_search, "show_search", true)
+        bindWdCheckbox(R.id.show_icons, "show_app_icons", true)
         bindWdCheckbox(R.id.show_year_day, "show_year_day", true)
         bindWdCheckbox(
             R.id.show_battery,

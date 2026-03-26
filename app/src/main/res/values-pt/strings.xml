@@ -49,6 +49,7 @@
     <!-- Settings -->
     <string name="settings">Configurações</string>
     <string name="others_header">Outros</string>
+    <string name="apps_header">Aplicações</string>
     <string name="clock_header">Relógio</string>
     <string name="date_header">Data e bateria</string>
     <string name="groups_header">Grupos</string>
@@ -62,6 +63,7 @@
     <string name="show_search_label">Mostrar botão de pesquisa</string>
     <string name="show_clock">Mostrar relógio</string>
     <string name="show_year_day">Mostrar dia do ano</string>
+    <string name="show_icons_label">Mostrar ícones das aplicações</string>
     <string name="add_group_label">+ Adicionar novo grupo</string>
     <string name="clock_none">Ocultar relógio</string>
     <string name="system_label">Padrão do sistema</string>

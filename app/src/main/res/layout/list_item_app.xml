@@ -5,6 +5,12 @@
     android:layout_height="wrap_content"
     android:gravity="center_vertical">
 
+    <ImageView
+        android:id="@+id/app_icon"
+        android:layout_width="32sp"
+        android:layout_height="32sp"
+        android:layout_marginEnd="8sp" />
+
     <TextView
         android:id="@+id/open_app_button"
         android:layout_width="wrap_content"
@@ -14,7 +20,7 @@
         android:paddingEnd="12sp"
         android:textSize="32sp"
         android:textColor="@color/foreground_color" />
-    
+
     <FrameLayout
         android:id="@+id/empty_space"
         android:layout_width="0dp"
