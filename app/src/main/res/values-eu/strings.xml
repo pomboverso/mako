@@ -64,6 +64,7 @@
     <string name="show_clock">Ordua erakutsi</string>
     <string name="show_year_day">Urteko eguna erakutsi</string>
     <string name="show_icons_label">Aplikazioen ikonoak erakutsi</string>
+    <string name="show_group_header_label">Taldearen goiburua erakutsi</string>
     <string name="add_group_label">+ Talde Berria Gehitu</string>
     <string name="clock_none">Ordua ez erakutsi</string>
     <string name="system_label">Sistemaren lehenetsia</string>

@@ -64,7 +64,9 @@ class AppListManager(
             // Only check visibility for known groups; ungrouped and unknown groups are always visible
             if (existingGroups.contains(groupName) && !groupsManager.isGroupVisible(groupName)) return@forEach
 
-            items.add(ListItem.Header(groupName))
+            if (prefs.isGroupHeaderVisible()) {
+                items.add(ListItem.Header(groupName))
+            }
             apps.sortedBy { getDisplayName(it).lowercase() }
                 .forEach { items.add(ListItem.App(it)) }
         }

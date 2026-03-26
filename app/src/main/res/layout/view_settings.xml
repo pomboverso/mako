@@ -46,7 +46,7 @@
                 android:paddingEnd="8sp"
                 android:orientation="vertical"
                 android:background="@color/secondary_bg"
-                android:focusableInTouchMode="true"></LinearLayout>
+                android:focusableInTouchMode="true" />
 
             <com.rama.mako.widgets.WdButton
                 android:id="@+id/add_group"
@@ -55,6 +55,12 @@
                 android:layout_marginBottom="8sp"
                 android:background="@color/button_secondary_color"
                 android:text="@string/add_group_label" />
+
+            <com.rama.mako.widgets.WdCheckbox
+                android:id="@+id/show_group_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/show_group_header_label" />
 
             <TextView
                 android:layout_width="wrap_content"

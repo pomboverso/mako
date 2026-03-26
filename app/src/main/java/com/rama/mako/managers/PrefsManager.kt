@@ -28,6 +28,7 @@ class PrefsManager private constructor(context: Context) {
         prefs.getBoolean("show_battery_charge_status", true)
 
     fun isDateVisible(): Boolean = prefs.getBoolean("show_date", true)
+    fun isGroupHeaderVisible(): Boolean = prefs.getBoolean("show_group_header", true)
     fun isYearDayVisible(): Boolean = prefs.getBoolean("show_year_day", true)
     fun isGroupVisible(group: String): Boolean = prefs.getBoolean("group_visibility_$group", true)
 
