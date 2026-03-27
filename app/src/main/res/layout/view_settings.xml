@@ -36,6 +36,24 @@
                 android:text="@string/groups_header"
                 android:textStyle="bold" />
 
+            <com.rama.mako.widgets.WdCheckbox
+                android:id="@+id/show_group_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/show_group_header_label" />
+
+            <com.rama.mako.widgets.WdCheckbox
+                android:id="@+id/show_ungrouped_apps"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/show_ungrouped_apps_label" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/disabled"
+                android:layout_marginVertical="16sp" />
+
             <LinearLayout
                 android:id="@+id/groups"
                 android:layout_width="match_parent"
@@ -55,18 +73,6 @@
                 android:layout_marginBottom="8sp"
                 android:background="@color/button_secondary_color"
                 android:text="@string/add_group_label" />
-
-            <com.rama.mako.widgets.WdCheckbox
-                android:id="@+id/show_group_header"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/show_group_header_label" />
-
-            <com.rama.mako.widgets.WdCheckbox
-                android:id="@+id/show_ungrouped_apps"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/show_ungrouped_apps_label" />
 
             <TextView
                 android:layout_width="wrap_content"
