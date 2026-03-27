@@ -284,6 +284,14 @@
                 android:text="@string/set_default" />
 
             <com.rama.mako.widgets.WdButton
+                android:id="@+id/set_clock_app_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8sp"
+                android:background="@color/button_secondary_color"
+                android:text="@string/set_clock_app" />
+
+            <com.rama.mako.widgets.WdButton
                 android:id="@+id/reset_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -72,6 +72,14 @@ class PrefsManager private constructor(context: Context) {
         prefs.getBoolean(key, defaultValue)
 
     fun setBoolean(key: String, value: Boolean) = prefs.edit().putBoolean(key, value).apply()
+    fun getString(key: String, defaultValue: String = ""): String {
+        return prefs.getString(key, defaultValue) ?: defaultValue
+    }
+
+    fun setString(key: String, value: String) {
+        prefs.edit().putString(key, value).apply()
+    }
+
     fun getStringSet(key: String, default: Set<String>): MutableSet<String> {
         return prefs.getStringSet(key, default) ?: default.toMutableSet()
     }
