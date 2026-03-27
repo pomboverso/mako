@@ -24,7 +24,7 @@
         <activity
             android:exported="false"
             android:name=".activities.SettingsActivity"
-            android:label="@string/settings" />
+            android:label="@string/settings_header" />
 
         <activity
             android:name=".activities.MainActivity"

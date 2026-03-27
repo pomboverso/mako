@@ -10,10 +10,19 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16sp"
         android:textSize="32sp"
         android:textColor="@color/foreground_color"
-        android:text="@string/set_clock_app"
+        android:text="@string/set_clock_app_label"
+        android:gravity="center"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16sp"
+        android:textSize="16sp"
+        android:textColor="@color/foreground_color"
+        android:text="@string/pick_clock_app_disclaimer"
         android:gravity="center"
         android:textStyle="bold" />
 

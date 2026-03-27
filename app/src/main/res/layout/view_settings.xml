@@ -24,7 +24,7 @@
                 android:layout_marginBottom="16sp"
                 android:textSize="32sp"
                 android:textColor="@color/foreground_color"
-                android:text="@string/settings"
+                android:text="@string/settings_header"
                 android:textStyle="bold" />
 
             <TextView
@@ -176,7 +176,7 @@
                         android:layout_marginBottom="8sp"
                         android:textSize="16sp"
                         android:textColor="@color/foreground_color"
-                        android:text="@string/clock_none" />
+                        android:text="@string/clock_none_label" />
 
                     <RadioButton
                         android:id="@+id/clock_system"
@@ -194,7 +194,7 @@
                         android:layout_marginBottom="8sp"
                         android:textSize="16sp"
                         android:textColor="@color/foreground_color"
-                        android:text="@string/clock_24" />
+                        android:text="@string/clock_24_label" />
 
                     <RadioButton
                         android:id="@+id/clock_12"
@@ -202,7 +202,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
                         android:textColor="@color/foreground_color"
-                        android:text="@string/clock_12" />
+                        android:text="@string/clock_12_label" />
                 </RadioGroup>
             </LinearLayout>
 
@@ -219,31 +219,31 @@
                 android:id="@+id/show_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/show_date" />
+                android:text="@string/show_date_label" />
 
             <com.rama.mako.widgets.WdCheckbox
                 android:id="@+id/show_year_day"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/show_year_day" />
+                android:text="@string/show_year_day_label" />
 
             <com.rama.mako.widgets.WdCheckbox
                 android:id="@+id/show_battery"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/show_battery" />
+                android:text="@string/show_battery_label" />
 
             <com.rama.mako.widgets.WdCheckbox
                 android:id="@+id/show_battery_temperature"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/show_battery_temperature" />
+                android:text="@string/show_battery_temperature_label" />
 
             <com.rama.mako.widgets.WdCheckbox
                 android:id="@+id/show_battery_charge_status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/show_battery_charge_status" />
+                android:text="@string/show_battery_charge_status_label" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -281,7 +281,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8sp"
                 android:background="@color/button_secondary_color"
-                android:text="@string/set_default" />
+                android:text="@string/set_default_label" />
 
             <com.rama.mako.widgets.WdButton
                 android:id="@+id/set_clock_app_button"
@@ -289,7 +289,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8sp"
                 android:background="@color/button_secondary_color"
-                android:text="@string/set_clock_app" />
+                android:text="@string/set_clock_app_label" />
 
             <com.rama.mako.widgets.WdButton
                 android:id="@+id/reset_button"
@@ -297,15 +297,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8sp"
                 android:background="@color/button_secondary_color"
-                android:text="@string/refresh_launcher" />
-
-            <com.rama.mako.widgets.WdButton
-                android:id="@+id/app_os_settings"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8sp"
-                android:background="@color/button_secondary_color"
-                android:text="@string/open_app_settings_label" />
+                android:text="@string/refresh_launcher_label" />
 
             <com.rama.mako.widgets.WdButton
                 android:id="@+id/change_apps_button"
@@ -313,7 +305,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8sp"
                 android:background="@color/button_secondary_color"
-                android:text="@string/edit_apps" />
+                android:text="@string/edit_apps_label" />
 
             <com.rama.mako.widgets.WdButton
                 android:id="@+id/wallpaper_button"
@@ -321,7 +313,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8sp"
                 android:background="@color/button_secondary_color"
-                android:text="@string/change_wallpaper" />
+                android:text="@string/change_wallpaper_label" />
 
             <com.rama.mako.widgets.WdButton
                 android:id="@+id/about_button"

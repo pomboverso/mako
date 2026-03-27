@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ListView
 import android.widget.RadioGroup
+import android.widget.TextView
 import android.widget.Toast
 import com.rama.mako.CsActivity
 import com.rama.mako.R
@@ -63,22 +64,6 @@ class SettingsActivity : CsActivity() {
             })
         }
 
-        findViewById<WdButton>(R.id.app_os_settings).setOnClickListener {
-            try {
-                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
-                    data = android.net.Uri.fromParts("package", packageName, null)
-                    flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                }
-                startActivity(intent)
-            } catch (e: Exception) {
-                Toast.makeText(
-                    this,
-                    getString(R.string.unable_open_settings_toast),
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        }
-
         findViewById<View>(R.id.change_apps_button).setOnClickListener {
             startActivity(Intent(Settings.ACTION_APPLICATION_SETTINGS))
         }
@@ -109,7 +94,7 @@ class SettingsActivity : CsActivity() {
     }
 
     private fun showAppPickerDialog() {
-        val dialogView = layoutInflater.inflate(R.layout.dialog_apps, null)
+        val dialogView = layoutInflater.inflate(R.layout.dialog_pick_clock_app, null)
         FontManager.applyFont(this, dialogView)
         val dialog = android.app.Dialog(this)
         dialog.setContentView(dialogView)
@@ -127,16 +112,20 @@ class SettingsActivity : CsActivity() {
 
             override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
                 val view = convertView ?: layoutInflater.inflate(
-                    android.R.layout.simple_list_item_1,
+                    R.layout.list_item_app,
                     parent,
                     false
                 )
 
                 val app = apps[position]
-                val text = view.findViewById<android.widget.TextView>(android.R.id.text1)
-                text.text = app.label
-                text.textSize = 24f
-                text.setPadding(0, 6, 0, 6)
+
+                val appLabel = view.findViewById<TextView>(R.id.open_app_button)
+                appLabel.text = app.label
+
+                val appIcon = view.findViewById<ImageView>(R.id.app_icon)
+                appIcon.setImageDrawable(
+                    packageManager.getApplicationIcon(app.packageName)
+                )
 
                 FontManager.applyFont(parent.context, view)
                 return view

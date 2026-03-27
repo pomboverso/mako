@@ -314,6 +314,7 @@ class AppListManager(
                             icon.setImageDrawable(drawable)
                             icon.visibility = View.VISIBLE
                             icon.setOnClickListener { launchApp(pkg) }
+                            icon.setOnLongClickListener { showContextMenu(it, app); true }
                         } else {
                             icon.visibility = View.GONE
                             icon.setImageDrawable(null)
