@@ -62,16 +62,14 @@ class AppListManager(
         allGroupNames.forEach { groupName ->
             val apps = groupedMap[groupName] ?: return@forEach
 
-            if (groupName == ungroupedLabel && !prefs.hasUngroupedAppsVisible()) {
-                return@forEach
-            }
-
-            // Only check visibility for known groups; ungrouped and unknown groups are always visible
-            if (existingGroups.contains(groupName) && !groupsManager.isGroupVisible(groupName)) return@forEach
+            val isVisible =
+                !existingGroups.contains(groupName) || groupsManager.isGroupVisible(groupName)
 
             if (prefs.isGroupHeaderVisible()) {
                 items.add(ListItem.Header(groupName))
             }
+
+            if (!isVisible) return@forEach
 
             apps.sortedBy { getDisplayName(it).lowercase() }
                 .forEach { items.add(ListItem.App(it)) }
@@ -290,9 +288,22 @@ class AppListManager(
                     is ListItem.Header -> {
                         val view =
                             convertView ?: View.inflate(context, R.layout.app_list_header, null)
+
                         val text = view.findViewById<TextView>(R.id.header_text)
-                        text.text = item.title.uppercase()
+                        val groupName = item.title
+
+                        text.text = groupName.uppercase()
                         FontManager.applyFont(context, text)
+
+//                        val isVisible = groupsManager.isGroupVisible(groupName)
+//                        text.text = (if (isVisible) "▼ " else "▶ ") + groupName.uppercase()
+
+                        view.setOnClickListener {
+                            val currentlyVisible = groupsManager.isGroupVisible(groupName)
+                            groupsManager.setGroupVisibility(groupName, !currentlyVisible)
+                            refresh()
+                        }
+
                         view
                     }
 
