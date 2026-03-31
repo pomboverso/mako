@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import com.rama.mako.R
+import com.rama.mako.utils.sp
 import com.rama.mako.activities.SettingsActivity
 import com.rama.mako.widgets.WdButton
 
@@ -29,6 +30,7 @@ class AppListManager(
     private val items = mutableListOf<ListItem>()
     private lateinit var adapter: ArrayAdapter<ListItem>
     private val iconCache = mutableMapOf<String, Drawable>()
+    private val ungroupedLabel by lazy { context.getString(R.string.ungrouped_header) }
 
     fun setup() {
         buildItems()
@@ -45,7 +47,10 @@ class AppListManager(
         val intent = Intent(Intent.ACTION_MAIN).apply { addCategory(Intent.CATEGORY_LAUNCHER) }
         val allApps = pm.queryIntentActivities(intent, 0)
         val ungroupedLabel = context.getString(R.string.ungrouped_header)
-        val existingGroups = groupsManager.getGroups().toMutableList() // known groups
+
+        val existingGroups = groupsManager.getGroups().toMutableList().apply {
+            if (!contains(ungroupedLabel)) add(ungroupedLabel)
+        }
 
         // Map apps to their group (keep unknown groups as they are)
         val groupedMap = allApps.groupBy { app ->
@@ -62,16 +67,13 @@ class AppListManager(
         allGroupNames.forEach { groupName ->
             val apps = groupedMap[groupName] ?: return@forEach
 
-            if (groupName == ungroupedLabel && !prefs.hasUngroupedAppsVisible()) {
-                return@forEach
-            }
-
-            // Only check visibility for known groups; ungrouped and unknown groups are always visible
-            if (existingGroups.contains(groupName) && !groupsManager.isGroupVisible(groupName)) return@forEach
+            val isVisible = groupsManager.isGroupVisible(groupName)
 
             if (prefs.isGroupHeaderVisible()) {
                 items.add(ListItem.Header(groupName))
             }
+
+            if (!isVisible) return@forEach
 
             apps.sortedBy { getDisplayName(it).lowercase() }
                 .forEach { items.add(ListItem.App(it)) }
@@ -184,14 +186,6 @@ class AppListManager(
         dialog.show()
     }
 
-    fun spToPx(sp: Float): Int {
-        return TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_SP,
-            sp,
-            context.resources.displayMetrics
-        ).toInt()
-    }
-
     private fun showGroupsDialog(app: ResolveInfo) {
         val pkg = app.activityInfo.packageName
         val view = View.inflate(context, R.layout.dialog_groups_add, null)
@@ -199,14 +193,17 @@ class AppListManager(
         val dialog = AlertDialog.Builder(context).setView(view).setCancelable(true).create()
 
         val closeBtn = view.findViewById<View>(R.id.close_button)
-        val container = view.findViewById<LinearLayout>(R.id.groups)
+        val container = view.findViewById<RadioGroup>(R.id.groups)
 
         fun renderGroups() {
             container.removeAllViews()
             val radioGroup = RadioGroup(context)
             val currentGroup = groupsManager.getGroup(pkg)
 
-            val groups = groupsManager.getGroups()
+            val groups = mutableListOf<String>().apply {
+                add(ungroupedLabel)
+                addAll(groupsManager.getGroups())
+            }
 
             groups.forEachIndexed { index, group ->
                 val isLast = index == groups.lastIndex
@@ -218,7 +215,7 @@ class AppListManager(
                         RadioGroup.LayoutParams.MATCH_PARENT,
                         RadioGroup.LayoutParams.WRAP_CONTENT
                     ).apply {
-                        bottomMargin = if (isLast) 0 else spToPx(8f)
+                        bottomMargin = if (isLast) 0 else context.sp(8f)
                     }
                 }
 
@@ -290,9 +287,30 @@ class AppListManager(
                     is ListItem.Header -> {
                         val view =
                             convertView ?: View.inflate(context, R.layout.app_list_header, null)
+
                         val text = view.findViewById<TextView>(R.id.header_text)
-                        text.text = item.title.uppercase()
+                        val groupName = item.title
+
+                        text.text = groupName.uppercase()
                         FontManager.applyFont(context, text)
+
+                        if (prefs.hasCollapsibleGroups()) {
+                            val isVisible = groupsManager.isGroupVisible(groupName)
+                            text.text = (if (isVisible) "[-] " else "[+] ") + groupName.uppercase()
+                            text.setPadding(
+                                0,
+                                context.sp(16f),
+                                0,
+                                context.sp(16f)
+                            )
+
+                            view.setOnClickListener {
+                                val currentlyVisible = groupsManager.isGroupVisible(groupName)
+                                groupsManager.setGroupVisibility(groupName, !currentlyVisible)
+                                refresh()
+                            }
+                        }
+
                         view
                     }
 

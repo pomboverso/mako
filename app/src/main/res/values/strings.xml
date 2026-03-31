@@ -88,6 +88,7 @@
     <string name="show_group_header_label">Show group header</string>
     <string name="show_icons_label">Show application icons</string>
     <string name="show_ungrouped_apps_label">Show ungrouped apps</string>
+    <string name="has_collapsible_groups">Allow collapsing groups</string>
     <string name="add_group_label">+ Add New Group</string>
     <string name="clock_none_label">Hide clock</string>
     <string name="system_label">System default</string>
@@ -103,8 +104,8 @@
     <string name="font_style_header">Font Style</string>
 
     <!-- Popup :: Context Menu App -->
-    <string name="rename_app">Rename app</string>
-    <string name="add_to_favorites">Add to group...</string>
+    <string name="rename_app">Rename app...</string>
+    <string name="add_to_favorites">Change group...</string>
     <string name="open_settings">App settings...</string>
 
     <!-- Dialog -->
@@ -119,7 +120,7 @@
     <string name="search_apps_header">Search apps</string>
 
     <!-- Dialog :: Delete Group -->
-    <string name="delete_group_title">Are you sure you want to delete this group?\nThis action cannot be undone.</string>
+    <string name="delete_group_title">Are you sure you want to delete this group?\nYour apps will go to the following group.</string>
     <string name="delete_group">Delete group</string>
 
     <!-- Dialog :: Pick Clock App -->

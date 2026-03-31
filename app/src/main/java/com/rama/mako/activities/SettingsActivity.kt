@@ -10,6 +10,7 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ListView
+import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
@@ -18,6 +19,7 @@ import com.rama.mako.R
 import com.rama.mako.managers.FontManager
 import com.rama.mako.managers.GroupsManager
 import com.rama.mako.managers.PrefsManager
+import com.rama.mako.utils.sp
 import com.rama.mako.widgets.WdButton
 import com.rama.mako.widgets.WdCheckbox
 
@@ -25,6 +27,7 @@ class SettingsActivity : CsActivity() {
 
     private val prefs by lazy { PrefsManager.getInstance(this) }
     private val groupsManager by lazy { GroupsManager(this) }
+    private val ungroupedLabel by lazy { getString(R.string.ungrouped_header) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -208,6 +211,7 @@ class SettingsActivity : CsActivity() {
         bindWdCheckbox(R.id.show_icons, "show_app_icons", true)
         bindWdCheckbox(R.id.show_group_header, "show_group_header", true)
         bindWdCheckbox(R.id.show_ungrouped_apps, "show_ungrouped_apps", true)
+        bindWdCheckbox(R.id.has_collapsible_groups, "has_collapsible_groups", true)
 
         bindWdCheckbox(R.id.show_year_day, "show_year_day", true)
         bindWdCheckbox(
@@ -252,7 +256,7 @@ class SettingsActivity : CsActivity() {
 
     // ------------------- Groups management -------------------
     private fun setupGroups() {
-        val groupsContainer = findViewById<LinearLayout>(R.id.groups)
+        val groupsContainer = findViewById<RadioGroup>(R.id.groups)
         val groups = groupsManager.getGroups().toMutableList()
         groups.forEach { group -> addGroupRow(group, groupsContainer, groups) }
 
@@ -321,20 +325,51 @@ class SettingsActivity : CsActivity() {
         deleteBtn.setOnClickListener {
             val dialogView = layoutInflater.inflate(R.layout.dialog_groups_delete, null)
             FontManager.applyFont(this, dialogView)
+
             val dialog = android.app.Dialog(this)
             dialog.setContentView(dialogView)
             dialog.setCancelable(true)
 
             val yesButton = dialogView.findViewById<WdButton>(R.id.yes_button)
             val noButton = dialogView.findViewById<WdButton>(R.id.no_button)
+            val radioGroup = dialogView.findViewById<RadioGroup>(R.id.groups)
+
+            val groupName = nameEdit.text.toString()
+
+            val targetGroups = mutableListOf<String>().apply {
+                add(ungroupedLabel)
+                addAll(groups.filter { it != groupName && it != ungroupedLabel })
+            }
+
+            var selectedGroup: String? = null
+
+            targetGroups.forEach { target ->
+                val radio = RadioButton(this).apply {
+                    text = target
+                }
+
+                FontManager.applyFont(this, radio)
+
+                radio.setOnClickListener {
+                    selectedGroup = target
+                }
+
+                radioGroup.addView(radio)
+            }
 
             yesButton.setOnClickListener {
-                val groupName = nameEdit.text.toString()
-                groupsManager.deleteGroup(groupName)
+                if (selectedGroup == null) {
+                    Toast.makeText(this, "Select a target group", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                groupsManager.deleteGroup(groupName, selectedGroup)
                 groups.remove(groupName)
                 container.removeView(row)
+
                 dialog.dismiss()
             }
+
             noButton.setOnClickListener { dialog.dismiss() }
 
             dialog.show()

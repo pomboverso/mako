@@ -3,7 +3,7 @@ package com.rama.mako.managers
 import android.content.Context
 import com.rama.mako.R
 
-class GroupsManager(context: Context) {
+class GroupsManager(private val context: Context) {
 
     private val prefs = PrefsManager.getInstance(context)
     private val defaultGroup = context.getString(R.string.favorites_header)
@@ -56,7 +56,7 @@ class GroupsManager(context: Context) {
         saveGroups(groups.sortedBy { it.lowercase() })
     }
 
-    fun deleteGroup(groupName: String) {
+    fun deleteGroup(groupName: String, moveToGroup: String? = ungroupedLabel) {
         val normalizedGroup = groupName.trim()
 
         // --- Remove group from the list ---
@@ -64,10 +64,10 @@ class GroupsManager(context: Context) {
         groups.removeAll { it.trim().equals(normalizedGroup, ignoreCase = true) }
         saveGroups(groups)
 
-        // --- Move apps to ungrouped if they belonged to this group ---
+        // --- Move apps to selected group (or ungrouped) ---
         getAllAppGroups().forEach { (pkg, group) ->
             if (group.trim().equals(normalizedGroup, ignoreCase = true)) {
-                setGroup(pkg, ungroupedLabel)
+                setGroup(pkg, moveToGroup)
             }
         }
     }
@@ -84,11 +84,24 @@ class GroupsManager(context: Context) {
 
     // --- Helper to get all stored app->group mappings ---
     private fun getAllAppGroups(): Map<String, String> {
-        val allKeys = prefs.getStringSet("all_apps", emptySet())
-        val map = mutableMapOf<String, String>()
-        allKeys.forEach { pkg ->
-            getGroup(pkg)?.let { group -> map[pkg] = group }
+        val pm = context.packageManager
+
+        val intent = android.content.Intent(android.content.Intent.ACTION_MAIN).apply {
+            addCategory(android.content.Intent.CATEGORY_LAUNCHER)
         }
+
+        val apps = pm.queryIntentActivities(intent, 0)
+
+        val map = mutableMapOf<String, String>()
+
+        apps.forEach { app ->
+            val pkg = app.activityInfo.packageName
+            val group = getGroup(pkg)
+            if (group != null) {
+                map[pkg] = group
+            }
+        }
+
         return map
     }
 }
