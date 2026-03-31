@@ -208,6 +208,7 @@ class SettingsActivity : CsActivity() {
         bindWdCheckbox(R.id.show_icons, "show_app_icons", true)
         bindWdCheckbox(R.id.show_group_header, "show_group_header", true)
         bindWdCheckbox(R.id.show_ungrouped_apps, "show_ungrouped_apps", true)
+        bindWdCheckbox(R.id.has_collapsible_groups, "has_collapsible_groups", true)
 
         bindWdCheckbox(R.id.show_year_day, "show_year_day", true)
         bindWdCheckbox(

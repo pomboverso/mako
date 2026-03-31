@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import com.rama.mako.R
+import com.rama.mako.utils.dp
 import com.rama.mako.activities.SettingsActivity
 import com.rama.mako.widgets.WdButton
 
@@ -45,7 +46,10 @@ class AppListManager(
         val intent = Intent(Intent.ACTION_MAIN).apply { addCategory(Intent.CATEGORY_LAUNCHER) }
         val allApps = pm.queryIntentActivities(intent, 0)
         val ungroupedLabel = context.getString(R.string.ungrouped_header)
-        val existingGroups = groupsManager.getGroups().toMutableList() // known groups
+
+        val existingGroups = groupsManager.getGroups().toMutableList().apply {
+            if (!contains(ungroupedLabel)) add(ungroupedLabel)
+        }
 
         // Map apps to their group (keep unknown groups as they are)
         val groupedMap = allApps.groupBy { app ->
@@ -62,8 +66,7 @@ class AppListManager(
         allGroupNames.forEach { groupName ->
             val apps = groupedMap[groupName] ?: return@forEach
 
-            val isVisible =
-                !existingGroups.contains(groupName) || groupsManager.isGroupVisible(groupName)
+            val isVisible = groupsManager.isGroupVisible(groupName)
 
             if (prefs.isGroupHeaderVisible()) {
                 items.add(ListItem.Header(groupName))
@@ -295,13 +298,21 @@ class AppListManager(
                         text.text = groupName.uppercase()
                         FontManager.applyFont(context, text)
 
-//                        val isVisible = groupsManager.isGroupVisible(groupName)
-//                        text.text = (if (isVisible) "▼ " else "▶ ") + groupName.uppercase()
+                        if (prefs.hasCollapsibleGroups()) {
+                            val isVisible = groupsManager.isGroupVisible(groupName)
+                            text.text = (if (isVisible) "▼ " else "▶ ") + groupName.uppercase()
+                            text.setPadding(
+                                0,
+                                context.dp(16),
+                                0,
+                                context.dp(16)
+                            )
 
-                        view.setOnClickListener {
-                            val currentlyVisible = groupsManager.isGroupVisible(groupName)
-                            groupsManager.setGroupVisibility(groupName, !currentlyVisible)
-                            refresh()
+                            view.setOnClickListener {
+                                val currentlyVisible = groupsManager.isGroupVisible(groupName)
+                                groupsManager.setGroupVisibility(groupName, !currentlyVisible)
+                                refresh()
+                            }
                         }
 
                         view

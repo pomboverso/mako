@@ -88,6 +88,7 @@
     <string name="show_group_header_label">Show group header</string>
     <string name="show_icons_label">Show application icons</string>
     <string name="show_ungrouped_apps_label">Show ungrouped apps</string>
+    <string name="has_collapsible_groups">Allow collapsing groups</string>
     <string name="add_group_label">+ Add New Group</string>
     <string name="clock_none_label">Hide clock</string>
     <string name="system_label">System default</string>

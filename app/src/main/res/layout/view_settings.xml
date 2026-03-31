@@ -48,6 +48,12 @@
                 android:layout_height="wrap_content"
                 android:text="@string/show_ungrouped_apps_label" />
 
+            <com.rama.mako.widgets.WdCheckbox
+                android:id="@+id/has_collapsible_groups"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/has_collapsible_groups" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
