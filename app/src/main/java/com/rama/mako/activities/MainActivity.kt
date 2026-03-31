@@ -150,22 +150,19 @@ class MainActivity : CsActivity() {
 
     // --- Open system clock safely ---
     private fun openSystemClock() {
-        val pm = packageManager
-        val intents = listOf(
-            Intent(Intent.ACTION_MAIN).addCategory("android.intent.category.APP_CLOCK"),
-            Intent("android.intent.action.SHOW_ALARMS"),
-            Intent(Intent.ACTION_MAIN).addCategory("android.intent.category.APP_ALARM")
-        )
+        val packageName = prefs.getString("clock_app_package", "")
 
-        for (intent in intents) {
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            if (intent.resolveActivity(pm) != null) {
-                startActivity(intent)
-                return
+        if (!packageName.isNullOrEmpty()) {
+            val launchIntent = packageManager.getLaunchIntentForPackage(packageName)
+            if (launchIntent != null) {
+                startActivity(launchIntent)
+            } else {
+                Toast.makeText(
+                    this,
+                    getString(R.string.unable_launch_app_toast),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
-
-        Toast.makeText(this, getString(R.string.no_clock_app_found_label), Toast.LENGTH_SHORT)
-            .show()
     }
 }

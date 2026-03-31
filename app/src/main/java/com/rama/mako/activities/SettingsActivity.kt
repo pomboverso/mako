@@ -9,7 +9,9 @@ import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.ListView
 import android.widget.RadioGroup
+import android.widget.TextView
 import android.widget.Toast
 import com.rama.mako.CsActivity
 import com.rama.mako.R
@@ -36,22 +38,7 @@ class SettingsActivity : CsActivity() {
         setupCheckboxes()
         setupGroups()
 
-        val appOsSettingsBtn = findViewById<WdButton>(R.id.app_os_settings)
-        appOsSettingsBtn.setOnClickListener {
-            try {
-                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
-                    data = android.net.Uri.fromParts("package", packageName, null)
-                    flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                }
-                startActivity(intent)
-            } catch (e: Exception) {
-                Toast.makeText(
-                    this,
-                    getString(R.string.unable_open_settings_toast),
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        }
+
     }
 
     // ------------------- Basic buttons -------------------
@@ -80,6 +67,90 @@ class SettingsActivity : CsActivity() {
         findViewById<View>(R.id.change_apps_button).setOnClickListener {
             startActivity(Intent(Settings.ACTION_APPLICATION_SETTINGS))
         }
+
+        findViewById<WdButton>(R.id.set_clock_app_button).setOnClickListener {
+            showAppPickerDialog()
+        }
+    }
+
+    data class AppInfo(
+        val label: String,
+        val packageName: String
+    )
+
+    private fun getLaunchableApps(): List<AppInfo> {
+        val intent = Intent(Intent.ACTION_MAIN, null).apply {
+            addCategory(Intent.CATEGORY_LAUNCHER)
+        }
+
+        val resolveInfoList = packageManager.queryIntentActivities(intent, 0)
+
+        return resolveInfoList.map {
+            AppInfo(
+                label = it.loadLabel(packageManager).toString(),
+                packageName = it.activityInfo.packageName
+            )
+        }.sortedBy { it.label.lowercase() }
+    }
+
+    private fun showAppPickerDialog() {
+        val dialogView = layoutInflater.inflate(R.layout.dialog_pick_clock_app, null)
+        FontManager.applyFont(this, dialogView)
+        val dialog = android.app.Dialog(this)
+        dialog.setContentView(dialogView)
+        dialog.setCancelable(true)
+
+        val listView = dialogView.findViewById<ListView>(R.id.app_list)
+        val closeBtn = dialogView.findViewById<WdButton>(R.id.close_button)
+
+        val apps = getLaunchableApps()
+
+        val adapter = object : android.widget.BaseAdapter() {
+            override fun getCount() = apps.size
+            override fun getItem(position: Int) = apps[position]
+            override fun getItemId(position: Int) = position.toLong()
+
+            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+                val view = convertView ?: layoutInflater.inflate(
+                    R.layout.list_item_app,
+                    parent,
+                    false
+                )
+
+                val app = apps[position]
+
+                val appLabel = view.findViewById<TextView>(R.id.open_app_button)
+                appLabel.text = app.label
+
+                val appIcon = view.findViewById<ImageView>(R.id.app_icon)
+                appIcon.setImageDrawable(
+                    packageManager.getApplicationIcon(app.packageName)
+                )
+
+                FontManager.applyFont(parent.context, view)
+                return view
+            }
+        }
+
+        listView.adapter = adapter
+
+        listView.setOnItemClickListener { _, _, position, _ ->
+            val selectedApp = apps[position]
+
+            prefs.setString("clock_app_package", selectedApp.packageName)
+
+            Toast.makeText(this, "Selected: ${selectedApp.label}", Toast.LENGTH_SHORT).show()
+
+            dialog.dismiss()
+        }
+
+        closeBtn.setOnClickListener { dialog.dismiss() }
+
+        dialog.show()
+        dialog.window?.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.MATCH_PARENT
+        )
     }
 
     // ------------------- Font style -------------------
