@@ -363,7 +363,7 @@ class SettingsActivity : CsActivity() {
                     return@setOnClickListener
                 }
 
-                groupsManager.deleteGroup(groupName)
+                groupsManager.deleteGroup(groupName, selectedGroup)
                 groups.remove(groupName)
                 container.removeView(row)
 
