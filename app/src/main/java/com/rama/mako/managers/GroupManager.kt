@@ -56,7 +56,7 @@ class GroupsManager(context: Context) {
         saveGroups(groups.sortedBy { it.lowercase() })
     }
 
-    fun deleteGroup(groupName: String) {
+    fun deleteGroup(groupName: String, moveToGroup: String? = ungroupedLabel) {
         val normalizedGroup = groupName.trim()
 
         // --- Remove group from the list ---
@@ -64,10 +64,10 @@ class GroupsManager(context: Context) {
         groups.removeAll { it.trim().equals(normalizedGroup, ignoreCase = true) }
         saveGroups(groups)
 
-        // --- Move apps to ungrouped if they belonged to this group ---
+        // --- Move apps to selected group (or ungrouped) ---
         getAllAppGroups().forEach { (pkg, group) ->
             if (group.trim().equals(normalizedGroup, ignoreCase = true)) {
-                setGroup(pkg, ungroupedLabel)
+                setGroup(pkg, moveToGroup)
             }
         }
     }

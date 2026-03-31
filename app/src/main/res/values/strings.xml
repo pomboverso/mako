@@ -104,8 +104,8 @@
     <string name="font_style_header">Font Style</string>
 
     <!-- Popup :: Context Menu App -->
-    <string name="rename_app">Rename app</string>
-    <string name="add_to_favorites">Add to group...</string>
+    <string name="rename_app">Rename app...</string>
+    <string name="add_to_favorites">Change group...</string>
     <string name="open_settings">App settings...</string>
 
     <!-- Dialog -->
