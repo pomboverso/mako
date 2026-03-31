@@ -14,7 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import com.rama.mako.R
-import com.rama.mako.utils.dp
+import com.rama.mako.utils.sp
 import com.rama.mako.activities.SettingsActivity
 import com.rama.mako.widgets.WdButton
 
@@ -185,14 +185,6 @@ class AppListManager(
         dialog.show()
     }
 
-    fun spToPx(sp: Float): Int {
-        return TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_SP,
-            sp,
-            context.resources.displayMetrics
-        ).toInt()
-    }
-
     private fun showGroupsDialog(app: ResolveInfo) {
         val pkg = app.activityInfo.packageName
         val view = View.inflate(context, R.layout.dialog_groups_add, null)
@@ -219,7 +211,7 @@ class AppListManager(
                         RadioGroup.LayoutParams.MATCH_PARENT,
                         RadioGroup.LayoutParams.WRAP_CONTENT
                     ).apply {
-                        bottomMargin = if (isLast) 0 else spToPx(8f)
+                        bottomMargin = if (isLast) 0 else context.sp(8f)
                     }
                 }
 
@@ -300,12 +292,12 @@ class AppListManager(
 
                         if (prefs.hasCollapsibleGroups()) {
                             val isVisible = groupsManager.isGroupVisible(groupName)
-                            text.text = (if (isVisible) "▼ " else "▶ ") + groupName.uppercase()
+                            text.text = (if (isVisible) "[-] " else "[+] ") + groupName.uppercase()
                             text.setPadding(
                                 0,
-                                context.dp(16),
+                                context.sp(16f),
                                 0,
-                                context.dp(16)
+                                context.sp(16f)
                             )
 
                             view.setOnClickListener {
