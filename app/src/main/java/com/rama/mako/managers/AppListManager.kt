@@ -30,6 +30,7 @@ class AppListManager(
     private val items = mutableListOf<ListItem>()
     private lateinit var adapter: ArrayAdapter<ListItem>
     private val iconCache = mutableMapOf<String, Drawable>()
+    private val ungroupedLabel by lazy { context.getString(R.string.ungrouped_header) }
 
     fun setup() {
         buildItems()
@@ -192,14 +193,17 @@ class AppListManager(
         val dialog = AlertDialog.Builder(context).setView(view).setCancelable(true).create()
 
         val closeBtn = view.findViewById<View>(R.id.close_button)
-        val container = view.findViewById<LinearLayout>(R.id.groups)
+        val container = view.findViewById<RadioGroup>(R.id.groups)
 
         fun renderGroups() {
             container.removeAllViews()
             val radioGroup = RadioGroup(context)
             val currentGroup = groupsManager.getGroup(pkg)
 
-            val groups = groupsManager.getGroups()
+            val groups = mutableListOf<String>().apply {
+                add(ungroupedLabel)
+                addAll(groupsManager.getGroups())
+            }
 
             groups.forEachIndexed { index, group ->
                 val isLast = index == groups.lastIndex
