@@ -59,7 +59,6 @@ class AppListManager(
 
         items.clear()
 
-        // Combine: known groups + any unknown groups from apps + ungrouped
         val unknownGroups =
             groupedMap.keys.filter { it != ungroupedLabel && !existingGroups.contains(it) }
         val allGroupNames = (existingGroups + unknownGroups + ungroupedLabel).distinct()
@@ -69,11 +68,17 @@ class AppListManager(
 
             val isVisible = groupsManager.isGroupVisible(groupName)
 
+            // completely skip hidden groups
+            if (!isVisible) return@forEach
+
+            // header only if group is visible
             if (prefs.isGroupHeaderVisible()) {
                 items.add(ListItem.Header(groupName))
             }
 
-            if (!isVisible) return@forEach
+            val isExpanded = groupsManager.isGroupExpanded(groupName)
+
+            if (!isExpanded) return@forEach
 
             apps.sortedBy { getDisplayName(it).lowercase() }
                 .forEach { items.add(ListItem.App(it)) }
@@ -295,8 +300,11 @@ class AppListManager(
                         FontManager.applyFont(context, text)
 
                         if (prefs.hasCollapsibleGroups()) {
-                            val isVisible = groupsManager.isGroupVisible(groupName)
-                            text.text = (if (isVisible) "[-] " else "[+] ") + groupName.uppercase()
+                            val isVisible =
+                                groupsManager.isGroupExpanded(groupName)
+
+                            text.text =
+                                (if (isVisible) "[-] " else "[+] ") + groupName.uppercase()
                             text.setPadding(
                                 0,
                                 context.sp(16f),
@@ -305,13 +313,14 @@ class AppListManager(
                             )
 
                             view.setOnClickListener {
-                                val currentlyVisible = groupsManager.isGroupVisible(groupName)
-                                groupsManager.setGroupVisibility(groupName, !currentlyVisible)
+                                val currentlyVisible = groupsManager.isGroupExpanded(groupName)
+                                groupsManager.setGroupExpanded(groupName, !currentlyVisible)
                                 refresh()
                             }
                         }
 
                         view
+
                     }
 
                     is ListItem.App -> {

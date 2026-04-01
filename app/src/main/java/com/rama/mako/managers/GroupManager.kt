@@ -78,8 +78,16 @@ class GroupsManager(private val context: Context) {
         return prefs.isGroupVisible(group)
     }
 
+    fun isGroupExpanded(group: String): Boolean {
+        return prefs.isGroupExpanded(group)
+    }
+
     fun setGroupVisibility(group: String, visible: Boolean) {
         prefs.setGroupVisible(group, visible)
+    }
+
+    fun setGroupExpanded(group: String, visible: Boolean) {
+        prefs.setGroupExpanded(group, visible)
     }
 
     // --- Helper to get all stored app->group mappings ---

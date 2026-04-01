@@ -34,6 +34,7 @@ class PrefsManager private constructor(context: Context) {
 
     fun isYearDayVisible(): Boolean = prefs.getBoolean("show_year_day", true)
     fun isGroupVisible(group: String): Boolean = prefs.getBoolean("group_visibility_$group", true)
+    fun isGroupExpanded(group: String): Boolean = prefs.getBoolean("group_expanded_$group", true)
 
     // Fonts
     fun getFontStyle(): String? = prefs.getString("font_style", "system")
@@ -67,6 +68,9 @@ class PrefsManager private constructor(context: Context) {
     // Groups
     fun setGroupVisible(group: String, visible: Boolean) =
         prefs.edit().putBoolean("group_visibility_$group", visible).apply()
+
+    fun setGroupExpanded(group: String, visible: Boolean) =
+        prefs.edit().putBoolean("group_expanded_$group", visible).apply()
 
     // General
     fun getBoolean(key: String, defaultValue: Boolean): Boolean =
