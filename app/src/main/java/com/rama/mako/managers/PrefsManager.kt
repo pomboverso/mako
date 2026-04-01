@@ -19,77 +19,135 @@ class PrefsManager private constructor(context: Context) {
         }
     }
 
-    fun isSearchVisible(): Boolean = prefs.getBoolean("show_search", true)
-    fun hasIconsVisible(): Boolean = prefs.getBoolean("show_app_icons", true)
-    fun hasCollapsibleGroups(): Boolean = prefs.getBoolean("has_collapsible_groups", true)
-    fun isClockVisible(): Boolean = prefs.getBoolean("show_clock", true)
-    fun isBatteryVisible(): Boolean = prefs.getBoolean("show_battery", true)
-    fun isBatteryTemperatureVisible(): Boolean = prefs.getBoolean("show_battery_temperature", true)
+    // APPS
+
+    fun getAppIds(): Set<String> =
+        prefs.getStringSet("apps:ids", emptySet()) ?: emptySet()
+
+    fun setAppIds(ids: Set<String>) =
+        prefs.edit().putStringSet("apps:ids", ids).apply()
+
+    fun getAppLabel(id: String): String =
+        prefs.getString("app:$id:label", "") ?: ""
+
+    fun setAppLabel(id: String, value: String) =
+        prefs.edit().putString("app:$id:label", value).apply()
+
+    fun getAppGroupId(id: String): Int =
+        prefs.getInt("app:$id:group_id", 0)
+
+    fun setAppGroupId(id: String, groupId: Int) =
+        prefs.edit().putInt("app:$id:group_id", groupId).apply()
+
+    // GROUPS
+
+    fun getGroupIds(): Set<String> =
+        prefs.getStringSet("groups:ids", setOf("0")) ?: setOf("0")
+
+    fun setGroupIds(ids: Set<String>) =
+        prefs.edit().putStringSet("groups:ids", ids).apply()
+
+    fun getGroupLabel(id: String): String =
+        prefs.getString("group:$id:label", "") ?: ""
+
+    fun setGroupLabel(id: String, value: String) =
+        prefs.edit().putString("group:$id:label", value).apply()
+
+    fun isGroupVisible(id: String): Boolean =
+        prefs.getBoolean("group:$id:visible", true)
+
+    fun setGroupVisible(id: String, value: Boolean) =
+        prefs.edit().putBoolean("group:$id:visible", value).apply()
+
+    fun isGroupExpanded(id: String): Boolean =
+        prefs.getBoolean("group:$id:expanded", true)
+
+    fun setGroupExpanded(id: String, value: Boolean) =
+        prefs.edit().putBoolean("group:$id:expanded", value).apply()
+
+    // SETTINGS - APPS
+
+    fun isSearchVisible(): Boolean =
+        prefs.getBoolean("settings:apps:search", true)
+
+    fun setSearchVisible(value: Boolean) =
+        prefs.edit().putBoolean("settings:apps:search", value).apply()
+
+    fun hasIconsVisible(): Boolean =
+        prefs.getBoolean("settings:apps:icons", true)
+
+    fun setIconsVisible(value: Boolean) =
+        prefs.edit().putBoolean("settings:apps:icons", value).apply()
+
+    // SETTINGS - GROUPS
+
+    fun hasGroupHeaders(): Boolean =
+        prefs.getBoolean("settings:groups:headers", true)
+
+    fun hasCollapsibleGroups(): Boolean =
+        prefs.getBoolean("settings:groups:collapsible", true)
+
+    // SETTINGS - CLOCK
+
+    fun getClockFormat(): String =
+        prefs.getString("settings:clock:format", "24-hours") ?: "24-hours"
+
+    fun setClockFormat(format: String) =
+        prefs.edit().putString("settings:clock:format", format).apply()
+
+    // SETTINGS - DATE
+
+    fun isDateVisible(): Boolean =
+        prefs.getBoolean("settings:date:visible", true)
+
+    fun setDateVisible(value: Boolean) =
+        prefs.edit().putBoolean("settings:date:visible", value).apply()
+
+    fun isYearDayVisible(): Boolean =
+        prefs.getBoolean("settings:date:year_day", true)
+
+    // SETTINGS - BATTERY
+
+    fun isBatteryVisible(): Boolean =
+        prefs.getBoolean("settings:battery:visible", true)
+
+    fun isBatteryTemperatureVisible(): Boolean =
+        prefs.getBoolean("settings:battery:temperature", true)
+
     fun isBatteryChargeStatusVisible(): Boolean =
-        prefs.getBoolean("show_battery_charge_status", true)
+        prefs.getBoolean("settings:battery:charge_status", true)
 
-    fun isDateVisible(): Boolean = prefs.getBoolean("show_date", true)
-    fun isGroupHeaderVisible(): Boolean = prefs.getBoolean("show_group_header", true)
-    fun hasUngroupedAppsVisible(): Boolean = prefs.getBoolean("show_ungrouped_apps", true)
+    // SETTINGS - FONT
 
-    fun isYearDayVisible(): Boolean = prefs.getBoolean("show_year_day", true)
-    fun isGroupVisible(group: String): Boolean = prefs.getBoolean("group_visibility_$group", true)
-    fun isGroupExpanded(group: String): Boolean = prefs.getBoolean("group_expanded_$group", true)
+    fun getFontStyle(): String =
+        prefs.getString("settings:font:style", "system") ?: "system"
 
-    // Fonts
-    fun getFontStyle(): String? = prefs.getString("font_style", "system")
-    fun setFontSystem() =
-        prefs.edit().putString("font_style", "system").apply()
+    fun setFontStyle(style: String) =
+        prefs.edit().putString("settings:font:style", style).apply()
 
-    fun setFontQuicksand() =
-        prefs.edit().putString("font_style", "quicksand").apply()
+    fun setFontSystem() = setFontStyle("system")
+    fun setFontQuicksand() = setFontStyle("quicksand")
+    fun setFontMontserrat() = setFontStyle("montserrat")
+    fun setFontRobotoslab() = setFontStyle("robotoslab")
+    fun setFontJersey() = setFontStyle("jersey")
 
-    fun setFontMontserrat() =
-        prefs.edit().putString("font_style", "montserrat").apply()
+    // GENERIC HELPERS
 
-    fun setFontRobotoslab() =
-        prefs.edit().putString("font_style", "robotoslab").apply()
-
-    fun setFontJersey() =
-        prefs.edit().putString("font_style", "jersey").apply()
-
-    // Clock
-    fun getClockFormat(): String? = prefs.getString("clock_format", "system")
-    fun setClockNone() = prefs.edit().putBoolean("show_clock", false).remove("clock_format").apply()
-    fun setClockSystem() =
-        prefs.edit().putBoolean("show_clock", true).putString("clock_format", "system").apply()
-
-    fun setClock24() =
-        prefs.edit().putBoolean("show_clock", true).putString("clock_format", "24").apply()
-
-    fun setClock12() =
-        prefs.edit().putBoolean("show_clock", true).putString("clock_format", "12").apply()
-
-    // Groups
-    fun setGroupVisible(group: String, visible: Boolean) =
-        prefs.edit().putBoolean("group_visibility_$group", visible).apply()
-
-    fun setGroupExpanded(group: String, visible: Boolean) =
-        prefs.edit().putBoolean("group_expanded_$group", visible).apply()
-
-    // General
     fun getBoolean(key: String, defaultValue: Boolean): Boolean =
         prefs.getBoolean(key, defaultValue)
 
-    fun setBoolean(key: String, value: Boolean) = prefs.edit().putBoolean(key, value).apply()
-    fun getString(key: String, defaultValue: String = ""): String {
-        return prefs.getString(key, defaultValue) ?: defaultValue
-    }
+    fun setBoolean(key: String, value: Boolean) =
+        prefs.edit().putBoolean(key, value).apply()
 
-    fun setString(key: String, value: String) {
+    fun getString(key: String, defaultValue: String = ""): String =
+        prefs.getString(key, defaultValue) ?: defaultValue
+
+    fun setString(key: String, value: String) =
         prefs.edit().putString(key, value).apply()
-    }
 
-    fun getStringSet(key: String, default: Set<String>): MutableSet<String> {
-        return prefs.getStringSet(key, default) ?: default.toMutableSet()
-    }
+    fun getStringSet(key: String, default: Set<String>): MutableSet<String> =
+        prefs.getStringSet(key, default) ?: default.toMutableSet()
 
-    fun setStringSet(key: String, value: Set<String>) {
+    fun setStringSet(key: String, value: Set<String>) =
         prefs.edit().putStringSet(key, value).apply()
-    }
 }

@@ -139,7 +139,7 @@ class MainActivity : CsActivity() {
 
     // --- Settings sync (row visibility only) ---
     private fun syncSettings() {
-        timeText.visibility = if (prefs.isClockVisible()) View.VISIBLE else View.GONE
+        timeText.visibility = if (prefs.getClockFormat() != "none") View.VISIBLE else View.GONE
         findViewById<View>(R.id.date_row).visibility =
             if (prefs.isDateVisible()) View.VISIBLE else View.GONE
         findViewById<View>(R.id.battery_row).visibility =

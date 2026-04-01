@@ -5,21 +5,12 @@ import android.os.Bundle
 import android.provider.Settings
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.ListView
-import android.widget.RadioButton
-import android.widget.RadioGroup
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import com.rama.mako.CsActivity
 import com.rama.mako.R
 import com.rama.mako.managers.FontManager
 import com.rama.mako.managers.GroupsManager
 import com.rama.mako.managers.PrefsManager
-import com.rama.mako.utils.sp
 import com.rama.mako.widgets.WdButton
 import com.rama.mako.widgets.WdCheckbox
 
@@ -40,20 +31,23 @@ class SettingsActivity : CsActivity() {
         setupFontStyle()
         setupCheckboxes()
         setupGroups()
-
-
     }
 
     // ------------------- Basic buttons -------------------
     private fun setupBasicButtons() {
-        setupButton(R.id.about_button) { startActivity(Intent(this, AboutActivity::class.java)) }
+        setupButton(R.id.about_button) {
+            startActivity(Intent(this, AboutActivity::class.java))
+        }
+
         setupButton(R.id.close_button) { finish() }
+
         setupButton(R.id.activate_button) {
             openIntent(
                 Intent(Settings.ACTION_HOME_SETTINGS),
                 getString(R.string.unable_open_settings_toast)
             )
         }
+
         setupButton(R.id.wallpaper_button) {
             openIntent(
                 Intent(Intent.ACTION_SET_WALLPAPER),
@@ -62,9 +56,11 @@ class SettingsActivity : CsActivity() {
         }
 
         findViewById<View>(R.id.reset_button).setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java).apply {
-                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            })
+            startActivity(
+                Intent(this, MainActivity::class.java).apply {
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                }
+            )
         }
 
         findViewById<View>(R.id.change_apps_button).setOnClickListener {
@@ -76,39 +72,38 @@ class SettingsActivity : CsActivity() {
         }
     }
 
-    data class AppInfo(
-        val label: String,
-        val packageName: String
-    )
+    data class AppInfo(val label: String, val packageName: String)
 
     private fun getLaunchableApps(): List<AppInfo> {
         val intent = Intent(Intent.ACTION_MAIN, null).apply {
             addCategory(Intent.CATEGORY_LAUNCHER)
         }
 
-        val resolveInfoList = packageManager.queryIntentActivities(intent, 0)
-
-        return resolveInfoList.map {
-            AppInfo(
-                label = it.loadLabel(packageManager).toString(),
-                packageName = it.activityInfo.packageName
-            )
-        }.sortedBy { it.label.lowercase() }
+        return packageManager.queryIntentActivities(intent, 0)
+            .map {
+                AppInfo(
+                    label = it.loadLabel(packageManager).toString(),
+                    packageName = it.activityInfo.packageName
+                )
+            }
+            .sortedBy { it.label.lowercase() }
     }
 
     private fun showAppPickerDialog() {
         val dialogView = layoutInflater.inflate(R.layout.dialog_pick_clock_app, null)
         FontManager.applyFont(this, dialogView)
-        val dialog = android.app.Dialog(this)
-        dialog.setContentView(dialogView)
-        dialog.setCancelable(true)
+
+        val dialog = android.app.Dialog(this).apply {
+            setContentView(dialogView)
+            setCancelable(true)
+        }
 
         val listView = dialogView.findViewById<ListView>(R.id.app_list)
         val closeBtn = dialogView.findViewById<WdButton>(R.id.close_button)
 
         val apps = getLaunchableApps()
 
-        val adapter = object : android.widget.BaseAdapter() {
+        val adapter = object : BaseAdapter() {
             override fun getCount() = apps.size
             override fun getItem(position: Int) = apps[position]
             override fun getItemId(position: Int) = position.toLong()
@@ -122,11 +117,8 @@ class SettingsActivity : CsActivity() {
 
                 val app = apps[position]
 
-                val appLabel = view.findViewById<TextView>(R.id.open_app_button)
-                appLabel.text = app.label
-
-                val appIcon = view.findViewById<ImageView>(R.id.app_icon)
-                appIcon.setImageDrawable(
+                view.findViewById<TextView>(R.id.open_app_button).text = app.label
+                view.findViewById<ImageView>(R.id.app_icon).setImageDrawable(
                     packageManager.getApplicationIcon(app.packageName)
                 )
 
@@ -139,11 +131,9 @@ class SettingsActivity : CsActivity() {
 
         listView.setOnItemClickListener { _, _, position, _ ->
             val selectedApp = apps[position]
-
             prefs.setString("clock_app_package", selectedApp.packageName)
 
             Toast.makeText(this, "Selected: ${selectedApp.label}", Toast.LENGTH_SHORT).show()
-
             dialog.dismiss()
         }
 
@@ -158,17 +148,18 @@ class SettingsActivity : CsActivity() {
 
     // ------------------- Font style -------------------
     private fun setupFontStyle() {
-        val fontStyleGroup = findViewById<RadioGroup>(R.id.font_style_group)
-        when {
-            prefs.getFontStyle() == "jersey" -> fontStyleGroup.check(R.id.font_jersey)
-            prefs.getFontStyle() == "montserrat" -> fontStyleGroup.check(R.id.font_montserrat)
-            prefs.getFontStyle() == "robotoslab" -> fontStyleGroup.check(R.id.font_robotoslab)
-            prefs.getClockFormat() == "quicksand" -> fontStyleGroup.check(R.id.font_quicksand)
-            else -> fontStyleGroup.check(R.id.font_system)
+        val group = findViewById<RadioGroup>(R.id.font_style_group)
+
+        when (prefs.getFontStyle()) {
+            "jersey" -> group.check(R.id.font_jersey)
+            "montserrat" -> group.check(R.id.font_montserrat)
+            "robotoslab" -> group.check(R.id.font_robotoslab)
+            "quicksand" -> group.check(R.id.font_quicksand)
+            else -> group.check(R.id.font_system)
         }
 
-        fontStyleGroup.setOnCheckedChangeListener { _, checkedId ->
-            when (checkedId) {
+        group.setOnCheckedChangeListener { _, id ->
+            when (id) {
                 R.id.font_jersey -> prefs.setFontJersey()
                 R.id.font_quicksand -> prefs.setFontQuicksand()
                 R.id.font_robotoslab -> prefs.setFontRobotoslab()
@@ -181,89 +172,91 @@ class SettingsActivity : CsActivity() {
 
     // ------------------- Clock format -------------------
     private fun setupClockFormat() {
-        val clockFormatGroup = findViewById<RadioGroup>(R.id.clock_format_group)
+        val group = findViewById<RadioGroup>(R.id.clock_format_group)
+
         when {
-            !prefs.isClockVisible() -> clockFormatGroup.check(R.id.clock_none)
-            prefs.getClockFormat() == "24" -> clockFormatGroup.check(R.id.clock_24)
-            prefs.getClockFormat() == "12" -> clockFormatGroup.check(R.id.clock_12)
-            else -> clockFormatGroup.check(R.id.clock_system)
+            prefs.getClockFormat() == "none" -> group.check(R.id.clock_none)
+            prefs.getClockFormat() == "24-hours" -> group.check(R.id.clock_24)
+            prefs.getClockFormat() == "12-hours" -> group.check(R.id.clock_12)
+            else -> group.check(R.id.clock_system)
         }
 
-        clockFormatGroup.setOnCheckedChangeListener { _, checkedId ->
-            when (checkedId) {
-                R.id.clock_none -> prefs.setClockNone()
-                R.id.clock_system -> prefs.setClockSystem()
-                R.id.clock_24 -> prefs.setClock24()
-                R.id.clock_12 -> prefs.setClock12()
+        group.setOnCheckedChangeListener { _, id ->
+            when (id) {
+                R.id.clock_none -> prefs.setClockFormat("none")
+                R.id.clock_system -> prefs.setClockFormat("default")
+                R.id.clock_24 -> prefs.setClockFormat("24-hours")
+                R.id.clock_12 -> prefs.setClockFormat("12-hours")
             }
         }
     }
 
     // ------------------- Checkboxes -------------------
     private fun setupCheckboxes() {
-        bindWdCheckbox(
-            R.id.show_date,
-            "show_date",
-            true,
-            dependentViewIds = listOf(R.id.show_year_day)
-        )
+        bindWdCheckbox(R.id.show_date, "show_date", true, listOf(R.id.show_year_day))
         bindWdCheckbox(R.id.show_search, "show_search", true)
         bindWdCheckbox(R.id.show_icons, "show_app_icons", true)
+
         bindWdCheckbox(
             R.id.show_group_header,
             "show_group_header",
             true,
-            dependentViewIds = listOf(R.id.has_collapsible_groups)
+            listOf(R.id.has_collapsible_groups)
         )
+
         bindWdCheckbox(R.id.show_ungrouped_apps, "show_ungrouped_apps", true)
         bindWdCheckbox(R.id.has_collapsible_groups, "has_collapsible_groups", true)
 
         bindWdCheckbox(R.id.show_year_day, "show_year_day", true)
+
         bindWdCheckbox(
             R.id.show_battery,
             "show_battery",
             true,
-            dependentViewIds = listOf(
+            listOf(
                 R.id.show_battery_temperature,
                 R.id.show_battery_charge_status
             )
         )
+
         bindWdCheckbox(R.id.show_battery_temperature, "show_battery_temperature", true)
         bindWdCheckbox(R.id.show_battery_charge_status, "show_battery_charge_status", true)
     }
 
-
     private fun bindWdCheckbox(
         wdCheckboxId: Int,
-        prefKey: String,
+        key: String,
         defaultValue: Boolean,
         dependentViewIds: List<Int>? = null,
         onChange: ((Boolean) -> Unit)? = null
     ) {
-        val wdCheckbox = findViewById<WdCheckbox>(wdCheckboxId)
+        val checkbox = findViewById<WdCheckbox>(wdCheckboxId)
+        val dependents = dependentViewIds?.map { findViewById<View>(it) }
 
-        // Collect all dependent views in a list
-        val dependentViews: List<View>? = dependentViewIds?.map { findViewById<View>(it) }
+        val isChecked = prefs.getBoolean(key, defaultValue)
+        checkbox.setChecked(isChecked)
 
-        val isChecked = prefs.getBoolean(prefKey, defaultValue)
-        wdCheckbox.setChecked(isChecked)
+        dependents?.forEach {
+            it.visibility = if (isChecked) View.VISIBLE else View.GONE
+        }
 
-        // Set initial visibility for all dependent views
-        dependentViews?.forEach { it.visibility = if (isChecked) View.VISIBLE else View.GONE }
+        checkbox.setOnCheckedChangeListener { checked ->
+            prefs.setBoolean(key, checked)
 
-        wdCheckbox.setOnCheckedChangeListener { checked ->
-            prefs.setBoolean(prefKey, checked)
-            // Update visibility for all dependent views
-            dependentViews?.forEach { it.visibility = if (checked) View.VISIBLE else View.GONE }
+            dependents?.forEach {
+                it.visibility = if (checked) View.VISIBLE else View.GONE
+            }
+
             onChange?.invoke(checked)
         }
     }
 
-    // ------------------- Groups management -------------------
+    // ------------------- Groups -------------------
     private fun setupGroups() {
-        val groupsContainer = findViewById<RadioGroup>(R.id.groups)
+        val container = findViewById<RadioGroup>(R.id.groups)
         val groups = groupsManager.getGroups().toMutableList()
-        groups.forEach { group -> addGroupRow(group, groupsContainer, groups) }
+
+        groups.forEach { addGroupRow(it, container, groups) }
 
         findViewById<WdButton>(R.id.add_group).setOnClickListener {
             var newName = getString(R.string.new_group_header)
@@ -276,106 +269,84 @@ class SettingsActivity : CsActivity() {
 
             groups.add(newName)
             groups.sortBy { it.lowercase() }
+
             groupsManager.saveGroups(groups)
             prefs.setBoolean("group_visibility_$newName", true)
 
-            // Rebuild UI
-            groupsContainer.removeAllViews()
-            groups.forEach { g -> addGroupRow(g, groupsContainer, groups) }
+            container.removeAllViews()
+            groups.forEach { addGroupRow(it, container, groups) }
         }
     }
 
     private fun addGroupRow(group: String, container: LinearLayout, groups: MutableList<String>) {
         val row = layoutInflater.inflate(R.layout.list_item_group, container, false)
         FontManager.applyFont(this, row)
-        val nameEdit = row.findViewById<EditText>(R.id.group_name)
-        val deleteBtn = row.findViewById<FrameLayout>(R.id.delete_group)
-        val toggleBtn = row.findViewById<FrameLayout>(R.id.toggle_visibility)
-        val toggleBtnImg = row.findViewById<ImageView>(R.id.toggle_visibility_img)
 
-        nameEdit.setText(group)
-        nameEdit.tag = group
+        val name = row.findViewById<EditText>(R.id.group_name)
+        val delete = row.findViewById<FrameLayout>(R.id.delete_group)
+        val toggle = row.findViewById<FrameLayout>(R.id.toggle_visibility)
+        val toggleIcon = row.findViewById<ImageView>(R.id.toggle_visibility_img)
 
-        // Visibility toggle
-        toggleBtnImg.setImageResource(
-            if (prefs.isGroupVisible(group)) R.drawable.icon_eye
-            else R.drawable.icon_eye_cross
-        )
-        toggleBtn.setOnClickListener {
-            val newVisibility = !prefs.isGroupVisible(group)
-            prefs.setBoolean("group_visibility_$group", newVisibility)
-            toggleBtnImg.setImageResource(
-                if (newVisibility) R.drawable.icon_eye else R.drawable.icon_eye_cross
+        name.setText(group)
+        name.tag = group
+
+        fun updateIcon() {
+            toggleIcon.setImageResource(
+                if (prefs.isGroupVisible(group)) R.drawable.icon_eye
+                else R.drawable.icon_eye_cross
             )
         }
 
-        // Rename
-        nameEdit.addTextChangedListener(object : android.text.TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-            override fun afterTextChanged(s: android.text.Editable?) {
-                val oldName = nameEdit.tag as String
-                val newName = s?.toString()?.trim() ?: return
-                if (oldName != newName && newName.isNotEmpty()) {
-                    groupsManager.renameGroup(oldName, newName)
-                    val index =
-                        groups.indexOfFirst { it.trim().equals(oldName.trim(), ignoreCase = true) }
-                    if (index != -1) groups[index] = newName
-                    nameEdit.tag = newName
-                }
-            }
-        })
+        updateIcon()
 
-        // Delete group
-        deleteBtn.setOnClickListener {
+        toggle.setOnClickListener {
+            val newValue = !prefs.isGroupVisible(group)
+            prefs.setBoolean("group_visibility_$group", newValue)
+            updateIcon()
+        }
+
+        delete.setOnClickListener {
             val dialogView = layoutInflater.inflate(R.layout.dialog_groups_delete, null)
             FontManager.applyFont(this, dialogView)
 
-            val dialog = android.app.Dialog(this)
-            dialog.setContentView(dialogView)
-            dialog.setCancelable(true)
+            val dialog = android.app.Dialog(this).apply {
+                setContentView(dialogView)
+                setCancelable(true)
+            }
 
-            val yesButton = dialogView.findViewById<WdButton>(R.id.yes_button)
-            val noButton = dialogView.findViewById<WdButton>(R.id.no_button)
+            val yes = dialogView.findViewById<WdButton>(R.id.yes_button)
+            val no = dialogView.findViewById<WdButton>(R.id.no_button)
             val radioGroup = dialogView.findViewById<RadioGroup>(R.id.groups)
 
-            val groupName = nameEdit.text.toString()
-
-            val targetGroups = mutableListOf<String>().apply {
+            val groupName = name.text.toString()
+            val targets = mutableListOf<String>().apply {
                 add(ungroupedLabel)
                 addAll(groups.filter { it != groupName && it != ungroupedLabel })
             }
 
-            var selectedGroup: String? = null
+            var selected: String? = null
 
-            targetGroups.forEach { target ->
-                val radio = RadioButton(this).apply {
-                    text = target
+            targets.forEach {
+                RadioButton(this).apply {
+                    text = it
+//                    setOnClickListener { selected = it }
+                    radioGroup.addView(this)
                 }
-
-                FontManager.applyFont(this, radio)
-
-                radio.setOnClickListener {
-                    selectedGroup = target
-                }
-
-                radioGroup.addView(radio)
             }
 
-            yesButton.setOnClickListener {
-                if (selectedGroup == null) {
+            yes.setOnClickListener {
+                if (selected == null) {
                     Toast.makeText(this, "Select a target group", Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
 
-                groupsManager.deleteGroup(groupName, selectedGroup)
+                groupsManager.deleteGroup(groupName, selected)
                 groups.remove(groupName)
                 container.removeView(row)
-
                 dialog.dismiss()
             }
 
-            noButton.setOnClickListener { dialog.dismiss() }
+            no.setOnClickListener { dialog.dismiss() }
 
             dialog.show()
             dialog.window?.setLayout(
@@ -392,8 +363,8 @@ class SettingsActivity : CsActivity() {
         findViewById<View>(id).setOnClickListener { action() }
     }
 
-    private fun openIntent(intent: Intent, errorMsg: String) {
+    private fun openIntent(intent: Intent, error: String) {
         if (intent.resolveActivity(packageManager) != null) startActivity(intent)
-        else Toast.makeText(this, errorMsg, Toast.LENGTH_SHORT).show()
+        else Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
     }
 }
