@@ -20,10 +20,9 @@
     <RadioGroup
         android:id="@+id/groups"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="8sp"
         android:padding="16sp"
-        android:orientation="vertical"
         android:background="@color/secondary_bg"
         android:focusableInTouchMode="true" />
 

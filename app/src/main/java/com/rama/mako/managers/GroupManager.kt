@@ -12,8 +12,19 @@ class GroupsManager(private val context: Context) {
         return prefs.getGroupIds().sortedBy { prefs.getGroupLabel(it).lowercase() }
     }
 
-    fun createGroup(label: String): String {
+    fun createGroup(baseLabel: String): String {
         val id = System.currentTimeMillis().toString()
+
+        val existingLabels = prefs.getGroupIds()
+            .map { prefs.getGroupLabel(it).trim().lowercase() }
+
+        var label = baseLabel
+        var counter = 1
+
+        while (existingLabels.contains(label.trim().lowercase())) {
+            counter++
+            label = "$baseLabel $counter"
+        }
 
         val updated = prefs.getGroupIds().toMutableSet()
         updated.add(id)

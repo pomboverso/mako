@@ -269,7 +269,7 @@ class SettingsActivity : CsActivity() {
 
     // ------------------- Groups -------------------
     private fun setupGroups() {
-        val container = findViewById<RadioGroup>(R.id.groups)
+        val container = findViewById<LinearLayout>(R.id.groups)
 
         fun render() {
             container.removeAllViews()
@@ -283,20 +283,7 @@ class SettingsActivity : CsActivity() {
         render()
 
         findViewById<WdButton>(R.id.add_group).setOnClickListener {
-
-            var newLabel = getString(R.string.new_group_header)
-            var counter = 1
-
-            val existingLabels = prefs.getGroupIds()
-                .map { prefs.getGroupLabel(it) }
-
-            while (existingLabels.contains(newLabel)) {
-                counter++
-                newLabel = getString(R.string.new_group_header_count, counter)
-            }
-
-            groupsManager.createGroup(newLabel)
-
+            groupsManager.createGroup(getString(R.string.new_group_header))
             render()
         }
     }
@@ -317,6 +304,9 @@ class SettingsActivity : CsActivity() {
 
         name.setText(groupLabel)
         name.tag = groupId
+        name.setSaveEnabled(false)
+//        name.freezesText = false
+//        name.isSaveEnabled = false
 
         fun updateIcon() {
             toggleIcon.setImageResource(
@@ -335,20 +325,18 @@ class SettingsActivity : CsActivity() {
         }
 
         // ------------------- Rename -------------------
-        name.addTextChangedListener(object : android.text.TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        name.setText(groupLabel)
+        name.tag = groupId
 
-            override fun afterTextChanged(s: android.text.Editable?) {
-                val newLabel = s?.toString()?.trim() ?: return
-                if (newLabel.isEmpty()) return
-
-                val id = name.tag as String
-
-                // Only update label, NOT identity
-                prefs.setGroupLabel(id, newLabel)
+        name.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) {
+                val newLabel = name.text.toString().trim()
+                if (newLabel.isNotEmpty()) {
+                    val id = name.tag as String
+                    prefs.setGroupLabel(id, newLabel)
+                }
             }
-        })
+        }
 
         // ------------------- Delete -------------------
         delete.setOnClickListener {
