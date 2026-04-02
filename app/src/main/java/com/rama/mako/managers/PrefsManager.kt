@@ -2,6 +2,10 @@ package com.rama.mako.managers
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.net.Uri
+import android.util.Log
+import org.json.JSONObject
+import java.io.File
 
 class PrefsManager private constructor(context: Context) {
 
@@ -76,9 +80,6 @@ class PrefsManager private constructor(context: Context) {
     fun hasIconsVisible(): Boolean =
         prefs.getBoolean("settings:apps:icons", true)
 
-    fun setIconsVisible(value: Boolean) =
-        prefs.edit().putBoolean("settings:apps:icons", value).apply()
-
     // SETTINGS - GROUPS
 
     fun hasGroupHeaders(): Boolean =
@@ -105,9 +106,6 @@ class PrefsManager private constructor(context: Context) {
 
     fun isDateVisible(): Boolean =
         prefs.getBoolean("settings:date:visible", true)
-
-    fun setDateVisible(value: Boolean) =
-        prefs.edit().putBoolean("settings:date:visible", value).apply()
 
     fun isYearDayVisible(): Boolean =
         prefs.getBoolean("settings:date:year_day", true)
@@ -150,4 +148,43 @@ class PrefsManager private constructor(context: Context) {
 
     fun setStringSet(key: String, value: Set<String>) =
         prefs.edit().putStringSet(key, value).apply()
+
+    // Export to SAF (user picked location)
+
+    fun exportToUri(context: Context, uri: Uri): Boolean {
+        return try {
+            val json = buildExportJson()
+
+            context.contentResolver.openOutputStream(uri)?.use {
+                it.write(json.toString(2).toByteArray())
+            }
+
+            true
+        } catch (e: Exception) {
+            e.printStackTrace()
+            false
+        }
+    }
+
+    // Core builder
+
+    private fun buildExportJson(): JSONObject {
+        val json = JSONObject()
+
+        prefs.all.forEach { (key, value) ->
+            Log.d("mako-export", "$key = $value")
+
+            when (value) {
+                is Boolean -> json.put(key, value)
+                is Int -> json.put(key, value)
+                is Long -> json.put(key, value)
+                is Float -> json.put(key, value)
+                is String -> json.put(key, value)
+                is Set<*> -> json.put(key, value.toList())
+                else -> json.put(key, value.toString())
+            }
+        }
+
+        return json
+    }
 }

@@ -69,6 +69,24 @@ class SettingsActivity : CsActivity() {
         findViewById<WdButton>(R.id.set_clock_app_button).setOnClickListener {
             showAppPickerDialog()
         }
+
+        findViewById<WdButton>(R.id.export_button).setOnClickListener {
+            val intent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
+                addCategory(Intent.CATEGORY_OPENABLE)
+                type = "application/json"
+                putExtra(Intent.EXTRA_TITLE, "prefs_backup.json")
+            }
+
+            startActivityForResult(intent, 1001)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == 1001 && resultCode == RESULT_OK) {
+            data?.data?.let { prefs.exportToUri(this, it) }
+        }
     }
 
     data class AppInfo(val label: String, val packageName: String)
@@ -266,10 +284,6 @@ class SettingsActivity : CsActivity() {
 
         findViewById<WdButton>(R.id.add_group).setOnClickListener {
 
-            // Generate NEW ID (simple incremental or timestamp)
-            val newId = System.currentTimeMillis().toString()
-
-            // Default label
             var newLabel = getString(R.string.new_group_header)
             var counter = 1
 
@@ -281,14 +295,7 @@ class SettingsActivity : CsActivity() {
                 newLabel = getString(R.string.new_group_header_count, counter)
             }
 
-            // Save new group
-            val updatedIds = prefs.getGroupIds().toMutableSet()
-            updatedIds.add(newId)
-
-            prefs.setGroupIds(updatedIds)
-            prefs.setGroupLabel(newId, newLabel)
-            prefs.setGroupVisible(newId, true)
-            prefs.setGroupExpanded(newId, true)
+            groupsManager.createGroup(newLabel)
 
             render()
         }
@@ -309,7 +316,7 @@ class SettingsActivity : CsActivity() {
         val toggleIcon = row.findViewById<ImageView>(R.id.toggle_visibility_img)
 
         name.setText(groupLabel)
-        name.tag = groupId // store ID, not label
+        name.tag = groupId
 
         fun updateIcon() {
             toggleIcon.setImageResource(
