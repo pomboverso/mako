@@ -78,7 +78,7 @@ class PrefsManager private constructor(context: Context) {
                 SystemIds.UNGROUPED,
                 SystemIds.FAVORITES
             )
-            
+
             prefs.edit()
                 .putStringSet(PrefKeys.GROUPS_IDS, defaultIds)
 
@@ -235,23 +235,6 @@ class PrefsManager private constructor(context: Context) {
     fun setString(key: String, value: String) =
         prefs.edit().putString(key, value).apply()
 
-    // Export to SAF (user picked location)
-
-    fun exportToUri(context: Context, uri: Uri): Boolean {
-        return try {
-            val json = buildExportJson()
-
-            context.contentResolver.openOutputStream(uri)?.use {
-                it.write(json.toString(2).toByteArray())
-            }
-
-            true
-        } catch (e: Exception) {
-            e.printStackTrace()
-            false
-        }
-    }
-
     // Core builder
 
     private fun buildExportJson(): JSONObject {
@@ -277,7 +260,29 @@ class PrefsManager private constructor(context: Context) {
         return json
     }
 
-    fun clearAllPrefs() {
-        prefs.edit().clear().apply()
+    // Export to SAF (user picked location)
+
+    fun exportToUri(context: Context, uri: Uri): Boolean {
+        return try {
+            val json = buildExportJson()
+
+            context.contentResolver.openOutputStream(uri)?.use {
+                it.write(json.toString(2).toByteArray())
+            }
+
+            true
+        } catch (e: Exception) {
+            e.printStackTrace()
+            false
+        }
+    }
+
+    fun clearAllPrefs(): Result<Unit> {
+        return try {
+            prefs.edit().clear().apply()
+            Result.success(Unit)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
     }
 }
