@@ -43,12 +43,6 @@
                 android:text="@string/show_group_header_label" />
 
             <com.rama.mako.widgets.WdCheckbox
-                android:id="@+id/show_ungrouped_apps"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/show_ungrouped_apps_label" />
-
-            <com.rama.mako.widgets.WdCheckbox
                 android:id="@+id/has_collapsible_groups"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -105,7 +99,7 @@
                     android:orientation="vertical">
 
                     <RadioButton
-                        android:id="@+id/font_system"
+                        android:id="@+id/font_default"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
@@ -212,6 +206,14 @@
                 </RadioGroup>
             </LinearLayout>
 
+            <com.rama.mako.widgets.WdButton
+                android:id="@+id/set_clock_app_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8sp"
+                android:background="@color/button_secondary_color"
+                android:text="@string/set_clock_app_label" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -288,14 +290,6 @@
                 android:layout_marginBottom="8sp"
                 android:background="@color/button_secondary_color"
                 android:text="@string/set_default_label" />
-
-            <com.rama.mako.widgets.WdButton
-                android:id="@+id/set_clock_app_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8sp"
-                android:background="@color/button_secondary_color"
-                android:text="@string/set_clock_app_label" />
 
             <com.rama.mako.widgets.WdButton
                 android:id="@+id/reset_button"

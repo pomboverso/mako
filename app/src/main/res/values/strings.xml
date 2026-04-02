@@ -75,7 +75,7 @@
     <string name="date_header">Date and Battery</string>
     <string name="groups_header">Groups</string>
     <string name="set_default_label">Set Launcher as default</string>
-    <string name="set_clock_app_label">Clock Tap Action</string>
+    <string name="set_clock_app_label">Change Clock Tap Action</string>
     <string name="refresh_launcher_label">Refresh launcher</string>
     <string name="change_wallpaper_label">Change OS wallpaper</string>
     <string name="about_mako_label">About Mako</string>

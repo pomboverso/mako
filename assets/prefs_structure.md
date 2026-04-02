@@ -79,6 +79,7 @@ settings:groups:headers = true
 settings:groups:collapsible = true
 
 settings:clock:format = "24-hours"
+settings:clock:app = "com.fossify.clock"
 
 settings:date:visible = true
 settings:date:year_day = true

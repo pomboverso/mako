@@ -95,6 +95,12 @@ class PrefsManager private constructor(context: Context) {
     fun setClockFormat(format: String) =
         prefs.edit().putString("settings:clock:format", format).apply()
 
+    fun getClockApp(): String =
+        prefs.getString("settings:clock:app", "org.fossify.clock") ?: ""
+
+    fun setClockApp(appId: String) =
+        prefs.edit().putString("settings:clock:app", appId).apply()
+
     // SETTINGS - DATE
 
     fun isDateVisible(): Boolean =
@@ -124,12 +130,6 @@ class PrefsManager private constructor(context: Context) {
 
     fun setFontStyle(style: String) =
         prefs.edit().putString("settings:font:style", style).apply()
-
-    fun setFontSystem() = setFontStyle("system")
-    fun setFontQuicksand() = setFontStyle("quicksand")
-    fun setFontMontserrat() = setFontStyle("montserrat")
-    fun setFontRobotoslab() = setFontStyle("robotoslab")
-    fun setFontJersey() = setFontStyle("jersey")
 
     // GENERIC HELPERS
 

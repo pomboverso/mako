@@ -72,7 +72,7 @@ class AppListManager(
             if (!isVisible) return@forEach
 
             // header only if group is visible
-            if (prefs.isGroupHeaderVisible()) {
+            if (prefs.hasGroupHeaders()) {
                 items.add(ListItem.Header(groupName))
             }
 

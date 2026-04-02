@@ -18,7 +18,6 @@ class SettingsActivity : CsActivity() {
 
     private val prefs by lazy { PrefsManager.getInstance(this) }
     private val groupsManager by lazy { GroupsManager(this) }
-    private val ungroupedLabel by lazy { getString(R.string.ungrouped_header) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -131,7 +130,7 @@ class SettingsActivity : CsActivity() {
 
         listView.setOnItemClickListener { _, _, position, _ ->
             val selectedApp = apps[position]
-            prefs.setString("clock_app_package", selectedApp.packageName)
+            prefs.setClockApp(selectedApp.packageName)
 
             Toast.makeText(this, "Selected: ${selectedApp.label}", Toast.LENGTH_SHORT).show()
             dialog.dismiss()
@@ -155,16 +154,16 @@ class SettingsActivity : CsActivity() {
             "montserrat" -> group.check(R.id.font_montserrat)
             "robotoslab" -> group.check(R.id.font_robotoslab)
             "quicksand" -> group.check(R.id.font_quicksand)
-            else -> group.check(R.id.font_system)
+            else -> group.check(R.id.font_default)
         }
 
         group.setOnCheckedChangeListener { _, id ->
             when (id) {
-                R.id.font_jersey -> prefs.setFontJersey()
-                R.id.font_quicksand -> prefs.setFontQuicksand()
-                R.id.font_robotoslab -> prefs.setFontRobotoslab()
-                R.id.font_montserrat -> prefs.setFontMontserrat()
-                R.id.font_system -> prefs.setFontSystem()
+                R.id.font_jersey -> prefs.setFontStyle("jersey")
+                R.id.font_quicksand -> prefs.setFontStyle("quicksand")
+                R.id.font_robotoslab -> prefs.setFontStyle("roboto")
+                R.id.font_montserrat -> prefs.setFontStyle("montserrat")
+                R.id.font_default -> prefs.setFontStyle("default")
             }
             refreshFont()
         }
@@ -193,25 +192,24 @@ class SettingsActivity : CsActivity() {
 
     // ------------------- Checkboxes -------------------
     private fun setupCheckboxes() {
-        bindWdCheckbox(R.id.show_date, "show_date", true, listOf(R.id.show_year_day))
-        bindWdCheckbox(R.id.show_search, "show_search", true)
-        bindWdCheckbox(R.id.show_icons, "show_app_icons", true)
+        bindWdCheckbox(R.id.show_date, "settings:date:visible", true, listOf(R.id.show_year_day))
+        bindWdCheckbox(R.id.show_search, "settings:apps:search", true)
+        bindWdCheckbox(R.id.show_icons, "settings:apps:icons", true)
 
         bindWdCheckbox(
             R.id.show_group_header,
-            "show_group_header",
+            "settings:groups:headers",
             true,
             listOf(R.id.has_collapsible_groups)
         )
 
-        bindWdCheckbox(R.id.show_ungrouped_apps, "show_ungrouped_apps", true)
-        bindWdCheckbox(R.id.has_collapsible_groups, "has_collapsible_groups", true)
+        bindWdCheckbox(R.id.has_collapsible_groups, "settings:groups:collapsible", true)
 
-        bindWdCheckbox(R.id.show_year_day, "show_year_day", true)
+        bindWdCheckbox(R.id.show_year_day, "settings:date:year_day", true)
 
         bindWdCheckbox(
             R.id.show_battery,
-            "show_battery",
+            "settings:battery:visible",
             true,
             listOf(
                 R.id.show_battery_temperature,
@@ -219,8 +217,8 @@ class SettingsActivity : CsActivity() {
             )
         )
 
-        bindWdCheckbox(R.id.show_battery_temperature, "show_battery_temperature", true)
-        bindWdCheckbox(R.id.show_battery_charge_status, "show_battery_charge_status", true)
+        bindWdCheckbox(R.id.show_battery_temperature, "settings:battery:temperature", true)
+        bindWdCheckbox(R.id.show_battery_charge_status, "settings:battery:charge_status", true)
     }
 
     private fun bindWdCheckbox(
@@ -254,31 +252,54 @@ class SettingsActivity : CsActivity() {
     // ------------------- Groups -------------------
     private fun setupGroups() {
         val container = findViewById<RadioGroup>(R.id.groups)
-        val groups = groupsManager.getGroups().toMutableList()
 
-        groups.forEach { addGroupRow(it, container, groups) }
+        fun render() {
+            container.removeAllViews()
+
+            prefs.getGroupIds().forEach { id ->
+                val label = prefs.getGroupLabel(id)
+                addGroupRow(id, label, container, mutableListOf())
+            }
+        }
+
+        render()
 
         findViewById<WdButton>(R.id.add_group).setOnClickListener {
-            var newName = getString(R.string.new_group_header)
+
+            // Generate NEW ID (simple incremental or timestamp)
+            val newId = System.currentTimeMillis().toString()
+
+            // Default label
+            var newLabel = getString(R.string.new_group_header)
             var counter = 1
 
-            while (groups.contains(newName)) {
+            val existingLabels = prefs.getGroupIds()
+                .map { prefs.getGroupLabel(it) }
+
+            while (existingLabels.contains(newLabel)) {
                 counter++
-                newName = getString(R.string.new_group_header_count, counter)
+                newLabel = getString(R.string.new_group_header_count, counter)
             }
 
-            groups.add(newName)
-            groups.sortBy { it.lowercase() }
+            // Save new group
+            val updatedIds = prefs.getGroupIds().toMutableSet()
+            updatedIds.add(newId)
 
-            groupsManager.saveGroups(groups)
-            prefs.setBoolean("group_visibility_$newName", true)
+            prefs.setGroupIds(updatedIds)
+            prefs.setGroupLabel(newId, newLabel)
+            prefs.setGroupVisible(newId, true)
+            prefs.setGroupExpanded(newId, true)
 
-            container.removeAllViews()
-            groups.forEach { addGroupRow(it, container, groups) }
+            render()
         }
     }
 
-    private fun addGroupRow(group: String, container: LinearLayout, groups: MutableList<String>) {
+    private fun addGroupRow(
+        groupId: String,
+        groupLabel: String,
+        container: LinearLayout,
+        groups: MutableList<String>
+    ) {
         val row = layoutInflater.inflate(R.layout.list_item_group, container, false)
         FontManager.applyFont(this, row)
 
@@ -287,24 +308,42 @@ class SettingsActivity : CsActivity() {
         val toggle = row.findViewById<FrameLayout>(R.id.toggle_visibility)
         val toggleIcon = row.findViewById<ImageView>(R.id.toggle_visibility_img)
 
-        name.setText(group)
-        name.tag = group
+        name.setText(groupLabel)
+        name.tag = groupId // store ID, not label
 
         fun updateIcon() {
             toggleIcon.setImageResource(
-                if (prefs.isGroupVisible(group)) R.drawable.icon_eye
+                if (prefs.isGroupVisible(groupId)) R.drawable.icon_eye
                 else R.drawable.icon_eye_cross
             )
         }
 
         updateIcon()
 
+        // Toggle visibility (ID-based)
         toggle.setOnClickListener {
-            val newValue = !prefs.isGroupVisible(group)
-            prefs.setBoolean("group_visibility_$group", newValue)
+            val newValue = !prefs.isGroupVisible(groupId)
+            prefs.setGroupVisible(groupId, newValue)
             updateIcon()
         }
 
+        // ------------------- Rename -------------------
+        name.addTextChangedListener(object : android.text.TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: android.text.Editable?) {
+                val newLabel = s?.toString()?.trim() ?: return
+                if (newLabel.isEmpty()) return
+
+                val id = name.tag as String
+
+                // Only update label, NOT identity
+                prefs.setGroupLabel(id, newLabel)
+            }
+        })
+
+        // ------------------- Delete -------------------
         delete.setOnClickListener {
             val dialogView = layoutInflater.inflate(R.layout.dialog_groups_delete, null)
             FontManager.applyFont(this, dialogView)
@@ -318,30 +357,35 @@ class SettingsActivity : CsActivity() {
             val no = dialogView.findViewById<WdButton>(R.id.no_button)
             val radioGroup = dialogView.findViewById<RadioGroup>(R.id.groups)
 
-            val groupName = name.text.toString()
-            val targets = mutableListOf<String>().apply {
-                add(ungroupedLabel)
-                addAll(groups.filter { it != groupName && it != ungroupedLabel })
-            }
+            val currentGroupId = name.tag as String
 
-            var selected: String? = null
+            val targetGroups = prefs.getGroupIds()
+                .filter { it != currentGroupId }
 
-            targets.forEach {
-                RadioButton(this).apply {
-                    text = it
-//                    setOnClickListener { selected = it }
-                    radioGroup.addView(this)
+            var selectedGroupId: String? = null
+
+            targetGroups.forEach { targetId ->
+                val radio = RadioButton(this).apply {
+                    text = prefs.getGroupLabel(targetId)
+                    setOnClickListener { selectedGroupId = targetId }
                 }
+                radioGroup.addView(radio)
             }
 
             yes.setOnClickListener {
-                if (selected == null) {
+                if (selectedGroupId == null) {
                     Toast.makeText(this, "Select a target group", Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
 
-                groupsManager.deleteGroup(groupName, selected)
-                groups.remove(groupName)
+                // move apps + delete
+                groupsManager.deleteGroup(currentGroupId, selectedGroupId!!)
+
+                // remove from prefs
+                val updated = prefs.getGroupIds().toMutableSet()
+                updated.remove(currentGroupId)
+                prefs.setGroupIds(updated)
+
                 container.removeView(row)
                 dialog.dismiss()
             }

@@ -150,7 +150,7 @@ class MainActivity : CsActivity() {
 
     // --- Open system clock safely ---
     private fun openSystemClock() {
-        val packageName = prefs.getString("clock_app_package", "")
+        val packageName = prefs.getClockApp()
 
         if (!packageName.isNullOrEmpty()) {
             val launchIntent = packageManager.getLaunchIntentForPackage(packageName)
