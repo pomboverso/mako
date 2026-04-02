@@ -252,7 +252,15 @@ class PrefsManager private constructor(context: Context) {
                 is Long -> json.put(key, value)
                 is Float -> json.put(key, value)
                 is String -> json.put(key, value)
-//                is Set<*> -> json.put(key, value.toList().sorted()) // optional: sort sets too
+
+                is Set<*> -> {
+                    val array = org.json.JSONArray()
+                    value.forEach { item ->
+                        array.put(item)
+                    }
+                    json.put(key, array)
+                }
+
                 else -> json.put(key, value.toString())
             }
         }
