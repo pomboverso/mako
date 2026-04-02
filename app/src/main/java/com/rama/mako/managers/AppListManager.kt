@@ -83,7 +83,12 @@ class AppListManager(
 
             // Header uses label only for display
             if (prefs.hasGroupHeaders()) {
-                items.add(ListItem.Header(label))
+                items.add(
+                    ListItem.Header(
+                        id = groupId,
+                        title = label
+                    )
+                )
             }
 
             val isExpanded = groupsManager.isGroupExpanded(groupId)
@@ -155,7 +160,13 @@ class AppListManager(
 
             // Header uses label only
             if (prefs.hasGroupHeaders()) {
-                filteredItems.add(ListItem.Header(label))
+                filteredItems.add(
+                    ListItem.Header(
+                        id = groupId,
+                        title = label
+                    )
+                )
+
             }
 
             val isExpanded = groupsManager.isGroupExpanded(groupId)
@@ -350,33 +361,27 @@ class AppListManager(
                             convertView ?: View.inflate(context, R.layout.app_list_header, null)
 
                         val text = view.findViewById<TextView>(R.id.header_text)
+
+                        val groupId = item.id
                         val groupName = item.title
 
-                        text.text = groupName.uppercase()
+                        val isExpanded = groupsManager.isGroupExpanded(groupId)
+
+                        text.text =
+                            (if (isExpanded) "[-] " else "[+] ") + groupName.uppercase()
+
                         FontManager.applyFont(context, text)
 
                         if (prefs.hasCollapsibleGroups()) {
-                            val isVisible =
-                                groupsManager.isGroupExpanded(groupName)
-
-                            text.text =
-                                (if (isVisible) "[-] " else "[+] ") + groupName.uppercase()
-                            text.setPadding(
-                                0,
-                                context.sp(16f),
-                                0,
-                                context.sp(16f)
-                            )
 
                             view.setOnClickListener {
-                                val currentlyVisible = groupsManager.isGroupExpanded(groupName)
-                                groupsManager.setGroupExpanded(groupName, !currentlyVisible)
+                                val currently = groupsManager.isGroupExpanded(groupId)
+                                groupsManager.setGroupExpanded(groupId, !currently)
                                 refresh()
                             }
                         }
 
                         view
-
                     }
 
                     is ListItem.App -> {
@@ -438,7 +443,12 @@ class AppListManager(
     }
 
     private sealed class ListItem {
-        data class Header(val title: String) : ListItem()
+
+        data class Header(
+            val id: String,
+            val title: String
+        ) : ListItem()
+
         data class App(val info: ResolveInfo) : ListItem()
     }
 }
