@@ -323,12 +323,29 @@
                 android:background="@color/button_secondary_color"
                 android:text="@string/about_mako_label" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8sp"
+                android:textSize="16sp"
+                android:textColor="@color/foreground_color"
+                android:text="Debug"
+                android:textStyle="bold" />
+
             <com.rama.mako.widgets.WdButton
                 android:id="@+id/export_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8sp"
                 android:background="@color/button_danger"
-                android:text="Export Data (Debug)" />
+                android:text="Export Data" />
+
+            <com.rama.mako.widgets.WdButton
+                android:id="@+id/clear_prefs_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/button_danger"
+                android:text="Clear Data" />
         </LinearLayout>
     </ScrollView>
 

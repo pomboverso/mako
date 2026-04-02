@@ -11,6 +11,7 @@ import com.rama.mako.R
 import com.rama.mako.managers.FontManager
 import com.rama.mako.managers.GroupsManager
 import com.rama.mako.managers.PrefsManager
+import com.rama.mako.managers.PrefsManager.PrefKeys
 import com.rama.mako.widgets.WdButton
 import com.rama.mako.widgets.WdCheckbox
 
@@ -78,6 +79,10 @@ class SettingsActivity : CsActivity() {
             }
 
             startActivityForResult(intent, 1001)
+        }
+
+        findViewById<WdButton>(R.id.clear_prefs_button).setOnClickListener {
+            prefs.clearAllPrefs()
         }
     }
 
@@ -168,20 +173,20 @@ class SettingsActivity : CsActivity() {
         val group = findViewById<RadioGroup>(R.id.font_style_group)
 
         when (prefs.getFontStyle()) {
-            "jersey" -> group.check(R.id.font_jersey)
-            "montserrat" -> group.check(R.id.font_montserrat)
-            "robotoslab" -> group.check(R.id.font_robotoslab)
-            "quicksand" -> group.check(R.id.font_quicksand)
+            PrefsManager.FontStyle.JERSEY_25 -> group.check(R.id.font_jersey)
+            PrefsManager.FontStyle.MONTSERRAT -> group.check(R.id.font_montserrat)
+            PrefsManager.FontStyle.ROBOTO_SLAB -> group.check(R.id.font_robotoslab)
+            PrefsManager.FontStyle.QUICKSAND -> group.check(R.id.font_quicksand)
             else -> group.check(R.id.font_default)
         }
 
         group.setOnCheckedChangeListener { _, id ->
             when (id) {
-                R.id.font_jersey -> prefs.setFontStyle("jersey")
-                R.id.font_quicksand -> prefs.setFontStyle("quicksand")
-                R.id.font_robotoslab -> prefs.setFontStyle("roboto")
-                R.id.font_montserrat -> prefs.setFontStyle("montserrat")
-                R.id.font_default -> prefs.setFontStyle("default")
+                R.id.font_jersey -> prefs.setFontStyle(PrefsManager.FontStyle.JERSEY_25)
+                R.id.font_quicksand -> prefs.setFontStyle(PrefsManager.FontStyle.QUICKSAND)
+                R.id.font_robotoslab -> prefs.setFontStyle(PrefsManager.FontStyle.ROBOTO_SLAB)
+                R.id.font_montserrat -> prefs.setFontStyle(PrefsManager.FontStyle.MONTSERRAT)
+                R.id.font_default -> prefs.setFontStyle(PrefsManager.FontStyle.DEFAULT)
             }
             refreshFont()
         }
@@ -192,42 +197,42 @@ class SettingsActivity : CsActivity() {
         val group = findViewById<RadioGroup>(R.id.clock_format_group)
 
         when {
-            prefs.getClockFormat() == "none" -> group.check(R.id.clock_none)
-            prefs.getClockFormat() == "24-hours" -> group.check(R.id.clock_24)
-            prefs.getClockFormat() == "12-hours" -> group.check(R.id.clock_12)
+            prefs.getClockFormat() == PrefsManager.ClockFormat.NONE -> group.check(R.id.clock_none)
+            prefs.getClockFormat() == PrefsManager.ClockFormat.HOUR_24 -> group.check(R.id.clock_24)
+            prefs.getClockFormat() == PrefsManager.ClockFormat.HOUR_12 -> group.check(R.id.clock_12)
             else -> group.check(R.id.clock_system)
         }
 
         group.setOnCheckedChangeListener { _, id ->
             when (id) {
-                R.id.clock_none -> prefs.setClockFormat("none")
-                R.id.clock_system -> prefs.setClockFormat("default")
-                R.id.clock_24 -> prefs.setClockFormat("24-hours")
-                R.id.clock_12 -> prefs.setClockFormat("12-hours")
+                R.id.clock_none -> prefs.setClockFormat(PrefsManager.ClockFormat.NONE)
+                R.id.clock_system -> prefs.setClockFormat(PrefsManager.ClockFormat.DEFAULT)
+                R.id.clock_24 -> prefs.setClockFormat(PrefsManager.ClockFormat.HOUR_24)
+                R.id.clock_12 -> prefs.setClockFormat(PrefsManager.ClockFormat.HOUR_12)
             }
         }
     }
 
     // ------------------- Checkboxes -------------------
     private fun setupCheckboxes() {
-        bindWdCheckbox(R.id.show_date, "settings:date:visible", true, listOf(R.id.show_year_day))
-        bindWdCheckbox(R.id.show_search, "settings:apps:search", true)
-        bindWdCheckbox(R.id.show_icons, "settings:apps:icons", true)
+        bindWdCheckbox(R.id.show_date, PrefKeys.DATE_VISIBLE, true, listOf(R.id.show_year_day))
+        bindWdCheckbox(R.id.show_search, PrefKeys.APPS_SEARCH, true)
+        bindWdCheckbox(R.id.show_icons, PrefKeys.APPS_ICONS, true)
 
         bindWdCheckbox(
             R.id.show_group_header,
-            "settings:groups:headers",
+            PrefKeys.GROUPS_HEADERS,
             true,
             listOf(R.id.has_collapsible_groups)
         )
 
-        bindWdCheckbox(R.id.has_collapsible_groups, "settings:groups:collapsible", true)
+        bindWdCheckbox(R.id.has_collapsible_groups, PrefKeys.GROUPS_COLLAPSIBLE, true)
 
-        bindWdCheckbox(R.id.show_year_day, "settings:date:year_day", true)
+        bindWdCheckbox(R.id.show_year_day, PrefKeys.YEAR_DAY, true)
 
         bindWdCheckbox(
             R.id.show_battery,
-            "settings:battery:visible",
+            PrefKeys.BATTERY_VISIBLE,
             true,
             listOf(
                 R.id.show_battery_temperature,
@@ -235,8 +240,8 @@ class SettingsActivity : CsActivity() {
             )
         )
 
-        bindWdCheckbox(R.id.show_battery_temperature, "settings:battery:temperature", true)
-        bindWdCheckbox(R.id.show_battery_charge_status, "settings:battery:charge_status", true)
+        bindWdCheckbox(R.id.show_battery_temperature, PrefKeys.BATTERY_TEMPERATURE, true)
+        bindWdCheckbox(R.id.show_battery_charge_status, PrefKeys.BATTERY_CHARGE_STATUS, true)
     }
 
     private fun bindWdCheckbox(

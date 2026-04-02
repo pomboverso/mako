@@ -1,35 +1,25 @@
 package com.rama.mako.managers
 
 import android.content.Context
+import com.rama.mako.utils.IdUtils
 
 class GroupsManager(private val context: Context) {
 
     private val prefs = PrefsManager.getInstance(context)
 
-    // Groups
+    // ------------------- Groups -------------------
 
-    fun getGroupIds(): List<String> {
-        return prefs.getGroupIds().sortedBy { prefs.getGroupLabel(it).lowercase() }
-    }
+    fun getGroupIds(): List<String> =
+        prefs.getGroupIds()
+            .sortedBy { prefs.getGroupLabel(it).lowercase() }
+
 
     fun createGroup(baseLabel: String): String {
-        val id = System.currentTimeMillis().toString()
+        val id = IdUtils.toBase36Fixed(System.currentTimeMillis())
 
-        val existingLabels = prefs.getGroupIds()
-            .map { prefs.getGroupLabel(it).trim().lowercase() }
+        val label = generateUniqueLabel(baseLabel)
 
-        var label = baseLabel
-        var counter = 1
-
-        while (existingLabels.contains(label.trim().lowercase())) {
-            counter++
-            label = "$baseLabel $counter"
-        }
-
-        val updated = prefs.getGroupIds().toMutableSet()
-        updated.add(id)
-
-        prefs.setGroupIds(updated)
+        prefs.addGroupId(id)
         prefs.setGroupLabel(id, label)
         prefs.setGroupVisible(id, true)
         prefs.setGroupExpanded(id, true)
@@ -38,56 +28,47 @@ class GroupsManager(private val context: Context) {
     }
 
     fun deleteGroup(groupId: String, newGroupId: String?) {
-        val allApps = getAllApps()
-
-        // Move apps
-        allApps.forEach { pkg ->
-            val currentGroupId = getGroupId(pkg)
-            if (currentGroupId == groupId) {
-                setGroupId(pkg, newGroupId)
+        getAllApps().forEach { pkg ->
+            if (prefs.getAppGroupId(pkg) == groupId) {
+                prefs.setAppGroupId(pkg, newGroupId)
             }
         }
 
-        // Remove group
-        val updated = prefs.getGroupIds().toMutableSet()
-        updated.remove(groupId)
-        prefs.setGroupIds(updated)
+        prefs.removeGroupId(groupId)
     }
 
-    // App -> Group mapping
+    // ------------------- Label logic -------------------
 
-    fun getGroupId(pkg: String): String? {
-        return prefs.getString("app:$pkg:group_id", "")
-            .takeIf { it.isNotEmpty() }
-    }
+    private fun generateUniqueLabel(base: String): String {
+        val existing = prefs.getGroupIds()
+            .map { prefs.getGroupLabel(it).trim().lowercase() }
 
-    fun setGroupId(pkg: String, groupId: String?) {
-        if (groupId != null) {
-            prefs.setString("app:$pkg:group_id", groupId)
-        } else {
-            prefs.setString("app:$pkg:group_id", "")
+        var label = base
+        var counter = 1
+
+        while (existing.contains(label.trim().lowercase())) {
+            counter++
+            label = "$base $counter"
         }
+
+        return label
     }
 
-    // Visibility / Expanded
+    // ------------------- Visibility -------------------
 
-    fun isGroupVisible(groupId: String): Boolean {
-        return prefs.isGroupVisible(groupId)
-    }
+    fun isGroupVisible(groupId: String) =
+        prefs.isGroupVisible(groupId)
 
-    fun isGroupExpanded(groupId: String): Boolean {
-        return prefs.isGroupExpanded(groupId)
-    }
+    fun isGroupExpanded(groupId: String) =
+        prefs.isGroupExpanded(groupId)
 
-    fun setGroupVisible(groupId: String, visible: Boolean) {
+    fun setGroupVisible(groupId: String, visible: Boolean) =
         prefs.setGroupVisible(groupId, visible)
-    }
 
-    fun setGroupExpanded(groupId: String, expanded: Boolean) {
+    fun setGroupExpanded(groupId: String, expanded: Boolean) =
         prefs.setGroupExpanded(groupId, expanded)
-    }
 
-    // Helpers
+    // ------------------- Helpers -------------------
 
     private fun getAllApps(): List<String> {
         val pm = context.packageManager

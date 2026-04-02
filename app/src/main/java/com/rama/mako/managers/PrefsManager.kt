@@ -4,13 +4,15 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.net.Uri
 import android.util.Log
+import com.rama.mako.utils.IdUtils
 import org.json.JSONObject
-import java.io.File
 
 class PrefsManager private constructor(context: Context) {
 
     val prefs: SharedPreferences =
         context.getSharedPreferences("settings", Context.MODE_PRIVATE)
+    val ungroupedId = IdUtils.toBase36Fixed(0)
+    val favoritesId = IdUtils.toBase36Fixed(1)
 
     companion object {
         @Volatile
@@ -23,111 +25,191 @@ class PrefsManager private constructor(context: Context) {
         }
     }
 
-    // APPS
+    object PrefKeys {
+        const val APPS_SEARCH = "apps:search"
+        const val APPS_ICONS = "apps:icons"
+        const val GROUPS_IDS = "groups:ids"
+        const val GROUPS_HEADERS = "groups:headers"
+        const val GROUPS_COLLAPSIBLE = "groups:collapsible"
+        const val DATE_VISIBLE = "date:visible"
+        const val DATE_YEAR_DAY = "date:year_day"
+        const val BATTERY_VISIBLE = "battery:visible"
+        const val BATTERY_TEMPERATURE = "battery:temperature"
+        const val BATTERY_CHARGE_STATUS = "battery:charge_status"
+        const val CLOCK_FORMAT = "clock:format"
+        const val CLOCK_APP = "clock:app"
+        const val FONT_STYLE = "font:style"
 
-    fun getAppIds(): Set<String> =
-        prefs.getStringSet("apps:ids", emptySet()) ?: emptySet()
+        fun APP_GROUP_ID(pkg: String) = "app:$pkg:group_id"
+        fun GROUP_LABEL(id: String) = "group:$id:label"
+        fun GROUP_VISIBLE(id: String) = "group:$id:visible"
+        fun GROUP_EXPANDED(id: String) = "group:$id:expanded"
+    }
 
-    fun setAppIds(ids: Set<String>) =
-        prefs.edit().putStringSet("apps:ids", ids).apply()
+    object FontStyle {
+        const val DEFAULT = "default"
+        const val MONTSERRAT = "montserrat"
+        const val QUICKSAND = "quicksand"
+        const val ROBOTO_SLAB = "robotoslab"
+        const val JERSEY_25 = "jersey"
+    }
 
-    fun getAppLabel(id: String): String =
-        prefs.getString("app:$id:label", "") ?: ""
+    object ClockFormat {
+        const val NONE = "none"
+        const val DEFAULT = "default"
+        const val HOUR_12 = "12-hour"
+        const val HOUR_24 = "24-hour"
+    }
 
-    fun setAppLabel(id: String, value: String) =
-        prefs.edit().putString("app:$id:label", value).apply()
+    fun ensureDefaultGroups() {
+        val ids = prefs.getStringSet(PrefKeys.GROUPS_IDS, null)
 
-    fun getAppGroupId(id: String): Int =
-        prefs.getInt("app:$id:group_id", 0)
+        if (ids.isNullOrEmpty()) {
+            val defaultIds = setOf(
+                ungroupedId,
+                favoritesId
+            )
+            val separator = "------"
 
-    fun setAppGroupId(id: String, groupId: Int) =
-        prefs.edit().putInt("app:$id:group_id", groupId).apply()
+            prefs.edit()
+                .putStringSet(PrefKeys.GROUPS_IDS, defaultIds)
+
+                .putString(PrefKeys.GROUP_LABEL(ungroupedId), "$separator Default")
+                .putBoolean(PrefKeys.GROUP_VISIBLE(ungroupedId), true)
+                .putBoolean(PrefKeys.GROUP_EXPANDED(ungroupedId), true)
+
+                .putString(PrefKeys.GROUP_LABEL(favoritesId), "$separator Favorites")
+                .putBoolean(PrefKeys.GROUP_VISIBLE(favoritesId), true)
+                .putBoolean(PrefKeys.GROUP_EXPANDED(favoritesId), true)
+
+                .putString(PrefKeys.FONT_STYLE, FontStyle.JERSEY_25)
+                .putString(PrefKeys.CLOCK_FORMAT, ClockFormat.HOUR_24)
+
+                .putBoolean(PrefKeys.APPS_ICONS, false)
+                .putBoolean(PrefKeys.APPS_SEARCH, false)
+
+                .putBoolean(PrefKeys.BATTERY_VISIBLE, true)
+                .putBoolean(PrefKeys.BATTERY_TEMPERATURE, true)
+                .putBoolean(PrefKeys.BATTERY_CHARGE_STATUS, false)
+
+                .putBoolean(PrefKeys.DATE_VISIBLE, true)
+                .putBoolean(PrefKeys.DATE_YEAR_DAY, true)
+
+                .putBoolean(PrefKeys.GROUPS_HEADERS, true)
+                .putBoolean(PrefKeys.GROUPS_COLLAPSIBLE, true)
+                .apply()
+        }
+    }
+
+    // --- GROUP HELPERS ---
+
+    fun addGroupId(id: String) {
+        val updated = getGroupIds().toMutableSet()
+        updated.add(id)
+        setGroupIds(updated)
+    }
+
+    fun removeGroupId(id: String) {
+        val updated = getGroupIds().toMutableSet()
+        updated.remove(id)
+        setGroupIds(updated)
+    }
+
+    // --- APP GROUP MAPPING ---
+
+    fun getAppGroupId(pkg: String): String? =
+        getString(PrefKeys.APP_GROUP_ID(pkg), "").takeIf { it.isNotEmpty() }
+
+    fun setAppGroupId(pkg: String, groupId: String?) {
+        if (groupId != null) {
+            setString(PrefKeys.APP_GROUP_ID(pkg), groupId)
+        } else {
+            setString(PrefKeys.APP_GROUP_ID(pkg), "")
+        }
+    }
 
     // GROUPS
 
     fun getGroupIds(): Set<String> =
-        prefs.getStringSet("groups:ids", setOf("0")) ?: setOf("0")
+        prefs.getStringSet(PrefKeys.GROUPS_IDS, setOf("0")) ?: setOf("0")
 
     fun setGroupIds(ids: Set<String>) =
-        prefs.edit().putStringSet("groups:ids", ids).apply()
+        prefs.edit().putStringSet(PrefKeys.GROUPS_IDS, ids).apply()
 
     fun getGroupLabel(id: String): String =
-        prefs.getString("group:$id:label", "") ?: ""
+        prefs.getString(PrefKeys.GROUP_LABEL(id), "") ?: ""
 
     fun setGroupLabel(id: String, value: String) =
-        prefs.edit().putString("group:$id:label", value).apply()
+        prefs.edit().putString(PrefKeys.GROUP_LABEL(id), value).apply()
 
     fun isGroupVisible(id: String): Boolean =
-        prefs.getBoolean("group:$id:visible", true)
+        prefs.getBoolean(PrefKeys.GROUP_VISIBLE(id), true)
 
     fun setGroupVisible(id: String, value: Boolean) =
-        prefs.edit().putBoolean("group:$id:visible", value).apply()
+        prefs.edit().putBoolean(PrefKeys.GROUP_VISIBLE(id), value).apply()
 
     fun isGroupExpanded(id: String): Boolean =
-        prefs.getBoolean("group:$id:expanded", true)
+        prefs.getBoolean(PrefKeys.GROUP_EXPANDED(id), true)
 
     fun setGroupExpanded(id: String, value: Boolean) =
-        prefs.edit().putBoolean("group:$id:expanded", value).apply()
+        prefs.edit().putBoolean(PrefKeys.GROUP_EXPANDED(id), value).apply()
 
     // SETTINGS - APPS
 
     fun isSearchVisible(): Boolean =
-        prefs.getBoolean("settings:apps:search", true)
-
-    fun setSearchVisible(value: Boolean) =
-        prefs.edit().putBoolean("settings:apps:search", value).apply()
+        prefs.getBoolean(PrefKeys.APPS_SEARCH, true)
 
     fun hasIconsVisible(): Boolean =
-        prefs.getBoolean("settings:apps:icons", true)
+        prefs.getBoolean(PrefKeys.APPS_ICONS, true)
 
     // SETTINGS - GROUPS
 
     fun hasGroupHeaders(): Boolean =
-        prefs.getBoolean("settings:groups:headers", true)
+        prefs.getBoolean(PrefKeys.GROUPS_HEADERS, true)
 
     fun hasCollapsibleGroups(): Boolean =
-        prefs.getBoolean("settings:groups:collapsible", true)
+        prefs.getBoolean(PrefKeys.GROUPS_COLLAPSIBLE, true)
 
     // SETTINGS - CLOCK
 
     fun getClockFormat(): String =
-        prefs.getString("settings:clock:format", "24-hours") ?: "24-hours"
+        prefs.getString(PrefKeys.CLOCK_FORMAT, ClockFormat.DEFAULT) ?: ClockFormat.DEFAULT
 
     fun setClockFormat(format: String) =
-        prefs.edit().putString("settings:clock:format", format).apply()
+        prefs.edit().putString(PrefKeys.CLOCK_FORMAT, format).apply()
 
     fun getClockApp(): String =
-        prefs.getString("settings:clock:app", "org.fossify.clock") ?: ""
+        prefs.getString(PrefKeys.CLOCK_APP, "org.fossify.clock") ?: "org.fossify.clock"
 
     fun setClockApp(appId: String) =
-        prefs.edit().putString("settings:clock:app", appId).apply()
+        prefs.edit().putString(PrefKeys.CLOCK_APP, appId).apply()
 
     // SETTINGS - DATE
 
     fun isDateVisible(): Boolean =
-        prefs.getBoolean("settings:date:visible", true)
+        prefs.getBoolean(PrefKeys.DATE_VISIBLE, true)
 
     fun isYearDayVisible(): Boolean =
-        prefs.getBoolean("settings:date:year_day", true)
+        prefs.getBoolean(PrefKeys.DATE_YEAR_DAY, true)
 
     // SETTINGS - BATTERY
 
     fun isBatteryVisible(): Boolean =
-        prefs.getBoolean("settings:battery:visible", true)
+        prefs.getBoolean(PrefKeys.BATTERY_VISIBLE, true)
 
     fun isBatteryTemperatureVisible(): Boolean =
-        prefs.getBoolean("settings:battery:temperature", true)
+        prefs.getBoolean(PrefKeys.BATTERY_TEMPERATURE, true)
 
     fun isBatteryChargeStatusVisible(): Boolean =
-        prefs.getBoolean("settings:battery:charge_status", true)
+        prefs.getBoolean(PrefKeys.BATTERY_CHARGE_STATUS, true)
 
     // SETTINGS - FONT
 
     fun getFontStyle(): String =
-        prefs.getString("settings:font:style", "system") ?: "system"
+        prefs.getString(PrefKeys.FONT_STYLE, FontStyle.DEFAULT) ?: FontStyle.DEFAULT
 
     fun setFontStyle(style: String) =
-        prefs.edit().putString("settings:font:style", style).apply()
+        prefs.edit().putString(PrefKeys.FONT_STYLE, style).apply()
 
     // GENERIC HELPERS
 
@@ -142,12 +224,6 @@ class PrefsManager private constructor(context: Context) {
 
     fun setString(key: String, value: String) =
         prefs.edit().putString(key, value).apply()
-
-    fun getStringSet(key: String, default: Set<String>): MutableSet<String> =
-        prefs.getStringSet(key, default) ?: default.toMutableSet()
-
-    fun setStringSet(key: String, value: Set<String>) =
-        prefs.edit().putStringSet(key, value).apply()
 
     // Export to SAF (user picked location)
 
@@ -171,7 +247,10 @@ class PrefsManager private constructor(context: Context) {
     private fun buildExportJson(): JSONObject {
         val json = JSONObject()
 
-        prefs.all.forEach { (key, value) ->
+        val sortedEntries = prefs.all.entries
+            .sortedBy { it.key }
+
+        sortedEntries.forEach { (key, value) ->
             Log.d("mako-export", "$key = $value")
 
             when (value) {
@@ -180,11 +259,15 @@ class PrefsManager private constructor(context: Context) {
                 is Long -> json.put(key, value)
                 is Float -> json.put(key, value)
                 is String -> json.put(key, value)
-                is Set<*> -> json.put(key, value.toList())
+//                is Set<*> -> json.put(key, value.toList().sorted()) // optional: sort sets too
                 else -> json.put(key, value.toString())
             }
         }
 
         return json
+    }
+
+    fun clearAllPrefs() {
+        prefs.edit().clear().apply()
     }
 }

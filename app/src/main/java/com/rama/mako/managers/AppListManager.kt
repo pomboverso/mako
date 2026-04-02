@@ -59,7 +59,7 @@ class AppListManager(
 
         // Map apps by groupId (NOT label)
         val groupedMap = allApps.groupBy { app ->
-            groupsManager.getGroupId(app.activityInfo.packageName) ?: ungroupedId
+            prefs.getAppGroupId(app.activityInfo.packageName) ?: ungroupedId
         }
 
         items.clear()
@@ -131,7 +131,7 @@ class AppListManager(
 
         // Group by ID
         val groupedMap = allApps.groupBy { app ->
-            groupsManager.getGroupId(app.activityInfo.packageName) ?: ungroupedId
+            prefs.getAppGroupId(app.activityInfo.packageName) ?: ungroupedId
         }
 
         // Handle unknown groups (apps pointing to deleted groups)
@@ -261,9 +261,9 @@ class AppListManager(
 
             val radioGroup = RadioGroup(context)
 
-            val currentGroupId = groupsManager.getGroupId(pkg) ?: ungroupedId
+            val currentGroupId = prefs.getAppGroupId(pkg) ?: ungroupedId
 
-            // ✅ All group IDs (include ungrouped)
+            // All group IDs (include ungrouped)
             val groupIds = prefs.getGroupIds().toMutableList().apply {
                 if (!contains(ungroupedId)) add(0, ungroupedId)
             }
@@ -295,9 +295,9 @@ class AppListManager(
 
                 FontManager.applyFont(context, radio)
 
-                // ✅ Use groupId (not label)
+                // Use groupId (not label)
                 radio.setOnClickListener {
-                    groupsManager.setGroupId(pkg, groupId)
+                    prefs.setAppGroupId(pkg, groupId)
                     refresh()
                     dialog.dismiss()
                 }
