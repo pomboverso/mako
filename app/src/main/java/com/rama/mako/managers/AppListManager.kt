@@ -30,7 +30,6 @@ class AppListManager(
     private val items = mutableListOf<ListItem>()
     private lateinit var adapter: ArrayAdapter<ListItem>
     private val iconCache = mutableMapOf<String, Drawable>()
-    private val ungroupedLabel by lazy { context.getString(R.string.ungrouped_header) }
 
     fun setup() {
         buildItems()
@@ -50,16 +49,14 @@ class AppListManager(
 
         val allApps = pm.queryIntentActivities(intent, 0)
 
-        val ungroupedId = "0"
-
         // Get all known group IDs
         val groupIds = prefs.getGroupIds().toMutableSet().apply {
-            add(ungroupedId)
+            add(PrefsManager.SystemIds.UNGROUPED)
         }
 
         // Map apps by groupId (NOT label)
         val groupedMap = allApps.groupBy { app ->
-            prefs.getAppGroupId(app.activityInfo.packageName) ?: ungroupedId
+            prefs.getAppGroupId(app.activityInfo.packageName) ?: PrefsManager.SystemIds.UNGROUPED
         }
 
         items.clear()
@@ -75,8 +72,8 @@ class AppListManager(
             val isVisible = groupsManager.isGroupVisible(groupId)
             if (!isVisible) return@forEach
 
-            val label = if (groupId == ungroupedId) {
-                ungroupedLabel
+            val label = if (groupId == PrefsManager.SystemIds.UNGROUPED) {
+                PrefsManager.UI.UNGROUPED_LABEL
             } else {
                 prefs.getGroupLabel(groupId)
             }
@@ -121,17 +118,14 @@ class AppListManager(
 
         val allApps = pm.queryIntentActivities(intent, 0)
 
-        val ungroupedId = "0"
-        val ungroupedLabel = context.getString(R.string.ungrouped_header)
-
         // All known group IDs
         val groupIds = prefs.getGroupIds().toMutableSet().apply {
-            add(ungroupedId)
+            add(PrefsManager.SystemIds.UNGROUPED)
         }
 
         // Group by ID
         val groupedMap = allApps.groupBy { app ->
-            prefs.getAppGroupId(app.activityInfo.packageName) ?: ungroupedId
+            prefs.getAppGroupId(app.activityInfo.packageName) ?: PrefsManager.SystemIds.UNGROUPED
         }
 
         // Handle unknown groups (apps pointing to deleted groups)
@@ -152,13 +146,12 @@ class AppListManager(
 
             if (matchedApps.isEmpty()) return@forEach
 
-            val label = if (groupId == ungroupedId) {
-                ungroupedLabel
+            val label = if (groupId == PrefsManager.SystemIds.UNGROUPED) {
+                PrefsManager.UI.UNGROUPED_LABEL
             } else {
                 prefs.getGroupLabel(groupId)
             }
-
-            // Header uses label only
+            
             if (prefs.hasGroupHeaders()) {
                 filteredItems.add(
                     ListItem.Header(
@@ -253,26 +246,26 @@ class AppListManager(
         val closeBtn = view.findViewById<View>(R.id.close_button)
         val container = view.findViewById<RadioGroup>(R.id.groups)
 
-        val ungroupedId = "0"
-        val ungroupedLabel = context.getString(R.string.ungrouped_header)
-
         fun renderGroups() {
             container.removeAllViews()
 
             val radioGroup = RadioGroup(context)
 
-            val currentGroupId = prefs.getAppGroupId(pkg) ?: ungroupedId
+            val currentGroupId = prefs.getAppGroupId(pkg) ?: PrefsManager.SystemIds.UNGROUPED
 
             // All group IDs (include ungrouped)
             val groupIds = prefs.getGroupIds().toMutableList().apply {
-                if (!contains(ungroupedId)) add(0, ungroupedId)
+                if (!contains(PrefsManager.SystemIds.UNGROUPED)) add(
+                    0,
+                    PrefsManager.SystemIds.UNGROUPED
+                )
             }
 
             groupIds.forEachIndexed { index, groupId ->
                 val isLast = index == groupIds.lastIndex
 
-                val label = if (groupId == ungroupedId) {
-                    ungroupedLabel
+                val label = if (groupId == PrefsManager.SystemIds.UNGROUPED) {
+                    PrefsManager.UI.UNGROUPED_LABEL
                 } else {
                     prefs.getGroupLabel(groupId)
                 }

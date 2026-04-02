@@ -215,33 +215,33 @@ class SettingsActivity : CsActivity() {
 
     // ------------------- Checkboxes -------------------
     private fun setupCheckboxes() {
-        bindWdCheckbox(R.id.show_date, PrefKeys.DATE_VISIBLE, true, listOf(R.id.show_year_day))
-        bindWdCheckbox(R.id.show_search, PrefKeys.APPS_SEARCH, true)
-        bindWdCheckbox(R.id.show_icons, PrefKeys.APPS_ICONS, true)
+        bindWdCheckbox(R.id.show_date, PrefKeys.DATE_VISIBLE, false, listOf(R.id.show_year_day))
+        bindWdCheckbox(R.id.show_search, PrefKeys.APPS_SEARCH, false)
+        bindWdCheckbox(R.id.show_icons, PrefKeys.APPS_ICONS, false)
 
         bindWdCheckbox(
             R.id.show_group_header,
             PrefKeys.GROUPS_HEADERS,
-            true,
+            false,
             listOf(R.id.has_collapsible_groups)
         )
 
-        bindWdCheckbox(R.id.has_collapsible_groups, PrefKeys.GROUPS_COLLAPSIBLE, true)
+        bindWdCheckbox(R.id.has_collapsible_groups, PrefKeys.GROUPS_COLLAPSIBLE, false)
 
-        bindWdCheckbox(R.id.show_year_day, PrefKeys.YEAR_DAY, true)
+        bindWdCheckbox(R.id.show_year_day, PrefKeys.DATE_YEAR_DAY, false)
 
         bindWdCheckbox(
             R.id.show_battery,
             PrefKeys.BATTERY_VISIBLE,
-            true,
+            false,
             listOf(
                 R.id.show_battery_temperature,
                 R.id.show_battery_charge_status
             )
         )
 
-        bindWdCheckbox(R.id.show_battery_temperature, PrefKeys.BATTERY_TEMPERATURE, true)
-        bindWdCheckbox(R.id.show_battery_charge_status, PrefKeys.BATTERY_CHARGE_STATUS, true)
+        bindWdCheckbox(R.id.show_battery_temperature, PrefKeys.BATTERY_TEMPERATURE, false)
+        bindWdCheckbox(R.id.show_battery_charge_status, PrefKeys.BATTERY_CHARGE_STATUS, false)
     }
 
     private fun bindWdCheckbox(

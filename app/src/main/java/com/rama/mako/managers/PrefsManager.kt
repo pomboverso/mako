@@ -11,8 +11,6 @@ class PrefsManager private constructor(context: Context) {
 
     val prefs: SharedPreferences =
         context.getSharedPreferences("settings", Context.MODE_PRIVATE)
-    val ungroupedId = IdUtils.toBase36Fixed(0)
-    val favoritesId = IdUtils.toBase36Fixed(1)
 
     companion object {
         @Volatile
@@ -23,6 +21,17 @@ class PrefsManager private constructor(context: Context) {
                 INSTANCE ?: PrefsManager(context.applicationContext).also { INSTANCE = it }
             }
         }
+    }
+
+    object UI {
+        const val SEPARATOR = "------"
+        const val UNGROUPED_LABEL = "$SEPARATOR Default"
+        const val FAVORITES_LABEL = "$SEPARATOR Favorites"
+    }
+
+    object SystemIds {
+        val UNGROUPED = IdUtils.toBase36Fixed(0)
+        val FAVORITES = IdUtils.toBase36Fixed(1)
     }
 
     object PrefKeys {
@@ -61,29 +70,31 @@ class PrefsManager private constructor(context: Context) {
         const val HOUR_24 = "24-hour"
     }
 
-    fun ensureDefaultGroups() {
+    fun initPrefs() {
         val ids = prefs.getStringSet(PrefKeys.GROUPS_IDS, null)
 
         if (ids.isNullOrEmpty()) {
             val defaultIds = setOf(
-                ungroupedId,
-                favoritesId
+                SystemIds.UNGROUPED,
+                SystemIds.FAVORITES
             )
-            val separator = "------"
+
 
             prefs.edit()
                 .putStringSet(PrefKeys.GROUPS_IDS, defaultIds)
 
-                .putString(PrefKeys.GROUP_LABEL(ungroupedId), "$separator Default")
-                .putBoolean(PrefKeys.GROUP_VISIBLE(ungroupedId), true)
-                .putBoolean(PrefKeys.GROUP_EXPANDED(ungroupedId), true)
+                .putString(PrefKeys.GROUP_LABEL(SystemIds.UNGROUPED), UI.UNGROUPED_LABEL)
+                .putBoolean(PrefKeys.GROUP_VISIBLE(SystemIds.UNGROUPED), true)
+                .putBoolean(PrefKeys.GROUP_EXPANDED(SystemIds.UNGROUPED), true)
 
-                .putString(PrefKeys.GROUP_LABEL(favoritesId), "$separator Favorites")
-                .putBoolean(PrefKeys.GROUP_VISIBLE(favoritesId), true)
-                .putBoolean(PrefKeys.GROUP_EXPANDED(favoritesId), true)
+                .putString(PrefKeys.GROUP_LABEL(SystemIds.FAVORITES), UI.FAVORITES_LABEL)
+                .putBoolean(PrefKeys.GROUP_VISIBLE(SystemIds.FAVORITES), true)
+                .putBoolean(PrefKeys.GROUP_EXPANDED(SystemIds.FAVORITES), true)
 
                 .putString(PrefKeys.FONT_STYLE, FontStyle.JERSEY_25)
+
                 .putString(PrefKeys.CLOCK_FORMAT, ClockFormat.HOUR_24)
+                .putString(PrefKeys.CLOCK_APP, "")
 
                 .putBoolean(PrefKeys.APPS_ICONS, false)
                 .putBoolean(PrefKeys.APPS_SEARCH, false)
@@ -131,7 +142,7 @@ class PrefsManager private constructor(context: Context) {
     // GROUPS
 
     fun getGroupIds(): Set<String> =
-        prefs.getStringSet(PrefKeys.GROUPS_IDS, setOf("0")) ?: setOf("0")
+        prefs.getStringSet(PrefKeys.GROUPS_IDS, emptySet()) ?: emptySet()
 
     fun setGroupIds(ids: Set<String>) =
         prefs.edit().putStringSet(PrefKeys.GROUPS_IDS, ids).apply()
@@ -143,13 +154,13 @@ class PrefsManager private constructor(context: Context) {
         prefs.edit().putString(PrefKeys.GROUP_LABEL(id), value).apply()
 
     fun isGroupVisible(id: String): Boolean =
-        prefs.getBoolean(PrefKeys.GROUP_VISIBLE(id), true)
+        prefs.getBoolean(PrefKeys.GROUP_VISIBLE(id), false)
 
     fun setGroupVisible(id: String, value: Boolean) =
         prefs.edit().putBoolean(PrefKeys.GROUP_VISIBLE(id), value).apply()
 
     fun isGroupExpanded(id: String): Boolean =
-        prefs.getBoolean(PrefKeys.GROUP_EXPANDED(id), true)
+        prefs.getBoolean(PrefKeys.GROUP_EXPANDED(id), false)
 
     fun setGroupExpanded(id: String, value: Boolean) =
         prefs.edit().putBoolean(PrefKeys.GROUP_EXPANDED(id), value).apply()
@@ -157,29 +168,29 @@ class PrefsManager private constructor(context: Context) {
     // SETTINGS - APPS
 
     fun isSearchVisible(): Boolean =
-        prefs.getBoolean(PrefKeys.APPS_SEARCH, true)
+        prefs.getBoolean(PrefKeys.APPS_SEARCH, false)
 
     fun hasIconsVisible(): Boolean =
-        prefs.getBoolean(PrefKeys.APPS_ICONS, true)
+        prefs.getBoolean(PrefKeys.APPS_ICONS, false)
 
     // SETTINGS - GROUPS
 
     fun hasGroupHeaders(): Boolean =
-        prefs.getBoolean(PrefKeys.GROUPS_HEADERS, true)
+        prefs.getBoolean(PrefKeys.GROUPS_HEADERS, false)
 
     fun hasCollapsibleGroups(): Boolean =
-        prefs.getBoolean(PrefKeys.GROUPS_COLLAPSIBLE, true)
+        prefs.getBoolean(PrefKeys.GROUPS_COLLAPSIBLE, false)
 
     // SETTINGS - CLOCK
 
     fun getClockFormat(): String =
-        prefs.getString(PrefKeys.CLOCK_FORMAT, ClockFormat.DEFAULT) ?: ClockFormat.DEFAULT
+        prefs.getString(PrefKeys.CLOCK_FORMAT, "") ?: ""
 
     fun setClockFormat(format: String) =
         prefs.edit().putString(PrefKeys.CLOCK_FORMAT, format).apply()
 
     fun getClockApp(): String =
-        prefs.getString(PrefKeys.CLOCK_APP, "org.fossify.clock") ?: "org.fossify.clock"
+        prefs.getString(PrefKeys.CLOCK_APP, "") ?: ""
 
     fun setClockApp(appId: String) =
         prefs.edit().putString(PrefKeys.CLOCK_APP, appId).apply()
@@ -187,26 +198,26 @@ class PrefsManager private constructor(context: Context) {
     // SETTINGS - DATE
 
     fun isDateVisible(): Boolean =
-        prefs.getBoolean(PrefKeys.DATE_VISIBLE, true)
+        prefs.getBoolean(PrefKeys.DATE_VISIBLE, false)
 
     fun isYearDayVisible(): Boolean =
-        prefs.getBoolean(PrefKeys.DATE_YEAR_DAY, true)
+        prefs.getBoolean(PrefKeys.DATE_YEAR_DAY, false)
 
     // SETTINGS - BATTERY
 
     fun isBatteryVisible(): Boolean =
-        prefs.getBoolean(PrefKeys.BATTERY_VISIBLE, true)
+        prefs.getBoolean(PrefKeys.BATTERY_VISIBLE, false)
 
     fun isBatteryTemperatureVisible(): Boolean =
-        prefs.getBoolean(PrefKeys.BATTERY_TEMPERATURE, true)
+        prefs.getBoolean(PrefKeys.BATTERY_TEMPERATURE, false)
 
     fun isBatteryChargeStatusVisible(): Boolean =
-        prefs.getBoolean(PrefKeys.BATTERY_CHARGE_STATUS, true)
+        prefs.getBoolean(PrefKeys.BATTERY_CHARGE_STATUS, false)
 
     // SETTINGS - FONT
 
     fun getFontStyle(): String =
-        prefs.getString(PrefKeys.FONT_STYLE, FontStyle.DEFAULT) ?: FontStyle.DEFAULT
+        prefs.getString(PrefKeys.FONT_STYLE, "") ?: ""
 
     fun setFontStyle(style: String) =
         prefs.edit().putString(PrefKeys.FONT_STYLE, style).apply()

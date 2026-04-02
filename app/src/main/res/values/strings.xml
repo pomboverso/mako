@@ -3,8 +3,6 @@
 
     <!-- Global -->
     <string name="go_back_label">Go Back</string>
-    <string name="ungrouped_header" translatable="false">------</string>
-    <string name="favorites_header">------ Favorites</string>
     <string name="new_group_header">------ New Group</string>
     <string name="new_group_header_count">------ New Group %d</string>
     <string name="no_clock_app_found_label">No clock app found</string>

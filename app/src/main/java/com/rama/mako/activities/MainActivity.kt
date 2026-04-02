@@ -33,6 +33,7 @@ class MainActivity : CsActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        PrefsManager.getInstance(this).initPrefs()
         setContentView(R.layout.view_home)
 
         val root = findViewById<View>(R.id.root)
