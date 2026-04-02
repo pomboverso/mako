@@ -84,10 +84,10 @@ class SettingsActivity : CsActivity() {
         findViewById<WdButton>(R.id.clear_prefs_button).setOnClickListener {
             prefs.clearAllPrefs()
                 .onSuccess {
-                    Toast.makeText(this, "Prefs cleared", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Reset done", Toast.LENGTH_SHORT).show()
                 }
                 .onFailure {
-                    Toast.makeText(this, "Failed to clear prefs", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Reset failed", Toast.LENGTH_SHORT).show()
                 }
         }
     }

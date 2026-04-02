@@ -59,8 +59,8 @@ class PrefsManager private constructor(context: Context) {
         const val DEFAULT = "default"
         const val MONTSERRAT = "montserrat"
         const val QUICKSAND = "quicksand"
-        const val ROBOTO_SLAB = "robotoslab"
-        const val JERSEY_25 = "jersey"
+        const val ROBOTO_SLAB = "roboto_slab"
+        const val JERSEY_25 = "jersey_25"
     }
 
     object ClockFormat {
@@ -279,7 +279,8 @@ class PrefsManager private constructor(context: Context) {
 
     fun clearAllPrefs(): Result<Unit> {
         return try {
-            prefs.edit().clear().apply()
+            prefs.edit().clear().commit()
+            initPrefs()
             Result.success(Unit)
         } catch (e: Exception) {
             Result.failure(e)
