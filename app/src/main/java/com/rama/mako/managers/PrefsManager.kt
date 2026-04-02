@@ -78,8 +78,7 @@ class PrefsManager private constructor(context: Context) {
                 SystemIds.UNGROUPED,
                 SystemIds.FAVORITES
             )
-
-
+            
             prefs.edit()
                 .putStringSet(PrefKeys.GROUPS_IDS, defaultIds)
 
