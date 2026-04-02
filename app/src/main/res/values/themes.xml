@@ -1,7 +1,7 @@
 <resources>
     <!-- Base theme -->
     <style name="Theme.Mako" parent="android:Theme.DeviceDefault.NoActionBar">
-        <item name="bgColor">@color/bg_color</item>
+        <item name="bgColor">@color/bg_primary</item>
         <item name="foregroundColor">@color/foreground_color</item>
 
         <item name="android:windowBackground">?attr/bgColor</item>

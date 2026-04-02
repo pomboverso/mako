@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/bg_color">
+    android:background="@color/bg_primary">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -63,7 +63,7 @@
                 android:paddingStart="8sp"
                 android:paddingEnd="8sp"
                 android:orientation="vertical"
-                android:background="@color/secondary_bg"
+                android:background="@color/bg_secondary"
                 android:focusableInTouchMode="true" />
 
             <com.rama.mako.widgets.WdButton
@@ -89,7 +89,7 @@
                 android:padding="16sp"
                 android:orientation="vertical"
                 android:layout_marginBottom="8sp"
-                android:background="@color/secondary_bg"
+                android:background="@color/bg_secondary"
                 android:gravity="center_vertical">
 
                 <RadioGroup
@@ -160,7 +160,7 @@
                 android:padding="16sp"
                 android:orientation="vertical"
                 android:layout_marginBottom="8sp"
-                android:background="@color/secondary_bg"
+                android:background="@color/bg_secondary"
                 android:gravity="center_vertical">
 
                 <RadioGroup

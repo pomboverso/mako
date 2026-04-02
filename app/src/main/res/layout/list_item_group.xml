@@ -27,7 +27,26 @@
         android:maxLines="1"
         android:singleLine="true"
         android:textSize="16sp"
+        android:paddingTop="16sp"
+        android:paddingBottom="16sp"
+        android:paddingStart="8sp"
+        android:paddingEnd="8sp"
+        android:background="@color/input"
         android:layout_height="wrap_content" />
+
+    <FrameLayout
+        android:id="@+id/save_changes_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="12sp">
+
+        <ImageView
+            android:layout_width="24sp"
+            android:layout_height="match_parent"
+            android:padding="0dp"
+            android:src="@drawable/icon_disk"
+            android:contentDescription="Save" />
+    </FrameLayout>
 
     <FrameLayout
         android:id="@+id/delete_group"

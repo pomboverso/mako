@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:padding="16sp"
     android:layout_marginBottom="8sp"
-    android:background="@color/secondary_bg"
+    android:background="@color/bg_secondary"
     android:gravity="center_vertical">
 
     <CheckBox

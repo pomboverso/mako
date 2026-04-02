@@ -50,9 +50,7 @@ class AppListManager(
         val allApps = pm.queryIntentActivities(intent, 0)
 
         // Get all known group IDs
-        val groupIds = prefs.getGroupIds().toMutableSet().apply {
-            add(PrefsManager.SystemIds.UNGROUPED)
-        }
+        val groupIds = prefs.getGroupIds().toMutableSet()
 
         // Map apps by groupId (NOT label)
         val groupedMap = allApps.groupBy { app ->
@@ -119,9 +117,7 @@ class AppListManager(
         val allApps = pm.queryIntentActivities(intent, 0)
 
         // All known group IDs
-        val groupIds = prefs.getGroupIds().toMutableSet().apply {
-            add(PrefsManager.SystemIds.UNGROUPED)
-        }
+        val groupIds = prefs.getGroupIds().toMutableSet()
 
         // Group by ID
         val groupedMap = allApps.groupBy { app ->
@@ -151,7 +147,7 @@ class AppListManager(
             } else {
                 prefs.getGroupLabel(groupId)
             }
-            
+
             if (prefs.hasGroupHeaders()) {
                 filteredItems.add(
                     ListItem.Header(
@@ -254,12 +250,7 @@ class AppListManager(
             val currentGroupId = prefs.getAppGroupId(pkg) ?: PrefsManager.SystemIds.UNGROUPED
 
             // All group IDs (include ungrouped)
-            val groupIds = prefs.getGroupIds().toMutableList().apply {
-                if (!contains(PrefsManager.SystemIds.UNGROUPED)) add(
-                    0,
-                    PrefsManager.SystemIds.UNGROUPED
-                )
-            }
+            val groupIds = prefs.getGroupIds().toMutableList()
 
             groupIds.forEachIndexed { index, groupId ->
                 val isLast = index == groupIds.lastIndex

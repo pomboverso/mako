@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:padding="16sp"
     android:orientation="vertical"
-    android:background="@color/bg_color"
+    android:background="@color/bg_primary"
     android:focusableInTouchMode="true">
 
     <TextView
@@ -23,7 +23,7 @@
         android:layout_marginBottom="8sp"
         android:padding="16sp"
         android:orientation="vertical"
-        android:background="@color/secondary_bg"
+        android:background="@color/bg_secondary"
         android:focusableInTouchMode="true">
 
         <EditText

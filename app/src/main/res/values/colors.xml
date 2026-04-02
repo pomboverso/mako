@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="bg_color">#141417</color>
+    <color name="bg_primary">#141417</color>
     <color name="foreground_color">#CCCCCC</color>
 
     <!-- UI -->
-    <color name="secondary_bg">#1f1f29</color>
-    <color name="tertiary_bg">#322f1b</color>
-    <color name="accent">#abd68e</color>
+    <color name="bg_secondary">#1f1f29</color>
+    <color name="bg_tertiary">#322f1b</color>
+    <color name="accent_primary">#abd68e</color>
     <color name="accent_secondary">#cdc58b</color>
     <color name="accent_tertiary">#DCD07C</color>
     <color name="disabled">#888</color>
+    <color name="input">#16161F</color>
 
     <!-- INPUTS -->
     <color name="button_primary_color">#459984</color>
