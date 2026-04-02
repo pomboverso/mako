@@ -26,12 +26,12 @@ class ClockManager(
             val locale = Locale.getDefault()
 
             // --- Clock ---
-            if (clockFormatPref != "none") {
+            if (clockFormatPref != PrefsManager.ClockFormat.NONE) {
                 timeTextView.visibility = View.VISIBLE
 
                 val use24h = when (clockFormatPref) {
-                    "24-hours" -> true
-                    "12-hours" -> false
+                    PrefsManager.ClockFormat.HOUR_24 -> true
+                    PrefsManager.ClockFormat.HOUR_12 -> false
                     else -> DateFormat.is24HourFormat(timeTextView.context)
                 }
 

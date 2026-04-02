@@ -59,8 +59,8 @@ class PrefsManager private constructor(context: Context) {
         const val DEFAULT = "default"
         const val MONTSERRAT = "montserrat"
         const val QUICKSAND = "quicksand"
-        const val ROBOTO_SLAB = "roboto_slab"
-        const val JERSEY_25 = "jersey_25"
+        const val ROBOTO_SLAB = "roboto-slab"
+        const val JERSEY_25 = "jersey-25"
     }
 
     object ClockFormat {
@@ -127,8 +127,14 @@ class PrefsManager private constructor(context: Context) {
 
     // --- APP GROUP MAPPING ---
 
-    fun getAppGroupId(pkg: String): String? =
-        getString(PrefKeys.APP_GROUP_ID(pkg), "").takeIf { it.isNotEmpty() }
+    //    fun getAppGroupId(pkg: String): String? =
+//        getString(PrefKeys.APP_GROUP_ID(pkg), "").takeIf { it.isNotEmpty() }
+    fun getAppGroupId(pkg: String): String {
+        return prefs.getString(PrefKeys.APP_GROUP_ID(pkg), null)
+            ?: SystemIds.UNGROUPED.also {
+                prefs.edit().putString(PrefKeys.APP_GROUP_ID(pkg), it).apply()
+            }
+    }
 
     fun setAppGroupId(pkg: String, groupId: String?) {
         if (groupId != null) {

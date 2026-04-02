@@ -21,23 +21,23 @@ object FontManager {
 
     private fun getTypeface(context: Context, style: String): Typeface? {
 
-        if (style == "system") return null
+        if (style == PrefsManager.FontStyle.DEFAULT) return null
 
         if (cache.containsKey(style)) {
             return cache[style]
         }
 
         val tf = when (style) {
-            "quicksand" ->
+            PrefsManager.FontStyle.QUICKSAND ->
                 Typeface.createFromAsset(context.assets, "fonts/quicksand_bold.ttf")
 
-            "montserrat" ->
+            PrefsManager.FontStyle.MONTSERRAT ->
                 Typeface.createFromAsset(context.assets, "fonts/montserrat_medium.ttf")
 
-            "robotoslab" ->
+            PrefsManager.FontStyle.ROBOTO_SLAB ->
                 Typeface.createFromAsset(context.assets, "fonts/robotoslab_semibold.ttf")
 
-            "jersey" ->
+            PrefsManager.FontStyle.JERSEY_25 ->
                 Typeface.createFromAsset(context.assets, "fonts/jersey25_regular.ttf")
 
             else -> null

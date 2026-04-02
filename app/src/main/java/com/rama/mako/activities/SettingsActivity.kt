@@ -312,6 +312,7 @@ class SettingsActivity : CsActivity() {
         val delete = row.findViewById<FrameLayout>(R.id.delete_group)
         val toggle = row.findViewById<FrameLayout>(R.id.toggle_visibility)
         val toggleIcon = row.findViewById<ImageView>(R.id.toggle_visibility_img)
+        val saveButton = row.findViewById<FrameLayout>(R.id.save_changes_button)
 
         name.setText(groupLabel)
         name.tag = groupId
@@ -339,13 +340,12 @@ class SettingsActivity : CsActivity() {
         name.setText(groupLabel)
         name.tag = groupId
 
-        name.setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus) {
-                val newLabel = name.text.toString().trim()
-                if (newLabel.isNotEmpty()) {
-                    val id = name.tag as String
-                    prefs.setGroupLabel(id, newLabel)
-                }
+        saveButton.setOnClickListener {
+            val newLabel = name.text.toString().trim()
+            if (newLabel.isNotEmpty()) {
+                val id = name.tag as String
+                prefs.setGroupLabel(id, newLabel)
+                Toast.makeText(this, "Label Updated", Toast.LENGTH_SHORT).show()
             }
         }
 
