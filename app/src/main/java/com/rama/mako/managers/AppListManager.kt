@@ -11,6 +11,7 @@ import android.provider.Settings
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.generateViewId
 import android.view.ViewGroup
 import android.widget.*
 import com.rama.mako.R
@@ -70,11 +71,7 @@ class AppListManager(
             val isVisible = groupsManager.isGroupVisible(groupId)
             if (!isVisible) return@forEach
 
-            val label = if (groupId == PrefsManager.SystemIds.UNGROUPED) {
-                PrefsManager.UI.UNGROUPED_LABEL
-            } else {
-                prefs.getGroupLabel(groupId)
-            }
+            val label = prefs.getGroupLabel(groupId)
 
             // Header uses label only for display
             if (prefs.hasGroupHeaders()) {
@@ -142,11 +139,7 @@ class AppListManager(
 
             if (matchedApps.isEmpty()) return@forEach
 
-            val label = if (groupId == PrefsManager.SystemIds.UNGROUPED) {
-                PrefsManager.UI.UNGROUPED_LABEL
-            } else {
-                prefs.getGroupLabel(groupId)
-            }
+            val label = prefs.getGroupLabel(groupId)
 
             if (prefs.hasGroupHeaders()) {
                 filteredItems.add(
@@ -254,16 +247,12 @@ class AppListManager(
 
             groupIds.forEachIndexed { index, groupId ->
                 val isLast = index == groupIds.lastIndex
+                val label = prefs.getGroupLabel(groupId)
 
-                val label = if (groupId == PrefsManager.SystemIds.UNGROUPED) {
-                    PrefsManager.UI.UNGROUPED_LABEL
-                } else {
-                    prefs.getGroupLabel(groupId)
-                }
-
-                val row = LinearLayout(context).apply {
-                    orientation = LinearLayout.HORIZONTAL
-
+                val radio = RadioButton(context).apply {
+                    id = generateViewId()
+                    text = label
+                    isChecked = groupId == currentGroupId
                     layoutParams = RadioGroup.LayoutParams(
                         RadioGroup.LayoutParams.MATCH_PARENT,
                         RadioGroup.LayoutParams.WRAP_CONTENT
@@ -272,22 +261,15 @@ class AppListManager(
                     }
                 }
 
-                val radio = RadioButton(context).apply {
-                    text = label
-                    isChecked = groupId == currentGroupId
-                }
-
                 FontManager.applyFont(context, radio)
 
-                // Use groupId (not label)
                 radio.setOnClickListener {
                     prefs.setAppGroupId(pkg, groupId)
                     refresh()
                     dialog.dismiss()
                 }
 
-                row.addView(radio)
-                radioGroup.addView(row)
+                radioGroup.addView(radio)
             }
 
             container.addView(radioGroup)

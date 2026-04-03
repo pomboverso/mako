@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
+import android.view.View.generateViewId
 import android.view.ViewGroup
 import android.widget.*
 import com.rama.mako.CsActivity
@@ -317,8 +318,7 @@ class SettingsActivity : CsActivity() {
         name.setText(groupLabel)
         name.tag = groupId
         name.setSaveEnabled(false)
-//        name.freezesText = false
-//        name.isSaveEnabled = false
+        name.id = generateViewId()
 
         fun updateIcon() {
             toggleIcon.setImageResource(
@@ -372,6 +372,7 @@ class SettingsActivity : CsActivity() {
 
             targetGroups.forEach { targetId ->
                 val radio = RadioButton(this).apply {
+                    id = generateViewId()
                     text = prefs.getGroupLabel(targetId)
                     setOnClickListener { selectedGroupId = targetId }
                 }
