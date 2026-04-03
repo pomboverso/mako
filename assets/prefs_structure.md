@@ -1,92 +1,32 @@
 # Prefs Schema
 
-## js
-
-```js
-{
-  apps: {
-    "com.rama.chipdefense_copper.debug": {
-      label: "Chip Defense: Copper",
-      groupId: 0,
-    },
-  },
-  groups: [
-    {
-      // default / ungrouped apps
-      id: 0,
-      label: "---",
-      visible: true,
-      expanded: true,
-    },
-    {
-      id: 1,
-      label: "------- favorites",
-    },
-  ],
-  settings: {
-    apps: {
-      search: true,
-      icons: true,
-    },
-
-    groups: {
-      headers: true,
-      collapsible: true,
-    },
-
-    clock: {
-      // format<none|default|24-hours|12-hours>
-      format: "24-hours",
-    },
-
-    date: {
-      visible: true,
-      year_day: true,
-    },
-
-    battery: {
-      visible: true,
-      temperature: true,
-      charge_status: true,
-    },
-
-    font: {
-      //style<default|jersey|roboto|quicksand|montserrat>
-      style: "jersey",
-    },
-  },
-}
 ```
+app:com.rama.chipdefense_copper.debug:group_id = "00000000000"
+app:com.rama.chipdefense_copper.debug:custom_name = "Chip Defense: Copper"
 
-## Android
+group:00000000000:label = "------ Default"
+group:00000000000:visible = true
+group:00000000000:expanded = true
 
-```
-app:com.rama.chipdefense_copper.debug:label = "Chip Defense: Copper"
-app:com.rama.chipdefense_copper.debug:group_id = 0
+group:00000000001:label = "------ Favorites"
+group:00000000001:visible = true
+group:00000000001:expanded = false
 
-group:0:label = "---"
-group:0:visible = true
-group:0:expanded = true
+apps:search = false
+apps:icons = false
 
-group:1:label = "------- favorites"
-group:1:visible = true
-group:1:expanded = false
+groups:headers = true
+groups:collapsible = true
 
-settings:apps:search = true
-settings:apps:icons = true
+clock:format = "24-hour"
+clock:app = "org.fossify.clock"
 
-settings:groups:headers = true
-settings:groups:collapsible = true
+date:visible = true
+date:year_day = true
 
-settings:clock:format = "24-hours"
-settings:clock:app = "com.fossify.clock"
+battery:visible = true
+battery:temperature = true
+battery:charge_status = false
 
-settings:date:visible = true
-settings:date:year_day = true
-
-settings:battery:visible = true
-settings:battery:temperature = true
-settings:battery:charge_status = true
-
-settings:font:style = "jersey"
+font:style = "jersey-25"
 ```
