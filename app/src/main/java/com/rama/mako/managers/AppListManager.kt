@@ -3,7 +3,6 @@ package com.rama.mako.managers
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
-import android.content.pm.LauncherApps
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.provider.Settings
@@ -143,25 +142,6 @@ class AppListManager(
         items.clear()
         items.addAll(filteredItems)
         adapter.notifyDataSetChanged()
-    }
-
-    private fun launchApp(app: AppsProvider.AppEntry) {
-        val launcherApps = context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
-        try {
-            launcherApps.startMainActivity(
-                app.activityInfo.componentName,
-                app.userHandle,
-                null,
-                null
-            )
-        } catch (e: Exception) {
-            Toast.makeText(
-                context,
-                context.getString(R.string.unable_launch_app_toast),
-                Toast.LENGTH_SHORT
-            ).show()
-            refresh()
-        }
     }
 
     private fun openAppSettings(pkg: String) {
@@ -355,7 +335,16 @@ class AppListManager(
                             }
                             icon.setImageDrawable(drawable)
                             icon.visibility = View.VISIBLE
-                            icon.setOnClickListener { launchApp(app) }
+                            icon.setOnClickListener {
+                                if (!appsProvider.launch(app)) {
+                                    Toast.makeText(
+                                        context,
+                                        context.getString(R.string.unable_launch_app_toast),
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    refresh()
+                                }
+                            }
                             icon.setOnLongClickListener { showContextMenu(it, app); true }
                         } else {
                             icon.visibility = View.GONE
@@ -365,8 +354,26 @@ class AppListManager(
 
                         label.text = getDisplayName(app)
 
-                        label.setOnClickListener { launchApp(app) }
-                        emptySpace.setOnClickListener { launchApp(app) }
+                        label.setOnClickListener {
+                            if (!appsProvider.launch(app)) {
+                                Toast.makeText(
+                                    context,
+                                    context.getString(R.string.unable_launch_app_toast),
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                refresh()
+                            }
+                        }
+                        emptySpace.setOnClickListener {
+                            if (!appsProvider.launch(app)) {
+                                Toast.makeText(
+                                    context,
+                                    context.getString(R.string.unable_launch_app_toast),
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                refresh()
+                            }
+                        }
 
                         label.setOnLongClickListener { showContextMenu(it, app); true }
                         emptySpace.setOnLongClickListener {

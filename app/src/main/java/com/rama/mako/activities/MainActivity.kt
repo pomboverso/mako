@@ -29,6 +29,7 @@ class MainActivity : CsActivity() {
     private lateinit var clockManager: ClockManager
     private lateinit var batteryManager: BatteryManager
     private lateinit var appListManager: AppListManager
+    private lateinit var appsProvider: AppsProvider
 
     private lateinit var prefs: PrefsManager
 
@@ -62,6 +63,7 @@ class MainActivity : CsActivity() {
         batteryManager.register()
 
         // --- App List ---
+        appsProvider = AppsProvider(this)
         appListManager = AppListManager(this, listView, AppsProvider(this))
         appListManager.setup()
 
@@ -154,17 +156,16 @@ class MainActivity : CsActivity() {
     // --- Open system clock safely ---
     private fun openSystemClock() {
         val packageName = prefs.getClockApp()
-
-        if (!packageName.isNullOrEmpty()) {
-            val launchIntent = packageManager.getLaunchIntentForPackage(packageName)
-            if (launchIntent != null) {
-                startActivity(launchIntent)
-            } else {
-                Toast.makeText(
-                    this,
-                    getString(R.string.unable_launch_app_toast),
-                    Toast.LENGTH_SHORT
-                ).show()
+        if (packageName.isNotEmpty()) {
+            val app = appsProvider.getAll().firstOrNull { it.packageName == packageName }
+            if (app != null) {
+                if (!appsProvider.launch(app)) {
+                    Toast.makeText(
+                        this,
+                        getString(R.string.unable_launch_app_toast),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
     }

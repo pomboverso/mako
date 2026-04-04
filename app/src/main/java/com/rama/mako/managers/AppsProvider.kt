@@ -18,6 +18,9 @@ class AppsProvider(private val context: Context) {
         val displayLabel: String = if (isWorkProfile) "[W] $label" else label
     }
 
+    private val launcherApps =
+        context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
+
     fun getAll(): List<AppEntry> {
         val launcherApps = context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
         val userManager = context.getSystemService(Context.USER_SERVICE) as UserManager
@@ -31,6 +34,20 @@ class AppsProvider(private val context: Context) {
                     activityInfo = info
                 )
             }
+        }
+    }
+
+    fun launch(app: AppEntry): Boolean {
+        return try {
+            launcherApps.startMainActivity(
+                app.activityInfo.componentName,
+                app.userHandle,
+                null,
+                null
+            )
+            true
+        } catch (e: Exception) {
+            false
         }
     }
 }
