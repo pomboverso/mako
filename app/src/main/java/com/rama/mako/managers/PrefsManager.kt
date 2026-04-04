@@ -52,7 +52,7 @@ class PrefsManager private constructor(context: Context) {
 
         fun appKey(pkg: String, userHandle: UserHandle): String {
             val userId = userHandle.hashCode()
-            return if (userId == 0) "app:$pkg" else "app:$pkg:work"
+            return if (userId == 0) "app:$pkg" else "app:$pkg:profile_$userId"
         }
 
         fun APP_GROUP_ID(pkg: String, userHandle: UserHandle) =

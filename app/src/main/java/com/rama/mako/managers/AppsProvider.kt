@@ -13,27 +13,28 @@ class AppsProvider(private val context: Context) {
         val packageName: String,
         val label: String,
         val userHandle: UserHandle,
-        val activityInfo: LauncherActivityInfo
+        val activityInfo: LauncherActivityInfo,
+        val profileInitial: String?
     ) {
         val isWorkProfile: Boolean = userHandle.hashCode() != 0
-        val displayLabel: String = if (isWorkProfile) "[W] $label" else label
+        val displayLabel: String = if (isWorkProfile) "[$profileInitial] $label" else label
     }
 
     private val launcherApps =
         context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
     private val iconCache = mutableMapOf<String, Drawable>()
+    private val userManager = context.getSystemService(Context.USER_SERVICE) as UserManager
 
     fun getAll(): List<AppEntry> {
-        val launcherApps = context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
-        val userManager = context.getSystemService(Context.USER_SERVICE) as UserManager
-
         return userManager.userProfiles.flatMap { userHandle ->
+            val profileInitial = getProfileInitial(userHandle)
             launcherApps.getActivityList(null, userHandle).map { info ->
                 AppEntry(
                     packageName = info.applicationInfo.packageName,
                     label = info.label.toString(),
                     userHandle = userHandle,
-                    activityInfo = info
+                    activityInfo = info,
+                    profileInitial = profileInitial
                 )
             }
         }
@@ -58,5 +59,14 @@ class AppsProvider(private val context: Context) {
         return iconCache.getOrPut(key) {
             app.activityInfo.getIcon(context.resources.displayMetrics.densityDpi)
         }
+    }
+
+    private fun getProfileInitial(userHandle: UserHandle): String? {
+        if (userHandle.hashCode() == 0) return null
+        return context.packageManager.getUserBadgedLabel("", userHandle).toString()
+            .trim()
+            .firstOrNull()
+            ?.uppercase()
+            ?: "E"
     }
 }
