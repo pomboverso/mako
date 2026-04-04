@@ -287,7 +287,7 @@ class SettingsActivity : CsActivity() {
         fun render() {
             container.removeAllViews()
 
-            prefs.getGroupIds().forEach { id ->
+            groupsManager.getGroupIds().forEach { id ->
                 val label = prefs.getGroupLabel(id)
                 addGroupRow(id, label, container, mutableListOf())
             }
