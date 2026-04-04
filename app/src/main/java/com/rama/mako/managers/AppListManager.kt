@@ -46,7 +46,7 @@ class AppListManager(
 
         // Map apps by groupId (NOT label)
         val groupedMap = allApps.groupBy { app ->
-            prefs.getAppGroupId(app.packageName) ?: PrefsManager.SystemIds.UNGROUPED
+            prefs.getAppGroupId(app.packageName, app.userHandle) ?: PrefsManager.SystemIds.UNGROUPED
         }
 
         items.clear()
@@ -89,7 +89,7 @@ class AppListManager(
 //            .trim()
 
     private fun getDisplayName(app: AppsProvider.AppEntry): String {
-        return prefs.getCustomName(app.packageName) ?: app.label
+        return prefs.getCustomName(app.packageName, app.userHandle) ?: app.label
     }
 
     fun filter(query: String) {
@@ -104,7 +104,7 @@ class AppListManager(
 
         // Group by ID
         val groupedMap = allApps.groupBy { app ->
-            prefs.getAppGroupId(app.packageName) ?: PrefsManager.SystemIds.UNGROUPED
+            prefs.getAppGroupId(app.packageName, app.userHandle) ?: PrefsManager.SystemIds.UNGROUPED
         }
 
         // Handle unknown groups (apps pointing to deleted groups)
@@ -197,13 +197,13 @@ class AppListManager(
 
         yesButton.setOnClickListener {
             input.text.toString().trim().takeIf { it.isNotEmpty() }
-                ?.let { prefs.setCustomName(pkg, it) }
+                ?.let { prefs.setCustomName(pkg, app.userHandle, it) }
             refresh()
             dialog.dismiss()
         }
 
         resetButton.setOnClickListener {
-            prefs.clearCustomName(pkg)
+            prefs.clearCustomName(pkg, app.userHandle)
             refresh()
             dialog.dismiss()
         }
@@ -231,7 +231,8 @@ class AppListManager(
 
             val radioGroup = RadioGroup(context)
 
-            val currentGroupId = prefs.getAppGroupId(pkg) ?: PrefsManager.SystemIds.UNGROUPED
+            val currentGroupId =
+                prefs.getAppGroupId(pkg, app.userHandle) ?: PrefsManager.SystemIds.UNGROUPED
 
             // All group IDs (include ungrouped)
             val groupIds = prefs.getGroupIds().toMutableList()
@@ -255,7 +256,7 @@ class AppListManager(
                 FontManager.applyFont(context, radio)
 
                 radio.setOnClickListener {
-                    prefs.setAppGroupId(pkg, groupId)
+                    prefs.setAppGroupId(pkg, app.userHandle, groupId)
                     refresh()
                     dialog.dismiss()
                 }

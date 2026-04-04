@@ -33,8 +33,8 @@ class GroupsManager(
     fun deleteGroup(groupId: String, newGroupId: String?) {
         val allApps = appsProvider.getAll()
         allApps.forEach { app ->
-            if (prefs.getAppGroupId(app.packageName) == groupId) {
-                prefs.setAppGroupId(app.packageName, newGroupId)
+            if (prefs.getAppGroupId(app.packageName, app.userHandle) == groupId) {
+                prefs.setAppGroupId(app.packageName, app.userHandle, newGroupId)
             }
         }
 
