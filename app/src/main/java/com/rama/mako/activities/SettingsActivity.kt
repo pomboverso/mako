@@ -351,7 +351,7 @@ class SettingsActivity : CsActivity() {
 
             val currentGroupId = name.tag as String
 
-            val targetGroups = prefs.getGroupIds()
+            val targetGroups = groupsManager.getGroupIds()
                 .filter { it != currentGroupId }
 
             var selectedGroupId: String? = null
