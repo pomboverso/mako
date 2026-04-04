@@ -3,6 +3,7 @@ package com.rama.mako.activities
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
+import android.text.Editable
 import android.view.View
 import android.view.View.generateViewId
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ import com.rama.mako.managers.PrefsManager
 import com.rama.mako.managers.PrefsManager.PrefKeys
 import com.rama.mako.widgets.WdButton
 import com.rama.mako.widgets.WdCheckbox
+import android.text.TextWatcher
 
 class SettingsActivity : CsActivity() {
 
@@ -326,6 +328,24 @@ class SettingsActivity : CsActivity() {
         name.setText(groupLabel)
         name.tag = groupId
 
+        val originalText = name.text.toString()
+
+        name.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val currentText = s?.toString() ?: ""
+
+                saveButton.visibility =
+                    if (currentText != originalText && currentText.isNotBlank())
+                        View.VISIBLE
+                    else
+                        View.GONE
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
         saveButton.setOnClickListener {
             val newLabel = name.text.toString().trim()
             if (newLabel.isNotEmpty()) {
@@ -333,6 +353,7 @@ class SettingsActivity : CsActivity() {
                 prefs.setGroupLabel(id, newLabel)
                 Toast.makeText(this, "Label Updated", Toast.LENGTH_SHORT).show()
             }
+            saveButton.visibility = View.GONE
         }
 
         // ------------------- Delete -------------------
