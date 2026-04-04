@@ -83,7 +83,8 @@ class AppListManager(
     }
 
     private fun getDisplayName(app: AppsProvider.AppEntry): String {
-        return prefs.getCustomName(app.packageName, app.userHandle) ?: app.displayLabel
+        val custom = prefs.getCustomName(app.packageName, app.userHandle)
+        return if (app.isWorkProfile) "[W] ${custom ?: app.label}" else custom ?: app.label
     }
 
     fun filter(query: String) {
