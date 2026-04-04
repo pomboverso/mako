@@ -176,7 +176,8 @@ class AppListManager(
 
     private fun showRenameDialog(app: AppsProvider.AppEntry) {
         val pkg = app.packageName
-        val currentName = getDisplayName(app)
+        val currentName = prefs.getCustomName(app.packageName, app.userHandle)
+            ?: app.label
 
         val view = LayoutInflater.from(context).inflate(R.layout.dialog_rename_app, null)
         FontManager.applyFont(context, view)
