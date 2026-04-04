@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.pm.LauncherActivityInfo
 import android.os.UserHandle
 import android.content.pm.LauncherApps
+import android.graphics.drawable.Drawable
 import android.os.UserManager
 
 class AppsProvider(private val context: Context) {
@@ -20,6 +21,7 @@ class AppsProvider(private val context: Context) {
 
     private val launcherApps =
         context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
+    private val iconCache = mutableMapOf<String, Drawable>()
 
     fun getAll(): List<AppEntry> {
         val launcherApps = context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
@@ -48,6 +50,13 @@ class AppsProvider(private val context: Context) {
             true
         } catch (e: Exception) {
             false
+        }
+    }
+
+    fun getIcon(app: AppEntry): Drawable {
+        val key = "${app.packageName}:${app.userHandle.hashCode()}"
+        return iconCache.getOrPut(key) {
+            app.activityInfo.getIcon(context.resources.displayMetrics.densityDpi)
         }
     }
 }

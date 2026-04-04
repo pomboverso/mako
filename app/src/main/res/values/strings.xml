@@ -118,7 +118,8 @@
     <string name="search_apps_header">Search apps</string>
 
     <!-- Dialog :: Delete Group -->
-    <string name="delete_group_title">Are you sure you want to delete this group?\nYour apps will go to the following group.</string>
+    <string name="delete_group_title">Are you sure you want to delete this group?</string>
+    <string name="delete_group_disclaimer">Your apps will go to the following group.</string>
     <string name="delete_group">Delete group</string>
 
     <!-- Dialog :: Pick Clock App -->

@@ -330,9 +330,8 @@ class AppListManager(
                         val showIcons = prefs.hasIconsVisible()
 
                         if (showIcons) {
-                            val drawable = iconCache.getOrPut(pkg) {
-                                app.activityInfo.getIcon(context.resources.displayMetrics.densityDpi)
-                            }
+                            val drawable = appsProvider.getIcon(app)
+
                             icon.setImageDrawable(drawable)
                             icon.visibility = View.VISIBLE
                             icon.setOnClickListener {

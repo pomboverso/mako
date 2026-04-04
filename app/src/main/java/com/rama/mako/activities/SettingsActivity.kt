@@ -21,12 +21,14 @@ class SettingsActivity : CsActivity() {
 
     private val prefs by lazy { PrefsManager.getInstance(this) }
     private val groupsManager by lazy { GroupsManager(this, AppsProvider(this)) }
+    private lateinit var appsProvider: AppsProvider
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.view_settings)
 
         applyEdgeToEdgePadding(findViewById(android.R.id.content))
+        appsProvider = AppsProvider(this)
 
         setupBasicButtons()
         setupClockFormat()
@@ -102,23 +104,6 @@ class SettingsActivity : CsActivity() {
         }
     }
 
-    data class AppInfo(val label: String, val packageName: String)
-
-    private fun getLaunchableApps(): List<AppInfo> {
-        val intent = Intent(Intent.ACTION_MAIN, null).apply {
-            addCategory(Intent.CATEGORY_LAUNCHER)
-        }
-
-        return packageManager.queryIntentActivities(intent, 0)
-            .map {
-                AppInfo(
-                    label = it.loadLabel(packageManager).toString(),
-                    packageName = it.activityInfo.packageName
-                )
-            }
-            .sortedBy { it.label.lowercase() }
-    }
-
     private fun showAppPickerDialog() {
         val dialogView = layoutInflater.inflate(R.layout.dialog_pick_clock_app, null)
         FontManager.applyFont(this, dialogView)
@@ -131,7 +116,7 @@ class SettingsActivity : CsActivity() {
         val listView = dialogView.findViewById<ListView>(R.id.app_list)
         val closeBtn = dialogView.findViewById<WdButton>(R.id.close_button)
 
-        val apps = getLaunchableApps()
+        val apps = appsProvider.getAll()
 
         val adapter = object : BaseAdapter() {
             override fun getCount() = apps.size
@@ -149,7 +134,7 @@ class SettingsActivity : CsActivity() {
 
                 view.findViewById<TextView>(R.id.open_app_button).text = app.label
                 view.findViewById<ImageView>(R.id.app_icon).setImageDrawable(
-                    packageManager.getApplicationIcon(app.packageName)
+                    appsProvider.getIcon(app)
                 )
 
                 FontManager.applyFont(parent.context, view)
