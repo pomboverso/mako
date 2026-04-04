@@ -13,7 +13,10 @@ class AppsProvider(private val context: Context) {
         val label: String,
         val userHandle: UserHandle,
         val activityInfo: LauncherActivityInfo
-    )
+    ) {
+        val isWorkProfile: Boolean = userHandle.hashCode() != 0
+        val displayLabel: String = if (isWorkProfile) "[W] $label" else label
+    }
 
     fun getAll(): List<AppEntry> {
         val launcherApps = context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps

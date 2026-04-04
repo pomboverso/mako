@@ -81,15 +81,9 @@ class AppListManager(
                 .forEach { items.add(ListItem.App(it)) }
         }
     }
-// TODO Remove
-//    private fun sanitizeSystemLabel(raw: String): String =
-//        raw.replace(Regex("[\\p{So}\\p{Cn}]"), "")
-//            .replace(Regex("[!?.]{2,}"), "")
-//            .replace(Regex("\\s+"), " ")
-//            .trim()
 
     private fun getDisplayName(app: AppsProvider.AppEntry): String {
-        return prefs.getCustomName(app.packageName, app.userHandle) ?: app.label
+        return prefs.getCustomName(app.packageName, app.userHandle) ?: app.displayLabel
     }
 
     fun filter(query: String) {
