@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.*
 import com.rama.mako.CsActivity
 import com.rama.mako.R
+import com.rama.mako.managers.AppsProvider
 import com.rama.mako.managers.FontManager
 import com.rama.mako.managers.GroupsManager
 import com.rama.mako.managers.PrefsManager
@@ -19,7 +20,7 @@ import com.rama.mako.widgets.WdCheckbox
 class SettingsActivity : CsActivity() {
 
     private val prefs by lazy { PrefsManager.getInstance(this) }
-    private val groupsManager by lazy { GroupsManager(this) }
+    private val groupsManager by lazy { GroupsManager(this, AppsProvider(this)) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

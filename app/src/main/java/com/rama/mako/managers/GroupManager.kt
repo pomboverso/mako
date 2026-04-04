@@ -3,7 +3,10 @@ package com.rama.mako.managers
 import android.content.Context
 import com.rama.mako.utils.IdUtils
 
-class GroupsManager(private val context: Context) {
+class GroupsManager(
+    context: Context,
+    private val appsProvider: AppsProvider
+) {
 
     private val prefs = PrefsManager.getInstance(context)
 
@@ -28,9 +31,10 @@ class GroupsManager(private val context: Context) {
     }
 
     fun deleteGroup(groupId: String, newGroupId: String?) {
-        getAllApps().forEach { pkg ->
-            if (prefs.getAppGroupId(pkg) == groupId) {
-                prefs.setAppGroupId(pkg, newGroupId)
+        val allApps = appsProvider.getAll()
+        allApps.forEach { app ->
+            if (prefs.getAppGroupId(app.packageName) == groupId) {
+                prefs.setAppGroupId(app.packageName, newGroupId)
             }
         }
 
@@ -52,32 +56,5 @@ class GroupsManager(private val context: Context) {
         }
 
         return label
-    }
-
-    // ------------------- Visibility -------------------
-
-    fun isGroupVisible(groupId: String) =
-        prefs.isGroupVisible(groupId)
-
-    fun isGroupExpanded(groupId: String) =
-        prefs.isGroupExpanded(groupId)
-
-    fun setGroupVisible(groupId: String, visible: Boolean) =
-        prefs.setGroupVisible(groupId, visible)
-
-    fun setGroupExpanded(groupId: String, expanded: Boolean) =
-        prefs.setGroupExpanded(groupId, expanded)
-
-    // ------------------- Helpers -------------------
-
-    private fun getAllApps(): List<String> {
-        val pm = context.packageManager
-
-        val intent = android.content.Intent(android.content.Intent.ACTION_MAIN).apply {
-            addCategory(android.content.Intent.CATEGORY_LAUNCHER)
-        }
-
-        return pm.queryIntentActivities(intent, 0)
-            .map { it.activityInfo.packageName }
     }
 }

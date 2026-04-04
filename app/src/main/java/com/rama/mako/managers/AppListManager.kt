@@ -3,13 +3,10 @@ package com.rama.mako.managers
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.content.pm.ResolveInfo
 import android.content.pm.LauncherApps
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.provider.Settings
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.generateViewId
@@ -25,11 +22,7 @@ class AppListManager(
     private val listView: ListView,
     private val appsProvider: AppsProvider
 ) {
-
-    private val groupsManager = GroupsManager(context)
     private val prefs = PrefsManager.getInstance(context)
-    private val pm = context.packageManager
-
     private val items = mutableListOf<ListItem>()
     private lateinit var adapter: ArrayAdapter<ListItem>
     private val iconCache = mutableMapOf<String, Drawable>()
@@ -66,7 +59,7 @@ class AppListManager(
 
             val apps = groupedMap[groupId] ?: return@forEach
 
-            val isVisible = groupsManager.isGroupVisible(groupId)
+            val isVisible = prefs.isGroupVisible(groupId)
             if (!isVisible) return@forEach
 
             val label = prefs.getGroupLabel(groupId)
@@ -81,7 +74,7 @@ class AppListManager(
                 )
             }
 
-            val isExpanded = groupsManager.isGroupExpanded(groupId)
+            val isExpanded = prefs.isGroupExpanded(groupId)
             if (!isExpanded) return@forEach
 
             apps.sortedBy { getDisplayName(it).lowercase() }
@@ -122,7 +115,7 @@ class AppListManager(
 
             val apps = groupedMap[groupId] ?: return@forEach
 
-            val isVisible = groupsManager.isGroupVisible(groupId)
+            val isVisible = prefs.isGroupVisible(groupId)
             if (!isVisible) return@forEach
 
             // Filter apps
@@ -144,7 +137,7 @@ class AppListManager(
 
             }
 
-            val isExpanded = groupsManager.isGroupExpanded(groupId)
+            val isExpanded = prefs.isGroupExpanded(groupId)
             if (!isExpanded) return@forEach
 
             matchedApps
@@ -329,7 +322,7 @@ class AppListManager(
                         val groupId = item.id
                         val groupName = item.title
 
-                        val isExpanded = groupsManager.isGroupExpanded(groupId)
+                        val isExpanded = prefs.isGroupExpanded(groupId)
 
                         text.text =
                             (if (isExpanded) "[-] " else "[+] ") + groupName.uppercase()
@@ -339,8 +332,8 @@ class AppListManager(
                         if (prefs.hasCollapsibleGroups()) {
 
                             view.setOnClickListener {
-                                val currently = groupsManager.isGroupExpanded(groupId)
-                                groupsManager.setGroupExpanded(groupId, !currently)
+                                val currently = prefs.isGroupExpanded(groupId)
+                                prefs.setGroupExpanded(groupId, !currently)
                                 refresh()
                             }
                         }
@@ -411,10 +404,3 @@ class AppListManager(
         data class App(val info: AppsProvider.AppEntry) : ListItem()
     }
 }
-
-// --- PrefsManager extension for app custom names ---
-fun PrefsManager.getCustomName(pkg: String): String? = prefs.getString(pkg, null)
-fun PrefsManager.setCustomName(pkg: String, name: String) =
-    prefs.edit().putString(pkg, name).apply()
-
-fun PrefsManager.clearCustomName(pkg: String) = prefs.edit().remove(pkg).apply()
