@@ -50,7 +50,7 @@ class PrefsManager private constructor(context: Context) {
         const val FONT_STYLE = "font:style"
 
         fun APP_GROUP_ID(pkg: String) = "app:$pkg:group_id"
-        fun APP_CUSTOM_NAME(pkg: String) = "app:$pkg:custom_label"
+        fun APP_CUSTOM_LABEL(pkg: String) = "app:$pkg:custom_label"
         fun GROUP_LABEL(id: String) = "group:$id:label"
         fun GROUP_VISIBLE(id: String) = "group:$id:visible"
         fun GROUP_EXPANDED(id: String) = "group:$id:expanded"
@@ -243,13 +243,13 @@ class PrefsManager private constructor(context: Context) {
         prefs.edit().putString(key, value).apply()
 
     fun getCustomName(pkg: String): String? =
-        prefs.getString(PrefKeys.APP_CUSTOM_NAME(pkg), null)?.takeIf { it.isNotEmpty() }
+        prefs.getString(PrefKeys.APP_CUSTOM_LABEL(pkg), null)?.takeIf { it.isNotEmpty() }
 
     fun setCustomName(pkg: String, name: String) =
-        prefs.edit().putString(PrefKeys.APP_CUSTOM_NAME(pkg), name).apply()
+        prefs.edit().putString(PrefKeys.APP_CUSTOM_LABEL(pkg), name).apply()
 
     fun clearCustomName(pkg: String) =
-        prefs.edit().remove(PrefKeys.APP_CUSTOM_NAME(pkg)).apply()
+        prefs.edit().remove(PrefKeys.APP_CUSTOM_LABEL(pkg)).apply()
 
     // Core builder
 
