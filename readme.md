@@ -70,6 +70,12 @@ No network access is required.
 **Mako** is Free Software. You are free to use, study, share, and improve it under the terms of the
 **GNU General Public License v3** or later.
 
+## QA
+
+- Pixel 8 Pro / Android 16 :: 2026
+- Pixel 6 / Graphene OS :: 2026
+- Samsung On 5 / Android 6 :: 2015
+
 ---
 
 ## Acknowledgements

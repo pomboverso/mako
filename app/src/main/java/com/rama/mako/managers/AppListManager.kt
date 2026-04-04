@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
+import android.content.pm.LauncherApps
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.provider.Settings
@@ -21,7 +22,8 @@ import com.rama.mako.widgets.WdButton
 
 class AppListManager(
     private val context: Context,
-    private val listView: ListView
+    private val listView: ListView,
+    private val appsProvider: AppsProvider
 ) {
 
     private val groupsManager = GroupsManager(context)
@@ -44,18 +46,14 @@ class AppListManager(
     }
 
     private fun buildItems() {
-        val intent = Intent(Intent.ACTION_MAIN).apply {
-            addCategory(Intent.CATEGORY_LAUNCHER)
-        }
-
-        val allApps = pm.queryIntentActivities(intent, 0)
+        val allApps = appsProvider.getAll()
 
         // Get all known group IDs
         val groupIds = prefs.getGroupIds().toMutableSet()
 
         // Map apps by groupId (NOT label)
         val groupedMap = allApps.groupBy { app ->
-            prefs.getAppGroupId(app.activityInfo.packageName) ?: PrefsManager.SystemIds.UNGROUPED
+            prefs.getAppGroupId(app.packageName) ?: PrefsManager.SystemIds.UNGROUPED
         }
 
         items.clear()
@@ -90,16 +88,15 @@ class AppListManager(
                 .forEach { items.add(ListItem.App(it)) }
         }
     }
+// TODO Remove
+//    private fun sanitizeSystemLabel(raw: String): String =
+//        raw.replace(Regex("[\\p{So}\\p{Cn}]"), "")
+//            .replace(Regex("[!?.]{2,}"), "")
+//            .replace(Regex("\\s+"), " ")
+//            .trim()
 
-    private fun sanitizeSystemLabel(raw: String): String =
-        raw.replace(Regex("[\\p{So}\\p{Cn}]"), "")
-            .replace(Regex("[!?.]{2,}"), "")
-            .replace(Regex("\\s+"), " ")
-            .trim()
-
-    private fun getDisplayName(app: ResolveInfo): String {
-        val pkg = app.activityInfo.packageName
-        return prefs.getCustomName(pkg) ?: sanitizeSystemLabel(app.loadLabel(pm).toString())
+    private fun getDisplayName(app: AppsProvider.AppEntry): String {
+        return prefs.getCustomName(app.packageName) ?: app.label
     }
 
     fun filter(query: String) {
@@ -107,18 +104,14 @@ class AppListManager(
 
         val filteredItems = mutableListOf<ListItem>()
 
-        val intent = Intent(Intent.ACTION_MAIN).apply {
-            addCategory(Intent.CATEGORY_LAUNCHER)
-        }
-
-        val allApps = pm.queryIntentActivities(intent, 0)
+        val allApps = appsProvider.getAll()
 
         // All known group IDs
         val groupIds = prefs.getGroupIds().toMutableSet()
 
         // Group by ID
         val groupedMap = allApps.groupBy { app ->
-            prefs.getAppGroupId(app.activityInfo.packageName) ?: PrefsManager.SystemIds.UNGROUPED
+            prefs.getAppGroupId(app.packageName) ?: PrefsManager.SystemIds.UNGROUPED
         }
 
         // Handle unknown groups (apps pointing to deleted groups)
@@ -164,11 +157,16 @@ class AppListManager(
         adapter.notifyDataSetChanged()
     }
 
-    private fun launchApp(pkg: String) {
-        pm.getLaunchIntentForPackage(pkg)?.let {
-            it.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            context.startActivity(it)
-        } ?: run {
+    private fun launchApp(app: AppsProvider.AppEntry) {
+        val launcherApps = context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
+        try {
+            launcherApps.startMainActivity(
+                app.activityInfo.componentName,
+                app.userHandle,
+                null,
+                null
+            )
+        } catch (e: Exception) {
             Toast.makeText(
                 context,
                 context.getString(R.string.unable_launch_app_toast),
@@ -188,9 +186,9 @@ class AppListManager(
         )
     }
 
-    private fun showRenameDialog(app: ResolveInfo) {
-        val pkg = app.activityInfo.packageName
-        val currentName = prefs.getCustomName(pkg) ?: getDisplayName(app)
+    private fun showRenameDialog(app: AppsProvider.AppEntry) {
+        val pkg = app.packageName
+        val currentName = getDisplayName(app)
 
         val view = LayoutInflater.from(context).inflate(R.layout.dialog_rename_app, null)
         FontManager.applyFont(context, view)
@@ -221,8 +219,8 @@ class AppListManager(
         dialog.show()
     }
 
-    private fun showGroupsDialog(app: ResolveInfo) {
-        val pkg = app.activityInfo.packageName
+    private fun showGroupsDialog(app: AppsProvider.AppEntry) {
+        val pkg = app.packageName
 
         val view = View.inflate(context, R.layout.dialog_groups_add, null)
         FontManager.applyFont(context, view)
@@ -282,8 +280,8 @@ class AppListManager(
         dialog.show()
     }
 
-    private fun showContextMenu(anchor: View, app: ResolveInfo) {
-        val pkg = app.activityInfo.packageName
+    private fun showContextMenu(anchor: View, app: AppsProvider.AppEntry) {
+        val pkg = app.packageName
         val popup = PopupMenu(context, anchor)
         popup.menuInflater.inflate(R.menu.app_context_menu, popup.menu)
         popup.setOnMenuItemClickListener { item ->
@@ -354,7 +352,7 @@ class AppListManager(
                         val view =
                             convertView ?: View.inflate(context, R.layout.list_item_app, null)
                         val app = item.info
-                        val pkg = app.activityInfo.packageName
+                        val pkg = app.packageName
                         val label = view.findViewById<TextView>(R.id.open_app_button)
                         val emptySpace = view.findViewById<View>(R.id.empty_space)
 
@@ -363,11 +361,11 @@ class AppListManager(
 
                         if (showIcons) {
                             val drawable = iconCache.getOrPut(pkg) {
-                                app.loadIcon(pm)
+                                app.activityInfo.getIcon(context.resources.displayMetrics.densityDpi)
                             }
                             icon.setImageDrawable(drawable)
                             icon.visibility = View.VISIBLE
-                            icon.setOnClickListener { launchApp(pkg) }
+                            icon.setOnClickListener { launchApp(app) }
                             icon.setOnLongClickListener { showContextMenu(it, app); true }
                         } else {
                             icon.visibility = View.GONE
@@ -377,8 +375,8 @@ class AppListManager(
 
                         label.text = getDisplayName(app)
 
-                        label.setOnClickListener { launchApp(pkg) }
-                        emptySpace.setOnClickListener { launchApp(pkg) }
+                        label.setOnClickListener { launchApp(app) }
+                        emptySpace.setOnClickListener { launchApp(app) }
 
                         label.setOnLongClickListener { showContextMenu(it, app); true }
                         emptySpace.setOnLongClickListener {
@@ -409,13 +407,8 @@ class AppListManager(
     }
 
     private sealed class ListItem {
-
-        data class Header(
-            val id: String,
-            val title: String
-        ) : ListItem()
-
-        data class App(val info: ResolveInfo) : ListItem()
+        data class Header(val id: String, val title: String) : ListItem()
+        data class App(val info: AppsProvider.AppEntry) : ListItem()
     }
 }
 

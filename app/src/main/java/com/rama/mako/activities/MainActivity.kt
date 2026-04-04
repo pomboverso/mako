@@ -12,6 +12,7 @@ import android.widget.Toast
 import com.rama.mako.CsActivity
 import com.rama.mako.R
 import com.rama.mako.managers.AppListManager
+import com.rama.mako.managers.AppsProvider
 import com.rama.mako.managers.BatteryManager
 import com.rama.mako.managers.ClockManager
 import com.rama.mako.managers.FontManager
@@ -61,7 +62,7 @@ class MainActivity : CsActivity() {
         batteryManager.register()
 
         // --- App List ---
-        appListManager = AppListManager(this, listView)
+        appListManager = AppListManager(this, listView, AppsProvider(this))
         appListManager.setup()
 
         val emptySpaceDrawer = findViewById<View>(R.id.empty_space_drawer)
