@@ -13,8 +13,8 @@ distractions to a minimum by emphasizing clarity and intentional interaction.
 
 ## Screenshots
 
-| Home                                                                                                                                         | Settings                                                                                                                                         | About                                                                                                                                         |
-|----------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
+| Home                                                                                                                                       | Settings                                                                                                                                       | About                                                                                                                                       |
+|--------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
 | ![Home](https://raw.githubusercontent.com/pomboverso/mako/refs/heads/master/fastlane/metadata/android/en-US/images/phoneScreenshots/1.png) | ![Settings](https://raw.githubusercontent.com/pomboverso/mako/refs/heads/master/fastlane/metadata/android/en-US/images/phoneScreenshots/2.png) | ![About](https://raw.githubusercontent.com/pomboverso/mako/refs/heads/master/fastlane/metadata/android/en-US/images/phoneScreenshots/3.png) |
 
 ---
@@ -43,7 +43,8 @@ No network access is required.
 ## Usage
 
 * Long-press in an empty area of the **app list** to open **Settings**.
-* Watch the **[Mako Demo / Walkthrough](https://www.youtube.com/watch?v=cfble2DRqyM)** for a quick overview.
+* Watch the **[Mako Demo / Walkthrough](https://www.youtube.com/watch?v=cfble2DRqyM)** for a quick
+  overview.
 
 ---
 
@@ -70,11 +71,15 @@ No network access is required.
 **Mako** is Free Software. You are free to use, study, share, and improve it under the terms of the
 **GNU General Public License v3** or later.
 
-## QA
+---
 
-- Pixel 8 Pro / Android 16 :: 2026
-- Pixel 6 / Graphene OS :: 2026
-- Samsung On 5 / Android 6 :: 2015
+## Tested Devices
+
+| Device       | OS         | Year | Status     |
+|--------------|------------|------|------------|
+| Pixel 8 Pro  | Android 16 | 2026 | ✅ Verified |
+| Pixel 6      | GrapheneOS | 2026 | ✅ Verified |
+| Samsung On 5 | Android 6  | 2015 | ✅ Verified |
 
 ---
 
