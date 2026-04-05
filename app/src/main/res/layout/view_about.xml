@@ -28,7 +28,7 @@
                 android:layout_marginBottom="16sp" />
 
             <TextView
-                android:text="@string/app_name"
+                android:id="@+id/name_version"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 android:layout_gravity="center"

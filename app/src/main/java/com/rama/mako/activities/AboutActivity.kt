@@ -2,6 +2,7 @@ package com.rama.mako.activities
 
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import com.rama.mako.CsActivity
 import com.rama.mako.R
 
@@ -24,5 +25,9 @@ class AboutActivity : CsActivity() {
         closeButton.setOnClickListener {
             finish()
         }
+
+        val version = packageManager.getPackageInfo(packageName, 0).versionCode
+        val nameView = findViewById<TextView>(R.id.name_version)
+        nameView.text = getString(R.string.app_name) + ' ' + version
     }
 }
