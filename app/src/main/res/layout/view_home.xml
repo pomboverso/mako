@@ -29,7 +29,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:paddingBottom="16dp">
+                    android:paddingBottom="16sp">
 
                     <Button
                         android:id="@+id/time"
@@ -44,13 +44,13 @@
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingBottom="4dp"
+                        android:paddingBottom="4sp"
                         android:gravity="center_vertical">
 
                         <ImageView
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
-                            android:layout_marginEnd="4dp"
+                            android:layout_width="16sp"
+                            android:layout_height="16sp"
+                            android:layout_marginEnd="4sp"
                             android:src="@drawable/icon_calendar_today" />
 
                         <TextView
@@ -69,9 +69,9 @@
                         android:gravity="center_vertical">
 
                         <ImageView
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
-                            android:layout_marginEnd="4dp"
+                            android:layout_width="16sp"
+                            android:layout_height="16sp"
+                            android:layout_marginEnd="4sp"
                             android:src="@drawable/icon_battery_full_alt" />
 
                         <TextView
@@ -100,17 +100,19 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="8sp"
+        android:gravity="center"
+        android:paddingTop="16sp"
         android:background="@color/bg_primary">
 
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="12dp">
+            android:padding="12sp">
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="24sp"
+                android:layout_height="24sp"
                 android:layout_gravity="center"
                 android:src="@drawable/icon_search"
                 android:contentDescription="Search icon" />
@@ -120,17 +122,25 @@
             android:id="@+id/search_field"
             android:layout_weight="1"
             android:layout_width="0dp"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textSize="16sp"
+            android:paddingTop="16sp"
+            android:paddingBottom="16sp"
+            android:paddingStart="8sp"
+            android:paddingEnd="8sp"
+            android:background="@color/input"
             android:layout_height="wrap_content" />
 
         <FrameLayout
             android:id="@+id/clear_field"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="12dp">
+            android:padding="12sp">
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="24sp"
+                android:layout_height="24sp"
                 android:layout_gravity="center"
                 android:src="@drawable/icon_close"
                 android:contentDescription="Clear field button" />
