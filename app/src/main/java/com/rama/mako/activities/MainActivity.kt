@@ -8,6 +8,8 @@ import android.widget.ListView
 import android.widget.TextView
 import android.widget.EditText
 import android.widget.FrameLayout
+import android.widget.LinearLayout
+import android.widget.ScrollView
 import android.widget.Toast
 import com.rama.mako.CsActivity
 import com.rama.mako.R
@@ -67,35 +69,20 @@ class MainActivity : CsActivity() {
         appListManager = AppListManager(this, listView, AppsProvider(this))
         appListManager.setup()
 
-        val emptySpaceDrawer = findViewById<View>(R.id.empty_space_drawer)
-        emptySpaceDrawer.setOnLongClickListener {
+        val appLayout = findViewById<LinearLayout>(R.id.apps_layout)
+        appLayout.setOnLongClickListener {
             startActivity(Intent(this, SettingsActivity::class.java))
             true
         }
 
-        val searchBtn = findViewById<View>(R.id.search_btn)
-        searchBtn.setOnClickListener {
-            showSearchDialog()
-        }
+        initSearchbar()
     }
 
     private var currentSearchQuery: String = ""
 
-    private fun showSearchDialog() {
-        val dialogView = layoutInflater.inflate(R.layout.dialog_search, null)
-        FontManager.applyFont(this, dialogView)
-
-        val dialog = android.app.Dialog(this)
-        dialog.setContentView(dialogView)
-        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
-        dialog.window?.setLayout(
-            WindowManager.LayoutParams.MATCH_PARENT,
-            WindowManager.LayoutParams.WRAP_CONTENT
-        )
-
-        val searchField = dialog.findViewById<EditText>(R.id.search_field)
-        val clearBtn = dialog.findViewById<FrameLayout>(R.id.clear_field)
-        val closeBtn = dialog.findViewById<WdButton>(R.id.close_button)
+    private fun initSearchbar() {
+        val searchField = findViewById<EditText>(R.id.search_field)
+        val clearBtn = findViewById<FrameLayout>(R.id.clear_field)
 
         // Load previous query
         searchField.setText(currentSearchQuery)
@@ -118,14 +105,7 @@ class MainActivity : CsActivity() {
             currentSearchQuery = ""
             searchField.text.clear()
             appListManager.filter("")
-            dialog.dismiss()
         }
-
-        closeBtn.setOnClickListener {
-            dialog.dismiss()
-        }
-
-        dialog.show()
     }
 
     override fun onResume() {
@@ -149,7 +129,7 @@ class MainActivity : CsActivity() {
             if (prefs.isDateVisible()) View.VISIBLE else View.GONE
         findViewById<View>(R.id.battery_row).visibility =
             if (prefs.isBatteryVisible()) View.VISIBLE else View.GONE
-        findViewById<View>(R.id.search_btn).visibility =
+        findViewById<View>(R.id.searchbar).visibility =
             if (prefs.isSearchVisible()) View.VISIBLE else View.GONE
     }
 

@@ -79,7 +79,7 @@
     <string name="about_mako_label">About Mako</string>
     <string name="edit_apps_label">Manage Installed Apps</string>
     <string name="show_battery_label">Show battery</string>
-    <string name="show_search_label">Show search button</string>
+    <string name="show_search_label">Show searchbar</string>
     <string name="show_date_label">Show date</string>
     <string name="show_clock_label">Show clock</string>
     <string name="show_year_day_label">Show day of the year</string>
