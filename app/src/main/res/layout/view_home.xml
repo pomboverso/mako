@@ -102,8 +102,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8sp"
         android:gravity="center"
-        android:paddingTop="16sp"
-        android:background="@color/bg_primary">
+        android:paddingTop="16sp">
 
         <FrameLayout
             android:layout_width="wrap_content"
@@ -129,7 +128,7 @@
             android:paddingBottom="16sp"
             android:paddingStart="8sp"
             android:paddingEnd="8sp"
-            android:background="@color/input"
+            android:background="@color/bg_secondary"
             android:layout_height="wrap_content" />
 
         <FrameLayout
