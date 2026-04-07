@@ -48,6 +48,7 @@ class MainActivity : CsActivity() {
 
     private var backCallback: OnBackInvokedCallback? = null
     private var isSearchExpanded = false
+    private var isProgrammaticSearchUpdate = false
     private val searchDebounceHandler = Handler(Looper.getMainLooper())
     private var searchDebounceRunnable: Runnable? = null
     private var currentSearchQuery: String = ""
@@ -86,7 +87,7 @@ class MainActivity : CsActivity() {
         appListManager = AppListManager(
             this,
             listView,
-            AppsProvider(this)
+            appsProvider
         ) {
             if (isSearchExpanded) {
                 collapseSearch()
@@ -144,6 +145,8 @@ class MainActivity : CsActivity() {
         searchField.addTextChangedListener(object : android.text.TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (isProgrammaticSearchUpdate) return
+
                 val query = s.toString()
                 
                 // Cancel previous debounce
@@ -166,7 +169,10 @@ class MainActivity : CsActivity() {
         // Clear button (resets the list too)
         clearBtn.setOnClickListener {
             currentSearchQuery = ""
+            searchDebounceRunnable?.let { searchDebounceHandler.removeCallbacks(it) }
+            isProgrammaticSearchUpdate = true
             searchField.text.clear()
+            isProgrammaticSearchUpdate = false
             appListManager.filter("")
             clearBtn.visibility = View.GONE
         }
@@ -205,7 +211,10 @@ class MainActivity : CsActivity() {
 
         if (clearQuery) {
             currentSearchQuery = ""
+            searchDebounceRunnable?.let { searchDebounceHandler.removeCallbacks(it) }
+            isProgrammaticSearchUpdate = true
             searchField.text.clear()
+            isProgrammaticSearchUpdate = false
             appListManager.filter("")
         }
 

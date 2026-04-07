@@ -25,21 +25,29 @@ class AppListManager(
     private val prefs = PrefsManager.getInstance(context)
     private val items = mutableListOf<ListItem>()
     private lateinit var adapter: ArrayAdapter<ListItem>
-    private val iconCache = mutableMapOf<String, Drawable>()
+    private var allAppsCache: List<AppsProvider.AppEntry> = emptyList()
+    private val searchableNameCache = mutableMapOf<String, String>()
 
     fun setup() {
+        updateAppsCache()
         buildItems()
         setupAdapter()
         setupScrollListener()
     }
 
     fun refresh() {
+        updateAppsCache()
         buildItems()
         adapter.notifyDataSetChanged()
     }
 
+    private fun updateAppsCache() {
+        allAppsCache = appsProvider.getAll()
+        searchableNameCache.clear()
+    }
+
     private fun buildItems() {
-        val allApps = appsProvider.getAll()
+        val allApps = allAppsCache
 
         // Get all known group IDs
         val groupIds = prefs.getGroupIds().toMutableSet()
@@ -77,8 +85,19 @@ class AppListManager(
             val isExpanded = prefs.isGroupExpanded(groupId)
             if (!isExpanded) return@forEach
 
-            apps.sortedBy { getDisplayName(it).lowercase() }
+            apps.sortedBy { getSearchableName(it) }
                 .forEach { items.add(ListItem.App(it)) }
+        }
+    }
+
+    private fun getAppCacheKey(app: AppsProvider.AppEntry): String {
+        return "${app.packageName}:${app.userHandle.hashCode()}"
+    }
+
+    private fun getSearchableName(app: AppsProvider.AppEntry): String {
+        val key = getAppCacheKey(app)
+        return searchableNameCache.getOrPut(key) {
+            getDisplayName(app).lowercase()
         }
     }
 
@@ -97,7 +116,7 @@ class AppListManager(
 
         val filteredItems = mutableListOf<ListItem>()
 
-        val allApps = appsProvider.getAll()
+        val allApps = allAppsCache
 
         // All known group IDs
         val groupIds = prefs.getGroupIds().toMutableSet()
@@ -119,9 +138,7 @@ class AppListManager(
             if (!isVisible) return@forEach
 
             // Filter apps
-            val matchedApps = apps.filter {
-                getDisplayName(it).lowercase().contains(lowerQuery)
-            }
+            val matchedApps = apps.filter { getSearchableName(it).contains(lowerQuery) }
 
             if (matchedApps.isEmpty()) return@forEach
 
@@ -142,7 +159,7 @@ class AppListManager(
             if (!isExpanded) return@forEach
 
             matchedApps
-                .sortedBy { getDisplayName(it).lowercase() }
+                .sortedBy { getSearchableName(it) }
                 .forEach { filteredItems.add(ListItem.App(it)) }
         }
 
