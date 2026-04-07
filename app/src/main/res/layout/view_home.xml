@@ -26,7 +26,7 @@
 
                 <LinearLayout
                     android:orientation="vertical"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:paddingBottom="16sp">
@@ -82,6 +82,20 @@
                             android:textColor="?attr/foregroundColor" />
                     </LinearLayout>
                 </LinearLayout>
+
+                <FrameLayout
+                    android:id="@+id/search_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="12sp">
+
+                    <ImageView
+                        android:layout_width="24sp"
+                        android:layout_height="24sp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/icon_search"
+                        android:contentDescription="@string/search_icon_desc" />
+                </FrameLayout>
             </LinearLayout>
 
             <ListView
@@ -101,26 +115,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8sp"
-        android:gravity="center"
+        android:gravity="center_vertical"
         android:paddingTop="16sp">
-
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="12sp">
-
-            <ImageView
-                android:layout_width="24sp"
-                android:layout_height="24sp"
-                android:layout_gravity="center"
-                android:src="@drawable/icon_search"
-                android:contentDescription="Search icon" />
-        </FrameLayout>
 
         <EditText
             android:id="@+id/search_field"
-            android:layout_weight="1"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:maxLines="1"
             android:singleLine="true"
             android:textSize="16sp"
@@ -129,20 +131,24 @@
             android:paddingStart="8sp"
             android:paddingEnd="8sp"
             android:background="@color/bg_secondary"
-            android:layout_height="wrap_content" />
+            android:textColor="?attr/foregroundColor"
+            android:textColorHint="@color/disabled"
+            android:hint="@string/search_apps_hint"
+            android:visibility="gone" />
 
         <FrameLayout
             android:id="@+id/clear_field"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="12sp">
+            android:padding="12sp"
+            android:visibility="gone">
 
             <ImageView
                 android:layout_width="24sp"
                 android:layout_height="24sp"
                 android:layout_gravity="center"
                 android:src="@drawable/icon_close"
-                android:contentDescription="Clear field button" />
+                android:contentDescription="@string/clear_search_desc" />
         </FrameLayout>
     </LinearLayout>
 

@@ -92,6 +92,7 @@ class AppListManager(
 
     fun filter(query: String) {
         val lowerQuery = query.lowercase()
+        val isSearchActive = lowerQuery.isNotEmpty()
 
         val filteredItems = mutableListOf<ListItem>()
 
@@ -135,7 +136,8 @@ class AppListManager(
 
             }
 
-            val isExpanded = prefs.isGroupExpanded(groupId)
+            // When search is active, ignore group collapse state (makes finding the app easier)
+            val isExpanded = if (isSearchActive) true else prefs.isGroupExpanded(groupId)
             if (!isExpanded) return@forEach
 
             matchedApps

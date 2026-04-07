@@ -116,6 +116,9 @@
 
     <!-- Dialog :: Search -->
     <string name="search_apps_header">Search apps</string>
+    <string name="search_apps_hint">Search apps...</string>
+    <string name="search_icon_desc">Toggle search</string>
+    <string name="clear_search_desc">Clear search</string>
 
     <!-- Dialog :: Delete Group -->
     <string name="delete_group_title">Are you sure you want to delete this group?</string>
