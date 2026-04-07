@@ -1,6 +1,7 @@
 package com.rama.mako.activities
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
@@ -11,6 +12,7 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.Toast
+import android.window.OnBackInvokedCallback
 import com.rama.mako.CsActivity
 import com.rama.mako.R
 import com.rama.mako.managers.AppListManager
@@ -34,6 +36,8 @@ class MainActivity : CsActivity() {
     private lateinit var appsProvider: AppsProvider
 
     private lateinit var prefs: PrefsManager
+
+    private var backCallback: OnBackInvokedCallback? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,6 +80,21 @@ class MainActivity : CsActivity() {
         }
 
         initSearchbar()
+        setupBackHandling()
+    }
+
+    // --- OnBackInvokedCallback registor for Android 13+ ---
+
+    private fun setupBackHandling() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            backCallback = OnBackInvokedCallback {
+                // Consume back press, do nothing to prevent launcher restart
+            }
+            onBackInvokedDispatcher.registerOnBackInvokedCallback(
+                0,
+                backCallback!!
+            )
+        }
     }
 
     private var currentSearchQuery: String = ""
@@ -117,8 +136,19 @@ class MainActivity : CsActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        
+        // Unregister back callback for Android 13+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && backCallback != null) {
+            onBackInvokedDispatcher.unregisterOnBackInvokedCallback(backCallback!!)
+        }
+        
         batteryManager.unregister()
         clockManager.stop()
+    }
+
+    override fun onBackPressed() {
+        // Consume back press to prevent launcher from restarting
+        // Do nothing - home launcher should stay open
     }
 
     // --- Settings sync (row visibility only) ---
