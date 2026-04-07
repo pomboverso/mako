@@ -19,7 +19,8 @@ import com.rama.mako.widgets.WdButton
 class AppListManager(
     private val context: Context,
     private val listView: ListView,
-    private val appsProvider: AppsProvider
+    private val appsProvider: AppsProvider,
+    private val onAppLaunched: (() -> Unit)? = null
 ) {
     private val prefs = PrefsManager.getInstance(context)
     private val items = mutableListOf<ListItem>()
@@ -348,6 +349,8 @@ class AppListManager(
                                         Toast.LENGTH_SHORT
                                     ).show()
                                     refresh()
+                                } else {
+                                    onAppLaunched?.invoke()
                                 }
                             }
                             icon.setOnLongClickListener { showContextMenu(it, app); true }
@@ -367,6 +370,8 @@ class AppListManager(
                                     Toast.LENGTH_SHORT
                                 ).show()
                                 refresh()
+                            } else {
+                                onAppLaunched?.invoke()
                             }
                         }
                         emptySpace.setOnClickListener {
@@ -377,6 +382,8 @@ class AppListManager(
                                     Toast.LENGTH_SHORT
                                 ).show()
                                 refresh()
+                            } else {
+                                onAppLaunched?.invoke()
                             }
                         }
 

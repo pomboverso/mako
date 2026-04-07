@@ -42,10 +42,15 @@ class MainActivity : CsActivity() {
 
     private lateinit var prefs: PrefsManager
 
+    private lateinit var searchField: EditText
+    private lateinit var searchIcon: FrameLayout
+    private lateinit var clearBtn: FrameLayout
+
     private var backCallback: OnBackInvokedCallback? = null
     private var isSearchExpanded = false
     private val searchDebounceHandler = Handler(Looper.getMainLooper())
     private var searchDebounceRunnable: Runnable? = null
+    private var currentSearchQuery: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,7 +83,15 @@ class MainActivity : CsActivity() {
 
         // --- App List ---
         appsProvider = AppsProvider(this)
-        appListManager = AppListManager(this, listView, AppsProvider(this))
+        appListManager = AppListManager(
+            this,
+            listView,
+            AppsProvider(this)
+        ) {
+            if (isSearchExpanded) {
+                collapseSearch()
+            }
+        }
         appListManager.setup()
 
         val appLayout = findViewById<LinearLayout>(R.id.apps_layout)
@@ -96,29 +109,35 @@ class MainActivity : CsActivity() {
     private fun setupBackHandling() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             backCallback = OnBackInvokedCallback {
-                // Consume back press, do nothing to prevent launcher restart
+                // If search is expanded, collapse it; otherwise consume back to prevent launcher restart
+                if (isSearchExpanded) {
+                    collapseSearch()
+                }
+                // If search is not expanded, do nothing (consume back to keep launcher open)
             }
             onBackInvokedDispatcher.registerOnBackInvokedCallback(
-                0,
+                android.window.OnBackInvokedDispatcher.PRIORITY_OVERLAY,
                 backCallback!!
             )
         }
     }
 
-    private var currentSearchQuery: String = ""
-
     private fun initSearchbar() {
-        val searchField = findViewById<EditText>(R.id.search_field)
-        val searchIcon = findViewById<FrameLayout>(R.id.search_icon)
-        val clearBtn = findViewById<FrameLayout>(R.id.clear_field)
+        searchField = findViewById(R.id.search_field)
+        searchIcon = findViewById(R.id.search_icon)
+        clearBtn = findViewById(R.id.clear_field)
 
         // Initially collapsed
         searchField.visibility = View.GONE
         clearBtn.visibility = View.GONE
 
-        // Search icon click: expand/collapse
+        // Search icon
         searchIcon.setOnClickListener {
-            toggleSearchExpansion(searchField, clearBtn, searchIcon)
+            if (isSearchExpanded) {
+                collapseSearch()
+            } else {
+                expandSearch()
+            }
         }
 
         // Text change with debounce
@@ -153,43 +172,44 @@ class MainActivity : CsActivity() {
         }
     }
 
-    private fun toggleSearchExpansion(
-        searchField: EditText,
-        clearBtn: FrameLayout,
-        searchIcon: FrameLayout
-    ) {
-        isSearchExpanded = !isSearchExpanded
+    private fun expandSearch() {
+        isSearchExpanded = true
 
-        if (isSearchExpanded) {
-            // show field
-            searchField.visibility = View.VISIBLE
-            searchField.requestFocus()
+        // Show field
+        searchField.visibility = View.VISIBLE
+        searchField.requestFocus()
 
-            val scaleX = ObjectAnimator.ofFloat(searchField, "scaleX", 0.8f, 1f)
-            val scaleY = ObjectAnimator.ofFloat(searchField, "scaleY", 0.8f, 1f)
-            val alpha = ObjectAnimator.ofFloat(searchField, "alpha", 0f, 1f)
+        val scaleX = ObjectAnimator.ofFloat(searchField, "scaleX", 0.8f, 1f)
+        val scaleY = ObjectAnimator.ofFloat(searchField, "scaleY", 0.8f, 1f)
+        val alpha = ObjectAnimator.ofFloat(searchField, "alpha", 0f, 1f)
 
-            AnimatorSet().apply {
-                playTogether(scaleX, scaleY, alpha)
-                duration = 300
-                interpolator = OvershootInterpolator(1.5f)
-                start()
-            }
+        AnimatorSet().apply {
+            playTogether(scaleX, scaleY, alpha)
+            duration = 300
+            interpolator = OvershootInterpolator(1.5f)
+            start()
+        }
 
-            // Show keyboard
-            val imm = getSystemService(android.content.Context.INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager
-            imm.showSoftInput(searchField, 0)
+        // Show keyboard
+        val imm = getSystemService(android.content.Context.INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager
+        imm.showSoftInput(searchField, 0)
+    }
 
-        } else {
-            // Hide field, clear query, reset list
-            searchField.visibility = View.GONE
-            clearBtn.visibility = View.GONE
-            
+    private fun collapseSearch(clearQuery: Boolean = true, hideKeyboard: Boolean = true) {
+        isSearchExpanded = false
+
+        // Hide field
+        searchField.visibility = View.GONE
+        clearBtn.visibility = View.GONE
+        searchField.clearFocus()
+
+        if (clearQuery) {
             currentSearchQuery = ""
             searchField.text.clear()
             appListManager.filter("")
+        }
 
-            // Hide keyboard
+        if (hideKeyboard) {
             val imm = getSystemService(android.content.Context.INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager
             imm.hideSoftInputFromWindow(searchField.windowToken, 0)
         }
@@ -218,12 +238,17 @@ class MainActivity : CsActivity() {
     }
 
     override fun onBackPressed() {
-        // Consume back press to prevent launcher from restarting
-        // Do nothing - home launcher should stay open
+        // Handle back for below Android 12
+        if (isSearchExpanded) {
+            collapseSearch()
+        }
+        // Otherwise consume back to prevent launcher from restarting
     }
 
     // --- Settings sync (row visibility only) ---
     private fun syncSettings() {
+        val searchVisible = prefs.isSearchVisible()
+
         timeText.visibility =
             if (prefs.getClockFormat() != PrefsManager.ClockFormat.NONE) View.VISIBLE else View.GONE
         findViewById<View>(R.id.date_row).visibility =
@@ -231,7 +256,9 @@ class MainActivity : CsActivity() {
         findViewById<View>(R.id.battery_row).visibility =
             if (prefs.isBatteryVisible()) View.VISIBLE else View.GONE
         findViewById<View>(R.id.searchbar).visibility =
-            if (prefs.isSearchVisible()) View.VISIBLE else View.GONE
+            if (searchVisible) View.VISIBLE else View.GONE
+        searchIcon.visibility =
+            if (searchVisible) View.VISIBLE else View.GONE
     }
 
     // --- Open system clock safely ---
