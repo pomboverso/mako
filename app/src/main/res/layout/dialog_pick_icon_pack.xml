@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16sp"
+    android:orientation="vertical"
+    android:background="@color/bg_primary"
+    android:focusableInTouchMode="true">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="32sp"
+        android:textColor="@color/foreground_color"
+        android:text="@string/select_icon_pack_label"
+        android:gravity="center"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16sp"
+        android:textSize="16sp"
+        android:textColor="@color/foreground_color"
+        android:text="@string/pick_icon_pack_disclaimer"
+        android:gravity="center"
+        android:textStyle="bold" />
+
+    <ListView
+        android:id="@+id/icon_pack_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:divider="@null"
+        android:dividerHeight="0dp" />
+
+    <com.rama.mako.widgets.WdButton
+        android:id="@+id/close_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/button_primary_color"
+        android:text="@string/go_back_label" />
+</LinearLayout>

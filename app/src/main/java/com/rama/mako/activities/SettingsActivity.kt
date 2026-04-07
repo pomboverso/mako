@@ -1,6 +1,7 @@
 package com.rama.mako.activities
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.text.Editable
@@ -13,6 +14,7 @@ import com.rama.mako.R
 import com.rama.mako.managers.AppsProvider
 import com.rama.mako.managers.FontManager
 import com.rama.mako.managers.GroupsManager
+import com.rama.mako.managers.IconManager
 import com.rama.mako.managers.PrefsManager
 import com.rama.mako.managers.PrefsManager.PrefKeys
 import com.rama.mako.widgets.WdButton
@@ -24,6 +26,7 @@ class SettingsActivity : CsActivity() {
     private val prefs by lazy { PrefsManager.getInstance(this) }
     private val groupsManager by lazy { GroupsManager(this, AppsProvider(this)) }
     private lateinit var appsProvider: AppsProvider
+    private lateinit var iconManager: IconManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,10 +34,12 @@ class SettingsActivity : CsActivity() {
 
         applyEdgeToEdgePadding(findViewById(android.R.id.content))
         appsProvider = AppsProvider(this)
+        iconManager = IconManager(this, appsProvider)
 
         setupBasicButtons()
         setupClockFormat()
         setupFontStyle()
+        setupIconsSection()
         setupCheckboxes()
         setupGroups()
     }
@@ -136,7 +141,7 @@ class SettingsActivity : CsActivity() {
 
                 view.findViewById<TextView>(R.id.open_app_button).text = app.label
                 view.findViewById<ImageView>(R.id.app_icon).setImageDrawable(
-                    appsProvider.getIcon(app)
+                    iconManager.getIcon(app)
                 )
 
                 FontManager.applyFont(parent.context, view)
@@ -212,7 +217,7 @@ class SettingsActivity : CsActivity() {
     private fun setupCheckboxes() {
         bindWdCheckbox(R.id.show_date, PrefKeys.DATE_VISIBLE, false, listOf(R.id.show_year_day))
         bindWdCheckbox(R.id.show_search, PrefKeys.APPS_SEARCH, false)
-        bindWdCheckbox(R.id.show_icons, PrefKeys.APPS_ICONS, false)
+        bindWdCheckbox(R.id.show_icons, PrefKeys.APPS_ICONS, false, listOf(R.id.icons_options_container))
 
         bindWdCheckbox(
             R.id.show_group_header,
@@ -243,6 +248,141 @@ class SettingsActivity : CsActivity() {
             false
         )
         bindWdCheckbox(R.id.show_battery_charge_status, PrefKeys.BATTERY_CHARGE_STATUS, false)
+    }
+
+    private fun setupIconsSection() {
+        val group = findViewById<RadioGroup>(R.id.icon_source_group)
+        val selectIconPackButton = findViewById<WdButton>(R.id.select_icon_pack_button)
+
+        when (prefs.getIconSource()) {
+            PrefsManager.IconSource.MONOCHROME -> group.check(R.id.icon_source_monochrome)
+            PrefsManager.IconSource.ICON_PACK -> group.check(R.id.icon_source_icon_pack)
+            else -> group.check(R.id.icon_source_system)
+        }
+
+        refreshIconPackSection()
+
+        group.setOnCheckedChangeListener { _, id ->
+            when (id) {
+                R.id.icon_source_monochrome -> prefs.setIconSource(PrefsManager.IconSource.MONOCHROME)
+                R.id.icon_source_icon_pack -> prefs.setIconSource(PrefsManager.IconSource.ICON_PACK)
+                else -> prefs.setIconSource(PrefsManager.IconSource.SYSTEM)
+            }
+
+            if (
+                id == R.id.icon_source_icon_pack &&
+                prefs.getIconPackPackage().isBlank()
+            ) {
+                showIconPackPickerDialog()
+            }
+
+            if (id == R.id.icon_source_monochrome && Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+                Toast.makeText(this, getString(R.string.monochrome_fallback_toast), Toast.LENGTH_SHORT)
+                    .show()
+            }
+
+            refreshIconPackSection()
+        }
+
+        selectIconPackButton.setOnClickListener {
+            showIconPackPickerDialog()
+        }
+    }
+
+    private fun refreshIconPackSection() {
+        val iconPackControls = findViewById<View>(R.id.icon_pack_controls)
+        val selectedIconPack = findViewById<TextView>(R.id.selected_icon_pack_label)
+
+        val currentPackage = prefs.getIconPackPackage()
+        val currentLabel = if (currentPackage.isBlank()) {
+            null
+        } else {
+            iconManager.getIconPackLabel(currentPackage)
+        }
+
+        selectedIconPack.text = if (currentLabel != null) {
+            getString(R.string.selected_icon_pack_label, currentLabel)
+        } else if (currentPackage.isNotBlank()) {
+            getString(R.string.selected_icon_pack_label, currentPackage)
+        } else {
+            getString(R.string.icon_pack_not_selected_label)
+        }
+
+        iconPackControls.visibility =
+            if (prefs.getIconSource() == PrefsManager.IconSource.ICON_PACK) View.VISIBLE else View.GONE
+    }
+
+    private fun showIconPackPickerDialog() {
+        val iconPacks = iconManager.getInstalledIconPacks()
+        if (iconPacks.isEmpty()) {
+            Toast.makeText(this, getString(R.string.no_icon_pack_found_label), Toast.LENGTH_SHORT)
+                .show()
+            return
+        }
+
+        val dialogView = layoutInflater.inflate(R.layout.dialog_pick_icon_pack, null)
+        FontManager.applyFont(this, dialogView)
+
+        val dialog = android.app.Dialog(this).apply {
+            setContentView(dialogView)
+            setCancelable(true)
+        }
+
+        val listView = dialogView.findViewById<ListView>(R.id.icon_pack_list)
+        val closeBtn = dialogView.findViewById<WdButton>(R.id.close_button)
+        val selectedPackage = prefs.getIconPackPackage()
+
+        val adapter = object : BaseAdapter() {
+            override fun getCount() = iconPacks.size
+            override fun getItem(position: Int) = iconPacks[position]
+            override fun getItemId(position: Int) = position.toLong()
+
+            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+                val view = convertView ?: layoutInflater.inflate(
+                    R.layout.list_item_icon_pack,
+                    parent,
+                    false
+                )
+
+                val iconPack = iconPacks[position]
+                val labelPrefix = if (iconPack.packageName == selectedPackage) "[*] " else "[ ] "
+
+                view.findViewById<TextView>(R.id.icon_pack_label).text = labelPrefix + iconPack.label
+                view.findViewById<ImageView>(R.id.icon_pack_icon).setImageDrawable(iconPack.icon)
+
+                FontManager.applyFont(parent.context, view)
+                return view
+            }
+        }
+
+        listView.adapter = adapter
+
+        listView.setOnItemClickListener { _, _, position, _ ->
+            val selectedIconPack = iconPacks[position]
+            prefs.setIconPackPackage(selectedIconPack.packageName)
+            prefs.setIconSource(PrefsManager.IconSource.ICON_PACK)
+            findViewById<RadioGroup>(R.id.icon_source_group).check(R.id.icon_source_icon_pack)
+
+            Toast.makeText(
+                this,
+                getString(R.string.icon_pack_selected_toast, selectedIconPack.label),
+                Toast.LENGTH_SHORT
+            ).show()
+
+            refreshIconPackSection()
+            dialog.dismiss()
+        }
+
+        closeBtn.setOnClickListener {
+            refreshIconPackSection()
+            dialog.dismiss()
+        }
+
+        dialog.show()
+        dialog.window?.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.MATCH_PARENT
+        )
     }
 
     private fun bindWdCheckbox(

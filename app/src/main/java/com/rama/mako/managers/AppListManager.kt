@@ -23,6 +23,7 @@ class AppListManager(
     private val onAppLaunched: (() -> Unit)? = null
 ) {
     private val prefs = PrefsManager.getInstance(context)
+    private val iconManager = IconManager(context, appsProvider)
     private val items = mutableListOf<ListItem>()
     private lateinit var adapter: ArrayAdapter<ListItem>
     private var allAppsCache: List<AppsProvider.AppEntry> = emptyList()
@@ -354,7 +355,7 @@ class AppListManager(
                         val showIcons = prefs.hasIconsVisible()
 
                         if (showIcons) {
-                            val drawable = appsProvider.getIcon(app)
+                            val drawable = iconManager.getIcon(app)
 
                             icon.setImageDrawable(drawable)
                             icon.visibility = View.VISIBLE

@@ -38,6 +38,8 @@ class PrefsManager private constructor(context: Context) {
     object PrefKeys {
         const val APPS_SEARCH = "apps:search"
         const val APPS_ICONS = "apps:icons"
+        const val APPS_ICON_SOURCE = "apps:icon_source"
+        const val APPS_ICON_PACK_PACKAGE = "apps:icon_pack_package"
         const val GROUPS_IDS = "groups:ids"
         const val GROUPS_HEADERS = "groups:headers"
         const val GROUPS_COLLAPSIBLE = "groups:collapsible"
@@ -82,6 +84,12 @@ class PrefsManager private constructor(context: Context) {
         const val HOUR_24 = "24-hour"
     }
 
+    object IconSource {
+        const val SYSTEM = "system"
+        const val MONOCHROME = "monochrome"
+        const val ICON_PACK = "icon_pack"
+    }
+
     fun initPrefs() {
         val ids = prefs.getStringSet(PrefKeys.GROUPS_IDS, null)
 
@@ -109,6 +117,8 @@ class PrefsManager private constructor(context: Context) {
 
                 .putBoolean(PrefKeys.APPS_ICONS, false)
                 .putBoolean(PrefKeys.APPS_SEARCH, false)
+                .putString(PrefKeys.APPS_ICON_SOURCE, IconSource.SYSTEM)
+                .putString(PrefKeys.APPS_ICON_PACK_PACKAGE, "")
 
                 .putBoolean(PrefKeys.BATTERY_VISIBLE, true)
                 .putBoolean(PrefKeys.BATTERY_TEMPERATURE, true)
@@ -189,6 +199,29 @@ class PrefsManager private constructor(context: Context) {
 
     fun hasIconsVisible(): Boolean =
         prefs.getBoolean(PrefKeys.APPS_ICONS, false)
+
+    fun getIconSource(): String {
+        return when (prefs.getString(PrefKeys.APPS_ICON_SOURCE, IconSource.SYSTEM)) {
+            IconSource.MONOCHROME -> IconSource.MONOCHROME
+            IconSource.ICON_PACK -> IconSource.ICON_PACK
+            else -> IconSource.SYSTEM
+        }
+    }
+
+    fun setIconSource(source: String) {
+        val normalized = when (source) {
+            IconSource.MONOCHROME -> IconSource.MONOCHROME
+            IconSource.ICON_PACK -> IconSource.ICON_PACK
+            else -> IconSource.SYSTEM
+        }
+        prefs.edit().putString(PrefKeys.APPS_ICON_SOURCE, normalized).apply()
+    }
+
+    fun getIconPackPackage(): String =
+        prefs.getString(PrefKeys.APPS_ICON_PACK_PACKAGE, "") ?: ""
+
+    fun setIconPackPackage(packageName: String) =
+        prefs.edit().putString(PrefKeys.APPS_ICON_PACK_PACKAGE, packageName).apply()
 
     // SETTINGS - GROUPS
 

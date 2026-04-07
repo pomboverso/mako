@@ -85,6 +85,15 @@
     <string name="show_year_day_label">Show day of the year</string>
     <string name="show_group_header_label">Show group header</string>
     <string name="show_icons_label">Show application icons</string>
+    <string name="icons_settings_header">Icons</string>
+    <string name="icons_monochrome_label">Monochrome (System colors / Material You)</string>
+    <string name="icons_icon_pack_label">Icon pack</string>
+    <string name="select_icon_pack_label">Select icon pack</string>
+    <string name="selected_icon_pack_label">Selected pack: %1$s</string>
+    <string name="icon_pack_not_selected_label">No icon pack selected</string>
+    <string name="no_icon_pack_found_label">No compatible icon pack found</string>
+    <string name="icon_pack_selected_toast">Selected icon pack: %1$s</string>
+    <string name="monochrome_fallback_toast">Monochrome icons require Android 13+, using fallback where unavailable</string>
     <string name="show_ungrouped_apps_label">Show ungrouped apps</string>
     <string name="has_collapsible_groups">Allow collapsing groups</string>
     <string name="add_group_label">+ Add New Group</string>
@@ -128,4 +137,7 @@
 
     <!-- Dialog :: Pick Clock App -->
     <string name="pick_clock_app_disclaimer">Selecting an app here will set it as your default clock action. When you tap the clock on your home screen, this app will be launched.</string>
+
+    <!-- Dialog :: Pick Icon Pack -->
+    <string name="pick_icon_pack_disclaimer">Choose an installed icon pack. If an icon is missing, Mako will use the system icon for that app.</string>
 </resources>
