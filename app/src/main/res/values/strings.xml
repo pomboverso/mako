@@ -94,6 +94,7 @@
     <string name="clock_12_label">12-hour (AM/PM)</string>
     <string name="open_app_settings_label">Open app settings</string>
     <string name="show_battery_temperature_label">Show battery temperature</string>
+    <string name="use_battery_temperature_celsius_label">Use Celsius for battery temperature</string>
     <string name="show_battery_charge_status_label">Show battery charge status</string>
     <string name="font_jersey_label" translatable="false">Jersey 25</string>
     <string name="font_quicksand_label" translatable="false">Quicksand</string>

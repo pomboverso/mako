@@ -43,7 +43,9 @@ class BatteryManager(
                 else -> context.getString(R.string.temp_critical)
             }
 
-            val useFahrenheit = Locale.getDefault().country in FAHRENHEIT_COUNTRIES
+            val useFahrenheit =
+                !prefs.isBatteryTemperatureCelsius() &&
+                        Locale.getDefault().country in FAHRENHEIT_COUNTRIES
             val (temperatureValue, unitRes) = if (useFahrenheit) {
                 (tempC * 9 / 5 + 32) to R.string.unit_fahrenheit
             } else tempC to R.string.unit_celsius

@@ -231,11 +231,17 @@ class SettingsActivity : CsActivity() {
             false,
             listOf(
                 R.id.show_battery_temperature,
+                R.id.use_battery_temperature_celsius,
                 R.id.show_battery_charge_status
             )
         )
 
         bindWdCheckbox(R.id.show_battery_temperature, PrefKeys.BATTERY_TEMPERATURE, false)
+        bindWdCheckbox(
+            R.id.use_battery_temperature_celsius,
+            PrefKeys.BATTERY_TEMPERATURE_CELSIUS,
+            false
+        )
         bindWdCheckbox(R.id.show_battery_charge_status, PrefKeys.BATTERY_CHARGE_STATUS, false)
     }
 

@@ -248,6 +248,12 @@
                 android:text="@string/show_battery_temperature_label" />
 
             <com.rama.mako.widgets.WdCheckbox
+                android:id="@+id/use_battery_temperature_celsius"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/use_battery_temperature_celsius_label" />
+
+            <com.rama.mako.widgets.WdCheckbox
                 android:id="@+id/show_battery_charge_status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

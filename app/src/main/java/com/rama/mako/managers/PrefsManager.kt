@@ -45,6 +45,7 @@ class PrefsManager private constructor(context: Context) {
         const val DATE_YEAR_DAY = "date:year_day"
         const val BATTERY_VISIBLE = "battery:visible"
         const val BATTERY_TEMPERATURE = "battery:temperature"
+        const val BATTERY_TEMPERATURE_CELSIUS = "battery:temperature_celsius"
         const val BATTERY_CHARGE_STATUS = "battery:charge_status"
         const val CLOCK_FORMAT = "clock:format"
         const val CLOCK_APP = "clock:app"
@@ -111,6 +112,7 @@ class PrefsManager private constructor(context: Context) {
 
                 .putBoolean(PrefKeys.BATTERY_VISIBLE, true)
                 .putBoolean(PrefKeys.BATTERY_TEMPERATURE, true)
+                .putBoolean(PrefKeys.BATTERY_TEMPERATURE_CELSIUS, false)
                 .putBoolean(PrefKeys.BATTERY_CHARGE_STATUS, false)
 
                 .putBoolean(PrefKeys.DATE_VISIBLE, true)
@@ -225,6 +227,9 @@ class PrefsManager private constructor(context: Context) {
 
     fun isBatteryTemperatureVisible(): Boolean =
         prefs.getBoolean(PrefKeys.BATTERY_TEMPERATURE, false)
+
+    fun isBatteryTemperatureCelsius(): Boolean =
+        prefs.getBoolean(PrefKeys.BATTERY_TEMPERATURE_CELSIUS, false)
 
     fun isBatteryChargeStatusVisible(): Boolean =
         prefs.getBoolean(PrefKeys.BATTERY_CHARGE_STATUS, false)
