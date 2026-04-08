@@ -18,6 +18,12 @@ Standard header image for social previews and repository sharing.
 
 Optimized for TV and wide-screen displays.
 
+## Feature Graphic
+
+![Mako Header TV](./img/mako_featureGraphic_1024x500.svg)
+
+Feature graphic on f-droid.
+
 ---
 
 ## Icon
