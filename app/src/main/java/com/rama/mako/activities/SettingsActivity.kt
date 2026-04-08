@@ -164,7 +164,7 @@ class SettingsActivity : CsActivity() {
         dialog.show()
         dialog.window?.setLayout(
             ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.MATCH_PARENT
+            ViewGroup.LayoutParams.WRAP_CONTENT
         )
     }
 
@@ -217,7 +217,12 @@ class SettingsActivity : CsActivity() {
     private fun setupCheckboxes() {
         bindWdCheckbox(R.id.show_date, PrefKeys.DATE_VISIBLE, false, listOf(R.id.show_year_day))
         bindWdCheckbox(R.id.show_search, PrefKeys.APPS_SEARCH, false)
-        bindWdCheckbox(R.id.show_icons, PrefKeys.APPS_ICONS, false, listOf(R.id.icons_options_container))
+        bindWdCheckbox(
+            R.id.show_icons,
+            PrefKeys.APPS_ICONS,
+            false,
+            listOf(R.id.icons_options_container)
+        )
 
         bindWdCheckbox(
             R.id.show_group_header,
@@ -277,7 +282,11 @@ class SettingsActivity : CsActivity() {
             }
 
             if (id == R.id.icon_source_monochrome && Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
-                Toast.makeText(this, getString(R.string.monochrome_fallback_toast), Toast.LENGTH_SHORT)
+                Toast.makeText(
+                    this,
+                    getString(R.string.monochrome_fallback_toast),
+                    Toast.LENGTH_SHORT
+                )
                     .show()
             }
 
@@ -347,7 +356,8 @@ class SettingsActivity : CsActivity() {
                 val iconPack = iconPacks[position]
                 val labelPrefix = if (iconPack.packageName == selectedPackage) "[*] " else "[ ] "
 
-                view.findViewById<TextView>(R.id.icon_pack_label).text = labelPrefix + iconPack.label
+                view.findViewById<TextView>(R.id.icon_pack_label).text =
+                    labelPrefix + iconPack.label
                 view.findViewById<ImageView>(R.id.icon_pack_icon).setImageDrawable(iconPack.icon)
 
                 FontManager.applyFont(parent.context, view)
@@ -381,7 +391,7 @@ class SettingsActivity : CsActivity() {
         dialog.show()
         dialog.window?.setLayout(
             ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.MATCH_PARENT
+            ViewGroup.LayoutParams.WRAP_CONTENT
         )
     }
 
