@@ -1,4 +1,4 @@
-![Preview](https://raw.githubusercontent.com/pomboverso/mako/refs/heads/master/metadata/mako_preview.svg)
+![Preview](./docs/img/mako_header_1280x630.svg)
 
 # Mako
 
