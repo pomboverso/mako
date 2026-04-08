@@ -22,6 +22,7 @@ Optimized for TV and wide-screen displays.
 
 ## Icon
 
+
 ### Foreground (Fill)
 
 ![Mako Icon Fill](./img/mako_icon_fill.svg)
@@ -64,3 +65,5 @@ Primary background color used behind the icon when needed.
 - Prefer the fill version for primary branding and the negative/outline versions for contextual use.
 
 ---
+
+[Go Back To Readme](../readme.md)

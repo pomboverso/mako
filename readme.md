@@ -83,6 +83,14 @@ No network access is required.
 
 ---
 
+## Documents
+
+- [Branding](./docs/branding.md)
+- [Attributions](./docs/attributions.md)
+- [Changelog](./docs/changelog.md)
+
+---
+
 ## Acknowledgements
 
 Inspired by [YAML Launcher](https://f-droid.org/en/packages/eu.ottop.yamlauncher/) and other
