@@ -34,6 +34,7 @@
         android:divider="@null"
         android:padding="16sp"
         android:background="@color/bg_secondary"
+        android:layout_marginBottom="8sp"
         android:layout_weight="1" />
 
     <com.rama.mako.widgets.WdButton
