@@ -1,4 +1,4 @@
-![Preview](https://raw.githubusercontent.com/pomboverso/mako/refs/heads/master/metadata/mako_preview.svg)
+![Preview](./docs/img/mako_header_1280x630.svg)
 
 # Mako
 
@@ -80,6 +80,13 @@ No network access is required.
 | Pixel 8 Pro  | Android 16 | 2026 | ✅ Verified |
 | Pixel 6      | GrapheneOS | 2026 | ✅ Verified |
 | Samsung On 5 | Android 6  | 2015 | ✅ Verified |
+
+---
+
+## Documents
+
+- [Branding](./docs/branding.md)
+- [Attributions](./docs/attributions.md)
 
 ---
 

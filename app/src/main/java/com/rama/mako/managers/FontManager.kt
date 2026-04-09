@@ -38,7 +38,7 @@ object FontManager {
                 Typeface.createFromAsset(context.assets, "fonts/robotoslab_semibold.ttf")
 
             PrefsManager.FontStyle.JERSEY_25 ->
-                Typeface.createFromAsset(context.assets, "fonts/jersey25_regular.ttf")
+                Typeface.createFromAsset(context.assets, "fonts/jersey25_regular.otf")
 
             else -> null
         }
