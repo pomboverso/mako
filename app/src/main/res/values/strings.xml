@@ -72,6 +72,14 @@
     <string name="clock_header">Clock</string>
     <string name="date_header">Date and Battery</string>
     <string name="groups_header">Groups</string>
+    <string name="settings_section_home_title">Home screen</string>
+    <string name="settings_section_appearance_title">Appearance</string>
+    <string name="settings_section_groups_title">Groups</string>
+    <string name="settings_section_apps_title">Applications</string>
+    <string name="settings_section_system_title">System</string>
+    <string name="settings_section_data_title">Data and Debug</string>
+    <string name="settings_section_expand_indicator">[+]</string>
+    <string name="settings_section_collapse_indicator">[-]</string>
     <string name="set_default_label">Set Launcher as default</string>
     <string name="set_clock_app_label">Change Clock Tap Action</string>
     <string name="refresh_launcher_label">Refresh launcher</string>
@@ -108,6 +116,14 @@
     <string name="open_app_settings_label">Open app settings</string>
     <string name="show_battery_temperature_label">Show battery temperature</string>
     <string name="show_battery_charge_status_label">Show battery charge status</string>
+    <string name="debug_header">Debug</string>
+    <string name="export_data_label">Export Data</string>
+    <string name="clear_data_label">Clear Data</string>
+    <string name="reset_done_toast">Reset done</string>
+    <string name="reset_failed_toast">Reset failed</string>
+    <string name="clock_app_selected_toast">Selected: %1$s</string>
+    <string name="group_label_updated_toast">Label Updated</string>
+    <string name="select_target_group_toast">Select a target group</string>
     <string name="font_jersey_label" translatable="false">Jersey 25</string>
     <string name="font_quicksand_label" translatable="false">Quicksand</string>
     <string name="font_montserrat_label" translatable="false">Montserrat</string>

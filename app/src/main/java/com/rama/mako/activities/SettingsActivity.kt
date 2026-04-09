@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.text.Editable
+import android.view.HapticFeedbackConstants
 import android.view.View
 import android.view.View.generateViewId
 import android.view.ViewGroup
@@ -37,6 +38,7 @@ class SettingsActivity : CsActivity() {
         iconManager = IconManager(this, appsProvider)
 
         setupBasicButtons()
+        setupCollapsibleSections()
         setupClockFormat()
         setupTemperatureFormat()
         setupFontStyle()
@@ -67,7 +69,7 @@ class SettingsActivity : CsActivity() {
             )
         }
 
-        findViewById<View>(R.id.reset_button).setOnClickListener {
+        setClickWithHaptics(findViewById(R.id.reset_button)) {
             startActivity(
                 Intent(this, MainActivity::class.java).apply {
                     addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
@@ -75,15 +77,15 @@ class SettingsActivity : CsActivity() {
             )
         }
 
-        findViewById<View>(R.id.change_apps_button).setOnClickListener {
+        setClickWithHaptics(findViewById(R.id.change_apps_button)) {
             startActivity(Intent(Settings.ACTION_APPLICATION_SETTINGS))
         }
 
-        findViewById<WdButton>(R.id.set_clock_app_button).setOnClickListener {
+        setClickWithHaptics(findViewById(R.id.set_clock_app_button)) {
             showAppPickerDialog()
         }
 
-        findViewById<WdButton>(R.id.export_button).setOnClickListener {
+        setClickWithHaptics(findViewById(R.id.export_button)) {
             val intent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
                 addCategory(Intent.CATEGORY_OPENABLE)
                 type = "application/json"
@@ -93,14 +95,98 @@ class SettingsActivity : CsActivity() {
             startActivityForResult(intent, 1001)
         }
 
-        findViewById<WdButton>(R.id.clear_prefs_button).setOnClickListener {
+        setClickWithHaptics(findViewById(R.id.clear_prefs_button)) {
             prefs.clearAllPrefs()
                 .onSuccess {
-                    Toast.makeText(this, "Reset done", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.reset_done_toast), Toast.LENGTH_SHORT)
+                        .show()
                 }
                 .onFailure {
-                    Toast.makeText(this, "Reset failed", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.reset_failed_toast), Toast.LENGTH_SHORT)
+                        .show()
                 }
+        }
+    }
+
+    private fun setupCollapsibleSections() {
+        bindSection(
+            headerId = R.id.section_home_header,
+            indicatorId = R.id.section_home_indicator,
+            contentId = R.id.section_home_content,
+            prefKey = PrefKeys.SETTINGS_SECTION_HOME,
+            defaultExpanded = true
+        )
+
+        bindSection(
+            headerId = R.id.section_appearance_header,
+            indicatorId = R.id.section_appearance_indicator,
+            contentId = R.id.section_appearance_content,
+            prefKey = PrefKeys.SETTINGS_SECTION_APPEARANCE,
+            defaultExpanded = true
+        )
+
+        bindSection(
+            headerId = R.id.section_groups_header,
+            indicatorId = R.id.section_groups_indicator,
+            contentId = R.id.section_groups_content,
+            prefKey = PrefKeys.SETTINGS_SECTION_GROUPS,
+            defaultExpanded = false
+        )
+
+        bindSection(
+            headerId = R.id.section_apps_header,
+            indicatorId = R.id.section_apps_indicator,
+            contentId = R.id.section_apps_content,
+            prefKey = PrefKeys.SETTINGS_SECTION_APPS,
+            defaultExpanded = false
+        )
+
+        bindSection(
+            headerId = R.id.section_system_header,
+            indicatorId = R.id.section_system_indicator,
+            contentId = R.id.section_system_content,
+            prefKey = PrefKeys.SETTINGS_SECTION_SYSTEM,
+            defaultExpanded = false
+        )
+
+        bindSection(
+            headerId = R.id.section_data_header,
+            indicatorId = R.id.section_data_indicator,
+            contentId = R.id.section_data_content,
+            prefKey = PrefKeys.SETTINGS_SECTION_DATA,
+            defaultExpanded = false
+        )
+    }
+
+    private fun bindSection(
+        headerId: Int,
+        indicatorId: Int,
+        contentId: Int,
+        prefKey: String,
+        defaultExpanded: Boolean
+    ) {
+        val header = findViewById<View>(headerId)
+        val indicator = findViewById<TextView>(indicatorId)
+        val content = findViewById<View>(contentId)
+
+        fun apply(expanded: Boolean) {
+            content.visibility = if (expanded) View.VISIBLE else View.GONE
+            indicator.text = getString(
+                if (expanded) {
+                    R.string.settings_section_collapse_indicator
+                } else {
+                    R.string.settings_section_expand_indicator
+                }
+            )
+        }
+
+        var isExpanded = prefs.getBoolean(prefKey, defaultExpanded)
+        apply(isExpanded)
+
+        setClickWithHaptics(header) {
+            isExpanded = !isExpanded
+            prefs.setBoolean(prefKey, isExpanded)
+            apply(isExpanded)
         }
     }
 
@@ -152,15 +238,20 @@ class SettingsActivity : CsActivity() {
 
         listView.adapter = adapter
 
-        listView.setOnItemClickListener { _, _, position, _ ->
+        listView.setOnItemClickListener { _, itemView, position, _ ->
+            performHapticClick(itemView)
             val selectedApp = apps[position]
             prefs.setClockApp(selectedApp.packageName)
 
-            Toast.makeText(this, "Selected: ${selectedApp.label}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                this,
+                getString(R.string.clock_app_selected_toast, selectedApp.label),
+                Toast.LENGTH_SHORT
+            ).show()
             dialog.dismiss()
         }
 
-        closeBtn.setOnClickListener { dialog.dismiss() }
+        setClickWithHaptics(closeBtn) { dialog.dismiss() }
 
         dialog.show()
         dialog.window?.setLayout(
@@ -292,7 +383,7 @@ class SettingsActivity : CsActivity() {
             refreshIconPackSection()
         }
 
-        selectIconPackButton.setOnClickListener {
+        setClickWithHaptics(selectIconPackButton) {
             showIconPackPickerDialog()
         }
     }
@@ -366,7 +457,8 @@ class SettingsActivity : CsActivity() {
 
         listView.adapter = adapter
 
-        listView.setOnItemClickListener { _, _, position, _ ->
+        listView.setOnItemClickListener { _, itemView, position, _ ->
+            performHapticClick(itemView)
             val selectedIconPack = iconPacks[position]
             prefs.setIconPackPackage(selectedIconPack.packageName)
             prefs.setIconSource(PrefsManager.IconSource.ICON_PACK)
@@ -382,7 +474,7 @@ class SettingsActivity : CsActivity() {
             dialog.dismiss()
         }
 
-        closeBtn.setOnClickListener {
+        setClickWithHaptics(closeBtn) {
             refreshIconPackSection()
             dialog.dismiss()
         }
@@ -466,7 +558,7 @@ class SettingsActivity : CsActivity() {
 
         render()
 
-        findViewById<WdButton>(R.id.add_group).setOnClickListener {
+        setClickWithHaptics(findViewById(R.id.add_group)) {
             groupsManager.createGroup(getString(R.string.new_group_header))
             render()
         }
@@ -502,7 +594,7 @@ class SettingsActivity : CsActivity() {
         updateIcon()
 
         // Toggle visibility (ID-based)
-        toggle.setOnClickListener {
+        setClickWithHaptics(toggle) {
             val newValue = !prefs.isGroupVisible(groupId)
             prefs.setGroupVisible(groupId, newValue)
             updateIcon()
@@ -530,18 +622,22 @@ class SettingsActivity : CsActivity() {
             override fun afterTextChanged(s: Editable?) {}
         })
 
-        saveButton.setOnClickListener {
+        setClickWithHaptics(saveButton) {
             val newLabel = name.text.toString().trim()
             if (newLabel.isNotEmpty()) {
                 val id = name.tag as String
                 prefs.setGroupLabel(id, newLabel)
-                Toast.makeText(this, "Label Updated", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    getString(R.string.group_label_updated_toast),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
             saveButton.visibility = View.GONE
         }
 
         // ------------------- Delete -------------------
-        delete.setOnClickListener {
+        setClickWithHaptics(delete) {
             val dialogView = layoutInflater.inflate(R.layout.dialog_groups_delete, null)
             FontManager.applyFont(this, dialogView)
 
@@ -565,30 +661,33 @@ class SettingsActivity : CsActivity() {
                 val radio = RadioButton(this).apply {
                     id = generateViewId()
                     text = prefs.getGroupLabel(targetId)
-                    setOnClickListener { selectedGroupId = targetId }
+                    setClickWithHaptics(this) { selectedGroupId = targetId }
                 }
                 radioGroup.addView(radio)
             }
 
-            yes.setOnClickListener {
+            setClickWithHaptics(yes) {
                 if (selectedGroupId == null) {
-                    Toast.makeText(this, "Select a target group", Toast.LENGTH_SHORT).show()
-                    return@setOnClickListener
+                    Toast.makeText(
+                        this,
+                        getString(R.string.select_target_group_toast),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    // move apps + delete
+                    groupsManager.deleteGroup(currentGroupId, selectedGroupId!!)
+
+                    // remove from prefs
+                    val updated = prefs.getGroupIds().toMutableSet()
+                    updated.remove(currentGroupId)
+                    prefs.setGroupIds(updated)
+
+                    container.removeView(row)
+                    dialog.dismiss()
                 }
-
-                // move apps + delete
-                groupsManager.deleteGroup(currentGroupId, selectedGroupId!!)
-
-                // remove from prefs
-                val updated = prefs.getGroupIds().toMutableSet()
-                updated.remove(currentGroupId)
-                prefs.setGroupIds(updated)
-
-                container.removeView(row)
-                dialog.dismiss()
             }
 
-            no.setOnClickListener { dialog.dismiss() }
+            setClickWithHaptics(no) { dialog.dismiss() }
 
             dialog.show()
             dialog.window?.setLayout(
@@ -602,7 +701,18 @@ class SettingsActivity : CsActivity() {
 
     // ------------------- Helpers -------------------
     private fun setupButton(id: Int, action: () -> Unit) {
-        findViewById<View>(id).setOnClickListener { action() }
+        setClickWithHaptics(findViewById(id), action)
+    }
+
+    private fun setClickWithHaptics(view: View, action: () -> Unit) {
+        view.setOnClickListener {
+            performHapticClick(it)
+            action()
+        }
+    }
+
+    private fun performHapticClick(view: View) {
+        view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
     }
 
     private fun openIntent(intent: Intent, error: String) {

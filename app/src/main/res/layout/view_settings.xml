@@ -1,308 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/bg_primary">
+    android:background="@color/bg_primary"
+    android:orientation="vertical">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="start"
+        android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:fillViewport="true"
+        android:scrollbars="none">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16sp"
-                android:textSize="32sp"
-                android:textColor="@color/foreground_color"
                 android:text="@string/settings_header"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8sp"
-                android:textSize="16sp"
                 android:textColor="@color/foreground_color"
-                android:text="@string/groups_header"
-                android:textStyle="bold" />
-
-            <com.rama.mako.widgets.WdCheckbox
-                android:id="@+id/show_group_header"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/show_group_header_label" />
-
-            <com.rama.mako.widgets.WdCheckbox
-                android:id="@+id/has_collapsible_groups"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/has_collapsible_groups" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/disabled"
-                android:layout_marginVertical="16sp" />
-
-            <LinearLayout
-                android:id="@+id/groups"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="8sp"
-                android:paddingTop="16sp"
-                android:paddingStart="8sp"
-                android:paddingEnd="8sp"
-                android:orientation="vertical"
-                android:background="@color/bg_secondary"
-                android:focusableInTouchMode="true" />
-
-            <com.rama.mako.widgets.WdButton
-                android:id="@+id/add_group"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8sp"
-                android:background="@color/button_secondary_color"
-                android:text="@string/add_group_label" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8sp"
-                android:textSize="16sp"
-                android:textColor="@color/foreground_color"
-                android:text="@string/font_style_header"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16sp"
-                android:orientation="vertical"
-                android:layout_marginBottom="8sp"
-                android:background="@color/bg_secondary"
-                android:gravity="center_vertical">
-
-                <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/font_style_group"
-                    android:orientation="vertical">
-
-                    <RadioButton
-                        android:id="@+id/font_default"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8sp"
-                        android:textSize="16sp"
-                        android:textColor="@color/foreground_color"
-                        android:text="@string/system_label" />
-
-                    <RadioButton
-                        android:id="@+id/font_jersey"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8sp"
-                        android:textSize="16sp"
-                        android:textColor="@color/foreground_color"
-                        android:text="@string/font_jersey_label" />
-
-                    <RadioButton
-                        android:id="@+id/font_quicksand"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8sp"
-                        android:textSize="16sp"
-                        android:textColor="@color/foreground_color"
-                        android:text="@string/font_quicksand_label" />
-
-                    <RadioButton
-                        android:id="@+id/font_montserrat"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8sp"
-                        android:textSize="16sp"
-                        android:textColor="@color/foreground_color"
-                        android:text="@string/font_montserrat_label" />
-
-                    <RadioButton
-                        android:id="@+id/font_robotoslab"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:textColor="@color/foreground_color"
-                        android:text="@string/font_robotoslab_label" />
-
-                </RadioGroup>
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8sp"
-                android:textSize="16sp"
-                android:textColor="@color/foreground_color"
-                android:text="@string/clock_header"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16sp"
-                android:orientation="vertical"
-                android:layout_marginBottom="8sp"
-                android:background="@color/bg_secondary"
-                android:gravity="center_vertical">
-
-                <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/clock_format_group"
-                    android:orientation="vertical">
-
-                    <RadioButton
-                        android:id="@+id/clock_none"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8sp"
-                        android:textSize="16sp"
-                        android:textColor="@color/foreground_color"
-                        android:text="@string/clock_none_label" />
-
-                    <RadioButton
-                        android:id="@+id/clock_system"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8sp"
-                        android:textSize="16sp"
-                        android:textColor="@color/foreground_color"
-                        android:text="@string/system_label" />
-
-                    <RadioButton
-                        android:id="@+id/clock_24"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8sp"
-                        android:textSize="16sp"
-                        android:textColor="@color/foreground_color"
-                        android:text="@string/clock_24_label" />
-
-                    <RadioButton
-                        android:id="@+id/clock_12"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:textColor="@color/foreground_color"
-                        android:text="@string/clock_12_label" />
-                </RadioGroup>
-            </LinearLayout>
-
-            <com.rama.mako.widgets.WdButton
-                android:id="@+id/set_clock_app_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8sp"
-                android:background="@color/button_secondary_color"
-                android:text="@string/set_clock_app_label" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8sp"
-                android:textSize="16sp"
-                android:textColor="@color/foreground_color"
-                android:text="@string/date_header"
-                android:textStyle="bold" />
-
-            <com.rama.mako.widgets.WdCheckbox
-                android:id="@+id/show_date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/show_date_label" />
-
-            <com.rama.mako.widgets.WdCheckbox
-                android:id="@+id/show_year_day"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/show_year_day_label" />
-
-            <com.rama.mako.widgets.WdCheckbox
-                android:id="@+id/show_battery"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/show_battery_label" />
-
-            <com.rama.mako.widgets.WdCheckbox
-                android:id="@+id/show_battery_temperature"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/show_battery_temperature_label" />
-
-            <LinearLayout
-                android:id="@+id/temperature_format_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8sp"
-                android:background="@color/bg_secondary"
-                android:orientation="vertical"
-                android:padding="16sp">
-
-                <RadioGroup
-                    android:id="@+id/temperature_format_group"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <RadioButton
-                        android:id="@+id/temperature_system"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8sp"
-                        android:text="@string/default_system_label"
-                        android:textColor="@color/foreground_color"
-                        android:textSize="16sp" />
-
-                    <RadioButton
-                        android:id="@+id/temperature_celsius"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8sp"
-                        android:text="@string/celsius_label"
-                        android:textColor="@color/foreground_color"
-                        android:textSize="16sp" />
-
-                    <RadioButton
-                        android:id="@+id/temperature_fahrenheit"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/fahrenheit_label"
-                        android:textColor="@color/foreground_color"
-                        android:textSize="16sp" />
-                </RadioGroup>
-            </LinearLayout>
-
-            <com.rama.mako.widgets.WdCheckbox
-                android:id="@+id/show_battery_charge_status"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/show_battery_charge_status_label" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8sp"
-                android:textSize="16sp"
-                android:textColor="@color/foreground_color"
-                android:text="@string/icons_settings_header"
+                android:textSize="32sp"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -310,172 +31,697 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8sp"
                 android:background="@color/bg_secondary"
-                android:orientation="vertical"
-                android:padding="16sp">
-
-                <RadioGroup
-                    android:id="@+id/icon_source_group"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <RadioButton
-                        android:id="@+id/icon_source_none"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8sp"
-                        android:text="@string/none_label"
-                        android:textColor="@color/foreground_color"
-                        android:textSize="16sp" />
-
-                    <RadioButton
-                        android:id="@+id/icon_source_system"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8sp"
-                        android:text="@string/default_label"
-                        android:textColor="@color/foreground_color"
-                        android:textSize="16sp" />
-
-                    <RadioButton
-                        android:id="@+id/icon_source_monochrome"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8sp"
-                        android:text="@string/icons_monochrome_label"
-                        android:textColor="@color/foreground_color"
-                        android:textSize="16sp" />
-
-                    <RadioButton
-                        android:id="@+id/icon_source_icon_pack"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/icons_icon_pack_label"
-                        android:textColor="@color/foreground_color"
-                        android:textSize="16sp" />
-                </RadioGroup>
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/icon_pack_controls"
+                    android:id="@+id/section_home_header"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8sp"
-                    android:orientation="vertical">
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:padding="16sp">
 
                     <TextView
-                        android:id="@+id/selected_icon_pack_label"
+                        android:id="@+id/section_home_indicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8sp"
+                        android:text="@string/settings_section_collapse_indicator"
+                        android:textColor="@color/foreground_color"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settings_section_home_title"
+                        android:textColor="@color/foreground_color"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/section_home_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingStart="8sp"
+                    android:paddingEnd="8sp"
+                    android:paddingBottom="8sp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8sp"
+                        android:text="@string/clock_header"
+                        android:textColor="@color/foreground_color"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
-                        android:text="@string/icon_pack_not_selected_label"
-                        android:textColor="@color/foreground_color"
-                        android:textSize="16sp" />
+                        android:background="@color/bg_primary"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:padding="16sp">
+
+                        <RadioGroup
+                            android:id="@+id/clock_format_group"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <RadioButton
+                                android:id="@+id/clock_none"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="8sp"
+                                android:text="@string/clock_none_label"
+                                android:textColor="@color/foreground_color"
+                                android:textSize="16sp" />
+
+                            <RadioButton
+                                android:id="@+id/clock_system"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="8sp"
+                                android:text="@string/system_label"
+                                android:textColor="@color/foreground_color"
+                                android:textSize="16sp" />
+
+                            <RadioButton
+                                android:id="@+id/clock_24"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="8sp"
+                                android:text="@string/clock_24_label"
+                                android:textColor="@color/foreground_color"
+                                android:textSize="16sp" />
+
+                            <RadioButton
+                                android:id="@+id/clock_12"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/clock_12_label"
+                                android:textColor="@color/foreground_color"
+                                android:textSize="16sp" />
+                        </RadioGroup>
+                    </LinearLayout>
 
                     <com.rama.mako.widgets.WdButton
-                        android:id="@+id/select_icon_pack_button"
+                        android:id="@+id/set_clock_app_button"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="12sp"
                         android:background="@color/button_secondary_color"
-                        android:text="@string/select_icon_pack_label" />
+                        android:text="@string/set_clock_app_label" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8sp"
+                        android:text="@string/date_header"
+                        android:textColor="@color/foreground_color"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <com.rama.mako.widgets.WdCheckbox
+                        android:id="@+id/show_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/show_date_label" />
+
+                    <com.rama.mako.widgets.WdCheckbox
+                        android:id="@+id/show_year_day"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/show_year_day_label" />
+
+                    <com.rama.mako.widgets.WdCheckbox
+                        android:id="@+id/show_battery"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/show_battery_label" />
+
+                    <com.rama.mako.widgets.WdCheckbox
+                        android:id="@+id/show_battery_temperature"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/show_battery_temperature_label" />
+
+                    <LinearLayout
+                        android:id="@+id/temperature_format_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8sp"
+                        android:background="@color/bg_primary"
+                        android:orientation="vertical"
+                        android:padding="16sp">
+
+                        <RadioGroup
+                            android:id="@+id/temperature_format_group"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <RadioButton
+                                android:id="@+id/temperature_system"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="8sp"
+                                android:text="@string/default_system_label"
+                                android:textColor="@color/foreground_color"
+                                android:textSize="16sp" />
+
+                            <RadioButton
+                                android:id="@+id/temperature_celsius"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="8sp"
+                                android:text="@string/celsius_label"
+                                android:textColor="@color/foreground_color"
+                                android:textSize="16sp" />
+
+                            <RadioButton
+                                android:id="@+id/temperature_fahrenheit"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/fahrenheit_label"
+                                android:textColor="@color/foreground_color"
+                                android:textSize="16sp" />
+                        </RadioGroup>
+                    </LinearLayout>
+
+                    <com.rama.mako.widgets.WdCheckbox
+                        android:id="@+id/show_battery_charge_status"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/show_battery_charge_status_label" />
                 </LinearLayout>
             </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8sp"
-                android:textSize="16sp"
-                android:textColor="@color/foreground_color"
-                android:text="@string/apps_header"
-                android:textStyle="bold" />
-
-            <com.rama.mako.widgets.WdCheckbox
-                android:id="@+id/show_search"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/show_search_label" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8sp"
-                android:textSize="16sp"
-                android:textColor="@color/foreground_color"
-                android:text="@string/others_header"
-                android:textStyle="bold" />
-
-            <com.rama.mako.widgets.WdButton
-                android:id="@+id/activate_button"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8sp"
-                android:background="@color/button_secondary_color"
-                android:text="@string/set_default_label" />
+                android:background="@color/bg_secondary"
+                android:orientation="vertical">
 
-            <com.rama.mako.widgets.WdButton
-                android:id="@+id/reset_button"
+                <LinearLayout
+                    android:id="@+id/section_appearance_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:padding="16sp">
+
+                    <TextView
+                        android:id="@+id/section_appearance_indicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8sp"
+                        android:text="@string/settings_section_collapse_indicator"
+                        android:textColor="@color/foreground_color"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settings_section_appearance_title"
+                        android:textColor="@color/foreground_color"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/section_appearance_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingStart="8sp"
+                    android:paddingEnd="8sp"
+                    android:paddingBottom="8sp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8sp"
+                        android:text="@string/font_style_header"
+                        android:textColor="@color/foreground_color"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12sp"
+                        android:background="@color/bg_primary"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:padding="16sp">
+
+                        <RadioGroup
+                            android:id="@+id/font_style_group"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <RadioButton
+                                android:id="@+id/font_default"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="8sp"
+                                android:text="@string/system_label"
+                                android:textColor="@color/foreground_color"
+                                android:textSize="16sp" />
+
+                            <RadioButton
+                                android:id="@+id/font_jersey"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="8sp"
+                                android:text="@string/font_jersey_label"
+                                android:textColor="@color/foreground_color"
+                                android:textSize="16sp" />
+
+                            <RadioButton
+                                android:id="@+id/font_quicksand"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="8sp"
+                                android:text="@string/font_quicksand_label"
+                                android:textColor="@color/foreground_color"
+                                android:textSize="16sp" />
+
+                            <RadioButton
+                                android:id="@+id/font_montserrat"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="8sp"
+                                android:text="@string/font_montserrat_label"
+                                android:textColor="@color/foreground_color"
+                                android:textSize="16sp" />
+
+                            <RadioButton
+                                android:id="@+id/font_robotoslab"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/font_robotoslab_label"
+                                android:textColor="@color/foreground_color"
+                                android:textSize="16sp" />
+                        </RadioGroup>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8sp"
+                        android:text="@string/icons_settings_header"
+                        android:textColor="@color/foreground_color"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8sp"
+                        android:background="@color/bg_primary"
+                        android:orientation="vertical"
+                        android:padding="16sp">
+
+                        <RadioGroup
+                            android:id="@+id/icon_source_group"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <RadioButton
+                                android:id="@+id/icon_source_none"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="8sp"
+                                android:text="@string/none_label"
+                                android:textColor="@color/foreground_color"
+                                android:textSize="16sp" />
+
+                            <RadioButton
+                                android:id="@+id/icon_source_system"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="8sp"
+                                android:text="@string/default_label"
+                                android:textColor="@color/foreground_color"
+                                android:textSize="16sp" />
+
+                            <RadioButton
+                                android:id="@+id/icon_source_monochrome"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="8sp"
+                                android:text="@string/icons_monochrome_label"
+                                android:textColor="@color/foreground_color"
+                                android:textSize="16sp" />
+
+                            <RadioButton
+                                android:id="@+id/icon_source_icon_pack"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/icons_icon_pack_label"
+                                android:textColor="@color/foreground_color"
+                                android:textSize="16sp" />
+                        </RadioGroup>
+
+                        <LinearLayout
+                            android:id="@+id/icon_pack_controls"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8sp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/selected_icon_pack_label"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="8sp"
+                                android:text="@string/icon_pack_not_selected_label"
+                                android:textColor="@color/foreground_color"
+                                android:textSize="16sp" />
+
+                            <com.rama.mako.widgets.WdButton
+                                android:id="@+id/select_icon_pack_button"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/button_secondary_color"
+                                android:text="@string/select_icon_pack_label" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8sp"
-                android:background="@color/button_secondary_color"
-                android:text="@string/refresh_launcher_label" />
+                android:background="@color/bg_secondary"
+                android:orientation="vertical">
 
-            <com.rama.mako.widgets.WdButton
-                android:id="@+id/change_apps_button"
+                <LinearLayout
+                    android:id="@+id/section_groups_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:padding="16sp">
+
+                    <TextView
+                        android:id="@+id/section_groups_indicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8sp"
+                        android:text="@string/settings_section_expand_indicator"
+                        android:textColor="@color/foreground_color"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settings_section_groups_title"
+                        android:textColor="@color/foreground_color"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/section_groups_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingStart="8sp"
+                    android:paddingEnd="8sp"
+                    android:paddingBottom="8sp"
+                    android:visibility="gone">
+
+                    <com.rama.mako.widgets.WdCheckbox
+                        android:id="@+id/show_group_header"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/show_group_header_label" />
+
+                    <com.rama.mako.widgets.WdCheckbox
+                        android:id="@+id/has_collapsible_groups"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/has_collapsible_groups" />
+
+                    <LinearLayout
+                        android:id="@+id/groups"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8sp"
+                        android:background="@color/bg_primary"
+                        android:focusableInTouchMode="true"
+                        android:orientation="vertical"
+                        android:paddingStart="8sp"
+                        android:paddingTop="16sp"
+                        android:paddingEnd="8sp"
+                        android:paddingBottom="8sp" />
+
+                    <com.rama.mako.widgets.WdButton
+                        android:id="@+id/add_group"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8sp"
+                        android:background="@color/button_secondary_color"
+                        android:text="@string/add_group_label" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8sp"
-                android:background="@color/button_secondary_color"
-                android:text="@string/edit_apps_label" />
+                android:background="@color/bg_secondary"
+                android:orientation="vertical">
 
-            <com.rama.mako.widgets.WdButton
-                android:id="@+id/wallpaper_button"
+                <LinearLayout
+                    android:id="@+id/section_apps_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:padding="16sp">
+
+                    <TextView
+                        android:id="@+id/section_apps_indicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8sp"
+                        android:text="@string/settings_section_expand_indicator"
+                        android:textColor="@color/foreground_color"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settings_section_apps_title"
+                        android:textColor="@color/foreground_color"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/section_apps_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingStart="8sp"
+                    android:paddingEnd="8sp"
+                    android:paddingBottom="8sp"
+                    android:visibility="gone">
+
+                    <com.rama.mako.widgets.WdCheckbox
+                        android:id="@+id/show_search"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/show_search_label" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8sp"
-                android:background="@color/button_secondary_color"
-                android:text="@string/change_wallpaper_label" />
+                android:background="@color/bg_secondary"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/section_system_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:padding="16sp">
+
+                    <TextView
+                        android:id="@+id/section_system_indicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8sp"
+                        android:text="@string/settings_section_expand_indicator"
+                        android:textColor="@color/foreground_color"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settings_section_system_title"
+                        android:textColor="@color/foreground_color"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/section_system_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingStart="8sp"
+                    android:paddingEnd="8sp"
+                    android:paddingBottom="8sp"
+                    android:visibility="gone">
+
+                    <com.rama.mako.widgets.WdButton
+                        android:id="@+id/activate_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8sp"
+                        android:background="@color/button_secondary_color"
+                        android:text="@string/set_default_label" />
+
+                    <com.rama.mako.widgets.WdButton
+                        android:id="@+id/reset_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8sp"
+                        android:background="@color/button_secondary_color"
+                        android:text="@string/refresh_launcher_label" />
+
+                    <com.rama.mako.widgets.WdButton
+                        android:id="@+id/change_apps_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8sp"
+                        android:background="@color/button_secondary_color"
+                        android:text="@string/edit_apps_label" />
+
+                    <com.rama.mako.widgets.WdButton
+                        android:id="@+id/wallpaper_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8sp"
+                        android:background="@color/button_secondary_color"
+                        android:text="@string/change_wallpaper_label" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8sp"
+                android:background="@color/bg_secondary"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/section_data_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:padding="16sp">
+
+                    <TextView
+                        android:id="@+id/section_data_indicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8sp"
+                        android:text="@string/settings_section_expand_indicator"
+                        android:textColor="@color/foreground_color"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settings_section_data_title"
+                        android:textColor="@color/foreground_color"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/section_data_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingStart="8sp"
+                    android:paddingEnd="8sp"
+                    android:paddingBottom="8sp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8sp"
+                        android:text="@string/debug_header"
+                        android:textColor="@color/foreground_color"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <com.rama.mako.widgets.WdButton
+                        android:id="@+id/export_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8sp"
+                        android:background="@color/button_danger"
+                        android:text="@string/export_data_label" />
+
+                    <com.rama.mako.widgets.WdButton
+                        android:id="@+id/clear_prefs_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/button_danger"
+                        android:text="@string/clear_data_label" />
+                </LinearLayout>
+            </LinearLayout>
 
             <com.rama.mako.widgets.WdButton
                 android:id="@+id/about_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8sp"
                 android:layout_marginBottom="8sp"
                 android:background="@color/button_secondary_color"
                 android:text="@string/about_mako_label" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8sp"
-                android:textSize="16sp"
-                android:textColor="@color/foreground_color"
-                android:text="Debug"
-                android:textStyle="bold" />
-
-            <com.rama.mako.widgets.WdButton
-                android:id="@+id/export_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8sp"
-                android:background="@color/button_danger"
-                android:text="Export Data" />
-
-            <com.rama.mako.widgets.WdButton
-                android:id="@+id/clear_prefs_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/button_danger"
-                android:text="Clear Data" />
         </LinearLayout>
     </ScrollView>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/disabled"
-        android:layout_marginVertical="16sp" />
-
+        android:layout_marginVertical="16sp"
+        android:background="@color/disabled" />
 
     <com.rama.mako.widgets.WdButton
         android:id="@+id/close_button"

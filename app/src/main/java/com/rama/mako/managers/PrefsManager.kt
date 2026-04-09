@@ -40,6 +40,12 @@ class PrefsManager private constructor(context: Context) {
         const val APPS_ICONS = "apps:icons"
         const val APPS_ICON_SOURCE = "apps:icon_source"
         const val APPS_ICON_PACK_PACKAGE = "apps:icon_pack_package"
+        const val SETTINGS_SECTION_HOME = "settings:section:home"
+        const val SETTINGS_SECTION_APPEARANCE = "settings:section:appearance"
+        const val SETTINGS_SECTION_GROUPS = "settings:section:groups"
+        const val SETTINGS_SECTION_APPS = "settings:section:apps"
+        const val SETTINGS_SECTION_SYSTEM = "settings:section:system"
+        const val SETTINGS_SECTION_DATA = "settings:section:data"
         const val GROUPS_IDS = "groups:ids"
         const val GROUPS_HEADERS = "groups:headers"
         const val GROUPS_COLLAPSIBLE = "groups:collapsible"
@@ -129,6 +135,12 @@ class PrefsManager private constructor(context: Context) {
                 .putBoolean(PrefKeys.APPS_SEARCH, false)
                 .putString(PrefKeys.APPS_ICON_SOURCE, IconSource.NONE)
                 .putString(PrefKeys.APPS_ICON_PACK_PACKAGE, "")
+                .putBoolean(PrefKeys.SETTINGS_SECTION_HOME, true)
+                .putBoolean(PrefKeys.SETTINGS_SECTION_APPEARANCE, true)
+                .putBoolean(PrefKeys.SETTINGS_SECTION_GROUPS, false)
+                .putBoolean(PrefKeys.SETTINGS_SECTION_APPS, false)
+                .putBoolean(PrefKeys.SETTINGS_SECTION_SYSTEM, false)
+                .putBoolean(PrefKeys.SETTINGS_SECTION_DATA, false)
 
                 .putBoolean(PrefKeys.BATTERY_VISIBLE, true)
                 .putBoolean(PrefKeys.BATTERY_TEMPERATURE, true)
