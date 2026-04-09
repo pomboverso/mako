@@ -218,12 +218,6 @@ class SettingsActivity : CsActivity() {
     private fun setupCheckboxes() {
         bindWdCheckbox(R.id.show_date, PrefKeys.DATE_VISIBLE, false, listOf(R.id.show_year_day))
         bindWdCheckbox(R.id.show_search, PrefKeys.APPS_SEARCH, false)
-        bindWdCheckbox(
-            R.id.show_icons,
-            PrefKeys.APPS_ICONS,
-            false,
-            listOf(R.id.icons_options_container)
-        )
 
         bindWdCheckbox(
             R.id.show_group_header,
