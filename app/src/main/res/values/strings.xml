@@ -72,6 +72,14 @@
     <string name="clock_header">Clock</string>
     <string name="date_header">Date and Battery</string>
     <string name="groups_header">Groups</string>
+    <string name="settings_section_home_title">Home screen</string>
+    <string name="settings_section_appearance_title">Appearance</string>
+    <string name="settings_section_groups_title">Groups</string>
+    <string name="settings_section_apps_title">Applications</string>
+    <string name="settings_section_system_title">System</string>
+    <string name="settings_section_data_title">Data and Debug</string>
+    <string name="settings_section_expand_indicator">[+]</string>
+    <string name="settings_section_collapse_indicator">[-]</string>
     <string name="set_default_label">Set Launcher as default</string>
     <string name="set_clock_app_label">Change Clock Tap Action</string>
     <string name="refresh_launcher_label">Refresh launcher</string>
@@ -84,7 +92,18 @@
     <string name="show_clock_label">Show clock</string>
     <string name="show_year_day_label">Show day of the year</string>
     <string name="show_group_header_label">Show group header</string>
-    <string name="show_icons_label">Show application icons</string>
+    <string name="icons_settings_header">Icons</string>
+    <string name="none_label">None</string>
+    <string name="default_label">Default</string>
+    <string name="default_system_label">Default (System)</string>
+    <string name="icons_monochrome_label">Monochrome (System colors / Material You)</string>
+    <string name="icons_icon_pack_label">Icon pack</string>
+    <string name="select_icon_pack_label">Select icon pack</string>
+    <string name="selected_icon_pack_label">Selected pack: %1$s</string>
+    <string name="icon_pack_not_selected_label">No icon pack selected</string>
+    <string name="no_icon_pack_found_label">No compatible icon pack found</string>
+    <string name="icon_pack_selected_toast">Selected icon pack: %1$s</string>
+    <string name="monochrome_fallback_toast">Monochrome icons require Android 13+, using fallback where unavailable</string>
     <string name="show_ungrouped_apps_label">Show ungrouped apps</string>
     <string name="has_collapsible_groups">Allow collapsing groups</string>
     <string name="add_group_label">+ Add New Group</string>
@@ -92,9 +111,19 @@
     <string name="system_label">System default</string>
     <string name="clock_24_label">24-hour</string>
     <string name="clock_12_label">12-hour (AM/PM)</string>
+    <string name="celsius_label">Celsius</string>
+    <string name="fahrenheit_label">Fahrenheit</string>
     <string name="open_app_settings_label">Open app settings</string>
     <string name="show_battery_temperature_label">Show battery temperature</string>
     <string name="show_battery_charge_status_label">Show battery charge status</string>
+    <string name="debug_header">Debug</string>
+    <string name="export_data_label">Export Data</string>
+    <string name="clear_data_label">Clear Data</string>
+    <string name="reset_done_toast">Reset done</string>
+    <string name="reset_failed_toast">Reset failed</string>
+    <string name="clock_app_selected_toast">Selected: %1$s</string>
+    <string name="group_label_updated_toast">Label Updated</string>
+    <string name="select_target_group_toast">Select a target group</string>
     <string name="font_jersey_label" translatable="false">Jersey 25</string>
     <string name="font_quicksand_label" translatable="false">Quicksand</string>
     <string name="font_montserrat_label" translatable="false">Montserrat</string>
@@ -116,6 +145,9 @@
 
     <!-- Dialog :: Search -->
     <string name="search_apps_header">Search apps</string>
+    <string name="search_apps_hint">Search apps...</string>
+    <string name="search_icon_desc">Toggle search</string>
+    <string name="clear_search_desc">Clear search</string>
 
     <!-- Dialog :: Delete Group -->
     <string name="delete_group_title">Are you sure you want to delete this group?</string>
@@ -124,4 +156,7 @@
 
     <!-- Dialog :: Pick Clock App -->
     <string name="pick_clock_app_disclaimer">Selecting an app here will set it as your default clock action. When you tap the clock on your home screen, this app will be launched.</string>
+
+    <!-- Dialog :: Pick Icon Pack -->
+    <string name="pick_icon_pack_disclaimer">Choose an installed icon pack. If an icon is missing, Mako will use the system icon for that app.</string>
 </resources>

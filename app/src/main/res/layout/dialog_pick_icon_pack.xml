@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:textSize="32sp"
         android:textColor="@color/foreground_color"
-        android:text="@string/set_clock_app_label"
+        android:text="@string/select_icon_pack_label"
         android:gravity="center"
         android:textStyle="bold" />
 
@@ -22,20 +22,20 @@
         android:layout_marginBottom="16sp"
         android:textSize="16sp"
         android:textColor="@color/foreground_color"
-        android:text="@string/pick_clock_app_disclaimer"
+        android:text="@string/pick_icon_pack_disclaimer"
         android:gravity="center"
         android:textStyle="bold" />
 
     <ListView
-        android:id="@+id/app_list"
+        android:id="@+id/icon_pack_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:dividerHeight="0dp"
+        android:layout_weight="1"
         android:divider="@null"
         android:padding="16sp"
         android:background="@color/bg_secondary"
         android:layout_marginBottom="8sp"
-        android:layout_weight="1" />
+        android:dividerHeight="0dp" />
 
     <com.rama.mako.widgets.WdButton
         android:id="@+id/close_button"

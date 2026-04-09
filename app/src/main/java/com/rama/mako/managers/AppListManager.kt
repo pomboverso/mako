@@ -15,30 +15,58 @@ import com.rama.mako.R
 import com.rama.mako.utils.sp
 import com.rama.mako.activities.SettingsActivity
 import com.rama.mako.widgets.WdButton
+import java.text.Normalizer
+import java.util.Locale
+import kotlin.math.abs
 
 class AppListManager(
     private val context: Context,
     private val listView: ListView,
-    private val appsProvider: AppsProvider
+    private val appsProvider: AppsProvider,
+    private val onAppLaunched: (() -> Unit)? = null
 ) {
+    private data class ScoredApp(
+        val app: AppsProvider.AppEntry,
+        val score: Int,
+        val normalizedName: String
+    )
+
+    private data class GroupMatch(
+        val groupId: String,
+        val label: String,
+        val bestScore: Int,
+        val apps: List<ScoredApp>
+    )
+
     private val prefs = PrefsManager.getInstance(context)
+    private val iconManager = IconManager(context, appsProvider)
     private val items = mutableListOf<ListItem>()
     private lateinit var adapter: ArrayAdapter<ListItem>
-    private val iconCache = mutableMapOf<String, Drawable>()
+    private var allAppsCache: List<AppsProvider.AppEntry> = emptyList()
+    private val searchableNameCache = mutableMapOf<String, String>()
+    private val combiningMarkRegex = Regex("\\p{M}+")
+    private val tokenSeparatorRegex = Regex("[^a-z0-9]+")
 
     fun setup() {
+        updateAppsCache()
         buildItems()
         setupAdapter()
         setupScrollListener()
     }
 
     fun refresh() {
+        updateAppsCache()
         buildItems()
         adapter.notifyDataSetChanged()
     }
 
+    private fun updateAppsCache() {
+        allAppsCache = appsProvider.getAll()
+        searchableNameCache.clear()
+    }
+
     private fun buildItems() {
-        val allApps = appsProvider.getAll()
+        val allApps = allAppsCache
 
         // Get all known group IDs
         val groupIds = prefs.getGroupIds().toMutableSet()
@@ -76,9 +104,151 @@ class AppListManager(
             val isExpanded = prefs.isGroupExpanded(groupId)
             if (!isExpanded) return@forEach
 
-            apps.sortedBy { getDisplayName(it).lowercase() }
+            apps.sortedBy { getSearchableName(it) }
                 .forEach { items.add(ListItem.App(it)) }
         }
+    }
+
+    private fun getAppCacheKey(app: AppsProvider.AppEntry): String {
+        return "${app.packageName}:${app.userHandle.hashCode()}"
+    }
+
+    private fun getSearchableName(app: AppsProvider.AppEntry): String {
+        val key = getAppCacheKey(app)
+        return searchableNameCache.getOrPut(key) {
+            normalizeForSearch(getDisplayName(app))
+        }
+    }
+
+// Explicit ones that might cause trouble when getting normalized
+    private fun normalizeForSearch(value: String): String {
+        val foldedTurkish = value
+            .lowercase(Locale.ROOT)
+            .replace('ı', 'i')
+            .replace('ş', 's')
+            .replace('ç', 'c')
+            .replace('ğ', 'g')
+            .replace('ö', 'o')
+            .replace('ü', 'u')
+
+        val foldedSpanish = foldedTurkish
+            .replace('ñ', 'n')
+            .replace('¡', ' ')
+            .replace('¿', ' ')
+
+        return Normalizer.normalize(foldedSpanish, Normalizer.Form.NFD)
+            .replace(combiningMarkRegex, "")
+            .trim()
+    }
+
+    private fun maxFuzzyDistance(queryLength: Int): Int {
+        return when {
+            queryLength <= 3 -> 0
+            queryLength <= 5 -> 1
+            queryLength <= 8 -> 2
+            else -> 3
+        }
+    }
+
+    private fun findWordPrefixIndex(text: String, query: String): Int {
+        if (query.isEmpty() || query.length > text.length) return -1
+
+        val lastStart = text.length - query.length
+        for (i in 0..lastStart) {
+            val isWordStart = i == 0 || !text[i - 1].isLetterOrDigit()
+            if (!isWordStart) continue
+
+            if (text.regionMatches(i, query, 0, query.length, ignoreCase = false)) {
+                return i
+            }
+        }
+
+        return -1
+    }
+
+    private fun boundedLevenshtein(a: String, b: String, maxDistance: Int): Int? {
+        if (abs(a.length - b.length) > maxDistance) return null
+        if (a == b) return 0
+        if (a.isEmpty()) return if (b.length <= maxDistance) b.length else null
+        if (b.isEmpty()) return if (a.length <= maxDistance) a.length else null
+
+        var previous = IntArray(b.length + 1) { it }
+        var current = IntArray(b.length + 1)
+
+        for (i in 1..a.length) {
+            current[0] = i
+            var rowMin = current[0]
+            val left = a[i - 1]
+
+            for (j in 1..b.length) {
+                val cost = if (left == b[j - 1]) 0 else 1
+                val deletion = previous[j] + 1
+                val insertion = current[j - 1] + 1
+                val substitution = previous[j - 1] + cost
+
+                val cell = minOf(deletion, insertion, substitution)
+                current[j] = cell
+                if (cell < rowMin) rowMin = cell
+            }
+
+            if (rowMin > maxDistance) return null
+
+            val swap = previous
+            previous = current
+            current = swap
+        }
+
+        val result = previous[b.length]
+        return if (result <= maxDistance) result else null
+    }
+
+    private fun getFuzzyDistance(name: String, query: String, maxDistance: Int): Int? {
+        var best: Int? = null
+
+        fun tryCandidate(candidate: String) {
+            if (candidate.isEmpty()) return
+            val distance = boundedLevenshtein(candidate, query, maxDistance) ?: return
+            if (best == null || distance < best!!) {
+                best = distance
+            }
+        }
+
+        tryCandidate(name)
+
+        name.split(tokenSeparatorRegex)
+            .filter { it.isNotEmpty() }
+            .forEach { token ->
+                tryCandidate(token)
+            }
+
+        return best
+    }
+
+    private fun scoreMatch(name: String, query: String): Int? {
+        if (name == query) return 0
+
+        if (name.startsWith(query)) {
+            return 100 + (name.length - query.length).coerceAtLeast(0)
+        }
+
+        val wordPrefixIndex = findWordPrefixIndex(name, query)
+        if (wordPrefixIndex >= 0) {
+            return 200 + wordPrefixIndex
+        }
+
+        val containsIndex = name.indexOf(query)
+        if (containsIndex >= 0) {
+            val lengthDiff = abs(name.length - query.length)
+            return 300 + (containsIndex * 2) + lengthDiff
+        }
+
+        val maxDistance = maxFuzzyDistance(query.length)
+        if (maxDistance == 0) return null
+
+        val fuzzyDistance = getFuzzyDistance(name, query, maxDistance) ?: return null
+        val lengthDiff = abs(name.length - query.length)
+
+        return 1000 + (fuzzyDistance * 100) + lengthDiff
     }
 
     private fun getDisplayName(app: AppsProvider.AppEntry): String {
@@ -91,11 +261,19 @@ class AppListManager(
     }
 
     fun filter(query: String) {
-        val lowerQuery = query.lowercase()
+        val normalizedQuery = normalizeForSearch(query)
+        val isSearchActive = normalizedQuery.isNotEmpty()
+
+        if (!isSearchActive) {
+            buildItems()
+            adapter.notifyDataSetChanged()
+            return
+        }
 
         val filteredItems = mutableListOf<ListItem>()
+        val matchedGroups = mutableListOf<GroupMatch>()
 
-        val allApps = appsProvider.getAll()
+        val allApps = allAppsCache
 
         // All known group IDs
         val groupIds = prefs.getGroupIds().toMutableSet()
@@ -116,32 +294,48 @@ class AppListManager(
             val isVisible = prefs.isGroupVisible(groupId)
             if (!isVisible) return@forEach
 
-            // Filter apps
-            val matchedApps = apps.filter {
-                getDisplayName(it).lowercase().contains(lowerQuery)
-            }
+            val matchedApps = apps.mapNotNull { app ->
+                val normalizedName = getSearchableName(app)
+                val score = scoreMatch(normalizedName, normalizedQuery) ?: return@mapNotNull null
+                ScoredApp(app = app, score = score, normalizedName = normalizedName)
+            }.sortedWith(
+                compareBy<ScoredApp> { it.score }
+                    .thenBy { it.normalizedName }
+            )
 
             if (matchedApps.isEmpty()) return@forEach
 
             val label = prefs.getGroupLabel(groupId)
 
-            if (prefs.hasGroupHeaders()) {
-                filteredItems.add(
-                    ListItem.Header(
-                        id = groupId,
-                        title = label
-                    )
+            matchedGroups.add(
+                GroupMatch(
+                    groupId = groupId,
+                    label = label,
+                    bestScore = matchedApps.first().score,
+                    apps = matchedApps
                 )
-
-            }
-
-            val isExpanded = prefs.isGroupExpanded(groupId)
-            if (!isExpanded) return@forEach
-
-            matchedApps
-                .sortedBy { getDisplayName(it).lowercase() }
-                .forEach { filteredItems.add(ListItem.App(it)) }
+            )
         }
+
+        matchedGroups
+            .sortedWith(
+                compareBy<GroupMatch> { it.bestScore }
+                    .thenBy { it.label.lowercase(Locale.ROOT) }
+            )
+            .forEach { group ->
+                if (prefs.hasGroupHeaders()) {
+                    filteredItems.add(
+                        ListItem.Header(
+                            id = group.groupId,
+                            title = group.label
+                        )
+                    )
+                }
+
+                group.apps.forEach { scoredApp ->
+                    filteredItems.add(ListItem.App(scoredApp.app))
+                }
+            }
 
         items.clear()
         items.addAll(filteredItems)
@@ -334,7 +528,7 @@ class AppListManager(
                         val showIcons = prefs.hasIconsVisible()
 
                         if (showIcons) {
-                            val drawable = appsProvider.getIcon(app)
+                            val drawable = iconManager.getIcon(app)
 
                             icon.setImageDrawable(drawable)
                             icon.visibility = View.VISIBLE
@@ -346,6 +540,8 @@ class AppListManager(
                                         Toast.LENGTH_SHORT
                                     ).show()
                                     refresh()
+                                } else {
+                                    onAppLaunched?.invoke()
                                 }
                             }
                             icon.setOnLongClickListener { showContextMenu(it, app); true }
@@ -365,6 +561,8 @@ class AppListManager(
                                     Toast.LENGTH_SHORT
                                 ).show()
                                 refresh()
+                            } else {
+                                onAppLaunched?.invoke()
                             }
                         }
                         emptySpace.setOnClickListener {
@@ -375,6 +573,8 @@ class AppListManager(
                                     Toast.LENGTH_SHORT
                                 ).show()
                                 refresh()
+                            } else {
+                                onAppLaunched?.invoke()
                             }
                         }
 

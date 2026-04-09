@@ -1,9 +1,15 @@
 package com.rama.mako.activities
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.view.WindowManager
+import android.view.animation.OvershootInterpolator
 import android.widget.ListView
 import android.widget.TextView
 import android.widget.EditText
@@ -11,6 +17,7 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.Toast
+import android.window.OnBackInvokedCallback
 import com.rama.mako.CsActivity
 import com.rama.mako.R
 import com.rama.mako.managers.AppListManager
@@ -34,6 +41,17 @@ class MainActivity : CsActivity() {
     private lateinit var appsProvider: AppsProvider
 
     private lateinit var prefs: PrefsManager
+
+    private lateinit var searchField: EditText
+    private lateinit var searchIcon: FrameLayout
+    private lateinit var clearBtn: FrameLayout
+
+    private var backCallback: OnBackInvokedCallback? = null
+    private var isSearchExpanded = false
+    private var isProgrammaticSearchUpdate = false
+    private val searchDebounceHandler = Handler(Looper.getMainLooper())
+    private var searchDebounceRunnable: Runnable? = null
+    private var currentSearchQuery: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,7 +84,15 @@ class MainActivity : CsActivity() {
 
         // --- App List ---
         appsProvider = AppsProvider(this)
-        appListManager = AppListManager(this, listView, AppsProvider(this))
+        appListManager = AppListManager(
+            this,
+            listView,
+            appsProvider
+        ) {
+            if (isSearchExpanded) {
+                collapseSearch()
+            }
+        }
         appListManager.setup()
 
         val appLayout = findViewById<LinearLayout>(R.id.apps_layout)
@@ -76,35 +102,125 @@ class MainActivity : CsActivity() {
         }
 
         initSearchbar()
+        setupBackHandling()
     }
 
-    private var currentSearchQuery: String = ""
+    // --- OnBackInvokedCallback registor for Android 13+ ---
+
+    private fun setupBackHandling() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            backCallback = OnBackInvokedCallback {
+                // If search is expanded, collapse it; otherwise consume back to prevent launcher restart
+                if (isSearchExpanded) {
+                    collapseSearch()
+                }
+                // If search is not expanded, do nothing (consume back to keep launcher open)
+            }
+            onBackInvokedDispatcher.registerOnBackInvokedCallback(
+                android.window.OnBackInvokedDispatcher.PRIORITY_OVERLAY,
+                backCallback!!
+            )
+        }
+    }
 
     private fun initSearchbar() {
-        val searchField = findViewById<EditText>(R.id.search_field)
-        val clearBtn = findViewById<FrameLayout>(R.id.clear_field)
+        searchField = findViewById(R.id.search_field)
+        searchIcon = findViewById(R.id.search_icon)
+        clearBtn = findViewById(R.id.clear_field)
 
-        // Load previous query
-        searchField.setText(currentSearchQuery)
-        searchField.setSelection(currentSearchQuery.length)
-        appListManager.filter(currentSearchQuery)
+        // Initially collapsed
+        searchField.visibility = View.GONE
+        clearBtn.visibility = View.GONE
 
-        // Update the query as user types
+        // Search icon
+        searchIcon.setOnClickListener {
+            if (isSearchExpanded) {
+                collapseSearch()
+            } else {
+                expandSearch()
+            }
+        }
+
+        // Text change with debounce
         searchField.addTextChangedListener(object : android.text.TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                currentSearchQuery = s.toString()
-                appListManager.filter(currentSearchQuery)
+                if (isProgrammaticSearchUpdate) return
+
+                val query = s.toString()
+                
+                // Cancel previous debounce
+                searchDebounceRunnable?.let { searchDebounceHandler.removeCallbacks(it) }
+                
+                // Schedule new after 300ms
+                searchDebounceRunnable = Runnable {
+                    currentSearchQuery = query
+                    appListManager.filter(currentSearchQuery)
+                }
+                searchDebounceHandler.postDelayed(searchDebounceRunnable!!, 300)
+                
+                // Clear button
+                clearBtn.visibility = if (query.isNotEmpty()) View.VISIBLE else View.GONE
             }
 
             override fun afterTextChanged(s: android.text.Editable?) {}
         })
 
-        // Clear button clears field + query
+        // Clear button (resets the list too)
         clearBtn.setOnClickListener {
             currentSearchQuery = ""
+            searchDebounceRunnable?.let { searchDebounceHandler.removeCallbacks(it) }
+            isProgrammaticSearchUpdate = true
             searchField.text.clear()
+            isProgrammaticSearchUpdate = false
             appListManager.filter("")
+            clearBtn.visibility = View.GONE
+        }
+    }
+
+    private fun expandSearch() {
+        isSearchExpanded = true
+
+        // Show field
+        searchField.visibility = View.VISIBLE
+        searchField.requestFocus()
+
+        val scaleX = ObjectAnimator.ofFloat(searchField, "scaleX", 0.8f, 1f)
+        val scaleY = ObjectAnimator.ofFloat(searchField, "scaleY", 0.8f, 1f)
+        val alpha = ObjectAnimator.ofFloat(searchField, "alpha", 0f, 1f)
+
+        AnimatorSet().apply {
+            playTogether(scaleX, scaleY, alpha)
+            duration = 300
+            interpolator = OvershootInterpolator(1.5f)
+            start()
+        }
+
+        // Show keyboard
+        val imm = getSystemService(android.content.Context.INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager
+        imm.showSoftInput(searchField, 0)
+    }
+
+    private fun collapseSearch(clearQuery: Boolean = true, hideKeyboard: Boolean = true) {
+        isSearchExpanded = false
+
+        // Hide field
+        searchField.visibility = View.GONE
+        clearBtn.visibility = View.GONE
+        searchField.clearFocus()
+
+        if (clearQuery) {
+            currentSearchQuery = ""
+            searchDebounceRunnable?.let { searchDebounceHandler.removeCallbacks(it) }
+            isProgrammaticSearchUpdate = true
+            searchField.text.clear()
+            isProgrammaticSearchUpdate = false
+            appListManager.filter("")
+        }
+
+        if (hideKeyboard) {
+            val imm = getSystemService(android.content.Context.INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager
+            imm.hideSoftInputFromWindow(searchField.windowToken, 0)
         }
     }
 
@@ -117,12 +233,31 @@ class MainActivity : CsActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        
+        // Clean up debounce handler
+        searchDebounceRunnable?.let { searchDebounceHandler.removeCallbacks(it) }
+        
+        // Unregister back callback for Android 13+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && backCallback != null) {
+            onBackInvokedDispatcher.unregisterOnBackInvokedCallback(backCallback!!)
+        }
+        
         batteryManager.unregister()
         clockManager.stop()
     }
 
+    override fun onBackPressed() {
+        // Handle back for below Android 12
+        if (isSearchExpanded) {
+            collapseSearch()
+        }
+        // Otherwise consume back to prevent launcher from restarting
+    }
+
     // --- Settings sync (row visibility only) ---
     private fun syncSettings() {
+        val searchVisible = prefs.isSearchVisible()
+
         timeText.visibility =
             if (prefs.getClockFormat() != PrefsManager.ClockFormat.NONE) View.VISIBLE else View.GONE
         findViewById<View>(R.id.date_row).visibility =
@@ -130,7 +265,9 @@ class MainActivity : CsActivity() {
         findViewById<View>(R.id.battery_row).visibility =
             if (prefs.isBatteryVisible()) View.VISIBLE else View.GONE
         findViewById<View>(R.id.searchbar).visibility =
-            if (prefs.isSearchVisible()) View.VISIBLE else View.GONE
+            if (searchVisible) View.VISIBLE else View.GONE
+        searchIcon.visibility =
+            if (searchVisible) View.VISIBLE else View.GONE
     }
 
     // --- Open system clock safely ---

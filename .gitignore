@@ -27,3 +27,10 @@ keystore.properties
 
 # Gradle output metadata
 **/output-metadata.json
+
+# Extensions may create this...
+.vscode/
+
+# AI slop stuff
+.agents/
+AGENTS.md
