@@ -16,6 +16,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Mako">
 
+        <service
+            android:name=".Tiles"
+            android:label="Launch Clock"
+            android:icon="@drawable/icon_eye"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+
+        </service>
+
         <activity
             android:exported="false"
             android:name=".activities.AboutActivity"
@@ -46,5 +59,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>
