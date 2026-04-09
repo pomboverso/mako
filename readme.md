@@ -87,7 +87,6 @@ No network access is required.
 
 - [Branding](./docs/branding.md)
 - [Attributions](./docs/attributions.md)
-- [Changelog](./docs/changelog.md)
 
 ---
 
