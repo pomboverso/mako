@@ -38,6 +38,7 @@ class SettingsActivity : CsActivity() {
 
         setupBasicButtons()
         setupClockFormat()
+        setupTemperatureFormat()
         setupFontStyle()
         setupIconsSection()
         setupCheckboxes()
@@ -241,18 +242,20 @@ class SettingsActivity : CsActivity() {
             false,
             listOf(
                 R.id.show_battery_temperature,
-                R.id.use_battery_temperature_celsius,
                 R.id.show_battery_charge_status
-            )
+            ),
+            onChange = { refreshTemperatureFormatVisibility() }
         )
 
-        bindWdCheckbox(R.id.show_battery_temperature, PrefKeys.BATTERY_TEMPERATURE, false)
         bindWdCheckbox(
-            R.id.use_battery_temperature_celsius,
-            PrefKeys.BATTERY_TEMPERATURE_CELSIUS,
-            false
+            R.id.show_battery_temperature,
+            PrefKeys.BATTERY_TEMPERATURE,
+            false,
+            onChange = { refreshTemperatureFormatVisibility() }
         )
         bindWdCheckbox(R.id.show_battery_charge_status, PrefKeys.BATTERY_CHARGE_STATUS, false)
+
+        refreshTemperatureFormatVisibility()
     }
 
     private fun setupIconsSection() {
@@ -260,6 +263,7 @@ class SettingsActivity : CsActivity() {
         val selectIconPackButton = findViewById<WdButton>(R.id.select_icon_pack_button)
 
         when (prefs.getIconSource()) {
+            PrefsManager.IconSource.NONE -> group.check(R.id.icon_source_none)
             PrefsManager.IconSource.MONOCHROME -> group.check(R.id.icon_source_monochrome)
             PrefsManager.IconSource.ICON_PACK -> group.check(R.id.icon_source_icon_pack)
             else -> group.check(R.id.icon_source_system)
@@ -269,6 +273,7 @@ class SettingsActivity : CsActivity() {
 
         group.setOnCheckedChangeListener { _, id ->
             when (id) {
+                R.id.icon_source_none -> prefs.setIconSource(PrefsManager.IconSource.NONE)
                 R.id.icon_source_monochrome -> prefs.setIconSource(PrefsManager.IconSource.MONOCHROME)
                 R.id.icon_source_icon_pack -> prefs.setIconSource(PrefsManager.IconSource.ICON_PACK)
                 else -> prefs.setIconSource(PrefsManager.IconSource.SYSTEM)
@@ -393,6 +398,35 @@ class SettingsActivity : CsActivity() {
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
+    }
+
+    private fun setupTemperatureFormat() {
+        val group = findViewById<RadioGroup>(R.id.temperature_format_group)
+
+        when (prefs.getTemperatureFormat()) {
+            PrefsManager.TemperatureFormat.CELSIUS -> group.check(R.id.temperature_celsius)
+            PrefsManager.TemperatureFormat.FAHRENHEIT -> group.check(R.id.temperature_fahrenheit)
+            else -> group.check(R.id.temperature_system)
+        }
+
+        group.setOnCheckedChangeListener { _, id ->
+            when (id) {
+                R.id.temperature_celsius -> prefs.setTemperatureFormat(PrefsManager.TemperatureFormat.CELSIUS)
+                R.id.temperature_fahrenheit -> prefs.setTemperatureFormat(PrefsManager.TemperatureFormat.FAHRENHEIT)
+                else -> prefs.setTemperatureFormat(PrefsManager.TemperatureFormat.DEFAULT)
+            }
+        }
+
+        refreshTemperatureFormatVisibility()
+    }
+
+    private fun refreshTemperatureFormatVisibility() {
+        val container = findViewById<View>(R.id.temperature_format_container)
+        val isVisible =
+            prefs.getBoolean(PrefKeys.BATTERY_VISIBLE, false) &&
+                    prefs.getBoolean(PrefKeys.BATTERY_TEMPERATURE, false)
+
+        container.visibility = if (isVisible) View.VISIBLE else View.GONE
     }
 
     private fun bindWdCheckbox(

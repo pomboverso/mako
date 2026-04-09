@@ -47,11 +47,14 @@ class PrefsManager private constructor(context: Context) {
         const val DATE_YEAR_DAY = "date:year_day"
         const val BATTERY_VISIBLE = "battery:visible"
         const val BATTERY_TEMPERATURE = "battery:temperature"
-        const val BATTERY_TEMPERATURE_CELSIUS = "battery:temperature_celsius"
+        const val TEMPERATURE_FORMAT = "temperature:format"
         const val BATTERY_CHARGE_STATUS = "battery:charge_status"
         const val CLOCK_FORMAT = "clock:format"
         const val CLOCK_APP = "clock:app"
         const val FONT_STYLE = "font:style"
+        const val MIGRATION_ICON_SOURCE_RADIO = "migration:icon_source_radio"
+        const val MIGRATION_TEMPERATURE_FORMAT = "migration:temperature_format"
+        const val LEGACY_BATTERY_TEMPERATURE_CELSIUS = "battery:temperature_celsius"
 
         fun appKey(pkg: String, userHandle: UserHandle): String {
             val userId = userHandle.hashCode()
@@ -85,9 +88,16 @@ class PrefsManager private constructor(context: Context) {
     }
 
     object IconSource {
+        const val NONE = "none"
         const val SYSTEM = "system"
         const val MONOCHROME = "monochrome"
         const val ICON_PACK = "icon_pack"
+    }
+
+    object TemperatureFormat {
+        const val DEFAULT = "default"
+        const val CELSIUS = "celsius"
+        const val FAHRENHEIT = "fahrenheit"
     }
 
     fun initPrefs() {
@@ -117,12 +127,12 @@ class PrefsManager private constructor(context: Context) {
 
                 .putBoolean(PrefKeys.APPS_ICONS, false)
                 .putBoolean(PrefKeys.APPS_SEARCH, false)
-                .putString(PrefKeys.APPS_ICON_SOURCE, IconSource.SYSTEM)
+                .putString(PrefKeys.APPS_ICON_SOURCE, IconSource.NONE)
                 .putString(PrefKeys.APPS_ICON_PACK_PACKAGE, "")
 
                 .putBoolean(PrefKeys.BATTERY_VISIBLE, true)
                 .putBoolean(PrefKeys.BATTERY_TEMPERATURE, true)
-                .putBoolean(PrefKeys.BATTERY_TEMPERATURE_CELSIUS, false)
+                .putString(PrefKeys.TEMPERATURE_FORMAT, TemperatureFormat.DEFAULT)
                 .putBoolean(PrefKeys.BATTERY_CHARGE_STATUS, false)
 
                 .putBoolean(PrefKeys.DATE_VISIBLE, true)
@@ -131,6 +141,51 @@ class PrefsManager private constructor(context: Context) {
                 .putBoolean(PrefKeys.GROUPS_HEADERS, true)
                 .putBoolean(PrefKeys.GROUPS_COLLAPSIBLE, true)
                 .apply()
+        }
+
+        migrateLegacyPrefs()
+    }
+
+    private fun migrateLegacyPrefs() {
+        val editor = prefs.edit()
+        var hasChanges = false
+
+        if (!prefs.getBoolean(PrefKeys.MIGRATION_ICON_SOURCE_RADIO, false)) {
+            val iconsEnabled = prefs.getBoolean(PrefKeys.APPS_ICONS, false)
+            val currentSource = prefs.getString(PrefKeys.APPS_ICON_SOURCE, IconSource.SYSTEM)
+
+            val normalizedSource = when (currentSource) {
+                IconSource.NONE -> IconSource.NONE
+                IconSource.MONOCHROME -> IconSource.MONOCHROME
+                IconSource.ICON_PACK -> IconSource.ICON_PACK
+                else -> IconSource.SYSTEM
+            }
+
+            val migratedSource = if (iconsEnabled) normalizedSource else IconSource.NONE
+
+            editor.putString(PrefKeys.APPS_ICON_SOURCE, migratedSource)
+            editor.putBoolean(PrefKeys.MIGRATION_ICON_SOURCE_RADIO, true)
+            hasChanges = true
+        }
+
+        if (!prefs.getBoolean(PrefKeys.MIGRATION_TEMPERATURE_FORMAT, false)) {
+            val migratedTemperatureFormat = if (
+                prefs.contains(PrefKeys.LEGACY_BATTERY_TEMPERATURE_CELSIUS) &&
+                prefs.getBoolean(PrefKeys.LEGACY_BATTERY_TEMPERATURE_CELSIUS, false)
+            ) {
+                TemperatureFormat.CELSIUS
+            } else {
+                TemperatureFormat.DEFAULT
+            }
+
+            editor.putString(PrefKeys.TEMPERATURE_FORMAT, migratedTemperatureFormat)
+            editor.remove(PrefKeys.LEGACY_BATTERY_TEMPERATURE_CELSIUS)
+            editor.putBoolean(PrefKeys.MIGRATION_TEMPERATURE_FORMAT, true)
+            hasChanges = true
+        }
+
+        if (hasChanges) {
+            editor.apply()
         }
     }
 
@@ -198,18 +253,21 @@ class PrefsManager private constructor(context: Context) {
         prefs.getBoolean(PrefKeys.APPS_SEARCH, false)
 
     fun hasIconsVisible(): Boolean =
-        prefs.getBoolean(PrefKeys.APPS_ICONS, false)
+        getIconSource() != IconSource.NONE
 
     fun getIconSource(): String {
-        return when (prefs.getString(PrefKeys.APPS_ICON_SOURCE, IconSource.SYSTEM)) {
+        return when (prefs.getString(PrefKeys.APPS_ICON_SOURCE, IconSource.NONE)) {
+            IconSource.NONE -> IconSource.NONE
             IconSource.MONOCHROME -> IconSource.MONOCHROME
             IconSource.ICON_PACK -> IconSource.ICON_PACK
-            else -> IconSource.SYSTEM
+            IconSource.SYSTEM -> IconSource.SYSTEM
+            else -> IconSource.NONE
         }
     }
 
     fun setIconSource(source: String) {
         val normalized = when (source) {
+            IconSource.NONE -> IconSource.NONE
             IconSource.MONOCHROME -> IconSource.MONOCHROME
             IconSource.ICON_PACK -> IconSource.ICON_PACK
             else -> IconSource.SYSTEM
@@ -261,8 +319,22 @@ class PrefsManager private constructor(context: Context) {
     fun isBatteryTemperatureVisible(): Boolean =
         prefs.getBoolean(PrefKeys.BATTERY_TEMPERATURE, false)
 
-    fun isBatteryTemperatureCelsius(): Boolean =
-        prefs.getBoolean(PrefKeys.BATTERY_TEMPERATURE_CELSIUS, false)
+    fun getTemperatureFormat(): String {
+        return when (prefs.getString(PrefKeys.TEMPERATURE_FORMAT, TemperatureFormat.DEFAULT)) {
+            TemperatureFormat.CELSIUS -> TemperatureFormat.CELSIUS
+            TemperatureFormat.FAHRENHEIT -> TemperatureFormat.FAHRENHEIT
+            else -> TemperatureFormat.DEFAULT
+        }
+    }
+
+    fun setTemperatureFormat(format: String) {
+        val normalized = when (format) {
+            TemperatureFormat.CELSIUS -> TemperatureFormat.CELSIUS
+            TemperatureFormat.FAHRENHEIT -> TemperatureFormat.FAHRENHEIT
+            else -> TemperatureFormat.DEFAULT
+        }
+        prefs.edit().putString(PrefKeys.TEMPERATURE_FORMAT, normalized).apply()
+    }
 
     fun isBatteryChargeStatusVisible(): Boolean =
         prefs.getBoolean(PrefKeys.BATTERY_CHARGE_STATUS, false)

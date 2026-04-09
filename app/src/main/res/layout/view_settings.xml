@@ -247,11 +247,48 @@
                 android:layout_height="wrap_content"
                 android:text="@string/show_battery_temperature_label" />
 
-            <com.rama.mako.widgets.WdCheckbox
-                android:id="@+id/use_battery_temperature_celsius"
+            <LinearLayout
+                android:id="@+id/temperature_format_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/use_battery_temperature_celsius_label" />
+                android:layout_marginBottom="8sp"
+                android:background="@color/bg_secondary"
+                android:orientation="vertical"
+                android:padding="16sp">
+
+                <RadioGroup
+                    android:id="@+id/temperature_format_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RadioButton
+                        android:id="@+id/temperature_system"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8sp"
+                        android:text="@string/default_system_label"
+                        android:textColor="@color/foreground_color"
+                        android:textSize="16sp" />
+
+                    <RadioButton
+                        android:id="@+id/temperature_celsius"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8sp"
+                        android:text="@string/celsius_label"
+                        android:textColor="@color/foreground_color"
+                        android:textSize="16sp" />
+
+                    <RadioButton
+                        android:id="@+id/temperature_fahrenheit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fahrenheit_label"
+                        android:textColor="@color/foreground_color"
+                        android:textSize="16sp" />
+                </RadioGroup>
+            </LinearLayout>
 
             <com.rama.mako.widgets.WdCheckbox
                 android:id="@+id/show_battery_charge_status"
@@ -268,14 +305,7 @@
                 android:text="@string/icons_settings_header"
                 android:textStyle="bold" />
 
-            <com.rama.mako.widgets.WdCheckbox
-                android:id="@+id/show_icons"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/show_icons_label" />
-
             <LinearLayout
-                android:id="@+id/icons_options_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8sp"
@@ -290,11 +320,20 @@
                     android:orientation="vertical">
 
                     <RadioButton
+                        android:id="@+id/icon_source_none"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8sp"
+                        android:text="@string/none_label"
+                        android:textColor="@color/foreground_color"
+                        android:textSize="16sp" />
+
+                    <RadioButton
                         android:id="@+id/icon_source_system"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
-                        android:text="@string/system_label"
+                        android:text="@string/default_label"
                         android:textColor="@color/foreground_color"
                         android:textSize="16sp" />
 
