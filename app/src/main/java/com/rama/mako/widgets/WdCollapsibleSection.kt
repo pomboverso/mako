@@ -9,6 +9,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.rama.mako.R
 import com.rama.mako.managers.PrefsManager
+import com.rama.mako.managers.PrefsManager.PrefKeys
 
 class WdCollapsibleSection @JvmOverloads constructor(
     context: Context,
@@ -41,7 +42,9 @@ class WdCollapsibleSection @JvmOverloads constructor(
 
             labelView.text = ta.getString(R.styleable.WdCollapsibleSection_label) ?: ""
 
-            key = ta.getString(R.styleable.WdCollapsibleSection_key)
+            key = resolveKey(
+                ta.getString(R.styleable.WdCollapsibleSection_key)
+            )
 
             defaultExpanded = ta.getBoolean(
                 R.styleable.WdCollapsibleSection_defaultExpanded,
@@ -61,6 +64,18 @@ class WdCollapsibleSection @JvmOverloads constructor(
             val newState = !isExpanded()
             applyState(newState)
             saveState(newState)
+        }
+    }
+
+    private fun resolveKey(raw: String?): String? {
+        if (raw == null) return null
+
+        return try {
+            PrefsManager.PrefKeys::class.java
+                .getDeclaredField(raw)
+                .get(null) as? String
+        } catch (e: Exception) {
+            null
         }
     }
 
@@ -95,13 +110,13 @@ class WdCollapsibleSection @JvmOverloads constructor(
 
     private fun saveState(expanded: Boolean) {
         key?.let {
-            prefs.setBoolean("section_$it", expanded)
+            prefs.setBoolean("$it", expanded)
         }
     }
 
     private fun loadState(): Boolean {
         return key?.let {
-            prefs.getBoolean("section_$it", defaultExpanded)
+            prefs.getBoolean("$it", defaultExpanded)
         } ?: defaultExpanded
     }
 }

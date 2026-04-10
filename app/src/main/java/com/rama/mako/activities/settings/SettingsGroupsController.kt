@@ -128,9 +128,6 @@ class SettingsGroupsController(private val activity: SettingsActivity) {
                     ).show()
                 } else {
                     groupsManager.deleteGroup(currentGroupId, selectedGroupId!!)
-                    val updated = prefs.getGroupIds().toMutableSet()
-                    updated.remove(currentGroupId)
-                    prefs.setGroupIds(updated)
                     container.removeView(row)
                     dialog.dismiss()
                 }
