@@ -67,11 +67,17 @@
 
     <!-- Settings -->
     <string name="settings_header">Settings</string>
-    <string name="others_header">Others</string>
+
     <string name="apps_header">Applications</string>
     <string name="clock_header">Clock</string>
-    <string name="date_header">Date and Battery</string>
+    <string name="search_header">Search</string>
+    <string name="battery_header">Battery</string>
+    <string name="date_header">Date</string>
+    <string name="data_header">Data</string>
+    <string name="temperature_header">Temperature</string>
     <string name="groups_header">Groups</string>
+    <string name="system_header">System</string>
+
     <string name="settings_section_home_title">Home screen</string>
     <string name="settings_section_appearance_title">Appearance</string>
     <string name="settings_section_groups_title">Groups</string>

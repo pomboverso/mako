@@ -2,6 +2,7 @@ package com.rama.mako.widgets
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.HapticFeedbackConstants
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
@@ -55,6 +56,8 @@ class WdCollapsibleSection @JvmOverloads constructor(
         applyState(expanded)
 
         header.setOnClickListener {
+            it.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+
             val newState = !isExpanded()
             applyState(newState)
             saveState(newState)

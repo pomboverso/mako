@@ -38,7 +38,6 @@ class SettingsActivity : CsActivity() {
         iconManager = IconManager(this, appsProvider)
 
         setupBasicButtons()
-        setupCollapsibleSections()
         setupClockFormat()
         setupTemperatureFormat()
         setupFontStyle()
@@ -105,88 +104,6 @@ class SettingsActivity : CsActivity() {
                     Toast.makeText(this, getString(R.string.reset_failed_toast), Toast.LENGTH_SHORT)
                         .show()
                 }
-        }
-    }
-
-    private fun setupCollapsibleSections() {
-        bindSection(
-            headerId = R.id.section_home_header,
-            indicatorId = R.id.section_home_indicator,
-            contentId = R.id.section_home_content,
-            prefKey = PrefKeys.SETTINGS_SECTION_HOME,
-            defaultExpanded = true
-        )
-
-        bindSection(
-            headerId = R.id.section_appearance_header,
-            indicatorId = R.id.section_appearance_indicator,
-            contentId = R.id.section_appearance_content,
-            prefKey = PrefKeys.SETTINGS_SECTION_APPEARANCE,
-            defaultExpanded = true
-        )
-
-        bindSection(
-            headerId = R.id.section_groups_header,
-            indicatorId = R.id.section_groups_indicator,
-            contentId = R.id.section_groups_content,
-            prefKey = PrefKeys.SETTINGS_SECTION_GROUPS,
-            defaultExpanded = true
-        )
-
-        bindSection(
-            headerId = R.id.section_apps_header,
-            indicatorId = R.id.section_apps_indicator,
-            contentId = R.id.section_apps_content,
-            prefKey = PrefKeys.SETTINGS_SECTION_APPS,
-            defaultExpanded = true
-        )
-
-        bindSection(
-            headerId = R.id.section_system_header,
-            indicatorId = R.id.section_system_indicator,
-            contentId = R.id.section_system_content,
-            prefKey = PrefKeys.SETTINGS_SECTION_SYSTEM,
-            defaultExpanded = true
-        )
-
-        bindSection(
-            headerId = R.id.section_data_header,
-            indicatorId = R.id.section_data_indicator,
-            contentId = R.id.section_data_content,
-            prefKey = PrefKeys.SETTINGS_SECTION_DATA,
-            defaultExpanded = true
-        )
-    }
-
-    private fun bindSection(
-        headerId: Int,
-        indicatorId: Int,
-        contentId: Int,
-        prefKey: String,
-        defaultExpanded: Boolean
-    ) {
-        val header = findViewById<View>(headerId)
-        val indicator = findViewById<TextView>(indicatorId)
-        val content = findViewById<View>(contentId)
-
-        fun apply(expanded: Boolean) {
-            content.visibility = if (expanded) View.VISIBLE else View.GONE
-            indicator.text = getString(
-                if (expanded) {
-                    R.string.settings_section_collapse_indicator
-                } else {
-                    R.string.settings_section_expand_indicator
-                }
-            )
-        }
-
-        var isExpanded = prefs.getBoolean(prefKey, defaultExpanded)
-        apply(isExpanded)
-
-        setClickWithHaptics(header) {
-            isExpanded = !isExpanded
-            prefs.setBoolean(prefKey, isExpanded)
-            apply(isExpanded)
         }
     }
 
@@ -329,18 +246,14 @@ class SettingsActivity : CsActivity() {
                 R.id.show_battery_temperature,
                 R.id.show_battery_charge_status
             ),
-            onChange = { refreshTemperatureFormatVisibility() }
         )
 
         bindWdCheckbox(
             R.id.show_battery_temperature,
             PrefKeys.BATTERY_TEMPERATURE,
             false,
-            onChange = { refreshTemperatureFormatVisibility() }
         )
         bindWdCheckbox(R.id.show_battery_charge_status, PrefKeys.BATTERY_CHARGE_STATUS, false)
-
-        refreshTemperatureFormatVisibility()
     }
 
     private fun setupIconsSection() {
@@ -502,17 +415,6 @@ class SettingsActivity : CsActivity() {
                 else -> prefs.setTemperatureFormat(PrefsManager.TemperatureFormat.DEFAULT)
             }
         }
-
-        refreshTemperatureFormatVisibility()
-    }
-
-    private fun refreshTemperatureFormatVisibility() {
-        val container = findViewById<View>(R.id.temperature_format_container)
-        val isVisible =
-            prefs.getBoolean(PrefKeys.BATTERY_VISIBLE, false) &&
-                    prefs.getBoolean(PrefKeys.BATTERY_TEMPERATURE, false)
-
-        container.visibility = if (isVisible) View.VISIBLE else View.GONE
     }
 
     private fun bindWdCheckbox(

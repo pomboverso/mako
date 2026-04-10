@@ -4,13 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@color/bg_secondary">
+    android:background="@color/bg_primary">
 
     <LinearLayout
         android:id="@+id/section_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16sp"
+        android:paddingTop="16sp"
+        android:paddingBottom="16sp"
         android:gravity="center_vertical"
         android:clickable="true"
         android:focusable="true">
@@ -19,7 +20,8 @@
             android:id="@+id/section_indicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="[+]"
+            android:text="@string/settings_section_collapse_indicator"
+            android:textSize="16sp"
             android:layout_marginEnd="8sp"
             android:textStyle="bold"
             android:textColor="@color/foreground_color" />
@@ -28,6 +30,7 @@
             android:id="@+id/section_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@color/foreground_color" />
     </LinearLayout>
@@ -36,8 +39,5 @@
         android:id="@+id/section_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingStart="8sp"
-        android:paddingEnd="8sp"
-        android:paddingBottom="8sp" />
+        android:orientation="vertical" />
 </LinearLayout>

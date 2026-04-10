@@ -40,12 +40,6 @@ class PrefsManager private constructor(context: Context) {
         const val APPS_ICONS = "apps:icons"
         const val APPS_ICON_SOURCE = "apps:icon_source"
         const val APPS_ICON_PACK_PACKAGE = "apps:icon_pack_package"
-        const val SETTINGS_SECTION_HOME = "settings:section:home"
-        const val SETTINGS_SECTION_APPEARANCE = "settings:section:appearance"
-        const val SETTINGS_SECTION_GROUPS = "settings:section:groups"
-        const val SETTINGS_SECTION_APPS = "settings:section:apps"
-        const val SETTINGS_SECTION_SYSTEM = "settings:section:system"
-        const val SETTINGS_SECTION_DATA = "settings:section:data"
         const val GROUPS_IDS = "groups:ids"
         const val GROUPS_HEADERS = "groups:headers"
         const val GROUPS_COLLAPSIBLE = "groups:collapsible"
@@ -61,6 +55,17 @@ class PrefsManager private constructor(context: Context) {
         const val MIGRATION_ICON_SOURCE_RADIO = "migration:icon_source_radio"
         const val MIGRATION_TEMPERATURE_FORMAT = "migration:temperature_format"
         const val LEGACY_BATTERY_TEMPERATURE_CELSIUS = "battery:temperature_celsius"
+
+        const val SETTINGS_SECTION_CLOCK = "settings:section:clock"
+        const val SETTINGS_SECTION_FONTS = "settings:section:fonts"
+        const val SETTINGS_SECTION_BATTERY = "settings:section:battery"
+        const val SETTINGS_SECTION_TEMPERATURE = "settings:section:temperature"
+        const val SETTINGS_SECTION_DATE = "settings:section:date"
+        const val SETTINGS_SECTION_ICONS = "settings:section:icons"
+        const val SETTINGS_SECTION_GROUPS = "settings:section:groups"
+        const val SETTINGS_SECTION_SEARCH = "settings:section:search"
+        const val SETTINGS_SECTION_SYSTEM = "settings:section:system"
+        const val SETTINGS_SECTION_DATA = "settings:section:data"
 
         fun appKey(pkg: String, userHandle: UserHandle): String {
             val userId = userHandle.hashCode()
@@ -135,12 +140,6 @@ class PrefsManager private constructor(context: Context) {
                 .putBoolean(PrefKeys.APPS_SEARCH, false)
                 .putString(PrefKeys.APPS_ICON_SOURCE, IconSource.NONE)
                 .putString(PrefKeys.APPS_ICON_PACK_PACKAGE, "")
-                .putBoolean(PrefKeys.SETTINGS_SECTION_HOME, true)
-                .putBoolean(PrefKeys.SETTINGS_SECTION_APPEARANCE, true)
-                .putBoolean(PrefKeys.SETTINGS_SECTION_GROUPS, false)
-                .putBoolean(PrefKeys.SETTINGS_SECTION_APPS, false)
-                .putBoolean(PrefKeys.SETTINGS_SECTION_SYSTEM, false)
-                .putBoolean(PrefKeys.SETTINGS_SECTION_DATA, false)
 
                 .putBoolean(PrefKeys.BATTERY_VISIBLE, true)
                 .putBoolean(PrefKeys.BATTERY_TEMPERATURE, true)
@@ -152,6 +151,18 @@ class PrefsManager private constructor(context: Context) {
 
                 .putBoolean(PrefKeys.GROUPS_HEADERS, true)
                 .putBoolean(PrefKeys.GROUPS_COLLAPSIBLE, true)
+
+                .putBoolean(PrefKeys.SETTINGS_SECTION_CLOCK, true)
+                .putBoolean(PrefKeys.SETTINGS_SECTION_TEMPERATURE, true)
+                .putBoolean(PrefKeys.SETTINGS_SECTION_DATE, true)
+                .putBoolean(PrefKeys.SETTINGS_SECTION_BATTERY, true)
+                .putBoolean(PrefKeys.SETTINGS_SECTION_FONTS, true)
+                .putBoolean(PrefKeys.SETTINGS_SECTION_ICONS, true)
+                .putBoolean(PrefKeys.SETTINGS_SECTION_GROUPS, true)
+                .putBoolean(PrefKeys.SETTINGS_SECTION_SEARCH, true)
+                .putBoolean(PrefKeys.SETTINGS_SECTION_SYSTEM, true)
+                .putBoolean(PrefKeys.SETTINGS_SECTION_DATA, true)
+
                 .apply()
         }
 
