@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/section_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/bg_secondary">
+
+    <LinearLayout
+        android:id="@+id/section_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16sp"
+        android:gravity="center_vertical"
+        android:clickable="true"
+        android:focusable="true">
+
+        <TextView
+            android:id="@+id/section_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="[+]"
+            android:layout_marginEnd="8sp"
+            android:textStyle="bold"
+            android:textColor="@color/foreground_color" />
+
+        <TextView
+            android:id="@+id/section_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/foreground_color" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/section_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="8sp"
+        android:paddingEnd="8sp"
+        android:paddingBottom="8sp" />
+</LinearLayout>

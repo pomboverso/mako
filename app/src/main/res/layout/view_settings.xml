@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_primary"
@@ -25,6 +26,21 @@
                 android:textColor="@color/foreground_color"
                 android:textSize="32sp"
                 android:textStyle="bold" />
+
+            <com.rama.mako.widgets.WdCollapsibleSection
+                android:id="@+id/section_home"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:key="SETTINGS_SECTION_HOME"
+                app:label="@string/settings_section_home_title"
+                app:defaultExpanded="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="hola" />
+
+            </com.rama.mako.widgets.WdCollapsibleSection>
 
             <LinearLayout
                 android:layout_width="match_parent"

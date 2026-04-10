@@ -1,0 +1,104 @@
+package com.rama.mako.widgets
+
+import android.content.Context
+import android.util.AttributeSet
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.LinearLayout
+import android.widget.TextView
+import com.rama.mako.R
+import com.rama.mako.managers.PrefsManager
+
+class WdCollapsibleSection @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null
+) : LinearLayout(context, attrs) {
+
+    private val header: LinearLayout
+    private val indicator: TextView
+    private val labelView: TextView
+    private val content: LinearLayout
+
+    private var key: String? = null
+    private var defaultExpanded: Boolean = true
+    private val prefs = PrefsManager.getInstance(context)
+
+    init {
+        orientation = VERTICAL
+
+        LayoutInflater.from(context)
+            .inflate(R.layout.wd_collapsible_section, this, true)
+
+        header = findViewById(R.id.section_header)
+        indicator = findViewById(R.id.section_indicator)
+        labelView = findViewById(R.id.section_label)
+        content = findViewById(R.id.section_content)
+
+        // Read XML attrs
+        attrs?.let {
+            val ta = context.obtainStyledAttributes(it, R.styleable.WdCollapsibleSection)
+
+            labelView.text = ta.getString(R.styleable.WdCollapsibleSection_label) ?: ""
+
+            key = ta.getString(R.styleable.WdCollapsibleSection_key)
+
+            defaultExpanded = ta.getBoolean(
+                R.styleable.WdCollapsibleSection_defaultExpanded,
+                true
+            )
+
+            ta.recycle()
+        }
+
+        val expanded = loadState()
+
+        applyState(expanded)
+
+        header.setOnClickListener {
+            val newState = !isExpanded()
+            applyState(newState)
+            saveState(newState)
+        }
+    }
+
+    // Inflate children inside component
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+
+        // Move all children (except internal layout) into content
+        val children = mutableListOf<View>()
+
+        for (i in 0 until childCount) {
+            val child = getChildAt(i)
+            if (child.id != R.id.section_root) {
+                children.add(child)
+            }
+        }
+
+        children.forEach {
+            removeView(it)
+            content.addView(it)
+        }
+    }
+
+    private fun isExpanded(): Boolean {
+        return content.visibility == View.VISIBLE
+    }
+
+    private fun applyState(expanded: Boolean) {
+        content.visibility = if (expanded) View.VISIBLE else View.GONE
+        indicator.text = if (expanded) "[-]" else "[+]"
+    }
+
+    private fun saveState(expanded: Boolean) {
+        key?.let {
+            prefs.setBoolean("section_$it", expanded)
+        }
+    }
+
+    private fun loadState(): Boolean {
+        return key?.let {
+            prefs.getBoolean("section_$it", defaultExpanded)
+        } ?: defaultExpanded
+    }
+}

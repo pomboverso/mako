@@ -3,4 +3,11 @@
     <attr name="foregroundColor" format="color" />
     <attr name="text" format="string" />
     <attr name="icon" format="reference" />
+
+    <declare-styleable name="WdCollapsibleSection">
+        <attr name="label" format="string" />
+        <attr name="key" format="string" />
+        <attr name="defaultExpanded" format="boolean" />
+    </declare-styleable>
+
 </resources>
