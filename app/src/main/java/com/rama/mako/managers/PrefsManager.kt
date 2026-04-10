@@ -53,8 +53,6 @@ class PrefsManager private constructor(context: Context) {
         const val CLOCK_APP = "clock:app"
         const val FONT_STYLE = "font:style"
         const val MIGRATION_ICON_SOURCE_RADIO = "migration:icon_source_radio"
-        const val MIGRATION_TEMPERATURE_FORMAT = "migration:temperature_format"
-        const val LEGACY_BATTERY_TEMPERATURE_CELSIUS = "battery:temperature_celsius"
 
         const val SETTINGS_SECTION_CLOCK = "settings:section:clock"
         const val SETTINGS_SECTION_FONTS = "settings:section:fonts"
@@ -188,22 +186,6 @@ class PrefsManager private constructor(context: Context) {
 
             editor.putString(PrefKeys.APPS_ICON_SOURCE, migratedSource)
             editor.putBoolean(PrefKeys.MIGRATION_ICON_SOURCE_RADIO, true)
-            hasChanges = true
-        }
-
-        if (!prefs.getBoolean(PrefKeys.MIGRATION_TEMPERATURE_FORMAT, false)) {
-            val migratedTemperatureFormat = if (
-                prefs.contains(PrefKeys.LEGACY_BATTERY_TEMPERATURE_CELSIUS) &&
-                prefs.getBoolean(PrefKeys.LEGACY_BATTERY_TEMPERATURE_CELSIUS, false)
-            ) {
-                TemperatureFormat.CELSIUS
-            } else {
-                TemperatureFormat.DEFAULT
-            }
-
-            editor.putString(PrefKeys.TEMPERATURE_FORMAT, migratedTemperatureFormat)
-            editor.remove(PrefKeys.LEGACY_BATTERY_TEMPERATURE_CELSIUS)
-            editor.putBoolean(PrefKeys.MIGRATION_TEMPERATURE_FORMAT, true)
             hasChanges = true
         }
 

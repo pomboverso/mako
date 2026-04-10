@@ -276,14 +276,7 @@ class SettingsActivity : CsActivity() {
                 R.id.icon_source_icon_pack -> prefs.setIconSource(PrefsManager.IconSource.ICON_PACK)
                 else -> prefs.setIconSource(PrefsManager.IconSource.SYSTEM)
             }
-
-            if (
-                id == R.id.icon_source_icon_pack &&
-                prefs.getIconPackPackage().isBlank()
-            ) {
-                showIconPackPickerDialog()
-            }
-
+            
             if (id == R.id.icon_source_monochrome && Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
                 Toast.makeText(
                     this,
@@ -384,7 +377,6 @@ class SettingsActivity : CsActivity() {
             ).show()
 
             refreshIconPackSection()
-            dialog.dismiss()
         }
 
         setClickWithHaptics(closeBtn) {

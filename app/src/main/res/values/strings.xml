@@ -103,7 +103,7 @@
     <string name="default_label">Default</string>
     <string name="default_system_label">Default (System)</string>
     <string name="icons_monochrome_label">Monochrome (System colors / Material You)</string>
-    <string name="icons_icon_pack_label">Icon pack</string>
+    <string name="icons_icon_pack_label">Custom icon pack</string>
     <string name="select_icon_pack_label">Select icon pack</string>
     <string name="selected_icon_pack_label">Selected pack: %1$s</string>
     <string name="icon_pack_not_selected_label">No icon pack selected</string>
