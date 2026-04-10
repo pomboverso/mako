@@ -130,7 +130,7 @@ class SettingsActivity : CsActivity() {
             indicatorId = R.id.section_groups_indicator,
             contentId = R.id.section_groups_content,
             prefKey = PrefKeys.SETTINGS_SECTION_GROUPS,
-            defaultExpanded = false
+            defaultExpanded = true
         )
 
         bindSection(
@@ -138,7 +138,7 @@ class SettingsActivity : CsActivity() {
             indicatorId = R.id.section_apps_indicator,
             contentId = R.id.section_apps_content,
             prefKey = PrefKeys.SETTINGS_SECTION_APPS,
-            defaultExpanded = false
+            defaultExpanded = true
         )
 
         bindSection(
@@ -146,7 +146,7 @@ class SettingsActivity : CsActivity() {
             indicatorId = R.id.section_system_indicator,
             contentId = R.id.section_system_content,
             prefKey = PrefKeys.SETTINGS_SECTION_SYSTEM,
-            defaultExpanded = false
+            defaultExpanded = true
         )
 
         bindSection(
@@ -154,7 +154,7 @@ class SettingsActivity : CsActivity() {
             indicatorId = R.id.section_data_indicator,
             contentId = R.id.section_data_content,
             prefKey = PrefKeys.SETTINGS_SECTION_DATA,
-            defaultExpanded = false
+            defaultExpanded = true
         )
     }
 
@@ -712,11 +712,11 @@ class SettingsActivity : CsActivity() {
     }
 
     private fun performHapticClick(view: View) {
-        view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
+        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
     }
 
     private fun openIntent(intent: Intent, error: String) {
         if (intent.resolveActivity(packageManager) != null) startActivity(intent)
-        else Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
+        else Toast.makeText(this, error, Toast.LENGTH_LONG).show()
     }
 }

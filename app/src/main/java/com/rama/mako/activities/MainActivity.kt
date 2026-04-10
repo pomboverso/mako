@@ -7,6 +7,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.HapticFeedbackConstants
 import android.view.View
 import android.view.WindowManager
 import android.view.animation.OvershootInterpolator
@@ -134,6 +135,8 @@ class MainActivity : CsActivity() {
 
         // Search icon
         searchIcon.setOnClickListener {
+            it.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+
             if (isSearchExpanded) {
                 collapseSearch()
             } else {
@@ -148,17 +151,17 @@ class MainActivity : CsActivity() {
                 if (isProgrammaticSearchUpdate) return
 
                 val query = s.toString()
-                
+
                 // Cancel previous debounce
                 searchDebounceRunnable?.let { searchDebounceHandler.removeCallbacks(it) }
-                
+
                 // Schedule new after 300ms
                 searchDebounceRunnable = Runnable {
                     currentSearchQuery = query
                     appListManager.filter(currentSearchQuery)
                 }
                 searchDebounceHandler.postDelayed(searchDebounceRunnable!!, 300)
-                
+
                 // Clear button
                 clearBtn.visibility = if (query.isNotEmpty()) View.VISIBLE else View.GONE
             }
@@ -197,7 +200,8 @@ class MainActivity : CsActivity() {
         }
 
         // Show keyboard
-        val imm = getSystemService(android.content.Context.INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager
+        val imm =
+            getSystemService(android.content.Context.INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager
         imm.showSoftInput(searchField, 0)
     }
 
@@ -219,7 +223,8 @@ class MainActivity : CsActivity() {
         }
 
         if (hideKeyboard) {
-            val imm = getSystemService(android.content.Context.INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager
+            val imm =
+                getSystemService(android.content.Context.INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager
             imm.hideSoftInputFromWindow(searchField.windowToken, 0)
         }
     }
@@ -233,15 +238,15 @@ class MainActivity : CsActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        
+
         // Clean up debounce handler
         searchDebounceRunnable?.let { searchDebounceHandler.removeCallbacks(it) }
-        
+
         // Unregister back callback for Android 13+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && backCallback != null) {
             onBackInvokedDispatcher.unregisterOnBackInvokedCallback(backCallback!!)
         }
-        
+
         batteryManager.unregister()
         clockManager.stop()
     }
