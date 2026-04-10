@@ -54,7 +54,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
-                        android:text="@string/system_label"
+                        android:text="@string/default_system_label"
                         android:textColor="@color/foreground_color"
                         android:textSize="16sp" />
 
@@ -206,7 +206,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
-                        android:text="@string/system_label"
+                        android:text="@string/default_system_label"
                         android:textColor="@color/foreground_color"
                         android:textSize="16sp" />
 
