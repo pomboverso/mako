@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/settings_section_collapse_indicator"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:layout_marginEnd="8sp"
             android:textStyle="bold"
             android:textColor="@color/foreground_color" />
@@ -30,7 +30,7 @@
             android:id="@+id/section_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@color/foreground_color" />
     </LinearLayout>
