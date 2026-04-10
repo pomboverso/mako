@@ -114,7 +114,6 @@
     <string name="has_collapsible_groups">Allow collapsing groups</string>
     <string name="add_group_label">+ Add New Group</string>
     <string name="clock_none_label">Hide clock</string>
-    <string name="system_label">System default</string>
     <string name="clock_24_label">24-hour</string>
     <string name="clock_12_label">12-hour (AM/PM)</string>
     <string name="celsius_label">Celsius</string>
