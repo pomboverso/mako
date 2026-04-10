@@ -14,14 +14,6 @@ object SettingsUiUtils {
         setClickWithHaptics(view, action)
     }
 
-    fun openIntent(activity: SettingsActivity, intent: Intent, error: String) {
-        if (intent.resolveActivity(activity.packageManager) != null) {
-            activity.startActivity(intent)
-        } else {
-            Toast.makeText(activity, error, Toast.LENGTH_LONG).show()
-        }
-    }
-
     fun setClickWithHaptics(view: View, action: () -> Unit) {
         view.setOnClickListener {
             view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
