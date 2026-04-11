@@ -28,7 +28,6 @@ Feature graphic on f-droid.
 
 ## Icon
 
-
 ### Foreground (Fill)
 
 ![Mako Icon Fill](./img/mako_icon_fill.svg)
@@ -44,7 +43,8 @@ Primary icon version using solid fill.
 This version is designed for use on dark or colored backgrounds.
 
 The negative variant can be used with any background color.  
-For demonstration purposes, green is used to showcase visibility in both light and dark markdown previews.
+For demonstration purposes, green is used to showcase visibility in both light and dark markdown
+previews.
 
 ---
 
@@ -58,7 +58,7 @@ Outline variant for minimal or subtle UI contexts.
 
 ## Icon Background
 
-`#2D5442`
+`#305F4A`
 
 Primary background color used behind the icon when needed.
 
