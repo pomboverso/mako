@@ -22,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/settings_header"
-                android:textColor="@color/foreground_color"
+                android:textColor="@color/foreground"
                 android:textSize="32sp"
                 android:textStyle="bold" />
 
@@ -46,7 +46,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
                         android:text="@string/clock_none_label"
-                        android:textColor="@color/foreground_color"
+                        android:textColor="@color/foreground"
                         android:textSize="16sp" />
 
                     <RadioButton
@@ -55,7 +55,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
                         android:text="@string/default_system_label"
-                        android:textColor="@color/foreground_color"
+                        android:textColor="@color/foreground"
                         android:textSize="16sp" />
 
                     <RadioButton
@@ -64,7 +64,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
                         android:text="@string/clock_24_label"
-                        android:textColor="@color/foreground_color"
+                        android:textColor="@color/foreground"
                         android:textSize="16sp" />
 
                     <RadioButton
@@ -72,7 +72,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/clock_12_label"
-                        android:textColor="@color/foreground_color"
+                        android:textColor="@color/foreground"
                         android:textSize="16sp" />
                 </RadioGroup>
 
@@ -80,7 +80,7 @@
                     android:id="@+id/set_clock_app_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/button_secondary_color"
+                    android:background="@color/button_secondary"
                     android:text="@string/set_clock_app_label" />
             </com.rama.mako.widgets.WdCollapsibleSection>
 
@@ -104,7 +104,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
                         android:text="@string/default_system_label"
-                        android:textColor="@color/foreground_color"
+                        android:textColor="@color/foreground"
                         android:textSize="16sp" />
 
                     <RadioButton
@@ -113,7 +113,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
                         android:text="@string/celsius_label"
-                        android:textColor="@color/foreground_color"
+                        android:textColor="@color/foreground"
                         android:textSize="16sp" />
 
                     <RadioButton
@@ -121,7 +121,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/fahrenheit_label"
-                        android:textColor="@color/foreground_color"
+                        android:textColor="@color/foreground"
                         android:textSize="16sp" />
                 </RadioGroup>
             </com.rama.mako.widgets.WdCollapsibleSection>
@@ -207,7 +207,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
                         android:text="@string/default_system_label"
-                        android:textColor="@color/foreground_color"
+                        android:textColor="@color/foreground"
                         android:textSize="16sp" />
 
                     <RadioButton
@@ -216,7 +216,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
                         android:text="@string/font_jersey_label"
-                        android:textColor="@color/foreground_color"
+                        android:textColor="@color/foreground"
                         android:textSize="16sp" />
 
                     <RadioButton
@@ -225,7 +225,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
                         android:text="@string/font_quicksand_label"
-                        android:textColor="@color/foreground_color"
+                        android:textColor="@color/foreground"
                         android:textSize="16sp" />
 
                     <RadioButton
@@ -234,7 +234,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
                         android:text="@string/font_montserrat_label"
-                        android:textColor="@color/foreground_color"
+                        android:textColor="@color/foreground"
                         android:textSize="16sp" />
 
                     <RadioButton
@@ -242,7 +242,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/font_robotoslab_label"
-                        android:textColor="@color/foreground_color"
+                        android:textColor="@color/foreground"
                         android:textSize="16sp" />
                 </RadioGroup>
 
@@ -268,7 +268,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
                         android:text="@string/none_label"
-                        android:textColor="@color/foreground_color"
+                        android:textColor="@color/foreground"
                         android:textSize="16sp" />
 
                     <RadioButton
@@ -277,7 +277,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
                         android:text="@string/default_label"
-                        android:textColor="@color/foreground_color"
+                        android:textColor="@color/foreground"
                         android:textSize="16sp" />
 
                     <RadioButton
@@ -286,7 +286,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
                         android:text="@string/icons_monochrome_label"
-                        android:textColor="@color/foreground_color"
+                        android:textColor="@color/foreground"
                         android:textSize="16sp" />
 
                     <RadioButton
@@ -294,7 +294,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/icons_icon_pack_label"
-                        android:textColor="@color/foreground_color"
+                        android:textColor="@color/foreground"
                         android:textSize="16sp" />
                 </RadioGroup>
 
@@ -313,14 +313,14 @@
                         android:layout_marginBottom="8sp"
                         android:padding="16sp"
                         android:text="@string/icon_pack_not_selected_label"
-                        android:textColor="@color/foreground_color"
+                        android:textColor="@color/foreground"
                         android:textSize="16sp" />
 
                     <com.rama.mako.widgets.WdButton
                         android:id="@+id/select_icon_pack_button"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/button_secondary_color"
+                        android:background="@color/button_secondary"
                         android:text="@string/select_icon_pack_label" />
                 </LinearLayout>
             </com.rama.mako.widgets.WdCollapsibleSection>
@@ -368,7 +368,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8sp"
-                    android:background="@color/button_secondary_color"
+                    android:background="@color/button_secondary"
                     android:text="@string/add_group_label" />
 
             </com.rama.mako.widgets.WdCollapsibleSection>
@@ -385,7 +385,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8sp"
-                    android:background="@color/button_secondary_color"
+                    android:background="@color/button_secondary"
                     android:text="@string/set_default_label" />
 
                 <com.rama.mako.widgets.WdButton
@@ -393,7 +393,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8sp"
-                    android:background="@color/button_secondary_color"
+                    android:background="@color/button_secondary"
                     android:text="@string/refresh_launcher_label" />
 
                 <com.rama.mako.widgets.WdButton
@@ -401,7 +401,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8sp"
-                    android:background="@color/button_secondary_color"
+                    android:background="@color/button_secondary"
                     android:text="@string/edit_apps_label" />
 
                 <com.rama.mako.widgets.WdButton
@@ -409,7 +409,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8sp"
-                    android:background="@color/button_secondary_color"
+                    android:background="@color/button_secondary"
                     android:text="@string/change_wallpaper_label" />
             </com.rama.mako.widgets.WdCollapsibleSection>
 
@@ -450,13 +450,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8sp"
         android:layout_marginBottom="8sp"
-        android:background="@color/button_primary_color"
+        android:background="@color/button_primary"
         android:text="@string/about_mako_label" />
 
     <com.rama.mako.widgets.WdButton
         android:id="@+id/close_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/button_primary_color"
+        android:background="@color/button_primary"
         android:text="@string/go_back_label" />
 </LinearLayout>

@@ -24,7 +24,7 @@
             android:textSize="18sp"
             android:layout_marginEnd="8sp"
             android:textStyle="bold"
-            android:textColor="@color/foreground_color" />
+            android:textColor="@color/foreground" />
 
         <TextView
             android:id="@+id/section_label"
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@color/foreground_color" />
+            android:textColor="@color/foreground" />
     </LinearLayout>
 
     <LinearLayout

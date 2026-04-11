@@ -34,7 +34,7 @@
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/foreground_color" />
+                android:textColor="@color/foreground" />
 
             <TextView
                 android:text="@string/app_description"
@@ -44,14 +44,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16sp"
                 android:textAlignment="center"
-                android:textColor="@color/foreground_color" />
+                android:textColor="@color/foreground" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8sp"
                 android:textSize="18sp"
-                android:textColor="@color/foreground_color"
+                android:textColor="@color/foreground"
                 android:text="@string/app_header"
                 android:textStyle="bold" />
 
@@ -108,7 +108,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8sp"
                 android:textSize="18sp"
-                android:textColor="@color/foreground_color"
+                android:textColor="@color/foreground"
                 android:text="@string/icons_header"
                 android:textStyle="bold" />
 
@@ -141,7 +141,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8sp"
                 android:textSize="18sp"
-                android:textColor="@color/foreground_color"
+                android:textColor="@color/foreground"
                 android:text="@string/fonts_header"
                 android:textStyle="bold" />
 
@@ -271,6 +271,6 @@
         android:id="@+id/close_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/button_primary_color"
+        android:background="@color/button_primary"
         android:text="@string/go_back_label" />
 </LinearLayout>

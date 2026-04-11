@@ -84,11 +84,16 @@ class SettingsGroupsController(private val activity: SettingsActivity) {
             if (newLabel.isNotEmpty()) {
                 val id = name.tag as String
                 prefs.setGroupLabel(id, newLabel)
+
                 Toast.makeText(
                     activity,
                     activity.getString(R.string.group_label_updated_toast),
                     Toast.LENGTH_SHORT
                 ).show()
+
+                (container.parent as View).post {
+                    setup()
+                }
             }
             saveButton.visibility = View.GONE
         }

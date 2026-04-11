@@ -90,9 +90,10 @@ class IconManager(
         val adaptiveIcon = baseIcon as? AdaptiveIconDrawable ?: return null
         val monochrome = adaptiveIcon.monochrome ?: return null
         val tintColor = resolveSystemMonochromeTintColor()
-        val tintedDrawable = (monochrome.constantState?.newDrawable()?.mutate() ?: monochrome).apply {
-            setTint(tintColor)
-        }
+        val tintedDrawable =
+            (monochrome.constantState?.newDrawable()?.mutate() ?: monochrome).apply {
+                setTint(tintColor)
+            }
 
         return ScaledDrawable(tintedDrawable, MONOCHROME_SCALE)
     }
@@ -111,11 +112,11 @@ class IconManager(
             return runCatching {
                 context.getColor(dynamicColorId)
             }.getOrElse {
-                ContextCompat.getColor(context, R.color.foreground_color)
+                ContextCompat.getColor(context, R.color.foreground)
             }
         }
 
-        return ContextCompat.getColor(context, R.color.foreground_color)
+        return ContextCompat.getColor(context, R.color.foreground)
     }
 
     private fun getIconFromPack(
@@ -211,7 +212,8 @@ class IconManager(
 
     private fun loadAppFilterFromAssets(packageName: String): Map<String, String> {
         return runCatching {
-            val packageContext = context.createPackageContext(packageName, Context.CONTEXT_IGNORE_SECURITY)
+            val packageContext =
+                context.createPackageContext(packageName, Context.CONTEXT_IGNORE_SECURITY)
             packageContext.assets.open("appfilter.xml").use { stream ->
                 val parser = Xml.newPullParser()
                 parser.setInput(stream, "utf-8")
@@ -225,7 +227,11 @@ class IconManager(
         var eventType = parser.eventType
 
         while (eventType != XmlPullParser.END_DOCUMENT) {
-            if (eventType == XmlPullParser.START_TAG && parser.name.equals("item", ignoreCase = true)) {
+            if (eventType == XmlPullParser.START_TAG && parser.name.equals(
+                    "item",
+                    ignoreCase = true
+                )
+            ) {
                 val component = parser.getAttributeValue(null, "component")
                 val drawable = parser.getAttributeValue(null, "drawable")
 

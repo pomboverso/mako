@@ -3,7 +3,6 @@ package com.rama.mako.managers
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
-import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.provider.Settings
 import android.view.LayoutInflater
@@ -69,7 +68,7 @@ class AppListManager(
         val allApps = allAppsCache
 
         // Get all known group IDs
-        val groupIds = prefs.getGroupIds().toMutableSet()
+        val groupIds = GroupsManager(context, appsProvider).getGroupIds()
 
         // Map apps by groupId (NOT label)
         val groupedMap = allApps.groupBy { app ->
@@ -120,7 +119,7 @@ class AppListManager(
         }
     }
 
-// Explicit ones that might cause trouble when getting normalized
+    // Explicit ones that might cause trouble when getting normalized
     private fun normalizeForSearch(value: String): String {
         val foldedTurkish = value
             .lowercase(Locale.ROOT)
@@ -276,7 +275,7 @@ class AppListManager(
         val allApps = allAppsCache
 
         // All known group IDs
-        val groupIds = prefs.getGroupIds().toMutableSet()
+        val groupIds = GroupsManager(context, appsProvider).getGroupIds()
 
         // Group by ID
         val groupedMap = allApps.groupBy { app ->
@@ -285,7 +284,9 @@ class AppListManager(
 
         // Handle unknown groups (apps pointing to deleted groups)
         val unknownGroupIds = groupedMap.keys.filter { it !in groupIds }
-        val allGroupIds = (groupIds + unknownGroupIds).distinct()
+        val allGroupIds = (groupIds + unknownGroupIds)
+            .distinct()
+            .sortedBy { prefs.getGroupLabel(it).lowercase(Locale.ROOT) }
 
         allGroupIds.forEach { groupId ->
 
@@ -409,7 +410,10 @@ class AppListManager(
                 prefs.getAppGroupId(pkg, app.userHandle) ?: PrefsManager.SystemIds.UNGROUPED
 
             // All group IDs (include ungrouped)
-            val groupIds = prefs.getGroupIds().toMutableList()
+            val groupIds = GroupsManager(
+                context,
+                appsProvider
+            ).getGroupIds()
 
             groupIds.forEachIndexed { index, groupId ->
                 val isLast = index == groupIds.lastIndex

@@ -19,7 +19,7 @@
         android:paddingBottom="12sp"
         android:paddingEnd="12sp"
         android:textSize="32sp"
-        android:textColor="@color/foreground_color" />
+        android:textColor="@color/foreground" />
 
     <FrameLayout
         android:id="@+id/empty_space"
