@@ -44,6 +44,7 @@
     <string name="icon_offline_desc">Works Offline</string>
     <string name="mako_url" translatable="false">github.com/pomboverso/mako</string>
     <string name="app_header">App</string>
+    <string name="contributors_header">Contributors</string>
     <string name="icons_header">Icons</string>
     <string name="fonts_header">Fonts</string>
 

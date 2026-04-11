@@ -109,6 +109,27 @@
                 android:layout_marginBottom="8sp"
                 android:textSize="18sp"
                 android:textColor="@color/foreground"
+                android:text="@string/contributors_header"
+                android:textStyle="bold" />
+
+            <com.rama.mako.widgets.WdLabel
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/icon_user"
+                android:text="Isotjs" />
+
+            <com.rama.mako.widgets.WdLabel
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/icon_github"
+                android:text="github.com/isotjs" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8sp"
+                android:textSize="18sp"
+                android:textColor="@color/foreground"
                 android:text="@string/icons_header"
                 android:textStyle="bold" />
 

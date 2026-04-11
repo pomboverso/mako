@@ -30,7 +30,15 @@ class WdLabel @JvmOverloads constructor(
             val name = attrs.getAttributeName(i)
             val value = attrs.getAttributeValue(i)
             when (name) {
-                "text" -> iconText.text = context.getString(attrs.getAttributeResourceValue(i, 0))
+                "text" -> {
+                    val resId = attrs.getAttributeResourceValue(i, 0)
+                    if (resId != 0) {
+                        iconText.text = context.getString(resId)
+                    } else {
+                        iconText.text = attrs.getAttributeValue(i) // fallback
+                    }
+                }
+
                 "icon" -> {
                     val resId = attrs.getAttributeResourceValue(i, 0)
                     if (resId != 0) iconImage.setImageResource(resId)
