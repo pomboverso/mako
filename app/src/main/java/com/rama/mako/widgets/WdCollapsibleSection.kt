@@ -105,7 +105,10 @@ class WdCollapsibleSection @JvmOverloads constructor(
 
     private fun applyState(expanded: Boolean) {
         content.visibility = if (expanded) View.VISIBLE else View.GONE
-        indicator.text = if (expanded) "[-]" else "[+]"
+        indicator.text =
+            if (expanded) context.getString(R.string.settings_section_collapse_indicator) else context.getString(
+                R.string.settings_section_expand_indicator
+            )
     }
 
     private fun saveState(expanded: Boolean) {

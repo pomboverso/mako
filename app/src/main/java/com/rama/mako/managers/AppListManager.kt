@@ -495,26 +495,33 @@ class AppListManager(
                     is ListItem.Header -> {
                         val view =
                             convertView ?: View.inflate(context, R.layout.app_list_header, null)
-
                         val text = view.findViewById<TextView>(R.id.header_text)
 
                         val groupId = item.id
                         val groupName = item.title
+                        val collapsible = prefs.hasCollapsibleGroups()
 
-                        val isExpanded = prefs.isGroupExpanded(groupId)
+                        val isExpanded = if (collapsible) prefs.isGroupExpanded(groupId) else false
 
-                        text.text =
-                            (if (isExpanded) "[-] " else "[+] ") + groupName.uppercase()
+                        val collapseIndicator = if (collapsible) {
+                            context.getString(
+                                if (isExpanded)
+                                    R.string.settings_section_collapse_indicator
+                                else
+                                    R.string.settings_section_expand_indicator
+                            ) + " "
+                        } else ""
 
+                        text.text = collapseIndicator + groupName.uppercase()
                         FontManager.applyFont(context, text)
 
-                        if (prefs.hasCollapsibleGroups()) {
-
+                        if (collapsible) {
                             view.setOnClickListener {
-                                val currently = prefs.isGroupExpanded(groupId)
-                                prefs.setGroupExpanded(groupId, !currently)
+                                prefs.setGroupExpanded(groupId, !isExpanded)
                                 refresh()
                             }
+                        } else {
+                            view.setOnClickListener(null)
                         }
 
                         view
