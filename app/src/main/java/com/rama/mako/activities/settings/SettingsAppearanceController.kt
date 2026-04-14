@@ -1,5 +1,6 @@
 package com.rama.mako.activities.settings
 
+import android.view.View
 import android.widget.RadioGroup
 import com.rama.mako.R
 import com.rama.mako.activities.SettingsActivity
@@ -58,13 +59,18 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
 
     private fun setupBackgroundMode() {
         val group = activity.findViewById<RadioGroup>(R.id.home_background_mode_group)
+        val wallpaperButton = activity.findViewById<View>(R.id.wallpaper_button)
 
-        when (prefs.getHomeBackgroundMode()) {
+        val initialMode = prefs.getHomeBackgroundMode()
+
+        when (initialMode) {
             PrefsManager.BackgroundMode.WALLPAPER -> group.check(R.id.home_background_wallpaper)
             PrefsManager.BackgroundMode.DYNAMIC -> group.check(R.id.home_background_dynamic)
             PrefsManager.BackgroundMode.AMOLED -> group.check(R.id.home_background_amoled)
             else -> group.check(R.id.home_background_default)
         }
+
+        updateWallpaperButtonVisibility(wallpaperButton, initialMode)
 
         group.setOnCheckedChangeListener { _, id ->
             val mode = when (id) {
@@ -75,7 +81,19 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
             }
 
             prefs.setHomeBackgroundMode(mode)
+            updateWallpaperButtonVisibility(wallpaperButton, mode)
             activity.applySettingsBackground()
+        }
+    }
+
+    private fun updateWallpaperButtonVisibility(button: View, mode: String) {
+        button.visibility = if (
+            mode == PrefsManager.BackgroundMode.WALLPAPER ||
+            mode == PrefsManager.BackgroundMode.DYNAMIC
+        ) {
+            View.VISIBLE
+        } else {
+            View.GONE
         }
     }
 }

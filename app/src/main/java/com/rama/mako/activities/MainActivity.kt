@@ -5,6 +5,7 @@ import android.animation.ObjectAnimator
 import android.content.BroadcastReceiver
 import android.content.Intent
 import android.content.IntentFilter
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -57,9 +58,11 @@ class MainActivity : CsActivity() {
     private var isProgrammaticSearchUpdate = false
     private val searchDebounceHandler = Handler(Looper.getMainLooper())
     private var searchDebounceRunnable: Runnable? = null
+    private var resumeRefreshRunnable: Runnable? = null
     private var currentSearchQuery: String = ""
     private var wallpaperReceiverRegistered = false
     private var lastAppliedBackgroundMode: String? = null
+    private var lastAppliedWallpaperSignature: Int? = null
 
     companion object {
         private const val WALLPAPER_CHANGED_ACTION = "android.intent.action.WALLPAPER_CHANGED"
@@ -259,18 +262,19 @@ class MainActivity : CsActivity() {
             unregisterWallpaperReceiverIfNeeded()
         }
         syncSettings()
-        appListManager.refresh()
-        batteryManager.forceUpdate()
+        schedulePostResumeRefresh()
     }
 
     override fun onPause() {
         super.onPause()
         unregisterWallpaperReceiverIfNeeded()
+        clearPendingResumeRefresh()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         unregisterWallpaperReceiverIfNeeded()
+        clearPendingResumeRefresh()
 
         // Clean up debounce handler
         searchDebounceRunnable?.let { searchDebounceHandler.removeCallbacks(it) }
@@ -327,45 +331,64 @@ class MainActivity : CsActivity() {
 
     private fun applyHomeBackground(force: Boolean = false) {
         val mode = prefs.getHomeBackgroundMode()
-        val needsAlwaysRefresh =
-            mode == PrefsManager.BackgroundMode.WALLPAPER || mode == PrefsManager.BackgroundMode.DYNAMIC
+        val wallpaperSignature = if (homeBackgroundManager.shouldTrackWallpaperChangesForMode(mode)) {
+            homeBackgroundManager.getWallpaperSignature()
+        } else {
+            null
+        }
 
-        if (!force && !needsAlwaysRefresh && mode == lastAppliedBackgroundMode) {
+        if (!force && mode == lastAppliedBackgroundMode && wallpaperSignature == lastAppliedWallpaperSignature) {
             return
         }
 
         if (mode == PrefsManager.BackgroundMode.WALLPAPER) {
             applyWallpaperModeBackground()
         } else {
-            disableWindowWallpaper()
+            disableWindowWallpaper(mode)
             homeBackgroundManager.applyTo(rootView, mode)
         }
 
         lastAppliedBackgroundMode = mode
+        lastAppliedWallpaperSignature = wallpaperSignature
     }
 
     private fun applyWallpaperModeBackground() {
         enableWindowWallpaper()
-        rootView.background = homeBackgroundManager.createWallpaperOverlayDrawable()
+        rootView.setBackgroundColor(Color.TRANSPARENT)
     }
 
     private fun enableWindowWallpaper() {
         window.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER)
-        window.setBackgroundDrawableResource(android.R.color.transparent)
+        window.setBackgroundDrawable(homeBackgroundManager.createWallpaperOverlayDrawable())
     }
 
-    private fun disableWindowWallpaper() {
+    private fun disableWindowWallpaper(mode: String) {
         window.clearFlags(WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER)
-        window.setBackgroundDrawableResource(R.color.bg_primary)
+        window.setBackgroundDrawable(homeBackgroundManager.createBackgroundDrawable(mode))
+    }
+
+    private fun schedulePostResumeRefresh() {
+        clearPendingResumeRefresh()
+
+        resumeRefreshRunnable = Runnable {
+            if (isFinishing || isDestroyed) return@Runnable
+            appListManager.refresh()
+            batteryManager.forceUpdate()
+        }
+
+        rootView.post(resumeRefreshRunnable)
+    }
+
+    private fun clearPendingResumeRefresh() {
+        resumeRefreshRunnable?.let {
+            rootView.removeCallbacks(it)
+        }
+        resumeRefreshRunnable = null
     }
 
     private fun shouldListenWallpaperChanges(): Boolean {
-        return when (prefs.getHomeBackgroundMode()) {
-            PrefsManager.BackgroundMode.WALLPAPER,
-            PrefsManager.BackgroundMode.DYNAMIC -> true
-
-            else -> false
-        }
+        val mode = prefs.getHomeBackgroundMode()
+        return homeBackgroundManager.shouldTrackWallpaperChangesForMode(mode)
     }
 
     private fun registerWallpaperReceiverIfNeeded() {

@@ -1,6 +1,7 @@
 package com.rama.mako.activities
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
@@ -29,6 +30,7 @@ class SettingsActivity : CsActivity() {
     private lateinit var homeBackgroundManager: HomeBackgroundManager
     private lateinit var settingsRootView: View
     private var lastAppliedBackgroundMode: String? = null
+    private var lastAppliedWallpaperSignature: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,32 +62,36 @@ class SettingsActivity : CsActivity() {
 
     fun applySettingsBackground(force: Boolean = false) {
         val mode = prefs.getHomeBackgroundMode()
-        val needsAlwaysRefresh =
-            mode == PrefsManager.BackgroundMode.WALLPAPER || mode == PrefsManager.BackgroundMode.DYNAMIC
+        val wallpaperSignature = if (homeBackgroundManager.shouldTrackWallpaperChangesForMode(mode)) {
+            homeBackgroundManager.getWallpaperSignature()
+        } else {
+            null
+        }
 
-        if (!force && !needsAlwaysRefresh && mode == lastAppliedBackgroundMode) {
+        if (!force && mode == lastAppliedBackgroundMode && wallpaperSignature == lastAppliedWallpaperSignature) {
             return
         }
 
         if (mode == PrefsManager.BackgroundMode.WALLPAPER) {
             enableWindowWallpaper()
-            settingsRootView.background = homeBackgroundManager.createWallpaperOverlayDrawable()
+            settingsRootView.setBackgroundColor(Color.TRANSPARENT)
         } else {
-            disableWindowWallpaper()
+            disableWindowWallpaper(mode)
             homeBackgroundManager.applyToSettings(settingsRootView, mode)
         }
 
         lastAppliedBackgroundMode = mode
+        lastAppliedWallpaperSignature = wallpaperSignature
     }
 
     private fun enableWindowWallpaper() {
         window.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER)
-        window.setBackgroundDrawableResource(android.R.color.transparent)
+        window.setBackgroundDrawable(homeBackgroundManager.createWallpaperOverlayDrawable())
     }
 
-    private fun disableWindowWallpaper() {
+    private fun disableWindowWallpaper(mode: String) {
         window.clearFlags(WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER)
-        window.setBackgroundDrawableResource(R.color.bg_primary)
+        window.setBackgroundDrawable(homeBackgroundManager.createBackgroundDrawable(mode))
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

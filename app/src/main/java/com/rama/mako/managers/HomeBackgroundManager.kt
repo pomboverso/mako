@@ -1,5 +1,6 @@
 package com.rama.mako.managers
 
+import android.app.WallpaperColors
 import android.app.WallpaperManager
 import android.content.Context
 import android.graphics.Color
@@ -27,7 +28,20 @@ class HomeBackgroundManager(context: Context) {
     }
 
     fun createWallpaperOverlayDrawable(): Drawable {
-        return ColorDrawable(ContextCompat.getColor(appContext, R.color.bg_wallpaper_scrim))
+        return ColorDrawable(resolveWallpaperScrimColor())
+    }
+
+    fun shouldTrackWallpaperChangesForMode(mode: String): Boolean {
+        return mode == PrefsManager.BackgroundMode.DYNAMIC && supportsWallpaperReactiveBackground()
+    }
+
+    fun getWallpaperSignature(): Int? {
+        if (!supportsWallpaperReactiveBackground()) return null
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) return null
+
+        return runCatching {
+            wallpaperManager.getWallpaperId(WallpaperManager.FLAG_SYSTEM)
+        }.getOrNull()
     }
 
     fun createBackgroundDrawable(mode: String): Drawable {
@@ -69,6 +83,28 @@ class HomeBackgroundManager(context: Context) {
             ?: return fallback
 
         return darkenForReadability(sourceColor)
+    }
+
+    private fun resolveWallpaperScrimColor(): Int {
+        val fallback = ContextCompat.getColor(appContext, R.color.bg_wallpaper_scrim)
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O_MR1) return fallback
+
+        val wallpaperColors = runCatching {
+            wallpaperManager.getWallpaperColors(WallpaperManager.FLAG_SYSTEM)
+        }.getOrNull() ?: return fallback
+
+        val hints = wallpaperColors.colorHints
+        val alpha = when {
+            hints and WallpaperColors.HINT_SUPPORTS_DARK_TEXT != 0 -> 0xB8
+            hints and WallpaperColors.HINT_SUPPORTS_DARK_THEME != 0 -> 0x7A
+            else -> 0x96
+        }
+
+        return ColorUtils.setAlphaComponent(Color.BLACK, alpha)
+    }
+
+    private fun supportsWallpaperReactiveBackground(): Boolean {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1
     }
 
     private fun resolveSystemDynamicColor(): Int? {
