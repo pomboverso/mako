@@ -2,18 +2,21 @@ package com.rama.mako.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.view.WindowManager
 import com.rama.mako.CsActivity
 import com.rama.mako.R
-import com.rama.mako.managers.AppsProvider
-import com.rama.mako.managers.GroupsManager
-import com.rama.mako.managers.IconManager
-import com.rama.mako.managers.PrefsManager
 import com.rama.mako.activities.settings.SettingsAppearanceController
 import com.rama.mako.activities.settings.SettingsBasicController
 import com.rama.mako.activities.settings.SettingsCheckboxController
 import com.rama.mako.activities.settings.SettingsClockController
 import com.rama.mako.activities.settings.SettingsGroupsController
 import com.rama.mako.activities.settings.SettingsIconsController
+import com.rama.mako.managers.AppsProvider
+import com.rama.mako.managers.GroupsManager
+import com.rama.mako.managers.HomeBackgroundManager
+import com.rama.mako.managers.IconManager
+import com.rama.mako.managers.PrefsManager
 
 class SettingsActivity : CsActivity() {
 
@@ -22,12 +25,19 @@ class SettingsActivity : CsActivity() {
     lateinit var iconManager: IconManager
     lateinit var groupsManager: GroupsManager
     private lateinit var clockController: SettingsClockController
+    private lateinit var appearanceController: SettingsAppearanceController
+    private lateinit var homeBackgroundManager: HomeBackgroundManager
+    private lateinit var settingsRootView: View
+    private var lastAppliedBackgroundMode: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.view_settings)
 
-        applyEdgeToEdgePadding(findViewById(android.R.id.content))
+        settingsRootView = findViewById(R.id.settings_root)
+        applyEdgeToEdgePadding(settingsRootView)
+        homeBackgroundManager = HomeBackgroundManager(this)
+        applySettingsBackground(force = true)
 
         appsProvider = AppsProvider(this)
         iconManager = IconManager(this, appsProvider)
@@ -37,10 +47,45 @@ class SettingsActivity : CsActivity() {
         clockController = SettingsClockController(this).also { it.setup() }
 
         SettingsBasicController(this).setup()
-        SettingsAppearanceController(this).setup()
+        appearanceController = SettingsAppearanceController(this).also { it.setup() }
         SettingsIconsController(this).setup()
         SettingsCheckboxController(this).setup()
         SettingsGroupsController(this).setup()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        applySettingsBackground()
+    }
+
+    fun applySettingsBackground(force: Boolean = false) {
+        val mode = prefs.getHomeBackgroundMode()
+        val needsAlwaysRefresh =
+            mode == PrefsManager.BackgroundMode.WALLPAPER || mode == PrefsManager.BackgroundMode.DYNAMIC
+
+        if (!force && !needsAlwaysRefresh && mode == lastAppliedBackgroundMode) {
+            return
+        }
+
+        if (mode == PrefsManager.BackgroundMode.WALLPAPER) {
+            enableWindowWallpaper()
+            settingsRootView.background = homeBackgroundManager.createWallpaperOverlayDrawable()
+        } else {
+            disableWindowWallpaper()
+            homeBackgroundManager.applyToSettings(settingsRootView, mode)
+        }
+
+        lastAppliedBackgroundMode = mode
+    }
+
+    private fun enableWindowWallpaper() {
+        window.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER)
+        window.setBackgroundDrawableResource(android.R.color.transparent)
+    }
+
+    private fun disableWindowWallpaper() {
+        window.clearFlags(WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER)
+        window.setBackgroundDrawableResource(R.color.bg_primary)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

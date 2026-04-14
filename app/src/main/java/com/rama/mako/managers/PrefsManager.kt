@@ -40,6 +40,7 @@ class PrefsManager private constructor(context: Context) {
         const val APPS_ICONS = "apps:icons"
         const val APPS_ICON_SOURCE = "apps:icon_source"
         const val APPS_ICON_PACK_PACKAGE = "apps:icon_pack_package"
+        const val HOME_BACKGROUND_MODE = "home:background_mode"
         const val GROUPS_IDS = "groups:ids"
         const val GROUPS_HEADERS = "groups:headers"
         const val GROUPS_COLLAPSIBLE = "groups:collapsible"
@@ -56,6 +57,7 @@ class PrefsManager private constructor(context: Context) {
 
         const val SETTINGS_SECTION_CLOCK = "settings:section:clock"
         const val SETTINGS_SECTION_FONTS = "settings:section:fonts"
+        const val SETTINGS_SECTION_BACKGROUND = "settings:section:background"
         const val SETTINGS_SECTION_BATTERY = "settings:section:battery"
         const val SETTINGS_SECTION_TEMPERATURE = "settings:section:temperature"
         const val SETTINGS_SECTION_DATE = "settings:section:date"
@@ -109,6 +111,13 @@ class PrefsManager private constructor(context: Context) {
         const val FAHRENHEIT = "fahrenheit"
     }
 
+    object BackgroundMode {
+        const val DEFAULT = "default"
+        const val WALLPAPER = "wallpaper"
+        const val DYNAMIC = "dynamic"
+        const val AMOLED = "amoled"
+    }
+
     fun initPrefs() {
         val ids = prefs.getStringSet(PrefKeys.GROUPS_IDS, null)
 
@@ -138,6 +147,7 @@ class PrefsManager private constructor(context: Context) {
                 .putBoolean(PrefKeys.APPS_SEARCH, false)
                 .putString(PrefKeys.APPS_ICON_SOURCE, IconSource.NONE)
                 .putString(PrefKeys.APPS_ICON_PACK_PACKAGE, "")
+                .putString(PrefKeys.HOME_BACKGROUND_MODE, BackgroundMode.DEFAULT)
 
                 .putBoolean(PrefKeys.BATTERY_VISIBLE, true)
                 .putBoolean(PrefKeys.BATTERY_TEMPERATURE, true)
@@ -152,6 +162,7 @@ class PrefsManager private constructor(context: Context) {
 
                 .putBoolean(PrefKeys.SETTINGS_SECTION_CLOCK, true)
                 .putBoolean(PrefKeys.SETTINGS_SECTION_TEMPERATURE, true)
+                .putBoolean(PrefKeys.SETTINGS_SECTION_BACKGROUND, true)
                 .putBoolean(PrefKeys.SETTINGS_SECTION_DATE, true)
                 .putBoolean(PrefKeys.SETTINGS_SECTION_BATTERY, true)
                 .putBoolean(PrefKeys.SETTINGS_SECTION_FONTS, true)
@@ -345,6 +356,28 @@ class PrefsManager private constructor(context: Context) {
         prefs.getBoolean(PrefKeys.BATTERY_CHARGE_STATUS, false)
 
     // SETTINGS - FONT
+
+    // SETTINGS - BACKGROUND
+
+    fun getHomeBackgroundMode(): String {
+        return when (prefs.getString(PrefKeys.HOME_BACKGROUND_MODE, BackgroundMode.DEFAULT)) {
+            BackgroundMode.WALLPAPER -> BackgroundMode.WALLPAPER
+            BackgroundMode.DYNAMIC -> BackgroundMode.DYNAMIC
+            BackgroundMode.AMOLED -> BackgroundMode.AMOLED
+            else -> BackgroundMode.DEFAULT
+        }
+    }
+
+    fun setHomeBackgroundMode(mode: String) {
+        val normalized = when (mode) {
+            BackgroundMode.WALLPAPER -> BackgroundMode.WALLPAPER
+            BackgroundMode.DYNAMIC -> BackgroundMode.DYNAMIC
+            BackgroundMode.AMOLED -> BackgroundMode.AMOLED
+            else -> BackgroundMode.DEFAULT
+        }
+
+        prefs.edit().putString(PrefKeys.HOME_BACKGROUND_MODE, normalized).apply()
+    }
 
     fun getFontStyle(): String =
         prefs.getString(PrefKeys.FONT_STYLE, "") ?: ""

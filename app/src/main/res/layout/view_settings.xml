@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/settings_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_primary"
+    android:background="@android:color/transparent"
     android:orientation="vertical">
 
     <ScrollView
@@ -123,7 +124,66 @@
                         android:text="@string/fahrenheit_label"
                         android:textColor="@color/foreground"
                         android:textSize="16sp" />
+                    </RadioGroup>
+            </com.rama.mako.widgets.WdCollapsibleSection>
+
+            <com.rama.mako.widgets.WdCollapsibleSection
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:key="SETTINGS_SECTION_BACKGROUND"
+                app:label="@string/background_header"
+                app:defaultExpanded="true">
+
+                <RadioGroup
+                    android:id="@+id/home_background_mode_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/bg_secondary"
+                    android:padding="16sp">
+
+                    <RadioButton
+                        android:id="@+id/home_background_default"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8sp"
+                        android:text="@string/background_default_label"
+                        android:textColor="@color/foreground"
+                        android:textSize="16sp" />
+
+                    <RadioButton
+                        android:id="@+id/home_background_wallpaper"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8sp"
+                        android:text="@string/background_wallpaper_label"
+                        android:textColor="@color/foreground"
+                        android:textSize="16sp" />
+
+                    <RadioButton
+                        android:id="@+id/home_background_dynamic"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8sp"
+                        android:text="@string/background_dynamic_label"
+                        android:textColor="@color/foreground"
+                        android:textSize="16sp" />
+
+                    <RadioButton
+                        android:id="@+id/home_background_amoled"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/background_amoled_label"
+                        android:textColor="@color/foreground"
+                        android:textSize="16sp" />
                 </RadioGroup>
+
+                <com.rama.mako.widgets.WdButton
+                    android:id="@+id/wallpaper_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8sp"
+                    android:background="@color/button_secondary"
+                    android:text="@string/change_wallpaper_label" />
             </com.rama.mako.widgets.WdCollapsibleSection>
 
             <com.rama.mako.widgets.WdCollapsibleSection
@@ -403,14 +463,6 @@
                     android:layout_marginBottom="8sp"
                     android:background="@color/button_secondary"
                     android:text="@string/edit_apps_label" />
-
-                <com.rama.mako.widgets.WdButton
-                    android:id="@+id/wallpaper_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8sp"
-                    android:background="@color/button_secondary"
-                    android:text="@string/change_wallpaper_label" />
             </com.rama.mako.widgets.WdCollapsibleSection>
 
             <com.rama.mako.widgets.WdCollapsibleSection

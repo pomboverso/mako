@@ -12,6 +12,7 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
     fun setup() {
         setupFontStyle()
         setupTemperatureFormat()
+        setupBackgroundMode()
     }
 
     private fun setupFontStyle() {
@@ -52,6 +53,29 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
                 R.id.temperature_fahrenheit -> prefs.setTemperatureFormat(PrefsManager.TemperatureFormat.FAHRENHEIT)
                 else -> prefs.setTemperatureFormat(PrefsManager.TemperatureFormat.DEFAULT)
             }
+        }
+    }
+
+    private fun setupBackgroundMode() {
+        val group = activity.findViewById<RadioGroup>(R.id.home_background_mode_group)
+
+        when (prefs.getHomeBackgroundMode()) {
+            PrefsManager.BackgroundMode.WALLPAPER -> group.check(R.id.home_background_wallpaper)
+            PrefsManager.BackgroundMode.DYNAMIC -> group.check(R.id.home_background_dynamic)
+            PrefsManager.BackgroundMode.AMOLED -> group.check(R.id.home_background_amoled)
+            else -> group.check(R.id.home_background_default)
+        }
+
+        group.setOnCheckedChangeListener { _, id ->
+            val mode = when (id) {
+                R.id.home_background_wallpaper -> PrefsManager.BackgroundMode.WALLPAPER
+                R.id.home_background_dynamic -> PrefsManager.BackgroundMode.DYNAMIC
+                R.id.home_background_amoled -> PrefsManager.BackgroundMode.AMOLED
+                else -> PrefsManager.BackgroundMode.DEFAULT
+            }
+
+            prefs.setHomeBackgroundMode(mode)
+            activity.applySettingsBackground()
         }
     }
 }
