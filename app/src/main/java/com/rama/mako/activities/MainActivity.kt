@@ -9,14 +9,12 @@ import android.os.Handler
 import android.os.Looper
 import android.view.HapticFeedbackConstants
 import android.view.View
-import android.view.WindowManager
 import android.view.animation.OvershootInterpolator
 import android.widget.ListView
 import android.widget.TextView
 import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.LinearLayout
-import android.widget.ScrollView
 import android.widget.Toast
 import android.window.OnBackInvokedCallback
 import com.rama.mako.CsActivity
@@ -25,9 +23,7 @@ import com.rama.mako.managers.AppListManager
 import com.rama.mako.managers.AppsProvider
 import com.rama.mako.managers.BatteryManager
 import com.rama.mako.managers.ClockManager
-import com.rama.mako.managers.FontManager
 import com.rama.mako.managers.PrefsManager
-import com.rama.mako.widgets.WdButton
 
 class MainActivity : CsActivity() {
 
@@ -46,6 +42,7 @@ class MainActivity : CsActivity() {
     private lateinit var searchField: EditText
     private lateinit var searchIcon: FrameLayout
     private lateinit var clearBtn: FrameLayout
+    private var isSearchBarAlwaysVisible = false
 
     private var backCallback: OnBackInvokedCallback? = null
     private var isSearchExpanded = false
@@ -90,7 +87,7 @@ class MainActivity : CsActivity() {
             listView,
             appsProvider
         ) {
-            if (isSearchExpanded) {
+            if (isSearchExpanded && !isSearchBarAlwaysVisible) {
                 collapseSearch()
             }
         }
@@ -111,11 +108,18 @@ class MainActivity : CsActivity() {
     private fun setupBackHandling() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             backCallback = OnBackInvokedCallback {
+                // If search is always visible, loose focus and collapse keyboard
+                if (isSearchBarAlwaysVisible) {
+                    searchField.clearFocus()
+                    val imm =
+                        getSystemService(android.content.Context.INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager
+                    imm.hideSoftInputFromWindow(searchField.windowToken, 0)
+                }
                 // If search is expanded, collapse it; otherwise consume back to prevent launcher restart
-                if (isSearchExpanded) {
+                else if (isSearchExpanded) {
                     collapseSearch()
                 }
-                // If search is not expanded, do nothing (consume back to keep launcher open)
+                // Else, do nothing (consume back to keep launcher open)
             }
             onBackInvokedDispatcher.registerOnBackInvokedCallback(
                 android.window.OnBackInvokedDispatcher.PRIORITY_OVERLAY,
@@ -186,7 +190,8 @@ class MainActivity : CsActivity() {
 
         // Show field
         searchField.visibility = View.VISIBLE
-        searchField.requestFocus()
+        if (!isSearchBarAlwaysVisible)
+            searchField.requestFocus()
 
         val scaleX = ObjectAnimator.ofFloat(searchField, "scaleX", 0.8f, 1f)
         val scaleY = ObjectAnimator.ofFloat(searchField, "scaleY", 0.8f, 1f)
@@ -234,6 +239,9 @@ class MainActivity : CsActivity() {
         syncSettings()
         appListManager.refresh()
         batteryManager.forceUpdate()
+
+        if (isSearchBarAlwaysVisible)
+            expandSearch()
     }
 
     override fun onDestroy() {
@@ -253,16 +261,25 @@ class MainActivity : CsActivity() {
 
     override fun onBackPressed() {
         // Handle back for below Android 12
-        if (isSearchExpanded) {
+        // If search is always visible, loose focus and collapse keyboard
+        if (isSearchBarAlwaysVisible) {
+            searchField.clearFocus()
+            val imm =
+                getSystemService(android.content.Context.INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager
+            imm.hideSoftInputFromWindow(searchField.windowToken, 0)
+        }
+        // If search is expanded, collapse it; otherwise consume back to prevent launcher restart
+        else if (isSearchExpanded) {
             collapseSearch()
         }
-        // Otherwise consume back to prevent launcher from restarting
+        // Else, do nothing (consume back to keep launcher open)
     }
 
     // --- Settings sync (row visibility only) ---
     private fun syncSettings() {
         val searchVisible = prefs.isSearchVisible()
 
+        isSearchBarAlwaysVisible = prefs.isSearchBarAlwaysVisible()
         timeText.visibility =
             if (prefs.getClockFormat() != PrefsManager.ClockFormat.NONE) View.VISIBLE else View.GONE
         findViewById<View>(R.id.date_row).visibility =
@@ -272,7 +289,7 @@ class MainActivity : CsActivity() {
         findViewById<View>(R.id.searchbar).visibility =
             if (searchVisible) View.VISIBLE else View.GONE
         searchIcon.visibility =
-            if (searchVisible) View.VISIBLE else View.GONE
+            if (searchVisible && !isSearchBarAlwaysVisible) View.VISIBLE else View.GONE
     }
 
     // --- Open system clock safely ---

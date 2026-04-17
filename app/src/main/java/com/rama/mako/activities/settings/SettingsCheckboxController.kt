@@ -12,7 +12,8 @@ class SettingsCheckboxController(private val activity: SettingsActivity) {
 
     fun setup() {
         bindWdCheckbox(R.id.show_date, PrefKeys.DATE_VISIBLE, false, listOf(R.id.show_year_day))
-        bindWdCheckbox(R.id.show_search, PrefKeys.APPS_SEARCH, false)
+        bindWdCheckbox(R.id.show_search, PrefKeys.APPS_SEARCH, false, dependentViewIds = listOf(R.id.always_show_search))
+        bindWdCheckbox(R.id.always_show_search, PrefKeys.APPS_ALWAYS_SEARCH_BAR, false)
         bindWdCheckbox(
             R.id.show_group_header,
             PrefKeys.GROUPS_HEADERS,
