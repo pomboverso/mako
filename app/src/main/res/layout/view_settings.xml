@@ -4,7 +4,7 @@
     android:id="@+id/settings_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/transparent"
+    android:background="@color/bg_primary"
     android:orientation="vertical">
 
     <ScrollView
@@ -124,7 +124,7 @@
                         android:text="@string/fahrenheit_label"
                         android:textColor="@color/foreground"
                         android:textSize="16sp" />
-                    </RadioGroup>
+                </RadioGroup>
             </com.rama.mako.widgets.WdCollapsibleSection>
 
             <com.rama.mako.widgets.WdCollapsibleSection

@@ -62,11 +62,12 @@ class SettingsActivity : CsActivity() {
 
     fun applySettingsBackground(force: Boolean = false) {
         val mode = prefs.getHomeBackgroundMode()
-        val wallpaperSignature = if (homeBackgroundManager.shouldTrackWallpaperChangesForMode(mode)) {
-            homeBackgroundManager.getWallpaperSignature()
-        } else {
-            null
-        }
+        val wallpaperSignature =
+            if (homeBackgroundManager.shouldTrackWallpaperChangesForMode(mode)) {
+                homeBackgroundManager.getWallpaperSignature()
+            } else {
+                null
+            }
 
         if (!force && mode == lastAppliedBackgroundMode && wallpaperSignature == lastAppliedWallpaperSignature) {
             return
@@ -74,7 +75,6 @@ class SettingsActivity : CsActivity() {
 
         if (mode == PrefsManager.BackgroundMode.WALLPAPER) {
             enableWindowWallpaper()
-            settingsRootView.setBackgroundColor(Color.TRANSPARENT)
         } else {
             disableWindowWallpaper(mode)
             homeBackgroundManager.applyToSettings(settingsRootView, mode)
