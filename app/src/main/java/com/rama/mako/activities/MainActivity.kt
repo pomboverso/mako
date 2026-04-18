@@ -12,6 +12,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.HapticFeedbackConstants
 import android.view.View
+import android.view.WindowManager
 import android.view.animation.OvershootInterpolator
 import android.widget.ListView
 import android.widget.TextView
@@ -26,7 +27,6 @@ import com.rama.mako.managers.AppListManager
 import com.rama.mako.managers.AppsProvider
 import com.rama.mako.managers.BatteryManager
 import com.rama.mako.managers.ClockManager
-import com.rama.mako.managers.FontManager
 import com.rama.mako.managers.HomeBackgroundManager
 import com.rama.mako.managers.PrefsManager
 
@@ -349,11 +349,12 @@ class MainActivity : CsActivity() {
 
     private fun applyHomeBackground(force: Boolean = false) {
         val mode = prefs.getHomeBackgroundMode()
-        val wallpaperSignature = if (homeBackgroundManager.shouldTrackWallpaperChangesForMode(mode)) {
-            homeBackgroundManager.getWallpaperSignature()
-        } else {
-            null
-        }
+        val wallpaperSignature =
+            if (homeBackgroundManager.shouldTrackWallpaperChangesForMode(mode)) {
+                homeBackgroundManager.getWallpaperSignature()
+            } else {
+                null
+            }
 
         if (!force && mode == lastAppliedBackgroundMode && wallpaperSignature == lastAppliedWallpaperSignature) {
             return
