@@ -2,7 +2,10 @@ package com.rama.mako.activities
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.content.BroadcastReceiver
 import android.content.Intent
+import android.content.IntentFilter
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -23,6 +26,8 @@ import com.rama.mako.managers.AppListManager
 import com.rama.mako.managers.AppsProvider
 import com.rama.mako.managers.BatteryManager
 import com.rama.mako.managers.ClockManager
+import com.rama.mako.managers.FontManager
+import com.rama.mako.managers.HomeBackgroundManager
 import com.rama.mako.managers.PrefsManager
 
 class MainActivity : CsActivity() {
@@ -38,6 +43,8 @@ class MainActivity : CsActivity() {
     private lateinit var appsProvider: AppsProvider
 
     private lateinit var prefs: PrefsManager
+    private lateinit var homeBackgroundManager: HomeBackgroundManager
+    private lateinit var rootView: View
 
     private lateinit var searchField: EditText
     private lateinit var searchIcon: FrameLayout
@@ -49,18 +56,36 @@ class MainActivity : CsActivity() {
     private var isProgrammaticSearchUpdate = false
     private val searchDebounceHandler = Handler(Looper.getMainLooper())
     private var searchDebounceRunnable: Runnable? = null
+    private var resumeRefreshRunnable: Runnable? = null
     private var currentSearchQuery: String = ""
+    private var wallpaperReceiverRegistered = false
+    private var lastAppliedBackgroundMode: String? = null
+    private var lastAppliedWallpaperSignature: Int? = null
+
+    companion object {
+        private const val WALLPAPER_CHANGED_ACTION = "android.intent.action.WALLPAPER_CHANGED"
+    }
+
+    private val wallpaperChangedReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: android.content.Context?, intent: Intent?) {
+            if (intent?.action == WALLPAPER_CHANGED_ACTION) {
+                applyHomeBackground()
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         PrefsManager.getInstance(this).initPrefs()
         setContentView(R.layout.view_home)
 
-        val root = findViewById<View>(R.id.root)
-        applyEdgeToEdgePadding(root)
+        rootView = findViewById(R.id.root)
+        applyEdgeToEdgePadding(rootView)
 
         // --- Prefs ---
         prefs = PrefsManager.getInstance(this)
+        homeBackgroundManager = HomeBackgroundManager(this)
+        applyHomeBackground(force = true)
 
         // --- Views ---
         timeText = findViewById(R.id.time)
@@ -236,16 +261,29 @@ class MainActivity : CsActivity() {
 
     override fun onResume() {
         super.onResume()
+        applyHomeBackground()
+        if (shouldListenWallpaperChanges()) {
+            registerWallpaperReceiverIfNeeded()
+        } else {
+            unregisterWallpaperReceiverIfNeeded()
+        }
         syncSettings()
-        appListManager.refresh()
-        batteryManager.forceUpdate()
+        schedulePostResumeRefresh()
 
         if (isSearchBarAlwaysVisible)
             expandSearch()
     }
 
+    override fun onPause() {
+        super.onPause()
+        unregisterWallpaperReceiverIfNeeded()
+        clearPendingResumeRefresh()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
+        unregisterWallpaperReceiverIfNeeded()
+        clearPendingResumeRefresh()
 
         // Clean up debounce handler
         searchDebounceRunnable?.let { searchDebounceHandler.removeCallbacks(it) }
@@ -307,5 +345,92 @@ class MainActivity : CsActivity() {
                 }
             }
         }
+    }
+
+    private fun applyHomeBackground(force: Boolean = false) {
+        val mode = prefs.getHomeBackgroundMode()
+        val wallpaperSignature = if (homeBackgroundManager.shouldTrackWallpaperChangesForMode(mode)) {
+            homeBackgroundManager.getWallpaperSignature()
+        } else {
+            null
+        }
+
+        if (!force && mode == lastAppliedBackgroundMode && wallpaperSignature == lastAppliedWallpaperSignature) {
+            return
+        }
+
+        if (mode == PrefsManager.BackgroundMode.WALLPAPER) {
+            applyWallpaperModeBackground()
+        } else {
+            disableWindowWallpaper(mode)
+            homeBackgroundManager.applyTo(rootView, mode)
+        }
+
+        lastAppliedBackgroundMode = mode
+        lastAppliedWallpaperSignature = wallpaperSignature
+    }
+
+    private fun applyWallpaperModeBackground() {
+        enableWindowWallpaper()
+        rootView.setBackgroundColor(Color.TRANSPARENT)
+    }
+
+    private fun enableWindowWallpaper() {
+        window.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER)
+        window.setBackgroundDrawable(homeBackgroundManager.createWallpaperOverlayDrawable())
+    }
+
+    private fun disableWindowWallpaper(mode: String) {
+        window.clearFlags(WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER)
+        window.setBackgroundDrawable(homeBackgroundManager.createBackgroundDrawable(mode))
+    }
+
+    private fun schedulePostResumeRefresh() {
+        clearPendingResumeRefresh()
+
+        resumeRefreshRunnable = Runnable {
+            if (isFinishing || isDestroyed) return@Runnable
+            appListManager.refresh()
+            batteryManager.forceUpdate()
+        }
+
+        rootView.post(resumeRefreshRunnable)
+    }
+
+    private fun clearPendingResumeRefresh() {
+        resumeRefreshRunnable?.let {
+            rootView.removeCallbacks(it)
+        }
+        resumeRefreshRunnable = null
+    }
+
+    private fun shouldListenWallpaperChanges(): Boolean {
+        val mode = prefs.getHomeBackgroundMode()
+        return homeBackgroundManager.shouldTrackWallpaperChangesForMode(mode)
+    }
+
+    private fun registerWallpaperReceiverIfNeeded() {
+        if (wallpaperReceiverRegistered) return
+
+        val filter = IntentFilter(WALLPAPER_CHANGED_ACTION)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            registerReceiver(
+                wallpaperChangedReceiver,
+                filter,
+                RECEIVER_NOT_EXPORTED
+            )
+        } else {
+            @Suppress("DEPRECATION")
+            registerReceiver(wallpaperChangedReceiver, filter)
+        }
+
+        wallpaperReceiverRegistered = true
+    }
+
+    private fun unregisterWallpaperReceiverIfNeeded() {
+        if (!wallpaperReceiverRegistered) return
+
+        runCatching { unregisterReceiver(wallpaperChangedReceiver) }
+        wallpaperReceiverRegistered = false
     }
 }

@@ -65,6 +65,8 @@
     <string name="quicksand_url" translatable="false">github.com/andrew-paglinawan/QuicksandFamily</string>
     <string name="robotoslab_creator" translatable="false">Christian Robertson</string>
     <string name="robotoslab_url" translatable="false">github.com/googlefonts/robotoslab</string>
+    <string name="isotjs" translatable="false">isotjs</string>
+    <string name="isotjs_url" translatable="false">github.com/isotjs</string>
 
     <!-- Settings -->
     <string name="settings_header">Settings</string>
@@ -78,6 +80,7 @@
     <string name="temperature_header">Temperature</string>
     <string name="groups_header">Groups</string>
     <string name="system_header">System</string>
+    <string name="background_header">Background</string>
 
     <string name="settings_section_home_title">Home screen</string>
     <string name="settings_section_appearance_title">Appearance</string>
@@ -135,6 +138,10 @@
     <string name="font_montserrat_label" translatable="false">Montserrat</string>
     <string name="font_robotoslab_label" translatable="false">Roboto Slab</string>
     <string name="font_style_header">Font Style</string>
+    <string name="background_default_label">Default theme</string>
+    <string name="background_wallpaper_label">Wallpaper</string>
+    <string name="background_dynamic_label">Dynamic colour</string>
+    <string name="background_amoled_label">AMOLED black</string>
 
     <!-- Popup :: Context Menu App -->
     <string name="rename_app">Rename app...</string>

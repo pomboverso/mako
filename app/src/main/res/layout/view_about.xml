@@ -116,13 +116,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/icon_user"
-                android:text="Isotjs" />
+                android:text="@string/isotjs" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/icon_github"
-                android:text="github.com/isotjs" />
+                android:text="@string/isotjs_url" />
 
             <TextView
                 android:layout_width="match_parent"
