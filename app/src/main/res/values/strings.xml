@@ -1,6 +1,4 @@
 <resources>
-    <!-- <string name=""></string> -->
-
     <!-- Global -->
     <string name="go_back_label">Go Back</string>
     <string name="new_group_header">------ New Group</string>
@@ -42,7 +40,7 @@
     <string name="icon_ads_desc">No Ads</string>
     <string name="icon_location_desc">No Trackers</string>
     <string name="icon_offline_desc">Works Offline</string>
-    <string name="mako_url" translatable="false">github.com/pomboverso/mako</string>
+    <string name="mako_url" translatable="false">github.com/rama-io/mako</string>
     <string name="app_header">App</string>
     <string name="contributors_header">Contributors</string>
     <string name="icons_header">Icons</string>
@@ -67,6 +65,8 @@
     <string name="robotoslab_url" translatable="false">github.com/googlefonts/robotoslab</string>
     <string name="isotjs" translatable="false">isotjs</string>
     <string name="isotjs_url" translatable="false">github.com/isotjs</string>
+    <string name="etwasmitbaum" translatable="false">etwasmitbaum</string>
+    <string name="etwasmitbaum_url" translatable="false">github.com/etwasmitbaum</string>
 
     <!-- Settings -->
     <string name="settings_header">Settings</string>

@@ -9,7 +9,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:gravity="start"
         android:layout_weight="1"
         android:orientation="vertical">
@@ -123,6 +123,24 @@
                 android:layout_height="wrap_content"
                 android:icon="@drawable/icon_github"
                 android:text="@string/isotjs_url" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/disabled"
+                android:layout_marginVertical="16sp" />
+
+            <com.rama.mako.widgets.WdLabel
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/icon_user"
+                android:text="@string/etwasmitbaum" />
+
+            <com.rama.mako.widgets.WdLabel
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/icon_github"
+                android:text="@string/etwasmitbaum_url" />
 
             <TextView
                 android:layout_width="match_parent"

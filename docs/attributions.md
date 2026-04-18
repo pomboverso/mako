@@ -4,22 +4,28 @@
 
 Privacy-first Android launcher designed for focus, speed, and simplicity.
 
-Built entirely in native Kotlin, runs fully on-device, avoids tracking, and keeps distractions to a minimum by emphasizing clarity and intentional interaction.
+Built entirely in native Kotlin, runs fully on-device, avoids tracking, and keeps distractions to a
+minimum by emphasizing clarity and intentional interaction.
 
 - Original author: [Pombo](https://github.com/pomboverso)
-- Original repository: https://github.com/pomboverso/mako
+- Original repository: https://github.com/rama-io/mako
 - License: **GPL 3.0**
 - License link: https://www.gnu.org/licenses/gpl-3.0
+
 ---
 
 ## Contributors
 
 - [Pombo](https://github.com/pomboverso)
 - [isotjs](https://github.com/isotjs)
-  - Search UX improvements
-  - Fixed back navigation behavior (prevented unintended app close by properly handling navigation stack)
-  - Added temperature unit support (Celsius, Fahrenheit, and system default)
-  - Custom app icon support improvements
+    - Search UX improvements
+    - Fixed back navigation behavior (prevented unintended app close by properly handling navigation
+      stack)
+    - Added temperature unit support (Celsius, Fahrenheit, and system default)
+    - Custom app icon support improvements
+    - Wallpaper functionality
+- [etwasmitbaum](https://github.com/etwasmitbaum)
+  - Search bar always on display
 
 ---
 

@@ -1,7 +1,6 @@
 package com.rama.mako.activities
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
