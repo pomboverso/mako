@@ -40,8 +40,6 @@ Primary icon version using solid fill.
 
 ![Mako Icon Negative](./img/mako_icon_negative.svg)
 
-This version is designed for use on dark or colored backgrounds.
-
 The negative variant can be used with any background color.  
 For demonstration purposes, green is used to showcase visibility in both light and dark markdown
 previews.
