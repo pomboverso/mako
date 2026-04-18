@@ -8,13 +8,12 @@ simplicity.
 Built entirely in **native Kotlin**, Mako runs fully **on-device**, avoids tracking, and keeps
 distractions to a minimum by emphasizing clarity and intentional interaction.
 
-
 ---
 
 ## Screenshots
 
-| Home                                                                     | Settings                                                                                                                                       | About                                                                                                                                       |
-|--------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| Home                                                                     | Settings                                                                     | About                                                                     |
+| ------------------------------------------------------------------------ | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
 | ![Home](./fastlane/metadata/android/en-US/images/phoneScreenshots/1.png) | ![Settings](./fastlane/metadata/android/en-US/images/phoneScreenshots/2.png) | ![About](./fastlane/metadata/android/en-US/images/phoneScreenshots/3.png) |
 
 ---
@@ -42,18 +41,16 @@ No network access is required.
 
 ## Usage
 
-* Long-press in an empty area of the **app list** to open **Settings**.
-* Watch the **[Mako Demo / Walkthrough](https://www.youtube.com/watch?v=cfble2DRqyM)** for a quick
+- Long-press in an empty area of the **App List** to open **Settings**.
+- Watch the **[Mako Demo / Walkthrough](https://www.youtube.com/watch?v=cfble2DRqyM)** for a quick
   overview.
 
 ---
 
 ## Installation
 
-* Available on **[F-Droid](https://f-droid.org/app/com.rama.mako)** for easy installation and
-  updates.
-* Download the latest APK from the **[Releases page](https://github.com/rama-io/mako/releases)
-  ** or use **[Obtanium](https://github.com/ImranR98/Obtainium)** to get the newest version directly
+- Available on **[F-Droid](https://f-droid.org/app/com.rama.mako)** for easy installation and updates.
+- Download the latest APK from the **[Releases page](https://github.com/rama-io/mako/releases)** or use **[Obtanium](https://github.com/ImranR98/Obtainium)** to get the newest version directly
   from the github releases.
 
 ## Signing certificate hash
@@ -75,8 +72,8 @@ No network access is required.
 
 ## Tested Devices
 
-| Device       | OS         | Year | Status     |
-|--------------|------------|------|------------|
+| Device       | OS         | Year | Status      |
+| ------------ | ---------- | ---- | ----------- |
 | Pixel 8 Pro  | Android 16 | 2026 | ✅ Verified |
 | Pixel 6      | GrapheneOS | 2026 | ✅ Verified |
 | Samsung On 5 | Android 6  | 2015 | ✅ Verified |
