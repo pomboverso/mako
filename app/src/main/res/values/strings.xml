@@ -26,12 +26,12 @@
     <string name="charge_wireless">Wireless</string>
 
     <!-- Main :: Formatting -->
-    <string name="battery_status_power">%1$s %2$dx</string>
-    <string name="battery_status_power_type">%1$s (%2$s) %3$dx</string>
+    <string name="battery_status_power" translatable="false">%1$s %2$dx</string>
+    <string name="battery_status_power_type" translatable="false">%1$s (%2$s) %3$dx</string>
     <string name="unit_celsius">C</string>
     <string name="unit_fahrenheit">F</string>
-    <string name="battery_temp">%1$d°%2$s</string>
-    <string name="battery_temp_labeled">%1$d°%2$s (%3$s)</string>
+    <string name="battery_temp" translatable="false">%1$d°%2$s</string>
+    <string name="battery_temp_labeled" translatable="false">%1$d°%2$s (%3$s)</string>
 
     <!-- APP / About -->
     <string name="app_name" translatable="false">Mako</string>
@@ -88,8 +88,8 @@
     <string name="settings_section_apps_title">Applications</string>
     <string name="settings_section_system_title">System</string>
     <string name="settings_section_data_title">Data and Debug</string>
-    <string name="settings_section_expand_indicator">[+]</string>
-    <string name="settings_section_collapse_indicator">[-]</string>
+    <string name="settings_section_expand_indicator" translatable="false">[+]</string>
+    <string name="settings_section_collapse_indicator" translatable="false">[-]</string>
     <string name="set_default_label">Set Launcher as default</string>
     <string name="set_clock_app_label">Change Clock Tap Action</string>
     <string name="refresh_launcher_label">Refresh launcher</string>
