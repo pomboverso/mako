@@ -256,6 +256,21 @@
             <com.rama.mako.widgets.WdCollapsibleSection
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:key="SETTINGS_SECTION_APPS"
+                app:label="@string/apps_header"
+                app:defaultExpanded="true">
+
+                <com.rama.mako.widgets.WdCheckbox
+                    android:id="@+id/show_profile_indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/show_profile_indicator_label" />
+
+            </com.rama.mako.widgets.WdCollapsibleSection>
+
+            <com.rama.mako.widgets.WdCollapsibleSection
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 app:key="SETTINGS_SECTION_FONTS"
                 app:label="@string/fonts_header"
                 app:defaultExpanded="true">
