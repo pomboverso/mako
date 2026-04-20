@@ -19,8 +19,6 @@ import com.rama.mako.managers.IconManager
 import com.rama.mako.managers.PrefsManager
 
 class SettingsActivity : CsActivity() {
-
-    val prefs by lazy { PrefsManager.getInstance(this) }
     lateinit var appsProvider: AppsProvider
     lateinit var iconManager: IconManager
     lateinit var groupsManager: GroupsManager

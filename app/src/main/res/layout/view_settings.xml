@@ -446,6 +446,12 @@
                 app:label="@string/system_header"
                 app:defaultExpanded="true">
 
+                <com.rama.mako.widgets.WdCheckbox
+                    android:id="@+id/show_system_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/show_system_bar_label" />
+
                 <com.rama.mako.widgets.WdButton
                     android:id="@+id/activate_button"
                     android:layout_width="match_parent"

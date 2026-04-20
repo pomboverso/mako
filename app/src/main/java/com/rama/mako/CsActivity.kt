@@ -5,12 +5,14 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
-import android.view.WindowInsetsController
 import android.view.WindowManager
 import com.rama.mako.managers.FontManager
 import com.rama.mako.utils.dp
+import com.rama.mako.managers.PrefsManager
 
 abstract class CsActivity : Activity() {
+
+    val prefs by lazy { PrefsManager.getInstance(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +47,26 @@ abstract class CsActivity : Activity() {
     fun refreshFont() {
         val root = findViewById<View>(android.R.id.content)
         FontManager.applyFont(this, root)
+    }
+
+    protected fun updateSystemBars() {
+        if (prefs.isSystemBarVisible()) {
+            window.decorView.systemUiVisibility =
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+        } else {
+            window.decorView.systemUiVisibility =
+                View.SYSTEM_UI_FLAG_FULLSCREEN or
+                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+                        View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
+                        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+        }
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus) {
+            updateSystemBars()
+        }
     }
 
     protected fun applyEdgeToEdgePadding(root: View) {

@@ -55,6 +55,7 @@ class PrefsManager private constructor(context: Context) {
         const val CLOCK_APP = "clock:app"
         const val FONT_STYLE = "font:style"
         const val MIGRATION_ICON_SOURCE_RADIO = "migration:icon_source_radio"
+        const val SYSTEM_BAR_VISIBLE = "system:bar:visible"
 
         const val SETTINGS_SECTION_CLOCK = "settings:section:clock"
         const val SETTINGS_SECTION_FONTS = "settings:section:fonts"
@@ -149,6 +150,7 @@ class PrefsManager private constructor(context: Context) {
                 .putString(PrefKeys.APPS_ICON_SOURCE, IconSource.NONE)
                 .putString(PrefKeys.APPS_ICON_PACK_PACKAGE, "")
                 .putString(PrefKeys.HOME_BACKGROUND_MODE, BackgroundMode.DEFAULT)
+                .putBoolean(PrefKeys.SYSTEM_BAR_VISIBLE, false)
 
                 .putBoolean(PrefKeys.BATTERY_VISIBLE, true)
                 .putBoolean(PrefKeys.BATTERY_TEMPERATURE, true)
@@ -308,6 +310,9 @@ class PrefsManager private constructor(context: Context) {
 
     fun hasCollapsibleGroups(): Boolean =
         prefs.getBoolean(PrefKeys.GROUPS_COLLAPSIBLE, false)
+
+    fun isSystemBarVisible(): Boolean =
+        prefs.getBoolean(PrefKeys.SYSTEM_BAR_VISIBLE, false)
 
     // SETTINGS - CLOCK
 
