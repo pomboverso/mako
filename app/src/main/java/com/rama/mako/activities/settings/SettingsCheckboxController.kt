@@ -35,6 +35,7 @@ class SettingsCheckboxController(private val activity: SettingsActivity) {
         )
         bindWdCheckbox(R.id.show_battery_temperature, PrefKeys.BATTERY_TEMPERATURE, false)
         bindWdCheckbox(R.id.show_battery_charge_status, PrefKeys.BATTERY_CHARGE_STATUS, false)
+        bindWdCheckbox(R.id.show_system_bar, PrefKeys.SYSTEM_BAR_VISIBLE, false)
     }
 
     private fun bindWdCheckbox(

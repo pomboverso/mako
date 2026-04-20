@@ -42,7 +42,6 @@ class MainActivity : CsActivity() {
     private lateinit var appListManager: AppListManager
     private lateinit var appsProvider: AppsProvider
 
-    private lateinit var prefs: PrefsManager
     private lateinit var homeBackgroundManager: HomeBackgroundManager
     private lateinit var rootView: View
 
@@ -83,7 +82,6 @@ class MainActivity : CsActivity() {
         applyEdgeToEdgePadding(rootView)
 
         // --- Prefs ---
-        prefs = PrefsManager.getInstance(this)
         homeBackgroundManager = HomeBackgroundManager(this)
         applyHomeBackground(force = true)
 
