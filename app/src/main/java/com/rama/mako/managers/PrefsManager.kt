@@ -41,6 +41,7 @@ class PrefsManager private constructor(context: Context) {
         const val APPS_ICONS = "apps:icons"
         const val APPS_ICON_SOURCE = "apps:icon_source"
         const val APPS_ICON_PACK_PACKAGE = "apps:icon_pack_package"
+        const val APPS_PROFILE_INDICATOR = "apps:profile_indicator"
         const val HOME_BACKGROUND_MODE = "home:background_mode"
         const val GROUPS_IDS = "groups:ids"
         const val GROUPS_HEADERS = "groups:headers"
@@ -68,6 +69,7 @@ class PrefsManager private constructor(context: Context) {
         const val SETTINGS_SECTION_SEARCH = "settings:section:search"
         const val SETTINGS_SECTION_SYSTEM = "settings:section:system"
         const val SETTINGS_SECTION_DATA = "settings:section:data"
+        const val SETTINGS_SECTION_APPS = "settings:section:apps"
 
         fun appKey(pkg: String, userHandle: UserHandle): String {
             val userId = userHandle.hashCode()
@@ -147,6 +149,7 @@ class PrefsManager private constructor(context: Context) {
 
                 .putBoolean(PrefKeys.APPS_ICONS, false)
                 .putBoolean(PrefKeys.APPS_SEARCH, false)
+                .putBoolean(PrefKeys.APPS_PROFILE_INDICATOR, true)
                 .putString(PrefKeys.APPS_ICON_SOURCE, IconSource.NONE)
                 .putString(PrefKeys.APPS_ICON_PACK_PACKAGE, "")
                 .putString(PrefKeys.HOME_BACKGROUND_MODE, BackgroundMode.DEFAULT)
@@ -276,6 +279,9 @@ class PrefsManager private constructor(context: Context) {
 
     fun hasIconsVisible(): Boolean =
         getIconSource() != IconSource.NONE
+
+    fun hasProfileIndicator(): Boolean =
+        prefs.getBoolean(PrefKeys.APPS_PROFILE_INDICATOR, true)
 
     fun getIconSource(): String {
         return when (prefs.getString(PrefKeys.APPS_ICON_SOURCE, IconSource.NONE)) {

@@ -82,6 +82,7 @@
     <string name="system_header">System</string>
     <string name="background_header">Background</string>
 
+    <string name="show_profile_indicator_label">Show profile indicator</string>
     <string name="settings_section_home_title">Home screen</string>
     <string name="settings_section_appearance_title">Appearance</string>
     <string name="settings_section_groups_title">Groups</string>

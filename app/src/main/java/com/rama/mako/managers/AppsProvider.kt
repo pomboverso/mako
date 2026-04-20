@@ -17,7 +17,7 @@ class AppsProvider(private val context: Context) {
         val profileInitial: String?
     ) {
         val isWorkProfile: Boolean = userHandle.hashCode() != 0
-        val displayLabel: String = if (isWorkProfile) "[$profileInitial] $label" else label
+        val displayLabel: String = label
     }
 
     private val launcherApps =
