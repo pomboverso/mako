@@ -1,6 +1,5 @@
 package com.rama.mako.managers
 
-import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.text.format.DateFormat
@@ -25,11 +24,7 @@ class ClockManager(
             val clockFormatPref = prefs.getClockFormat()
 
             calendar.timeInMillis = System.currentTimeMillis()
-<<<<<<< HEAD
             val locale = LocaleHelper.getCurrentLocale(dateTextView.resources.configuration)
-=======
-            val locale = getUiLocale()
->>>>>>> 1aacd6a (i18n but hell to maintain version)
 
             // --- Clock ---
             if (clockFormatPref != PrefsManager.ClockFormat.NONE) {
@@ -71,16 +66,6 @@ class ClockManager(
             }
 
             handler.postDelayed(this, 1000)
-        }
-    }
-
-    private fun getUiLocale(): Locale {
-        val configuration = dateTextView.resources.configuration
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            configuration.locales[0]
-        } else {
-            @Suppress("DEPRECATION")
-            configuration.locale
         }
     }
 

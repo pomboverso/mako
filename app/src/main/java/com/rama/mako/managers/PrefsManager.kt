@@ -118,6 +118,11 @@ class PrefsManager private constructor(context: Context) {
         const val FAHRENHEIT = "fahrenheit"
     }
 
+    object Language {
+        const val SYSTEM = "system"
+        const val FALLBACK = "en"
+    }
+
     object BackgroundMode {
         const val DEFAULT = "default"
         const val WALLPAPER = "wallpaper"
@@ -151,7 +156,7 @@ class PrefsManager private constructor(context: Context) {
 
                 .putString(PrefKeys.CLOCK_FORMAT, ClockFormat.HOUR_24)
                 .putString(PrefKeys.CLOCK_APP, "")
-                .putString(PrefKeys.APP_LANGUAGE, "system")
+                .putString(PrefKeys.APP_LANGUAGE, Language.SYSTEM)
 
                 .putBoolean(PrefKeys.APPS_ICONS, false)
                 .putBoolean(PrefKeys.APPS_SEARCH, false)
@@ -417,7 +422,7 @@ class PrefsManager private constructor(context: Context) {
         prefs.edit().putString(PrefKeys.FONT_STYLE, style).apply()
 
     fun getAppLanguage(): String {
-        return prefs.getString(PrefKeys.APP_LANGUAGE, "system") ?: "system"
+        return prefs.getString(PrefKeys.APP_LANGUAGE, Language.SYSTEM) ?: Language.SYSTEM
     }
 
     fun setAppLanguage(language: String) {

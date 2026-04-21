@@ -30,14 +30,14 @@ object LocaleHelper {
         selectedLanguage: String,
         systemLocale: Locale
     ): String {
-        if (selectedLanguage != "system") return selectedLanguage
+        if (selectedLanguage != PrefsManager.Language.SYSTEM) return selectedLanguage
 
         val supported = context.resources.getStringArray(R.array.supported_language_codes)
-            .filter { it != "system" }
-        return if (systemLocale.language in supported) systemLocale.language else "en"
+            .filter { it != PrefsManager.Language.SYSTEM }
+        return if (systemLocale.language in supported) systemLocale.language else PrefsManager.Language.FALLBACK
     }
 
-    private fun getCurrentLocale(configuration: Configuration): Locale {
+    fun getCurrentLocale(configuration: Configuration): Locale {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             configuration.locales[0]
         } else {
