@@ -1,9 +1,11 @@
+import java.time.LocalDate
+
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
 }
 
-def currentYear = java.time.LocalDate.now().getYear()
+val currentYear = LocalDate.now().year
 
 android {
     namespace = "com.rama.mako"
@@ -14,16 +16,16 @@ android {
         minSdk = 21
         targetSdk = 36
         versionCode = 36
-        versionName = currentYear + "." + versionCode.toString()
+        versionName = "$currentYear.$versionCode"
     }
 
     flavorDimensions += "version"
 
     productFlavors {
-        base {
+        create("base") {
             dimension = "version"
         }
-        ext {
+        create("ext") {
             dimension = "version"
             applicationIdSuffix = ".ext"
             versionNameSuffix = "-ext"
@@ -32,15 +34,18 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled = false
+            isMinifyEnabled = false
             vcsInfo.include = false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig = signingConfigs.debug
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+            signingConfig = signingConfigs.getByName("debug")
         }
         debug {
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-dev"
-            signingConfig = signingConfigs.debug
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
 
@@ -49,8 +54,9 @@ android {
         includeInBundle = false
     }
 
-    applicationVariants.all { variant ->
-        variant.outputs.all { output ->
+    applicationVariants.all {
+        outputs.all {
+            this as com.android.build.gradle.internal.api.BaseVariantOutputImpl
             outputFileName = "mako_${versionName}.apk"
         }
     }
@@ -68,13 +74,10 @@ android {
         generateLocaleConfig = true
     }
 
-    packagingOptions {
-        exclude 'META-INF/*.version'
-        exclude 'META-INF/com/android/build/gradle/app-metadata.properties'
-
-        jniLibs {
-            useLegacyPackaging = true
-        }
+    packaging {
+        resources.excludes += "META-INF/*.version"
+        resources.excludes += "META-INF/com/android/build/gradle/app-metadata.properties"
+        jniLibs.useLegacyPackaging = true
     }
 }
 
