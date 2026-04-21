@@ -1,10 +1,14 @@
 package com.rama.mako.activities.settings
 
+<<<<<<< HEAD
 import android.util.TypedValue
 import android.view.View
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.core.content.ContextCompat
+=======
+import android.widget.RadioGroup
+>>>>>>> 1aacd6a (i18n but hell to maintain version)
 import com.rama.mako.R
 import com.rama.mako.activities.SettingsActivity
 import com.rama.mako.managers.PrefsManager
@@ -15,6 +19,7 @@ class SettingsLanguageController(private val activity: SettingsActivity) {
 
     fun setup() {
         val group = activity.findViewById<RadioGroup>(R.id.language_group)
+<<<<<<< HEAD
         val codes = activity.resources.getStringArray(R.array.supported_language_codes)
         val labels = activity.resources.getStringArray(R.array.supported_language_labels)
         require(codes.size == labels.size) {
@@ -52,6 +57,21 @@ class SettingsLanguageController(private val activity: SettingsActivity) {
             val language = codeToId.entries
                 .firstOrNull { it.value == checkedId }?.key
                 ?: PrefsManager.Language.SYSTEM
+=======
+
+        when (prefs.getAppLanguage()) {
+            PrefsManager.AppLanguage.ENGLISH -> group.check(R.id.language_english)
+            PrefsManager.AppLanguage.GERMAN -> group.check(R.id.language_german)
+            else -> group.check(R.id.language_system)
+        }
+
+        group.setOnCheckedChangeListener { _, id ->
+            val language = when (id) {
+                R.id.language_english -> PrefsManager.AppLanguage.ENGLISH
+                R.id.language_german -> PrefsManager.AppLanguage.GERMAN
+                else -> PrefsManager.AppLanguage.SYSTEM
+            }
+>>>>>>> 1aacd6a (i18n but hell to maintain version)
 
             if (language == prefs.getAppLanguage()) {
                 return@setOnCheckedChangeListener

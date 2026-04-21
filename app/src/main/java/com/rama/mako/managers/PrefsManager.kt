@@ -132,6 +132,12 @@ class PrefsManager private constructor(context: Context) {
         const val AMOLED = "amoled"
     }
 
+    object AppLanguage {
+        const val SYSTEM = "system"
+        const val ENGLISH = "en"
+        const val GERMAN = "de"
+    }
+
     fun initPrefs() {
         val ids = prefs.getStringSet(PrefKeys.GROUPS_IDS, null)
 
@@ -158,7 +164,11 @@ class PrefsManager private constructor(context: Context) {
 
                 .putString(PrefKeys.CLOCK_FORMAT, ClockFormat.HOUR_24)
                 .putString(PrefKeys.CLOCK_APP, "")
+<<<<<<< HEAD
                 .putString(PrefKeys.APP_LANGUAGE, Language.SYSTEM)
+=======
+                .putString(PrefKeys.APP_LANGUAGE, AppLanguage.SYSTEM)
+>>>>>>> 1aacd6a (i18n but hell to maintain version)
 
                 .putBoolean(PrefKeys.APPS_ICONS, false)
                 .putBoolean(PrefKeys.APPS_SEARCH, false)
@@ -424,11 +434,29 @@ class PrefsManager private constructor(context: Context) {
         prefs.edit().putString(PrefKeys.FONT_STYLE, style).apply()
 
     fun getAppLanguage(): String {
+<<<<<<< HEAD
         return prefs.getString(PrefKeys.APP_LANGUAGE, Language.SYSTEM) ?: Language.SYSTEM
     }
 
     fun setAppLanguage(language: String) {
         prefs.edit().putString(PrefKeys.APP_LANGUAGE, language).apply()
+=======
+        return when (prefs.getString(PrefKeys.APP_LANGUAGE, AppLanguage.SYSTEM)) {
+            AppLanguage.ENGLISH -> AppLanguage.ENGLISH
+            AppLanguage.GERMAN -> AppLanguage.GERMAN
+            else -> AppLanguage.SYSTEM
+        }
+    }
+
+    fun setAppLanguage(language: String) {
+        val normalized = when (language) {
+            AppLanguage.ENGLISH -> AppLanguage.ENGLISH
+            AppLanguage.GERMAN -> AppLanguage.GERMAN
+            else -> AppLanguage.SYSTEM
+        }
+
+        prefs.edit().putString(PrefKeys.APP_LANGUAGE, normalized).apply()
+>>>>>>> 1aacd6a (i18n but hell to maintain version)
     }
 
     // GENERIC HELPERS
