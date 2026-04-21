@@ -1,0 +1,178 @@
+<resources>
+    <!-- Global -->
+    <string name="go_back_label">Geri Dön</string>
+    <string name="new_group_header">------ Yeni Grup</string>
+    <string name="new_group_header_count">------ Yeni Grup %d</string>
+    <string name="no_clock_app_found_label">Saat uygulaması bulunamadı</string>
+    <string name="unable_open_settings_toast">Başlatıcı ayarları açılamadı</string>
+    <string name="unable_open_wallpaper_app_toast">Duvar kağıdı uygulaması bulunamadı</string>
+    <string name="unable_launch_app_toast">Uygulama başlatılamadı</string>
+
+    <!-- Main :: Temperature labels -->
+    <string name="temp_warm">Ilık</string>
+    <string name="temp_hot">Sıcak</string>
+    <string name="temp_critical">Kritik</string>
+
+    <!-- Main :: Battery status -->
+    <string name="status_charging">Şarj oluyor</string>
+    <string name="status_discharging">Deşarj oluyor</string>
+    <string name="status_full">Dolu</string>
+    <string name="status_not_charging">Şarj etmiyor</string>
+    <string name="status_unknown">Bilinmiyor</string>
+
+    <!-- Main :: Charging types -->
+    <string name="charge_usb">USB</string>
+    <string name="charge_ac">AC</string>
+    <string name="charge_wireless">Kablosuz</string>
+
+    <!-- Main :: Formatting -->
+    <string name="battery_status_power" translatable="false">%1$s %2$dx</string>
+    <string name="battery_status_power_type" translatable="false">%1$s (%2$s) %3$dx</string>
+    <string name="unit_celsius">C</string>
+    <string name="unit_fahrenheit">F</string>
+    <string name="battery_temp" translatable="false">%1$d°%2$s</string>
+    <string name="battery_temp_labeled" translatable="false">%1$d°%2$s (%3$s)</string>
+
+    <!-- APP / About -->
+    <string name="app_name" translatable="false">Mako</string>
+    <string name="app_description">Odak ve sadelik için tasarlanmış, gizliliği önceleyen ve tamamen cihaz üzerinde çalışan, hafif ve dikkat dağıtmayan bir Android başlatıcı.</string>
+    <string name="icon_block_desc">Arka Planda işimiz yok!</string>
+    <string name="icon_ads_desc">Reklamsız</string>
+    <string name="icon_location_desc">Takip etmiyoruz!</string>
+    <string name="icon_offline_desc">Tamamen Çevrimdışı</string>
+    <string name="mako_url" translatable="false">github.com/rama-io/mako</string>
+    <string name="app_header">Uygulama</string>
+    <string name="contributors_header">Katkıda Bulunanlar</string>
+    <string name="icons_header">İkonlar</string>
+    <string name="fonts_header">Yazı Tipleri</string>
+
+    <string name="gpl3_desc" translatable="false">GPL 3.0</string>
+    <string name="ofl_1_1_desc" translatable="false">OFL 1.1</string>
+    <string name="apache_2_desc" translatable="false">Apache 2.0</string>
+    <string name="cc_4_desc" translatable="false">CC 4.0</string>
+
+    <string name="hackernoon_url" translatable="false">github.com/hackernoon/pixel-icon-library</string>
+    <string name="app_creator" translatable="false">Pombo</string>
+    <string name="hackernoon_creator" translatable="false">HackerNoon</string>
+    <string name="hackernoon_product" translatable="false">Pixel Icon Library</string>
+    <string name="jersey_creator" translatable="false">Sarah Cadigan-Fried</string>
+    <string name="jersey_url" translatable="false">github.com/scfried/soft-type-jersey</string>
+    <string name="montserrat_creator" translatable="false">Julieta Ulanovsky, Sol Matas, Juan Pablo del Peral, Jacques Le Bailly</string>
+    <string name="montserrat_url" translatable="false">github.com/JulietaUla/Montserrat</string>
+    <string name="quicksand_creator" translatable="false">Andrew Paglinawan</string>
+    <string name="quicksand_url" translatable="false">github.com/andrew-paglinawan/QuicksandFamily</string>
+    <string name="robotoslab_creator" translatable="false">Christian Robertson</string>
+    <string name="robotoslab_url" translatable="false">github.com/googlefonts/robotoslab</string>
+    <string name="isotjs" translatable="false">isotjs</string>
+    <string name="isotjs_url" translatable="false">github.com/isotjs</string>
+    <string name="etwasmitbaum" translatable="false">etwasmitbaum</string>
+    <string name="etwasmitbaum_url" translatable="false">github.com/etwasmitbaum</string>
+
+    <!-- Settings -->
+    <string name="settings_header">Ayarlar</string>
+
+    <string name="apps_header">Uygulamalar</string>
+    <string name="clock_header">Saat</string>
+    <string name="search_header">Ara</string>
+    <string name="battery_header">Pil</string>
+    <string name="date_header">Tarih</string>
+    <string name="data_header">Veri</string>
+    <string name="temperature_header">Sıcaklık</string>
+    <string name="groups_header">Gruplar</string>
+    <string name="system_header">Sistem</string>
+    <string name="background_header">Arka Plan</string>
+
+    <string name="show_profile_indicator_label">Profil göstergesini göster</string>
+    <string name="settings_section_home_title">Ana ekran</string>
+    <string name="settings_section_appearance_title">Görünüm</string>
+    <string name="settings_section_groups_title">Gruplar</string>
+    <string name="settings_section_apps_title">Uygulamalar</string>
+    <string name="settings_section_system_title">Sistem</string>
+    <string name="settings_section_data_title">Veri ve Hata Ayıklama</string>
+    <string name="settings_section_expand_indicator" translatable="false">[+]</string>
+    <string name="settings_section_collapse_indicator" translatable="false">[-]</string>
+    <string name="set_default_label">Başlatıcıyı varsayılan yap</string>
+    <string name="set_clock_app_label">Saat dokunuş eylemini değiştir</string>
+    <string name="refresh_launcher_label">Başlatıcıyı yenile</string>
+    <string name="change_wallpaper_label">Sistem duvar kağıdını değiştir</string>
+    <string name="about_mako_label">Mako hakkında</string>
+    <string name="edit_apps_label">Yüklü uygulamaları yönet</string>
+    <string name="show_battery_label">Pili göster</string>
+    <string name="show_system_bar_label">Sistem çubuğunu göster</string>
+    <string name="show_search_label">Arama çubuğunu göster</string>
+    <string name="show_date_label">Tarihi göster</string>
+    <string name="show_clock_label">Saati göster</string>
+    <string name="show_year_day_label">Yılın gününü göster</string>
+    <string name="show_group_header_label">Grup başlığını göster</string>
+    <string name="icons_settings_header">İkonlar</string>
+    <string name="none_label">Yok</string>
+    <string name="default_label">Varsayılan</string>
+    <string name="default_system_label">Varsayılan (Sistem)</string>
+    <string name="icons_monochrome_label">Monokrom (Sistem renkleri / Material You)</string>
+    <string name="icons_icon_pack_label">Özel ikon paketi</string>
+    <string name="select_icon_pack_label">İkon paketi seç</string>
+    <string name="selected_icon_pack_label">Seçili paket: %1$s</string>
+    <string name="icon_pack_not_selected_label">İkon paketi seçilmedi</string>
+    <string name="no_icon_pack_found_label">Uyumlu ikon paketi bulunamadı</string>
+    <string name="icon_pack_selected_toast">Seçili ikon paketi: %1$s</string>
+    <string name="monochrome_fallback_toast">Monokrom ikonlar Android 13+ gerektirir, mevcut olmayan yerlerde alternatif kullanılıyor</string>
+    <string name="show_ungrouped_apps_label">Gruplanmamış uygulamaları göster</string>
+    <string name="has_collapsible_groups">Grupların daraltılmasına izin ver</string>
+    <string name="add_group_label">+ Yeni Grup Ekle</string>
+    <string name="clock_none_label">Saati gizle</string>
+    <string name="clock_24_label">24 saat</string>
+    <string name="clock_12_label">12 saat (AM/PM)</string>
+    <string name="celsius_label">Celsius</string>
+    <string name="fahrenheit_label">Fahrenheit</string>
+    <string name="open_app_settings_label">Uygulama ayarlarını aç</string>
+    <string name="show_battery_temperature_label">Pil sıcaklığını göster</string>
+    <string name="show_battery_charge_status_label">Pil şarj durumunu göster</string>
+    <string name="debug_header">Hata Ayıklama</string>
+    <string name="export_data_label">Veriyi Dışa Aktar</string>
+    <string name="clear_data_label">Veriyi Temizle</string>
+    <string name="reset_done_toast">Sıfırlama tamamlandı</string>
+    <string name="reset_failed_toast">Sıfırlama başarısız</string>
+    <string name="clock_app_selected_toast">Seçildi: %1$s</string>
+    <string name="group_label_updated_toast">Etiket Güncellendi</string>
+    <string name="select_target_group_toast">Bir hedef grup seçin</string>
+    <string name="font_jersey_label" translatable="false">Jersey 25</string>
+    <string name="font_quicksand_label" translatable="false">Quicksand</string>
+    <string name="font_montserrat_label" translatable="false">Montserrat</string>
+    <string name="font_robotoslab_label" translatable="false">Roboto Slab</string>
+    <string name="font_style_header">Yazı Tipi Stili</string>
+    <string name="background_default_label">Varsayılan tema</string>
+    <string name="background_wallpaper_label">Duvar kağıdı</string>
+    <string name="background_dynamic_label">Dinamik renk</string>
+    <string name="background_amoled_label">AMOLED siyahı</string>
+
+    <!-- Popup :: Context Menu App -->
+    <string name="rename_app">Uygulamayı yeniden adlandır...</string>
+    <string name="add_to_favorites">Grubu değiştir...</string>
+    <string name="open_settings">Uygulama ayarları...</string>
+
+    <!-- Dialog -->
+    <string name="save">Kaydet</string>
+    <string name="reset">Sıfırla</string>
+    <string name="cancel">İptal</string>
+
+    <!-- Dialog :: Rename App -->
+    <string name="select_group">Grup Seç</string>
+
+    <!-- Dialog :: Search -->
+    <string name="search_apps_header">Uygulama ara</string>
+    <string name="search_apps_hint">Uygulama ara...</string>
+    <string name="search_icon_desc">Aramayı aç/kapat</string>
+    <string name="clear_search_desc">Aramayı temizle</string>
+
+    <!-- Dialog :: Delete Group -->
+    <string name="delete_group_title">Bu grubu silmek istediğinizden emin misiniz?</string>
+    <string name="delete_group_disclaimer">Uygulamalarınız aşağıdaki gruba taşınacaktır.</string>
+    <string name="delete_group">Grubu sil</string>
+
+    <!-- Dialog :: Pick Clock App -->
+    <string name="pick_clock_app_disclaimer">Buradan bir uygulama seçmek, onu varsayılan saat eylemi olarak ayarlar. Ana ekranınızdaki saate dokunduğunuzda bu uygulama açılır.</string>
+
+    <!-- Dialog :: Pick Icon Pack -->
+    <string name="pick_icon_pack_disclaimer">Yüklü bir ikon paketi seçin. Bir ikon eksikse Mako, o uygulama için sistem ikonunu kullanır.</string>
+    <string name="always_show_search_bar">Her zaman görünür</string>
+</resources>
