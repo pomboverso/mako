@@ -125,8 +125,6 @@ class PrefsManager private constructor(context: Context) {
         const val AMOLED = "amoled"
     }
 
-
-
     fun initPrefs() {
         val ids = prefs.getStringSet(PrefKeys.GROUPS_IDS, null)
 
