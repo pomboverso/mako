@@ -467,7 +467,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8sp"
                     android:background="@color/bg_secondary"
-                    android:padding="16sp" />
+                    android:padding="16sp"
+                    android:orientation="vertical" />
             </com.rama.mako.widgets.WdCollapsibleSection>
 
             <com.rama.mako.widgets.WdCollapsibleSection
