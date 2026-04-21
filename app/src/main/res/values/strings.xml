@@ -103,6 +103,7 @@
     <string name="language_system_default">System Default (fallback to English)</string>
     <string name="language_english" translatable="false">English</string>
     <string name="language_german" translatable="false">Deutsch</string>
+    <string name="language_turkish" translatable="false">Türkçe</string>
     <string name="show_search_label">Show search bar</string>
     <string name="show_date_label">Show date</string>
     <string name="show_clock_label">Show clock</string>

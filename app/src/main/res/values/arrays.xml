@@ -9,11 +9,13 @@
         <item>system</item>
         <item>en</item>
         <item>de</item>
+        <item>tr</item>
     </string-array>
 
     <string-array name="supported_language_labels">
         <item>@string/language_system_default</item>
         <item>@string/language_english</item>
         <item>@string/language_german</item>
+        <item>@string/language_turkish</item>
     </string-array>
 </resources>
