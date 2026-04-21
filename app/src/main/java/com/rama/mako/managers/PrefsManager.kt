@@ -85,6 +85,7 @@ class PrefsManager private constructor(context: Context) {
         fun GROUP_LABEL(id: String) = "group:$id:label"
         fun GROUP_VISIBLE(id: String) = "group:$id:visible"
         fun GROUP_EXPANDED(id: String) = "group:$id:expanded"
+        fun GROUP_ORDER(id: String) = "group:$id:order"
     }
 
     object FontStyle {
@@ -137,10 +138,12 @@ class PrefsManager private constructor(context: Context) {
                 .putString(PrefKeys.GROUP_LABEL(SystemIds.UNGROUPED), UI.UNGROUPED_LABEL)
                 .putBoolean(PrefKeys.GROUP_VISIBLE(SystemIds.UNGROUPED), true)
                 .putBoolean(PrefKeys.GROUP_EXPANDED(SystemIds.UNGROUPED), true)
+                .putInt(PrefKeys.GROUP_ORDER(SystemIds.UNGROUPED), 0)
 
                 .putString(PrefKeys.GROUP_LABEL(SystemIds.FAVORITES), UI.FAVORITES_LABEL)
                 .putBoolean(PrefKeys.GROUP_VISIBLE(SystemIds.FAVORITES), true)
                 .putBoolean(PrefKeys.GROUP_EXPANDED(SystemIds.FAVORITES), true)
+                .putInt(PrefKeys.GROUP_ORDER(SystemIds.FAVORITES), 1)
 
                 .putString(PrefKeys.FONT_STYLE, FontStyle.JERSEY_25)
 
@@ -268,6 +271,12 @@ class PrefsManager private constructor(context: Context) {
 
     fun setGroupExpanded(id: String, value: Boolean) =
         prefs.edit().putBoolean(PrefKeys.GROUP_EXPANDED(id), value).apply()
+
+    fun getGroupOrder(id: String): Int =
+        prefs.getInt(PrefKeys.GROUP_ORDER(id), Int.MAX_VALUE)
+
+    fun setGroupOrder(id: String, value: Int) =
+        prefs.edit().putInt(PrefKeys.GROUP_ORDER(id), value).apply()
 
     // SETTINGS - APPS
 

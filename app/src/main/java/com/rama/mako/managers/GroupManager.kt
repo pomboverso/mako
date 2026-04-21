@@ -14,18 +14,23 @@ class GroupsManager(
 
     fun getGroupIds(): List<String> =
         prefs.getGroupIds()
-            .sortedBy { prefs.getGroupLabel(it).lowercase() }
-
+            .sortedBy { prefs.getGroupOrder(it) }
 
     fun createGroup(baseLabel: String): String {
         val id = IdUtils.toBase36Fixed(System.currentTimeMillis())
 
         val label = generateUniqueLabel(baseLabel)
 
+        val nextOrder = prefs.getGroupIds()
+            .maxOfOrNull { prefs.getGroupOrder(it) }
+            ?.let { if (it == Int.MAX_VALUE) 0 else it + 1 }
+            ?: 0
+
         prefs.addGroupId(id)
         prefs.setGroupLabel(id, label)
         prefs.setGroupVisible(id, true)
         prefs.setGroupExpanded(id, true)
+        prefs.setGroupOrder(id, nextOrder)
 
         return id
     }
@@ -39,6 +44,22 @@ class GroupsManager(
         }
 
         prefs.removeGroupId(groupId)
+        reindexOrder()
+    }
+
+    fun moveGroup(groupId: String, direction: Int) {
+        val ordered = getGroupIds().toMutableList()
+        val idx = ordered.indexOf(groupId)
+        val swapIdx = idx + direction
+
+        if (swapIdx !in ordered.indices) return
+
+        val swapId = ordered[swapIdx]
+        val thisOrder = prefs.getGroupOrder(groupId)
+        val swapOrder = prefs.getGroupOrder(swapId)
+
+        prefs.setGroupOrder(groupId, swapOrder)
+        prefs.setGroupOrder(swapId, thisOrder)
     }
 
     // ------------------- Label logic -------------------
@@ -56,5 +77,11 @@ class GroupsManager(
         }
 
         return label
+    }
+
+    private fun reindexOrder() {
+        getGroupIds().forEachIndexed { index, id ->
+            prefs.setGroupOrder(id, index)
+        }
     }
 }
