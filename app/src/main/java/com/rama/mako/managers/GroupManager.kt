@@ -12,9 +12,24 @@ class GroupsManager(
 
     // ------------------- Groups -------------------
 
-    fun getGroupIds(): List<String> =
-        prefs.getGroupIds()
-            .sortedBy { prefs.getGroupOrder(it) }
+    fun getGroupIds(): List<String> {
+        val ids = prefs.getGroupIds()
+        val needsOrder = ids.filter { !prefs.hasGroupOrder(it) }
+
+        if (needsOrder.isNotEmpty()) {
+            val maxExisting = ids
+                .filter { prefs.hasGroupOrder(it) }
+                .maxOfOrNull { prefs.getGroupOrder(it) }
+                ?: -1
+
+            // Assign order to ungrouped ones, falling back to alphabetical for consistency
+            needsOrder
+                .sortedBy { prefs.getGroupLabel(it).lowercase() }
+                .forEachIndexed { i, id -> prefs.setGroupOrder(id, maxExisting + 1 + i) }
+        }
+
+        return ids.sortedBy { prefs.getGroupOrder(it) }
+    }
 
     fun createGroup(baseLabel: String): String {
         val id = IdUtils.toBase36Fixed(System.currentTimeMillis())

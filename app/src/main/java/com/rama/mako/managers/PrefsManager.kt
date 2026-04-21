@@ -272,6 +272,9 @@ class PrefsManager private constructor(context: Context) {
     fun setGroupExpanded(id: String, value: Boolean) =
         prefs.edit().putBoolean(PrefKeys.GROUP_EXPANDED(id), value).apply()
 
+    fun hasGroupOrder(id: String): Boolean =
+        prefs.contains(PrefKeys.GROUP_ORDER(id))
+
     fun getGroupOrder(id: String): Int =
         prefs.getInt(PrefKeys.GROUP_ORDER(id), Int.MAX_VALUE)
 
