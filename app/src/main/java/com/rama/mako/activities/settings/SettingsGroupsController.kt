@@ -45,6 +45,8 @@ class SettingsGroupsController(private val activity: SettingsActivity) {
         val toggle = row.findViewById<FrameLayout>(R.id.toggle_visibility)
         val toggleIcon = row.findViewById<ImageView>(R.id.toggle_visibility_img)
         val saveButton = row.findViewById<FrameLayout>(R.id.save_changes_button)
+        val ascend = row.findViewById<FrameLayout>(R.id.ascend_group)
+        val descend = row.findViewById<FrameLayout>(R.id.descend_group)
 
         name.setText(groupLabel)
         name.tag = groupId
@@ -145,6 +147,16 @@ class SettingsGroupsController(private val activity: SettingsActivity) {
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
             )
+        }
+
+        SettingsUiUtils.setClickWithHaptics(ascend) {
+            groupsManager.moveGroup(groupId, -1)
+            (container.parent as View).post { setup() }
+        }
+
+        SettingsUiUtils.setClickWithHaptics(descend) {
+            groupsManager.moveGroup(groupId, +1)
+            (container.parent as View).post { setup() }
         }
 
         container.addView(row)
