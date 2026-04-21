@@ -80,10 +80,7 @@
     <string name="language_system_default">Systemstandard (Fallback auf Englisch)</string>
     <string name="language_english" translatable="false">English</string>
     <string name="language_german" translatable="false">Deutsch</string>
-<<<<<<< HEAD
     <string name="language_turkish" translatable="false">Türkçe</string>
-=======
->>>>>>> 1aacd6a (i18n but hell to maintain version)
     <string name="show_search_label">Suchleiste anzeigen</string>
     <string name="show_date_label">Datum anzeigen</string>
     <string name="show_clock_label">Uhr anzeigen</string>
