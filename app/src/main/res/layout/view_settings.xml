@@ -467,34 +467,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8sp"
                     android:background="@color/bg_secondary"
-                    android:padding="16sp">
-
-                    <RadioButton
-                        android:id="@+id/language_system"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8sp"
-                        android:text="@string/language_system_default"
-                        android:textColor="@color/foreground"
-                        android:textSize="16sp" />
-
-                    <RadioButton
-                        android:id="@+id/language_english"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8sp"
-                        android:text="@string/language_english"
-                        android:textColor="@color/foreground"
-                        android:textSize="16sp" />
-
-                    <RadioButton
-                        android:id="@+id/language_german"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/language_german"
-                        android:textColor="@color/foreground"
-                        android:textSize="16sp" />
-                </RadioGroup>
+                    android:padding="16sp" />
             </com.rama.mako.widgets.WdCollapsibleSection>
 
             <com.rama.mako.widgets.WdCollapsibleSection

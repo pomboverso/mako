@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Single source of truth for supported languages.
+         To add a new language:
+         1. Add a values-xx/strings.xml with translations
+         2. Add the language code below
+         3. Add a label entry (use @string or a literal like "Türkçe") -->
+    <string-array name="supported_language_codes">
+        <item>system</item>
+        <item>en</item>
+        <item>de</item>
+    </string-array>
+
+    <string-array name="supported_language_labels">
+        <item>@string/language_system_default</item>
+        <item>@string/language_english</item>
+        <item>@string/language_german</item>
+    </string-array>
+</resources>

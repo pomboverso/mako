@@ -3,6 +3,7 @@ package com.rama.mako.utils
 import android.content.Context
 import android.content.res.Configuration
 import android.os.Build
+import com.rama.mako.R
 import com.rama.mako.managers.PrefsManager
 import java.util.Locale
 
@@ -11,7 +12,7 @@ object LocaleHelper {
     fun wrapContext(base: Context): Context {
         val prefs = PrefsManager.getInstance(base)
         val systemLocale = getCurrentLocale(base.resources.configuration)
-        val languageCode = resolveLanguageCode(prefs.getAppLanguage(), systemLocale)
+        val languageCode = resolveLanguageCode(base, prefs.getAppLanguage(), systemLocale)
         val targetLocale = Locale.forLanguageTag(languageCode)
 
         val currentLocale = getCurrentLocale(base.resources.configuration)
@@ -24,18 +25,16 @@ object LocaleHelper {
         return base.createConfigurationContext(configuration)
     }
 
-    private fun resolveLanguageCode(selectedLanguage: String, systemLocale: Locale): String {
-        return when (selectedLanguage) {
-            PrefsManager.AppLanguage.ENGLISH -> PrefsManager.AppLanguage.ENGLISH
-            PrefsManager.AppLanguage.GERMAN -> PrefsManager.AppLanguage.GERMAN
-            else -> {
-                if (systemLocale.language == PrefsManager.AppLanguage.GERMAN) {
-                    PrefsManager.AppLanguage.GERMAN
-                } else {
-                    PrefsManager.AppLanguage.ENGLISH
-                }
-            }
-        }
+    private fun resolveLanguageCode(
+        context: Context,
+        selectedLanguage: String,
+        systemLocale: Locale
+    ): String {
+        if (selectedLanguage != "system") return selectedLanguage
+
+        val supported = context.resources.getStringArray(R.array.supported_language_codes)
+            .filter { it != "system" }
+        return if (systemLocale.language in supported) systemLocale.language else "en"
     }
 
     private fun getCurrentLocale(configuration: Configuration): Locale {
