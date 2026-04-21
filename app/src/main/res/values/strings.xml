@@ -79,6 +79,7 @@
     <string name="data_header">Data</string>
     <string name="temperature_header">Temperature</string>
     <string name="groups_header">Groups</string>
+    <string name="language_header">Language</string>
     <string name="system_header">System</string>
     <string name="background_header">Background</string>
 
@@ -99,6 +100,9 @@
     <string name="edit_apps_label">Manage Installed Apps</string>
     <string name="show_battery_label">Show battery</string>
     <string name="show_system_bar_label">Show system bar</string>
+    <string name="language_system_default">System Default (fallback to English)</string>
+    <string name="language_english" translatable="false">English</string>
+    <string name="language_german" translatable="false">Deutsch</string>
     <string name="show_search_label">Show search bar</string>
     <string name="show_date_label">Show date</string>
     <string name="show_clock_label">Show clock</string>

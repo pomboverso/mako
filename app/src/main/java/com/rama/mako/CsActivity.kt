@@ -1,6 +1,7 @@
 package com.rama.mako
 
 import android.app.Activity
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -9,13 +10,20 @@ import android.view.WindowManager
 import com.rama.mako.managers.FontManager
 import com.rama.mako.utils.dp
 import com.rama.mako.managers.PrefsManager
+import com.rama.mako.utils.LocaleHelper
 
 abstract class CsActivity : Activity() {
 
     val prefs by lazy { PrefsManager.getInstance(this) }
+    private var lastKnownAppLanguage: String? = null
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LocaleHelper.wrapContext(newBase))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        lastKnownAppLanguage = prefs.getAppLanguage()
 
         val root = findViewById<View>(android.R.id.content)
         FontManager.applyFont(this, root)
@@ -40,6 +48,14 @@ abstract class CsActivity : Activity() {
 
     override fun onResume() {
         super.onResume()
+
+        val currentLanguage = prefs.getAppLanguage()
+        if (currentLanguage != lastKnownAppLanguage) {
+            lastKnownAppLanguage = currentLanguage
+            recreate()
+            return
+        }
+
         val root = findViewById<View>(android.R.id.content)
         FontManager.applyFont(this, root)
     }

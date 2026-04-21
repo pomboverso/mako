@@ -55,6 +55,7 @@ class PrefsManager private constructor(context: Context) {
         const val CLOCK_FORMAT = "clock:format"
         const val CLOCK_APP = "clock:app"
         const val FONT_STYLE = "font:style"
+        const val APP_LANGUAGE = "app:language"
         const val MIGRATION_ICON_SOURCE_RADIO = "migration:icon_source_radio"
         const val SYSTEM_BAR_VISIBLE = "system:bar:visible"
 
@@ -68,6 +69,7 @@ class PrefsManager private constructor(context: Context) {
         const val SETTINGS_SECTION_GROUPS = "settings:section:groups"
         const val SETTINGS_SECTION_SEARCH = "settings:section:search"
         const val SETTINGS_SECTION_SYSTEM = "settings:section:system"
+        const val SETTINGS_SECTION_LANGUAGE = "settings:section:language"
         const val SETTINGS_SECTION_DATA = "settings:section:data"
         const val SETTINGS_SECTION_APPS = "settings:section:apps"
 
@@ -123,6 +125,12 @@ class PrefsManager private constructor(context: Context) {
         const val AMOLED = "amoled"
     }
 
+    object AppLanguage {
+        const val SYSTEM = "system"
+        const val ENGLISH = "en"
+        const val GERMAN = "de"
+    }
+
     fun initPrefs() {
         val ids = prefs.getStringSet(PrefKeys.GROUPS_IDS, null)
 
@@ -149,6 +157,7 @@ class PrefsManager private constructor(context: Context) {
 
                 .putString(PrefKeys.CLOCK_FORMAT, ClockFormat.HOUR_24)
                 .putString(PrefKeys.CLOCK_APP, "")
+                .putString(PrefKeys.APP_LANGUAGE, AppLanguage.SYSTEM)
 
                 .putBoolean(PrefKeys.APPS_ICONS, false)
                 .putBoolean(PrefKeys.APPS_SEARCH, false)
@@ -179,6 +188,7 @@ class PrefsManager private constructor(context: Context) {
                 .putBoolean(PrefKeys.SETTINGS_SECTION_GROUPS, true)
                 .putBoolean(PrefKeys.SETTINGS_SECTION_SEARCH, true)
                 .putBoolean(PrefKeys.SETTINGS_SECTION_SYSTEM, true)
+                .putBoolean(PrefKeys.SETTINGS_SECTION_LANGUAGE, true)
                 .putBoolean(PrefKeys.SETTINGS_SECTION_DATA, true)
 
                 .apply()
@@ -411,6 +421,24 @@ class PrefsManager private constructor(context: Context) {
 
     fun setFontStyle(style: String) =
         prefs.edit().putString(PrefKeys.FONT_STYLE, style).apply()
+
+    fun getAppLanguage(): String {
+        return when (prefs.getString(PrefKeys.APP_LANGUAGE, AppLanguage.SYSTEM)) {
+            AppLanguage.ENGLISH -> AppLanguage.ENGLISH
+            AppLanguage.GERMAN -> AppLanguage.GERMAN
+            else -> AppLanguage.SYSTEM
+        }
+    }
+
+    fun setAppLanguage(language: String) {
+        val normalized = when (language) {
+            AppLanguage.ENGLISH -> AppLanguage.ENGLISH
+            AppLanguage.GERMAN -> AppLanguage.GERMAN
+            else -> AppLanguage.SYSTEM
+        }
+
+        prefs.edit().putString(PrefKeys.APP_LANGUAGE, normalized).apply()
+    }
 
     // GENERIC HELPERS
 

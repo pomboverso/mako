@@ -12,6 +12,7 @@ import com.rama.mako.activities.settings.SettingsCheckboxController
 import com.rama.mako.activities.settings.SettingsClockController
 import com.rama.mako.activities.settings.SettingsGroupsController
 import com.rama.mako.activities.settings.SettingsIconsController
+import com.rama.mako.activities.settings.SettingsLanguageController
 import com.rama.mako.managers.AppsProvider
 import com.rama.mako.managers.GroupsManager
 import com.rama.mako.managers.HomeBackgroundManager
@@ -47,6 +48,7 @@ class SettingsActivity : CsActivity() {
 
         SettingsBasicController(this).setup()
         appearanceController = SettingsAppearanceController(this).also { it.setup() }
+        SettingsLanguageController(this).setup()
         SettingsIconsController(this).setup()
         SettingsCheckboxController(this).setup()
         SettingsGroupsController(this).setup()
