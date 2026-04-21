@@ -42,8 +42,6 @@ class PrefsManager private constructor(context: Context) {
         const val APPS_ICON_SOURCE = "apps:icon_source"
         const val APPS_ICON_PACK_PACKAGE = "apps:icon_pack_package"
         const val APPS_PROFILE_INDICATOR = "apps:profile_indicator"
-
-        //        const val APPS_SHOW_HIDDEN = "apps:show_hidden"
         const val HOME_BACKGROUND_MODE = "home:background_mode"
         const val GROUPS_IDS = "groups:ids"
         const val GROUPS_HEADERS = "groups:headers"
@@ -120,11 +118,6 @@ class PrefsManager private constructor(context: Context) {
         const val FAHRENHEIT = "fahrenheit"
     }
 
-    object Language {
-        const val SYSTEM = "system"
-        const val FALLBACK = "en"
-    }
-
     object BackgroundMode {
         const val DEFAULT = "default"
         const val WALLPAPER = "wallpaper"
@@ -132,11 +125,7 @@ class PrefsManager private constructor(context: Context) {
         const val AMOLED = "amoled"
     }
 
-    object AppLanguage {
-        const val SYSTEM = "system"
-        const val ENGLISH = "en"
-        const val GERMAN = "de"
-    }
+
 
     fun initPrefs() {
         val ids = prefs.getStringSet(PrefKeys.GROUPS_IDS, null)
@@ -164,11 +153,7 @@ class PrefsManager private constructor(context: Context) {
 
                 .putString(PrefKeys.CLOCK_FORMAT, ClockFormat.HOUR_24)
                 .putString(PrefKeys.CLOCK_APP, "")
-<<<<<<< HEAD
-                .putString(PrefKeys.APP_LANGUAGE, Language.SYSTEM)
-=======
-                .putString(PrefKeys.APP_LANGUAGE, AppLanguage.SYSTEM)
->>>>>>> 1aacd6a (i18n but hell to maintain version)
+                .putString(PrefKeys.APP_LANGUAGE, "system")
 
                 .putBoolean(PrefKeys.APPS_ICONS, false)
                 .putBoolean(PrefKeys.APPS_SEARCH, false)
@@ -434,29 +419,11 @@ class PrefsManager private constructor(context: Context) {
         prefs.edit().putString(PrefKeys.FONT_STYLE, style).apply()
 
     fun getAppLanguage(): String {
-<<<<<<< HEAD
-        return prefs.getString(PrefKeys.APP_LANGUAGE, Language.SYSTEM) ?: Language.SYSTEM
+        return prefs.getString(PrefKeys.APP_LANGUAGE, "system") ?: "system"
     }
 
     fun setAppLanguage(language: String) {
         prefs.edit().putString(PrefKeys.APP_LANGUAGE, language).apply()
-=======
-        return when (prefs.getString(PrefKeys.APP_LANGUAGE, AppLanguage.SYSTEM)) {
-            AppLanguage.ENGLISH -> AppLanguage.ENGLISH
-            AppLanguage.GERMAN -> AppLanguage.GERMAN
-            else -> AppLanguage.SYSTEM
-        }
-    }
-
-    fun setAppLanguage(language: String) {
-        val normalized = when (language) {
-            AppLanguage.ENGLISH -> AppLanguage.ENGLISH
-            AppLanguage.GERMAN -> AppLanguage.GERMAN
-            else -> AppLanguage.SYSTEM
-        }
-
-        prefs.edit().putString(PrefKeys.APP_LANGUAGE, normalized).apply()
->>>>>>> 1aacd6a (i18n but hell to maintain version)
     }
 
     // GENERIC HELPERS

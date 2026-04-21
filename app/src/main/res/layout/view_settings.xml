@@ -266,13 +266,6 @@
                     android:layout_height="wrap_content"
                     android:text="@string/show_profile_indicator_label" />
 
-                <!--                <com.rama.mako.widgets.WdCheckbox-->
-                <!--                    android:id="@+id/show_hidden_apps"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:visibility="gone"-->
-                <!--                    android:text="@string/show_hidden_apps_label" />-->
-
             </com.rama.mako.widgets.WdCollapsibleSection>
 
             <com.rama.mako.widgets.WdCollapsibleSection
@@ -474,39 +467,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8sp"
                     android:background="@color/bg_secondary"
-<<<<<<< HEAD
-                    android:padding="16sp"
-                    android:orientation="vertical" />
-=======
-                    android:padding="16sp">
-
-                    <RadioButton
-                        android:id="@+id/language_system"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8sp"
-                        android:text="@string/language_system_default"
-                        android:textColor="@color/foreground"
-                        android:textSize="16sp" />
-
-                    <RadioButton
-                        android:id="@+id/language_english"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8sp"
-                        android:text="@string/language_english"
-                        android:textColor="@color/foreground"
-                        android:textSize="16sp" />
-
-                    <RadioButton
-                        android:id="@+id/language_german"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/language_german"
-                        android:textColor="@color/foreground"
-                        android:textSize="16sp" />
-                </RadioGroup>
->>>>>>> 1aacd6a (i18n but hell to maintain version)
+                    android:padding="16sp" />
             </com.rama.mako.widgets.WdCollapsibleSection>
 
             <com.rama.mako.widgets.WdCollapsibleSection
