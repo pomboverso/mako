@@ -266,6 +266,13 @@
                     android:layout_height="wrap_content"
                     android:text="@string/show_profile_indicator_label" />
 
+                <com.rama.mako.widgets.WdCheckbox
+                    android:id="@+id/show_hidden_apps"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:text="@string/show_hidden_apps_label" />
+
             </com.rama.mako.widgets.WdCollapsibleSection>
 
             <com.rama.mako.widgets.WdCollapsibleSection

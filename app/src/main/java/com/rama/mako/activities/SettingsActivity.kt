@@ -11,6 +11,7 @@ import com.rama.mako.activities.settings.SettingsBasicController
 import com.rama.mako.activities.settings.SettingsCheckboxController
 import com.rama.mako.activities.settings.SettingsClockController
 import com.rama.mako.activities.settings.SettingsGroupsController
+import com.rama.mako.activities.settings.SettingsExtController
 import com.rama.mako.activities.settings.SettingsIconsController
 import com.rama.mako.managers.AppsProvider
 import com.rama.mako.managers.GroupsManager
@@ -50,6 +51,7 @@ class SettingsActivity : CsActivity() {
         SettingsIconsController(this).setup()
         SettingsCheckboxController(this).setup()
         SettingsGroupsController(this).setup()
+        SettingsExtController(this).setup()
     }
 
     override fun onResume() {

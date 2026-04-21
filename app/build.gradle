@@ -13,18 +13,20 @@ android {
         applicationId = "com.rama.mako"
         minSdk = 21
         targetSdk = 36
-        versionCode = 35
+        versionCode = 36
         versionName = currentYear + "." + versionCode.toString()
     }
 
-    dependenciesInfo {
-        includeInApk = false
-        includeInBundle = false
-    }
+    flavorDimensions += "version"
 
-    applicationVariants.all { variant ->
-        variant.outputs.all { output ->
-            outputFileName = "mako_${versionName}.apk"
+    productFlavors {
+        base {
+            dimension = "version"
+        }
+        ext {
+            dimension = "version"
+            applicationIdSuffix = ".ext"
+            versionNameSuffix = "-ext"
         }
     }
 
@@ -39,6 +41,17 @@ android {
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-dev"
             signingConfig = signingConfigs.debug
+        }
+    }
+
+    dependenciesInfo {
+        includeInApk = false
+        includeInBundle = false
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            outputFileName = "mako_${versionName}.apk"
         }
     }
 
