@@ -42,6 +42,8 @@ class PrefsManager private constructor(context: Context) {
         const val APPS_ICON_SOURCE = "apps:icon_source"
         const val APPS_ICON_PACK_PACKAGE = "apps:icon_pack_package"
         const val APPS_PROFILE_INDICATOR = "apps:profile_indicator"
+
+        //        const val APPS_SHOW_HIDDEN = "apps:show_hidden"
         const val HOME_BACKGROUND_MODE = "home:background_mode"
         const val GROUPS_IDS = "groups:ids"
         const val GROUPS_HEADERS = "groups:headers"
