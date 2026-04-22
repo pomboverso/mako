@@ -46,7 +46,7 @@
     <string name="icons_header">Icons</string>
     <string name="fonts_header">Fonts</string>
 
-    <string name="gpl3_desc" translatable="false">GPL 3.0</string>
+    <string name="gpl3_desc" translatable="false">GPL 3.0 or Later</string>
     <string name="ofl_1_1_desc" translatable="false">OFL 1.1</string>
     <string name="apache_2_desc" translatable="false">Apache 2.0</string>
     <string name="cc_4_desc" translatable="false">CC 4.0</string>
