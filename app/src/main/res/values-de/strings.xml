@@ -37,6 +37,7 @@
     <string name="data_header">Daten</string>
     <string name="temperature_header">Temperatur</string>
     <string name="groups_header">Gruppen</string>
+    <string name="language_header">Sprache</string>
     <string name="system_header">System</string>
     <string name="background_header">Hintergrund</string>
     <string name="settings_section_home_title">Startseite</string>
@@ -75,6 +76,11 @@
     <string name="about_mako_label">Über Mako</string>
     <string name="edit_apps_label">Installierte Apps verwalten</string>
     <string name="show_battery_label">Ladestand anzeigen</string>
+    <string name="show_system_bar_label">Systemleiste anzeigen</string>
+    <string name="language_system_default">Systemstandard (Fallback auf Englisch)</string>
+    <string name="language_english" translatable="false">English</string>
+    <string name="language_german" translatable="false">Deutsch</string>
+    <string name="language_turkish" translatable="false">Türkçe</string>
     <string name="show_search_label">Suchleiste anzeigen</string>
     <string name="show_date_label">Datum anzeigen</string>
     <string name="show_clock_label">Uhr anzeigen</string>

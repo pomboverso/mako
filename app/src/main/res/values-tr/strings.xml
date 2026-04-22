@@ -79,6 +79,7 @@
     <string name="data_header">Veri</string>
     <string name="temperature_header">Sıcaklık</string>
     <string name="groups_header">Gruplar</string>
+    <string name="language_header">Dil</string>
     <string name="system_header">Sistem</string>
     <string name="background_header">Arka Plan</string>
 
@@ -99,6 +100,10 @@
     <string name="edit_apps_label">Yüklü uygulamaları yönet</string>
     <string name="show_battery_label">Pili göster</string>
     <string name="show_system_bar_label">Sistem çubuğunu göster</string>
+    <string name="language_system_default">Sistem Varsayılanı (Desteklemiyorsa İngilizce olur)</string>
+    <string name="language_english" translatable="false">English</string>
+    <string name="language_german" translatable="false">Deutsch</string>
+    <string name="language_turkish" translatable="false">Türkçe</string>
     <string name="show_search_label">Arama çubuğunu göster</string>
     <string name="show_date_label">Tarihi göster</string>
     <string name="show_clock_label">Saati göster</string>
