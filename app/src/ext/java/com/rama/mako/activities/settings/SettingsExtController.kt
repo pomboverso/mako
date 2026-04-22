@@ -11,14 +11,14 @@ class SettingsExtController(private val activity: SettingsActivity) {
     private val prefs get() = activity.prefs
 
     fun setup() {
-        val checkbox = activity.findViewById<WdCheckbox>(R.id.show_hidden_apps)
-        checkbox.visibility = View.VISIBLE
-
-        val isChecked = prefs.getBoolean(PrefKeys.APPS_SHOW_HIDDEN, false)
-        checkbox.setChecked(isChecked)
-
-        checkbox.setOnCheckedChangeListener { checked ->
-            prefs.setBoolean(PrefKeys.APPS_SHOW_HIDDEN, checked)
-        }
+//        val checkbox = activity.findViewById<WdCheckbox>(R.id.show_hidden_apps)
+//        checkbox.visibility = View.VISIBLE
+//
+//        val isChecked = prefs.getBoolean(PrefKeys.APPS_SHOW_HIDDEN, false)
+//        checkbox.setChecked(isChecked)
+//
+//        checkbox.setOnCheckedChangeListener { checked ->
+//            prefs.setBoolean(PrefKeys.APPS_SHOW_HIDDEN, checked)
+//        }
     }
 }
