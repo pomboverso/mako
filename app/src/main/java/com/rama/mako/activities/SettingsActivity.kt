@@ -25,6 +25,7 @@ class SettingsActivity : CsActivity() {
     lateinit var iconManager: IconManager
     lateinit var groupsManager: GroupsManager
     private lateinit var clockController: SettingsClockController
+    private lateinit var checkboxController: SettingsCheckboxController
     private lateinit var appearanceController: SettingsAppearanceController
     private lateinit var homeBackgroundManager: HomeBackgroundManager
     private lateinit var settingsRootView: View
@@ -51,7 +52,7 @@ class SettingsActivity : CsActivity() {
         appearanceController = SettingsAppearanceController(this).also { it.setup() }
         SettingsLanguageController(this).setup()
         SettingsIconsController(this).setup()
-        SettingsCheckboxController(this).setup()
+        checkboxController = SettingsCheckboxController(this).also { it.setup() }
         SettingsGroupsController(this).setup()
         SettingsExtController(this).setup()
     }
@@ -98,6 +99,7 @@ class SettingsActivity : CsActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         clockController.onActivityResult(requestCode, resultCode, data)
+        checkboxController.onActivityResult(requestCode, resultCode)
     }
 
 }

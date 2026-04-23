@@ -43,6 +43,7 @@ class PrefsManager private constructor(context: Context) {
         const val APPS_ICON_PACK_PACKAGE = "apps:icon_pack_package"
         const val APPS_PROFILE_INDICATOR = "apps:profile_indicator"
         const val HOME_BACKGROUND_MODE = "home:background_mode"
+        const val HOME_DOUBLE_TAP_SLEEP = "home:double_tap_sleep"
         const val GROUPS_IDS = "groups:ids"
         const val GROUPS_HEADERS = "groups:headers"
         const val GROUPS_COLLAPSIBLE = "groups:collapsible"
@@ -164,6 +165,7 @@ class PrefsManager private constructor(context: Context) {
                 .putString(PrefKeys.APPS_ICON_SOURCE, IconSource.NONE)
                 .putString(PrefKeys.APPS_ICON_PACK_PACKAGE, "")
                 .putString(PrefKeys.HOME_BACKGROUND_MODE, BackgroundMode.DEFAULT)
+                .putBoolean(PrefKeys.HOME_DOUBLE_TAP_SLEEP, false)
                 .putBoolean(PrefKeys.SYSTEM_BAR_VISIBLE, false)
 
                 .putBoolean(PrefKeys.BATTERY_VISIBLE, true)
@@ -340,6 +342,12 @@ class PrefsManager private constructor(context: Context) {
 
     fun isSystemBarVisible(): Boolean =
         prefs.getBoolean(PrefKeys.SYSTEM_BAR_VISIBLE, false)
+
+    fun isDoubleTapToSleepEnabled(): Boolean =
+        prefs.getBoolean(PrefKeys.HOME_DOUBLE_TAP_SLEEP, false)
+
+    fun setDoubleTapToSleepEnabled(enabled: Boolean) =
+        prefs.edit().putBoolean(PrefKeys.HOME_DOUBLE_TAP_SLEEP, enabled).apply()
 
     // SETTINGS - CLOCK
 

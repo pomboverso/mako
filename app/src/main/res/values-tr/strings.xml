@@ -100,6 +100,7 @@
     <string name="edit_apps_label">Yüklü uygulamaları yönet</string>
     <string name="show_battery_label">Pili göster</string>
     <string name="show_system_bar_label">Sistem çubuğunu göster</string>
+    <string name="double_tap_sleep_label">Çift dokunarak ekranı kapat</string>
     <string name="language_system_default">Sistem Varsayılanı (Desteklemiyorsa İngilizce olur)</string>
     <string name="language_english" translatable="false">English</string>
     <string name="language_german" translatable="false">Deutsch</string>
@@ -180,4 +181,12 @@
     <!-- Dialog :: Pick Icon Pack -->
     <string name="pick_icon_pack_disclaimer">Yüklü bir ikon paketi seçin. Bir ikon eksikse Mako, o uygulama için sistem ikonunu kullanır.</string>
     <string name="always_show_search_bar">Her zaman görünür</string>
+        
+    <!-- Admin :: Screen Lock -->
+    <string name="device_admin_label">Mako ekran kilidi</string>
+    <string name="device_admin_description">Mako\'nun ana ekran hareketiyle ekranı kilitlemesine izin verir.</string>
+    <string name="double_tap_sleep_admin_explanation">Mako\'nun ana ekranda çift dokunuşla ekranı kapatabilmesi için cihaz yöneticisi iznine ihtiyacı var.</string>
+    <string name="double_tap_sleep_enable_admin_toast">Çift dokunarak kapatma için cihaz yöneticisi erişimini etkinleştirin</string>
+    <string name="double_tap_sleep_admin_declined_toast">Cihaz yöneticisi erişimi verilmedi</string>
+    <string name="double_tap_sleep_failed_toast">Ekran kilitlenemedi</string>
 </resources>

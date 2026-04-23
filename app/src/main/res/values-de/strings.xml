@@ -50,6 +50,12 @@
     <string name="pick_clock_app_disclaimer">Die ausgewählte App wird als Standard-Uhr-Aktion festgelegt. Beim Antippen der Uhr auf dem Startbildschirm wird diese App gestartet.</string>
     <string name="pick_icon_pack_disclaimer">Wähle ein installiertes Icon-Paket aus. Bei fehlenden Icons wird Mako das System-Icon für die App verwenden.</string>
     <string name="always_show_search_bar">Immer anzeigen</string>
+    <string name="device_admin_label">Mako Bildschirm sperren</string>
+    <string name="device_admin_description">Erlaubt Mako, den Bildschirm per Startbildschirm-Geste zu sperren.</string>
+    <string name="double_tap_sleep_admin_explanation">Mako benötigt Geräteadministrator-Rechte, um den Bildschirm beim Doppeltippen auf dem Startbildschirm auszuschalten.</string>
+    <string name="double_tap_sleep_enable_admin_toast">Aktiviere Geräteadministrator für Doppeltippen zum Sperren</string>
+    <string name="double_tap_sleep_admin_declined_toast">Geräteadministrator wurde nicht aktiviert</string>
+    <string name="double_tap_sleep_failed_toast">Bildschirm konnte nicht gesperrt werden</string>
     <string name="background_default_label">Standard-Design</string>
     <string name="background_wallpaper_label">Hintergrundbild</string>
     <string name="background_dynamic_label">Dynamische Farben</string>
@@ -77,6 +83,7 @@
     <string name="edit_apps_label">Installierte Apps verwalten</string>
     <string name="show_battery_label">Ladestand anzeigen</string>
     <string name="show_system_bar_label">Systemleiste anzeigen</string>
+    <string name="double_tap_sleep_label">Doppeltippen zum Sperren</string>
     <string name="language_system_default">Systemstandard (Fallback auf Englisch)</string>
     <string name="language_english" translatable="false">English</string>
     <string name="language_german" translatable="false">Deutsch</string>

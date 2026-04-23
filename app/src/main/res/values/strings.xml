@@ -101,6 +101,7 @@
     <string name="edit_apps_label">Manage Installed Apps</string>
     <string name="show_battery_label">Show battery</string>
     <string name="show_system_bar_label">Show system bar</string>
+    <string name="double_tap_sleep_label">Double tap to sleep</string>
     <string name="language_system_default">System Default (fallback to English)</string>
     <string name="language_english" translatable="false">English</string>
     <string name="language_german" translatable="false">Deutsch</string>
@@ -181,4 +182,10 @@
     <!-- Dialog :: Pick Icon Pack -->
     <string name="pick_icon_pack_disclaimer">Choose an installed icon pack. If an icon is missing, Mako will use the system icon for that app.</string>
     <string name="always_show_search_bar">Always visible</string>
+    <string name="device_admin_label">Mako screen lock</string>
+    <string name="device_admin_description">Allows Mako to lock the screen from the home screen gesture.</string>
+    <string name="double_tap_sleep_admin_explanation">Mako needs device admin permission to turn off the screen when you double tap on the home screen.</string>
+    <string name="double_tap_sleep_enable_admin_toast">Enable device admin access for double tap to sleep</string>
+    <string name="double_tap_sleep_admin_declined_toast">Device admin access was not granted</string>
+    <string name="double_tap_sleep_failed_toast">Unable to lock the screen</string>
 </resources>
