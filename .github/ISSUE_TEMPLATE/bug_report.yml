@@ -1,0 +1,51 @@
+name: Bug report
+description: Report a bug or unexpected behavior in Mako
+labels: [bug]
+body:
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      description: "Ensure you've completed these checks before submitting."
+      options:
+        - label: " I've checked that this bug is not already reported."
+          required: true
+        - label: " I'm using the latest version of Mako."
+          required: true
+        - label: " The title describes the bug clearly."
+          required: true
+
+  - type: textarea
+    id: android-version
+    attributes:
+      label: Android Version
+      description: "Which Android version are you running? (e.g., Android 16, 15, 14...)"
+      placeholder: "Android 16"
+    validations:
+      required: true
+
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: Bug description
+      description: "Describe the bug in detail. What happened vs what you expected?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to reproduce
+      description: "List the exact steps to reproduce this bug."
+      placeholder: |
+        1. Go to '...'
+        2. Long press on '...'
+        3. See error..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional-information
+    attributes:
+      label: Additional information
+      description: "Screenshots, device info, or other context."

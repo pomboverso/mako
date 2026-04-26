@@ -1,0 +1,45 @@
+name: Feature request
+description: Suggest a new feature or enhancement for Mako
+labels: [enhancement]
+body:
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      description: "Ensure your feature request is well thought out."
+      options:
+        - label: " I've checked that this feature doesn't already exist."
+          required: true
+        - label: " This issue contains only one feature request."
+          required: true
+        - label: " The title clearly describes the requested feature."
+          required: true
+
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: Feature description
+      description: "What feature do you want? Describe what it should do and how it should work."
+    validations:
+      required: true
+
+  - type: textarea
+    id: why-is-the-feature-requested
+    attributes:
+      label: Why do you want this feature?
+      description: "Describe the problem or limitation this would solve."
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives-considered
+    attributes:
+      label: Alternatives considered
+      description: "What alternatives have you considered?"
+      placeholder: "I've tried using... but..."
+
+  - type: textarea
+    id: additional-information
+    attributes:
+      label: Additional information
+      description: "Screenshots, mockups, or other context."
