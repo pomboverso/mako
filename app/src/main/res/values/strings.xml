@@ -26,12 +26,12 @@
     <string name="charge_wireless">Wireless</string>
 
     <!-- Main :: Formatting -->
-    <string name="battery_status_power">%1$s %2$dx</string>
-    <string name="battery_status_power_type">%1$s (%2$s) %3$dx</string>
+    <string name="battery_status_power" translatable="false">%1$s %2$dx</string>
+    <string name="battery_status_power_type" translatable="false">%1$s (%2$s) %3$dx</string>
     <string name="unit_celsius">C</string>
     <string name="unit_fahrenheit">F</string>
-    <string name="battery_temp">%1$d°%2$s</string>
-    <string name="battery_temp_labeled">%1$d°%2$s (%3$s)</string>
+    <string name="battery_temp" translatable="false">%1$d°%2$s</string>
+    <string name="battery_temp_labeled" translatable="false">%1$d°%2$s (%3$s)</string>
 
     <!-- APP / About -->
     <string name="app_name" translatable="false">Mako</string>
@@ -46,7 +46,7 @@
     <string name="icons_header">Icons</string>
     <string name="fonts_header">Fonts</string>
 
-    <string name="gpl3_desc" translatable="false">GPL 3.0</string>
+    <string name="gpl3_desc" translatable="false">GPL 3.0 or Later</string>
     <string name="ofl_1_1_desc" translatable="false">OFL 1.1</string>
     <string name="apache_2_desc" translatable="false">Apache 2.0</string>
     <string name="cc_4_desc" translatable="false">CC 4.0</string>
@@ -79,17 +79,20 @@
     <string name="data_header">Data</string>
     <string name="temperature_header">Temperature</string>
     <string name="groups_header">Groups</string>
+    <string name="language_header">Language</string>
     <string name="system_header">System</string>
     <string name="background_header">Background</string>
 
+    <string name="show_profile_indicator_label">Show profile indicator</string>
+    <!--    <string name="show_hidden_apps_label">Show hidden apps</string>-->
     <string name="settings_section_home_title">Home screen</string>
     <string name="settings_section_appearance_title">Appearance</string>
     <string name="settings_section_groups_title">Groups</string>
     <string name="settings_section_apps_title">Applications</string>
     <string name="settings_section_system_title">System</string>
     <string name="settings_section_data_title">Data and Debug</string>
-    <string name="settings_section_expand_indicator">[+]</string>
-    <string name="settings_section_collapse_indicator">[-]</string>
+    <string name="settings_section_expand_indicator" translatable="false">[+]</string>
+    <string name="settings_section_collapse_indicator" translatable="false">[-]</string>
     <string name="set_default_label">Set Launcher as default</string>
     <string name="set_clock_app_label">Change Clock Tap Action</string>
     <string name="refresh_launcher_label">Refresh launcher</string>
@@ -97,6 +100,11 @@
     <string name="about_mako_label">About Mako</string>
     <string name="edit_apps_label">Manage Installed Apps</string>
     <string name="show_battery_label">Show battery</string>
+    <string name="show_system_bar_label">Show system bar</string>
+    <string name="language_system_default">System Default (fallback to English)</string>
+    <string name="language_english" translatable="false">English</string>
+    <string name="language_german" translatable="false">Deutsch</string>
+    <string name="language_turkish" translatable="false">Türkçe</string>
     <string name="show_search_label">Show search bar</string>
     <string name="show_date_label">Show date</string>
     <string name="show_clock_label">Show clock</string>

@@ -256,6 +256,28 @@
             <com.rama.mako.widgets.WdCollapsibleSection
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:key="SETTINGS_SECTION_APPS"
+                app:label="@string/apps_header"
+                app:defaultExpanded="true">
+
+                <com.rama.mako.widgets.WdCheckbox
+                    android:id="@+id/show_profile_indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/show_profile_indicator_label" />
+
+                <!--                <com.rama.mako.widgets.WdCheckbox-->
+                <!--                    android:id="@+id/show_hidden_apps"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:visibility="gone"-->
+                <!--                    android:text="@string/show_hidden_apps_label" />-->
+
+            </com.rama.mako.widgets.WdCollapsibleSection>
+
+            <com.rama.mako.widgets.WdCollapsibleSection
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 app:key="SETTINGS_SECTION_FONTS"
                 app:label="@string/fonts_header"
                 app:defaultExpanded="true">
@@ -442,9 +464,32 @@
             <com.rama.mako.widgets.WdCollapsibleSection
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:key="SETTINGS_SECTION_LANGUAGE"
+                app:label="@string/language_header"
+                app:defaultExpanded="true">
+
+                <RadioGroup
+                    android:id="@+id/language_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8sp"
+                    android:background="@color/bg_secondary"
+                    android:padding="16sp"
+                    android:orientation="vertical" />
+            </com.rama.mako.widgets.WdCollapsibleSection>
+
+            <com.rama.mako.widgets.WdCollapsibleSection
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 app:key="SETTINGS_SECTION_SYSTEM"
                 app:label="@string/system_header"
                 app:defaultExpanded="true">
+
+                <com.rama.mako.widgets.WdCheckbox
+                    android:id="@+id/show_system_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/show_system_bar_label" />
 
                 <com.rama.mako.widgets.WdButton
                     android:id="@+id/activate_button"

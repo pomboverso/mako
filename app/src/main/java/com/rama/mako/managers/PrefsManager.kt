@@ -41,6 +41,9 @@ class PrefsManager private constructor(context: Context) {
         const val APPS_ICONS = "apps:icons"
         const val APPS_ICON_SOURCE = "apps:icon_source"
         const val APPS_ICON_PACK_PACKAGE = "apps:icon_pack_package"
+        const val APPS_PROFILE_INDICATOR = "apps:profile_indicator"
+
+        //        const val APPS_SHOW_HIDDEN = "apps:show_hidden"
         const val HOME_BACKGROUND_MODE = "home:background_mode"
         const val GROUPS_IDS = "groups:ids"
         const val GROUPS_HEADERS = "groups:headers"
@@ -54,7 +57,9 @@ class PrefsManager private constructor(context: Context) {
         const val CLOCK_FORMAT = "clock:format"
         const val CLOCK_APP = "clock:app"
         const val FONT_STYLE = "font:style"
+        const val APP_LANGUAGE = "app:language"
         const val MIGRATION_ICON_SOURCE_RADIO = "migration:icon_source_radio"
+        const val SYSTEM_BAR_VISIBLE = "system:bar:visible"
 
         const val SETTINGS_SECTION_CLOCK = "settings:section:clock"
         const val SETTINGS_SECTION_FONTS = "settings:section:fonts"
@@ -66,7 +71,9 @@ class PrefsManager private constructor(context: Context) {
         const val SETTINGS_SECTION_GROUPS = "settings:section:groups"
         const val SETTINGS_SECTION_SEARCH = "settings:section:search"
         const val SETTINGS_SECTION_SYSTEM = "settings:section:system"
+        const val SETTINGS_SECTION_LANGUAGE = "settings:section:language"
         const val SETTINGS_SECTION_DATA = "settings:section:data"
+        const val SETTINGS_SECTION_APPS = "settings:section:apps"
 
         fun appKey(pkg: String, userHandle: UserHandle): String {
             val userId = userHandle.hashCode()
@@ -82,6 +89,7 @@ class PrefsManager private constructor(context: Context) {
         fun GROUP_LABEL(id: String) = "group:$id:label"
         fun GROUP_VISIBLE(id: String) = "group:$id:visible"
         fun GROUP_EXPANDED(id: String) = "group:$id:expanded"
+        fun GROUP_ORDER(id: String) = "group:$id:order"
     }
 
     object FontStyle {
@@ -112,6 +120,11 @@ class PrefsManager private constructor(context: Context) {
         const val FAHRENHEIT = "fahrenheit"
     }
 
+    object Language {
+        const val SYSTEM = "system"
+        const val FALLBACK = "en"
+    }
+
     object BackgroundMode {
         const val DEFAULT = "default"
         const val WALLPAPER = "wallpaper"
@@ -134,21 +147,26 @@ class PrefsManager private constructor(context: Context) {
                 .putString(PrefKeys.GROUP_LABEL(SystemIds.UNGROUPED), UI.UNGROUPED_LABEL)
                 .putBoolean(PrefKeys.GROUP_VISIBLE(SystemIds.UNGROUPED), true)
                 .putBoolean(PrefKeys.GROUP_EXPANDED(SystemIds.UNGROUPED), true)
+                .putInt(PrefKeys.GROUP_ORDER(SystemIds.UNGROUPED), 0)
 
                 .putString(PrefKeys.GROUP_LABEL(SystemIds.FAVORITES), UI.FAVORITES_LABEL)
                 .putBoolean(PrefKeys.GROUP_VISIBLE(SystemIds.FAVORITES), true)
                 .putBoolean(PrefKeys.GROUP_EXPANDED(SystemIds.FAVORITES), true)
+                .putInt(PrefKeys.GROUP_ORDER(SystemIds.FAVORITES), 1)
 
                 .putString(PrefKeys.FONT_STYLE, FontStyle.JERSEY_25)
 
                 .putString(PrefKeys.CLOCK_FORMAT, ClockFormat.HOUR_24)
                 .putString(PrefKeys.CLOCK_APP, "")
+                .putString(PrefKeys.APP_LANGUAGE, Language.SYSTEM)
 
                 .putBoolean(PrefKeys.APPS_ICONS, false)
                 .putBoolean(PrefKeys.APPS_SEARCH, false)
+                .putBoolean(PrefKeys.APPS_PROFILE_INDICATOR, true)
                 .putString(PrefKeys.APPS_ICON_SOURCE, IconSource.NONE)
                 .putString(PrefKeys.APPS_ICON_PACK_PACKAGE, "")
                 .putString(PrefKeys.HOME_BACKGROUND_MODE, BackgroundMode.DEFAULT)
+                .putBoolean(PrefKeys.SYSTEM_BAR_VISIBLE, false)
 
                 .putBoolean(PrefKeys.BATTERY_VISIBLE, true)
                 .putBoolean(PrefKeys.BATTERY_TEMPERATURE, true)
@@ -171,6 +189,7 @@ class PrefsManager private constructor(context: Context) {
                 .putBoolean(PrefKeys.SETTINGS_SECTION_GROUPS, true)
                 .putBoolean(PrefKeys.SETTINGS_SECTION_SEARCH, true)
                 .putBoolean(PrefKeys.SETTINGS_SECTION_SYSTEM, true)
+                .putBoolean(PrefKeys.SETTINGS_SECTION_LANGUAGE, true)
                 .putBoolean(PrefKeys.SETTINGS_SECTION_DATA, true)
 
                 .apply()
@@ -264,6 +283,15 @@ class PrefsManager private constructor(context: Context) {
     fun setGroupExpanded(id: String, value: Boolean) =
         prefs.edit().putBoolean(PrefKeys.GROUP_EXPANDED(id), value).apply()
 
+    fun hasGroupOrder(id: String): Boolean =
+        prefs.contains(PrefKeys.GROUP_ORDER(id))
+
+    fun getGroupOrder(id: String): Int =
+        prefs.getInt(PrefKeys.GROUP_ORDER(id), Int.MAX_VALUE)
+
+    fun setGroupOrder(id: String, value: Int) =
+        prefs.edit().putInt(PrefKeys.GROUP_ORDER(id), value).apply()
+
     // SETTINGS - APPS
 
     fun isSearchVisible(): Boolean =
@@ -274,6 +302,9 @@ class PrefsManager private constructor(context: Context) {
 
     fun hasIconsVisible(): Boolean =
         getIconSource() != IconSource.NONE
+
+    fun hasProfileIndicator(): Boolean =
+        prefs.getBoolean(PrefKeys.APPS_PROFILE_INDICATOR, true)
 
     fun getIconSource(): String {
         return when (prefs.getString(PrefKeys.APPS_ICON_SOURCE, IconSource.NONE)) {
@@ -308,6 +339,9 @@ class PrefsManager private constructor(context: Context) {
 
     fun hasCollapsibleGroups(): Boolean =
         prefs.getBoolean(PrefKeys.GROUPS_COLLAPSIBLE, false)
+
+    fun isSystemBarVisible(): Boolean =
+        prefs.getBoolean(PrefKeys.SYSTEM_BAR_VISIBLE, false)
 
     // SETTINGS - CLOCK
 
@@ -388,6 +422,14 @@ class PrefsManager private constructor(context: Context) {
 
     fun setFontStyle(style: String) =
         prefs.edit().putString(PrefKeys.FONT_STYLE, style).apply()
+
+    fun getAppLanguage(): String {
+        return prefs.getString(PrefKeys.APP_LANGUAGE, Language.SYSTEM) ?: Language.SYSTEM
+    }
+
+    fun setAppLanguage(language: String) {
+        prefs.edit().putString(PrefKeys.APP_LANGUAGE, language).apply()
+    }
 
     // GENERIC HELPERS
 

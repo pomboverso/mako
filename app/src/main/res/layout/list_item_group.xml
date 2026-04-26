@@ -20,6 +20,32 @@
             android:contentDescription="Toggle Visibility" />
     </FrameLayout>
 
+    <FrameLayout
+        android:id="@+id/ascend_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="12sp">
+
+        <ImageView
+            android:layout_width="24sp"
+            android:layout_height="24sp"
+            android:src="@drawable/icon_chevron_up_solid"
+            android:contentDescription="Ascend Group" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/descend_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="12sp">
+
+        <ImageView
+            android:layout_width="24sp"
+            android:layout_height="24sp"
+            android:src="@drawable/icon_chevron_down_solid"
+            android:contentDescription="Descend Group" />
+    </FrameLayout>
+
     <EditText
         android:id="@+id/group_name"
         android:layout_weight="1"

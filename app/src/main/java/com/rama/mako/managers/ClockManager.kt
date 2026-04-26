@@ -5,6 +5,7 @@ import android.os.Looper
 import android.text.format.DateFormat
 import android.view.View
 import android.widget.TextView
+import com.rama.mako.utils.LocaleHelper
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -23,7 +24,7 @@ class ClockManager(
             val clockFormatPref = prefs.getClockFormat()
 
             calendar.timeInMillis = System.currentTimeMillis()
-            val locale = Locale.getDefault()
+            val locale = LocaleHelper.getCurrentLocale(dateTextView.resources.configuration)
 
             // --- Clock ---
             if (clockFormatPref != PrefsManager.ClockFormat.NONE) {

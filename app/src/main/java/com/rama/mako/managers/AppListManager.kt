@@ -251,11 +251,11 @@ class AppListManager(
     }
 
     private fun getDisplayName(app: AppsProvider.AppEntry): String {
-        val custom = prefs.getCustomName(app.packageName, app.userHandle)
-        return if (custom != null) {
-            if (app.isWorkProfile) "[${app.profileInitial}] $custom" else custom
+        val baseName = prefs.getCustomName(app.packageName, app.userHandle) ?: app.displayLabel
+        return if (prefs.hasProfileIndicator() && app.isWorkProfile) {
+            "[${app.profileInitial}] $baseName"
         } else {
-            app.displayLabel
+            baseName
         }
     }
 

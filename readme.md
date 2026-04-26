@@ -65,6 +65,8 @@ No network access is required.
 
 ## License
 
+[![GPL-3.0-or-later](https://img.shields.io/badge/License-GPL--3.0--or--later-blue.svg)](https://spdx.org/licenses/GPL-3.0-or-later.html)
+
 **Mako** is Free Software. You are free to use, study, share, and improve it under the terms of the
 **GNU General Public License v3** or later.
 
