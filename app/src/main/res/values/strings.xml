@@ -1,5 +1,7 @@
 <resources>
     <!-- Global -->
+    <string name="unlock_label">Unlock</string>
+    <string name="clear_label">Clear</string>
     <string name="go_back_label">Go Back</string>
     <string name="new_group_header">------ New Group</string>
     <string name="new_group_header_count">------ New Group %d</string>
@@ -69,8 +71,6 @@
     <string name="etwasmitbaum_url" translatable="false">github.com/etwasmitbaum</string>
 
     <!-- Settings -->
-    <string name="settings_header">Settings</string>
-
     <string name="apps_header">Applications</string>
     <string name="clock_header">Clock</string>
     <string name="search_header">Search</string>
@@ -83,6 +83,10 @@
     <string name="security_header">Security</string>
     <string name="system_header">System</string>
     <string name="background_header">Background</string>
+
+    <string name="activity_settings_header">Settings</string>
+    <string name="activity_about_mako_header">About Mako</string>
+    <string name="activity_lock_header">Lock</string>
 
     <string name="show_profile_indicator_label">Show profile indicator</string>
     <string name="settings_section_home_title">Home screen</string>
@@ -97,7 +101,6 @@
     <string name="set_clock_app_label">Change Clock Tap Action</string>
     <string name="refresh_launcher_label">Refresh launcher</string>
     <string name="change_wallpaper_label">Change OS wallpaper</string>
-    <string name="about_mako_label">About Mako</string>
     <string name="edit_apps_label">Manage Installed Apps</string>
     <string name="show_battery_label">Show battery</string>
     <string name="show_system_bar_label">Show system bar</string>

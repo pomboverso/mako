@@ -28,7 +28,9 @@
         android:textColor="@color/foreground"
         android:background="@android:color/transparent"
         android:paddingTop="16sp"
-        android:maxLength="10"
+        android:maxLength="25"
+        android:maxLines="1"
+        android:singleLine="true"
         android:paddingBottom="16sp"
         android:inputType="numberPassword" />
 

@@ -22,7 +22,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/settings_header"
+                android:text="@string/activity_settings_header"
                 android:textColor="@color/foreground"
                 android:textSize="32sp"
                 android:textStyle="bold" />
@@ -581,7 +581,7 @@
         android:layout_marginTop="8sp"
         android:layout_marginBottom="8sp"
         android:background="@color/button_primary"
-        android:text="@string/about_mako_label" />
+        android:text="@string/activity_about_mako_header" />
 
     <com.rama.mako.widgets.WdButton
         android:id="@+id/close_button"
