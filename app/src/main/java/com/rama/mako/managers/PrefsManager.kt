@@ -7,11 +7,26 @@ import android.os.UserHandle
 import android.util.Log
 import com.rama.mako.utils.IdUtils
 import org.json.JSONObject
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
 
 class PrefsManager private constructor(context: Context) {
 
     val prefs: SharedPreferences =
         context.getSharedPreferences("settings", Context.MODE_PRIVATE)
+
+    private val encryptedPrefs: SharedPreferences = run {
+        val masterKey = MasterKey.Builder(context)
+            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+            .build()
+        EncryptedSharedPreferences.create(
+            context,
+            "secure_settings",
+            masterKey,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
+    }
 
     companion object {
         @Volatile
@@ -63,6 +78,7 @@ class PrefsManager private constructor(context: Context) {
 
         const val SECURITY_KEYPAD_VISIBLE = "security:keypad:visible"
         const val SECURITY_KEYPAD_RANDOMIZED = "security:keypad:randomized"
+        const val SECURITY_PIN = "security:pin"
 
         const val SETTINGS_SECTION_CLOCK = "settings:section:clock"
         const val SETTINGS_SECTION_FONTS = "settings:section:fonts"
@@ -439,6 +455,24 @@ class PrefsManager private constructor(context: Context) {
     fun setAppLanguage(language: String) {
         prefs.edit().putString(PrefKeys.APP_LANGUAGE, language).apply()
     }
+
+    // SECURITY - PIN (stored in EncryptedSharedPreferences)
+
+    fun getPin(): String =
+        encryptedPrefs.getString(PrefKeys.SECURITY_PIN, "") ?: ""
+
+    fun setPin(pin: String) =
+        encryptedPrefs.edit().putString(PrefKeys.SECURITY_PIN, pin).apply()
+
+    fun clearPin() =
+        encryptedPrefs.edit().remove(PrefKeys.SECURITY_PIN).apply()
+
+    fun isLockEnabled(): Boolean =
+        prefs.getBoolean(PrefKeys.SECURITY_KEYPAD_VISIBLE, false)
+
+    fun isKeypadRandomized(): Boolean =
+        prefs.getBoolean(PrefKeys.SECURITY_KEYPAD_RANDOMIZED, true)
+
 
     // GENERIC HELPERS
 

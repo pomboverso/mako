@@ -520,6 +520,7 @@
                     android:padding="16sp">
 
                     <com.rama.mako.widgets.WdPinField
+                        android:id="@+id/pin_field_widget"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
                 </LinearLayout>

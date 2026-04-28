@@ -186,4 +186,6 @@
     <!-- Dialog :: Pick Icon Pack -->
     <string name="pick_icon_pack_disclaimer">Choose an installed icon pack. If an icon is missing, Mako will use the system icon for that app.</string>
     <string name="always_show_search_bar">Always visible</string>
+    <string name="pin_saved_label">PIN saved</string>
+    <string name="pin_too_short_label">PIN must be at least 4 digits</string>
 </resources>

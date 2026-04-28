@@ -10,10 +10,11 @@ import com.rama.mako.activities.settings.SettingsAppearanceController
 import com.rama.mako.activities.settings.SettingsBasicController
 import com.rama.mako.activities.settings.SettingsCheckboxController
 import com.rama.mako.activities.settings.SettingsClockController
+import com.rama.mako.activities.settings.SettingsPinController
 import com.rama.mako.activities.settings.SettingsGroupsController
-import com.rama.mako.activities.settings.SettingsExtController
 import com.rama.mako.activities.settings.SettingsIconsController
 import com.rama.mako.activities.settings.SettingsLanguageController
+import com.rama.mako.activities.settings.SettingsExtController
 import com.rama.mako.managers.AppsProvider
 import com.rama.mako.managers.GroupsManager
 import com.rama.mako.managers.HomeBackgroundManager
@@ -30,6 +31,9 @@ class SettingsActivity : CsActivity() {
     private lateinit var settingsRootView: View
     private var lastAppliedBackgroundMode: String? = null
     private var lastAppliedWallpaperSignature: Int? = null
+
+    // Tracks whether we just returned from LockActivity to avoid re-triggering
+    private var lockShown = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,12 +57,26 @@ class SettingsActivity : CsActivity() {
         SettingsIconsController(this).setup()
         SettingsCheckboxController(this).setup()
         SettingsGroupsController(this).setup()
+        SettingsPinController(this).setup()
+
+        // ext flavor
         SettingsExtController(this).setup()
     }
 
     override fun onResume() {
         super.onResume()
         applySettingsBackground()
+
+        val lockEnabled = prefs.getBoolean(PrefsManager.PrefKeys.SECURITY_KEYPAD_VISIBLE, false)
+        val hasPin = prefs.getPin().isNotEmpty()
+
+        if (lockEnabled && hasPin && !lockShown) {
+            lockShown = true
+            startActivity(Intent(this, LockActivity::class.java))
+        } else {
+            // Reset so the lock shows again next time Settings is opened
+            lockShown = false
+        }
     }
 
     fun applySettingsBackground(force: Boolean = false) {
@@ -99,5 +117,4 @@ class SettingsActivity : CsActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         clockController.onActivityResult(requestCode, resultCode, data)
     }
-
 }

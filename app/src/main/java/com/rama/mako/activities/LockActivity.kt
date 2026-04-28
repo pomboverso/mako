@@ -15,8 +15,6 @@ class LockActivity : CsActivity() {
 
     private val pinBuilder = StringBuilder()
 
-    private val correctPin = "1234" // TODO: replace with secure storage
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -53,17 +51,21 @@ class LockActivity : CsActivity() {
 
     override fun onResume() {
         super.onResume()
-        shuffleKeypad()
+        setupKeypad()
         clearPin()
     }
 
-    private fun shuffleKeypad() {
-        val shuffled = (0..9).shuffled()
+    private fun setupKeypad() {
+        val isRandomized = prefs.getBoolean(
+            com.rama.mako.managers.PrefsManager.PrefKeys.SECURITY_KEYPAD_RANDOMIZED,
+            true
+        )
+
+        val digits = if (isRandomized) (0..9).shuffled() else (0..9).toList()
 
         buttons.forEachIndexed { index, button ->
-            val digit = shuffled[index]
+            val digit = digits[index]
             button.text = digit.toString()
-
             button.setOnClickListener {
                 appendDigit(digit)
             }
@@ -72,7 +74,6 @@ class LockActivity : CsActivity() {
 
     private fun appendDigit(digit: Int) {
         if (pinBuilder.length >= 10) return
-
         pinBuilder.append(digit)
         updateDisplay()
     }
@@ -101,11 +102,19 @@ class LockActivity : CsActivity() {
     }
 
     private fun validatePin() {
-        if (pinBuilder.toString() == correctPin) {
+        val savedPin = prefs.getPin()
+
+        if (savedPin.isEmpty()) {
+            // No PIN set yet — allow through
+            finish()
+            return
+        }
+
+        if (pinBuilder.toString() == savedPin) {
             finish()
         } else {
             clearPin()
-            shuffleKeypad() // re-randomize on failure
+            setupKeypad() // re-randomize on failure
         }
     }
 }
