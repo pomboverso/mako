@@ -18,6 +18,6 @@
         <item name="android:layout_rowWeight">1</item>
         <item name="android:background">@color/button_pin</item>
         <item name="android:textColor">@color/foreground</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">24sp</item>
     </style>
 </resources>

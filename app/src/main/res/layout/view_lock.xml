@@ -34,7 +34,7 @@
                 android:gravity="center"
                 android:maxLength="25"
                 android:focusable="false"
-                android:textSize="16sp"
+                android:textSize="24sp"
                 android:textColor="@color/foreground"
                 android:clickable="false"
                 android:layout_marginBottom="8sp"
@@ -102,13 +102,6 @@
 
         </GridLayout>
     </LinearLayout>
-
-    <!-- Divider -->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/disabled"
-        android:layout_marginVertical="12dp" />
 
     <!-- Actions -->
     <com.rama.mako.widgets.WdButton
