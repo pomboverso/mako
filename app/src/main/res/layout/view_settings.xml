@@ -22,7 +22,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/settings_header"
+                android:text="@string/activity_settings_header"
                 android:textColor="@color/foreground"
                 android:textSize="32sp"
                 android:textStyle="bold" />
@@ -492,6 +492,41 @@
                     android:text="@string/show_profile_indicator_label" />
 
             </com.rama.mako.widgets.WdCollapsibleSection>
+            <!--Security-->
+            <com.rama.mako.widgets.WdCollapsibleSection
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:key="SETTINGS_SECTION_SECURITY"
+                app:label="@string/security_header"
+                app:defaultExpanded="true">
+
+                <com.rama.mako.widgets.WdCheckbox
+                    android:id="@+id/lock_settings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lock_settings_label" />
+
+                <com.rama.mako.widgets.WdCheckbox
+                    android:id="@+id/randomized_keypad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/randomized_keypad_label" />
+
+                <LinearLayout
+                    android:id="@+id/pin_field"
+                    android:background="@color/bg_secondary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16sp">
+
+                    <com.rama.mako.widgets.WdPinField
+                        android:id="@+id/pin_field_widget"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+
+            </com.rama.mako.widgets.WdCollapsibleSection>
             <!--Language-->
             <com.rama.mako.widgets.WdCollapsibleSection
                 android:layout_width="match_parent"
@@ -548,7 +583,7 @@
         android:layout_marginTop="8sp"
         android:layout_marginBottom="8sp"
         android:background="@color/button_primary"
-        android:text="@string/about_mako_label" />
+        android:text="@string/activity_about_mako_header" />
 
     <com.rama.mako.widgets.WdButton
         android:id="@+id/close_button"

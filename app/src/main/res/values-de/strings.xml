@@ -28,7 +28,7 @@
     <string name="contributors_header">Beitragende</string>
     <string name="icons_header">Icons</string>
     <string name="fonts_header">Schriftarten</string>
-    <string name="settings_header">Einstellungen</string>
+    <string name="activity_settings_header">Einstellungen</string>
     <string name="apps_header">Anwendungen</string>
     <string name="clock_header">Uhr</string>
     <string name="search_header">Suche</string>
@@ -73,7 +73,7 @@
     <string name="set_clock_app_label">Aktion beim Tippen auf die Uhr ändern</string>
     <string name="refresh_launcher_label">Launcher neu laden</string>
     <string name="change_wallpaper_label">Betriebssystemhintergrundbild ändern</string>
-    <string name="about_mako_label">Über Mako</string>
+    <string name="activity_about_mako_header">Über Mako</string>
     <string name="edit_apps_label">Installierte Apps verwalten</string>
     <string name="show_battery_label">Ladestand anzeigen</string>
     <string name="show_system_bar_label">Systemleiste anzeigen</string>
