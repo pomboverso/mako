@@ -119,6 +119,7 @@ class LockActivity : CsActivity() {
         }
 
         if (pinBuilder.toString() == savedPin) {
+            setResult(RESULT_OK)
             finish()
         } else {
             clearPin()
