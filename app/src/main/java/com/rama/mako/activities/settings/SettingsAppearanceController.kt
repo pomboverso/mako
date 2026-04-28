@@ -1,6 +1,5 @@
 package com.rama.mako.activities.settings
 
-import android.view.View
 import android.widget.RadioGroup
 import com.rama.mako.R
 import com.rama.mako.activities.SettingsActivity
