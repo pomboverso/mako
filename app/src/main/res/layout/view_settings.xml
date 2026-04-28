@@ -513,6 +513,7 @@
                     android:text="@string/randomized_keypad_label" />
 
                 <LinearLayout
+                    android:id="@+id/pin_field"
                     android:background="@color/bg_secondary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

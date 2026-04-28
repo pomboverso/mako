@@ -32,8 +32,8 @@ class SettingsActivity : CsActivity() {
     private var lastAppliedBackgroundMode: String? = null
     private var lastAppliedWallpaperSignature: Int? = null
 
-    // Tracks whether we just returned from LockActivity to avoid re-triggering
-    private var lockShown = false
+    // true while LockActivity is on top. prevents re-triggering on its return onResume
+    private var lockInFlight = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +48,6 @@ class SettingsActivity : CsActivity() {
         iconManager = IconManager(this, appsProvider)
         groupsManager = GroupsManager(this, appsProvider)
 
-        // each module handles itself
         clockController = SettingsClockController(this).also { it.setup() }
 
         SettingsBasicController(this).setup()
@@ -67,15 +66,18 @@ class SettingsActivity : CsActivity() {
         super.onResume()
         applySettingsBackground()
 
+        if (lockInFlight) {
+            // Returning from LockActivity just clear the flag, don't re-trigger
+            lockInFlight = false
+            return
+        }
+
         val lockEnabled = prefs.getBoolean(PrefsManager.PrefKeys.SECURITY_KEYPAD_VISIBLE, false)
         val hasPin = prefs.getPin().isNotEmpty()
 
-        if (lockEnabled && hasPin && !lockShown) {
-            lockShown = true
+        if (lockEnabled && hasPin) {
+            lockInFlight = true
             startActivity(Intent(this, LockActivity::class.java))
-        } else {
-            // Reset so the lock shows again next time Settings is opened
-            lockShown = false
         }
     }
 

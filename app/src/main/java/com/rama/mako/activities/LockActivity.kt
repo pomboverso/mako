@@ -1,5 +1,6 @@
 package com.rama.mako.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
@@ -30,6 +31,8 @@ class LockActivity : CsActivity() {
 
         setupViews()
         setupActions()
+        setupKeypad()
+        clearPin()
     }
 
     private fun setupViews() {
@@ -49,10 +52,16 @@ class LockActivity : CsActivity() {
         )
     }
 
-    override fun onResume() {
-        super.onResume()
-        setupKeypad()
-        clearPin()
+    override fun onBackPressed() {
+        navigateToHome()
+    }
+
+    private fun navigateToHome() {
+        val intent = Intent(this, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+        }
+        startActivity(intent)
+        finish()
     }
 
     private fun setupKeypad() {
@@ -97,7 +106,7 @@ class LockActivity : CsActivity() {
         }
 
         findViewById<View>(R.id.close_button).setOnClickListener {
-            finish()
+            navigateToHome()
         }
     }
 
@@ -105,7 +114,6 @@ class LockActivity : CsActivity() {
         val savedPin = prefs.getPin()
 
         if (savedPin.isEmpty()) {
-            // No PIN set yet — allow through
             finish()
             return
         }
@@ -114,7 +122,7 @@ class LockActivity : CsActivity() {
             finish()
         } else {
             clearPin()
-            setupKeypad() // re-randomize on failure
+            setupKeypad()
         }
     }
 }
