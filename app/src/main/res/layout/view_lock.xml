@@ -12,31 +12,33 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical"
-        android:background="@color/bg_secondary"
         android:gravity="center">
 
-        <EditText
-            android:id="@+id/pin_display"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/input"
-            android:padding="16sp"
-            android:inputType="numberPassword"
-            android:singleLine="true"
-            android:maxLines="1"
-            android:maxLength="25"
-            android:focusable="false"
-            android:clickable="false"
-            android:layout_marginBottom="8sp"
-            android:text="" />
-
-
         <GridLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="250sp"
+            android:layout_height="375sp"
             android:columnCount="3"
-            android:rowCount="3"
             android:useDefaultMargins="true">
+
+            <EditText
+                android:id="@+id/pin_display"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_columnSpan="3"
+                android:background="#202030"
+                android:padding="16sp"
+                android:inputType="numberPassword"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:layout_margin="8sp"
+                android:gravity="center"
+                android:maxLength="25"
+                android:focusable="false"
+                android:textSize="16sp"
+                android:textColor="@color/foreground"
+                android:clickable="false"
+                android:layout_marginBottom="8sp"
+                android:text="" />
 
             <Button
                 android:id="@+id/btn1"

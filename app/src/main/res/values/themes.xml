@@ -11,11 +11,11 @@
     </style>
 
     <style name="PinButton">
-        <item name="android:layout_width">60sp</item>
-        <item name="android:layout_height">60sp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
         <item name="android:layout_margin">8sp</item>
-        <!--        <item name="android:layout_columnWeight">1</item>-->
-        <!--        <item name="android:layout_rowWeight">1</item>-->
+        <item name="android:layout_columnWeight">1</item>
+        <item name="android:layout_rowWeight">1</item>
         <item name="android:background">@color/button_pin</item>
         <item name="android:textColor">@color/foreground</item>
         <item name="android:textSize">18sp</item>
