@@ -61,6 +61,9 @@ class PrefsManager private constructor(context: Context) {
         const val MIGRATION_ICON_SOURCE_RADIO = "migration:icon_source_radio"
         const val SYSTEM_BAR_VISIBLE = "system:bar:visible"
 
+        const val SECURITY_KEYPAD_VISIBLE = "security:keypad:visible"
+        const val SECURITY_KEYPAD_RANDOMIZED = "security:keypad:randomized"
+
         const val SETTINGS_SECTION_CLOCK = "settings:section:clock"
         const val SETTINGS_SECTION_FONTS = "settings:section:fonts"
         const val SETTINGS_SECTION_BACKGROUND = "settings:section:background"
@@ -74,6 +77,7 @@ class PrefsManager private constructor(context: Context) {
         const val SETTINGS_SECTION_LANGUAGE = "settings:section:language"
         const val SETTINGS_SECTION_DATA = "settings:section:data"
         const val SETTINGS_SECTION_APPS = "settings:section:apps"
+        const val SETTINGS_SECTION_SECURITY = "settings:section:apps"
 
         fun appKey(pkg: String, userHandle: UserHandle): String {
             val userId = userHandle.hashCode()
@@ -179,6 +183,9 @@ class PrefsManager private constructor(context: Context) {
                 .putBoolean(PrefKeys.GROUPS_HEADERS, true)
                 .putBoolean(PrefKeys.GROUPS_COLLAPSIBLE, true)
 
+                .putBoolean(PrefKeys.SECURITY_KEYPAD_VISIBLE, false)
+                .putBoolean(PrefKeys.SECURITY_KEYPAD_RANDOMIZED, true)
+
                 .putBoolean(PrefKeys.SETTINGS_SECTION_CLOCK, true)
                 .putBoolean(PrefKeys.SETTINGS_SECTION_TEMPERATURE, true)
                 .putBoolean(PrefKeys.SETTINGS_SECTION_BACKGROUND, true)
@@ -191,6 +198,8 @@ class PrefsManager private constructor(context: Context) {
                 .putBoolean(PrefKeys.SETTINGS_SECTION_SYSTEM, true)
                 .putBoolean(PrefKeys.SETTINGS_SECTION_LANGUAGE, true)
                 .putBoolean(PrefKeys.SETTINGS_SECTION_DATA, true)
+                .putBoolean(PrefKeys.SETTINGS_SECTION_APPS, true)
+                .putBoolean(PrefKeys.SETTINGS_SECTION_SECURITY, true)
 
                 .apply()
         }

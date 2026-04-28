@@ -80,11 +80,11 @@
     <string name="temperature_header">Temperature</string>
     <string name="groups_header">Groups</string>
     <string name="language_header">Language</string>
+    <string name="security_header">Security</string>
     <string name="system_header">System</string>
     <string name="background_header">Background</string>
 
     <string name="show_profile_indicator_label">Show profile indicator</string>
-    <!--    <string name="show_hidden_apps_label">Show hidden apps</string>-->
     <string name="settings_section_home_title">Home screen</string>
     <string name="settings_section_appearance_title">Appearance</string>
     <string name="settings_section_groups_title">Groups</string>
@@ -150,6 +150,8 @@
     <string name="background_wallpaper_label">Wallpaper</string>
     <string name="background_dynamic_label">Dynamic colour</string>
     <string name="background_amoled_label">AMOLED black</string>
+    <string name="lock_settings_label">Lock Settings</string>
+    <string name="randomized_keypad_label">Randomized keypad</string>
 
     <!-- Popup :: Context Menu App -->
     <string name="rename_app">Rename app...</string>
