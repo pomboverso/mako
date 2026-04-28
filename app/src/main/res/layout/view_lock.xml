@@ -25,8 +25,11 @@
             android:singleLine="true"
             android:maxLines="1"
             android:maxLength="25"
+            android:focusable="false"
+            android:clickable="false"
             android:layout_marginBottom="8sp"
-            android:text="1234567890123456789012345" />
+            android:text="" />
+
 
         <GridLayout
             android:layout_width="wrap_content"
@@ -35,42 +38,65 @@
             android:rowCount="3"
             android:useDefaultMargins="true">
 
-            <!-- Generate 9 buttons -->
             <Button
+                android:id="@+id/btn1"
                 android:text="1"
                 style="@style/PinButton" />
 
             <Button
+                android:id="@+id/btn2"
                 android:text="2"
                 style="@style/PinButton" />
 
             <Button
+                android:id="@+id/btn3"
                 android:text="3"
                 style="@style/PinButton" />
 
             <Button
+                android:id="@+id/btn4"
                 android:text="4"
                 style="@style/PinButton" />
 
             <Button
+                android:id="@+id/btn5"
                 android:text="5"
                 style="@style/PinButton" />
 
             <Button
+                android:id="@+id/btn6"
                 android:text="6"
                 style="@style/PinButton" />
 
             <Button
+                android:id="@+id/btn7"
                 android:text="7"
                 style="@style/PinButton" />
 
             <Button
+                android:id="@+id/btn8"
                 android:text="8"
                 style="@style/PinButton" />
 
             <Button
+                android:id="@+id/btn9"
                 android:text="9"
                 style="@style/PinButton" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_columnWeight="1" />
+
+            <Button
+                android:id="@+id/btn0"
+                android:text="0"
+                style="@style/PinButton" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_columnWeight="1" />
 
         </GridLayout>
     </LinearLayout>
