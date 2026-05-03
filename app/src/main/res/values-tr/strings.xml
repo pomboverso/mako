@@ -69,7 +69,7 @@
     <string name="etwasmitbaum_url" translatable="false">github.com/etwasmitbaum</string>
 
     <!-- Settings -->
-    <string name="settings_header">Ayarlar</string>
+    <string name="activity_settings_header">Ayarlar</string>
 
     <string name="apps_header">Uygulamalar</string>
     <string name="clock_header">Saat</string>
@@ -96,7 +96,7 @@
     <string name="set_clock_app_label">Saat dokunuş eylemini değiştir</string>
     <string name="refresh_launcher_label">Başlatıcıyı yenile</string>
     <string name="change_wallpaper_label">Sistem duvar kağıdını değiştir</string>
-    <string name="about_mako_label">Mako hakkında</string>
+    <string name="activity_about_mako_header">Mako hakkında</string>
     <string name="edit_apps_label">Yüklü uygulamaları yönet</string>
     <string name="show_battery_label">Pili göster</string>
     <string name="show_system_bar_label">Sistem çubuğunu göster</string>

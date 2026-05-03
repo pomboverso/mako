@@ -1,0 +1,61 @@
+# Changelog
+
+## 36
+
+- Add PIN protection for settings
+- Reorganize settings
+- Fix issue where the search bar was not reset when opening apps
+- Reformat German (DE) translations
+- Add Changelog
+
+## 35
+
+- Separate flavors (no special features yet)
+- Add German (DE) translations
+- Add Turkish (TR) translations
+- Update license from GPLv3 to GPLv3-or-later
+- Add language switcher
+- Add profile indicator visibility toggle
+- Add fullscreen toggle
+
+## 34
+
+- Add wallpaper support for the home screen
+- Add always-visible search bar toggle
+
+## 33
+
+- Split settings into multiple files to improve collaboration
+- Add branding documentation
+- Add attribution documentation
+- Replace Jersey 25 TrueType font with OTF version
+- Add negative/monochrome logo variant
+- Add navigation between documents
+- Fix back navigation issue that caused app reload
+- Improve search performance
+- Add collapsible sections in settings
+- Add custom icon selection
+
+## 32
+
+- Show app version on the About page
+
+## 31
+
+- Add work profile support
+- Refactor preferences storage
+- Fix issue where checkboxes reset when navigating away from Settings
+- Fix "Default" group name not updating consistently
+- Ensure consistent group order between main view and Settings
+- Fix issue where deleting a group removed it twice from storage
+
+## 30
+
+- Rewrite preferences data structure for improved robustness and consistency
+- Use fixed-width Base36 group IDs (minimum 11 characters)
+- Assign deterministic IDs for system groups:
+  - `00000000000` → Default
+  - `00000000001` → Favorites
+- Generate user group IDs from creation timestamp encoded in Base36
+- Improve default initialization:
+  - `initPrefs()` now creates a complete and consistent preferences state on first run

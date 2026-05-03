@@ -1,0 +1,49 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/input"
+    android:orientation="horizontal">
+
+    <FrameLayout
+        android:id="@+id/toggle_visibility"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="12sp">
+
+        <ImageView
+            android:id="@+id/toggle_visibility_img"
+            android:layout_width="24sp"
+            android:layout_height="24sp"
+            android:src="@drawable/icon_eye"
+            android:contentDescription="Toggle Visibility" />
+    </FrameLayout>
+
+    <EditText
+        android:id="@+id/pin_field"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="16sp"
+        android:textColor="@color/foreground"
+        android:background="@android:color/transparent"
+        android:paddingTop="16sp"
+        android:maxLength="25"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:paddingBottom="16sp"
+        android:inputType="numberPassword" />
+
+    <FrameLayout
+        android:id="@+id/save_changes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="12sp">
+
+        <ImageView
+            android:layout_width="24sp"
+            android:layout_height="24sp"
+            android:src="@drawable/icon_disk"
+            android:contentDescription="Save Button" />
+    </FrameLayout>
+</LinearLayout>

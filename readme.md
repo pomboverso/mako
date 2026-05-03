@@ -20,7 +20,7 @@ distractions to a minimum by emphasizing clarity and intentional interaction.
 
 ## Permissions
 
-Mako Launcher requires **only essential permissions**:
+Mako requires **only essential permissions**:
 
 - **Set as Home App** – to function as a launcher
 - **Query Installed Apps** – to list and launch applications
