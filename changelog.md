@@ -1,5 +1,11 @@
 # Changelog
 
+## 37
+
+- Missing font on radio group for dialog_group_delete
+- Missing scroll area for dialog_group_delete and dialog_group_add
+- Adding default new group when deleting a group
+
 ## 36
 
 - Add PIN protection for settings
@@ -53,9 +59,7 @@
 
 - Rewrite preferences data structure for improved robustness and consistency
 - Use fixed-width Base36 group IDs (minimum 11 characters)
-- Assign deterministic IDs for system groups:
-  - `00000000000` → Default
-  - `00000000001` → Favorites
+- Assign deterministic IDs for system groups
 - Generate user group IDs from creation timestamp encoded in Base36
-- Improve default initialization:
-  - `initPrefs()` now creates a complete and consistent preferences state on first run
+- Improve default initialization. `initPrefs()` now creates a complete and consistent preferences
+  state on first run
