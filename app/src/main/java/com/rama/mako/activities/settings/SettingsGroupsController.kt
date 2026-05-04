@@ -102,7 +102,6 @@ class SettingsGroupsController(private val activity: SettingsActivity) {
 
         SettingsUiUtils.setClickWithHaptics(delete) {
             val dialogView = activity.layoutInflater.inflate(R.layout.dialog_groups_delete, null)
-            FontManager.applyFont(activity, dialogView)
 
             val dialog = android.app.Dialog(activity).apply {
                 setContentView(dialogView)
@@ -117,13 +116,18 @@ class SettingsGroupsController(private val activity: SettingsActivity) {
             val targetGroups = groupsManager.getGroupIds().filter { it != currentGroupId }
             var selectedGroupId: String? = null
 
-            targetGroups.forEach { targetId ->
+            targetGroups.forEachIndexed { index, targetId ->
                 val radio = RadioButton(activity).apply {
-                    id = generateViewId()
+                    id = View.generateViewId()
                     text = prefs.getGroupLabel(targetId)
-                    SettingsUiUtils.setClickWithHaptics(this) { selectedGroupId = targetId }
                 }
+
                 radioGroup.addView(radio)
+                
+                if (index == 0) {
+                    radio.isChecked = true
+                    selectedGroupId = targetId
+                }
             }
 
             SettingsUiUtils.setClickWithHaptics(yes) {
@@ -142,6 +146,7 @@ class SettingsGroupsController(private val activity: SettingsActivity) {
 
             SettingsUiUtils.setClickWithHaptics(no) { dialog.dismiss() }
 
+            FontManager.applyFont(activity, dialogView)
             dialog.show()
             dialog.window?.setLayout(
                 ViewGroup.LayoutParams.MATCH_PARENT,
