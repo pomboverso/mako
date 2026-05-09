@@ -1,5 +1,11 @@
 ![Preview](./docs/img/mako_header_1200x630.svg)
 
+<p align="center">
+  <a href="https://github.com/rama-io/mako/releases/latest"><img src="https://img.shields.io/github/v/release/rama-io/mako?label=release&color=127c77" alt="Release"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-GPLv3%20or%20Later-1d8f58" alt="License: GPLv3 or Later"></a>
+  <a href="https://github.com/rama-io/mako/releases"><img src="https://img.shields.io/github/downloads/rama-io/mako/total?color=blue" alt="Downloads"></a>
+</p>
+
 # Mako
 
 **Mako** is a **minimal, privacy-first Android launcher** designed for focus, speed, and
@@ -64,8 +70,6 @@ No network access is required.
 ---
 
 ## License
-
-[![GPL-3.0-or-later](https://img.shields.io/badge/License-GPL--3.0--or--later-blue.svg)](https://spdx.org/licenses/GPL-3.0-or-later.html)
 
 **Mako** is Free Software. You are free to use, study, share, and improve it under the terms of the
 **GNU General Public License v3** or later.
