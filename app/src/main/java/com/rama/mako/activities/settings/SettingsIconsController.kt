@@ -8,6 +8,7 @@ import com.rama.mako.R
 import com.rama.mako.activities.SettingsActivity
 import com.rama.mako.managers.FontManager
 import com.rama.mako.managers.PrefsManager
+import com.rama.mako.managers.ThemeManager
 import com.rama.mako.utils.SettingsUiUtils
 import com.rama.mako.widgets.WdButton
 
@@ -96,6 +97,7 @@ class SettingsIconsController(private val activity: SettingsActivity) {
 
         val dialogView = activity.layoutInflater.inflate(R.layout.dialog_pick_icon_pack, null)
         FontManager.applyFont(activity, dialogView)
+        ThemeManager.applyTheme(activity, dialogView)
 
         val dialog = android.app.Dialog(activity).apply {
             setContentView(dialogView)
@@ -121,6 +123,7 @@ class SettingsIconsController(private val activity: SettingsActivity) {
                     labelPrefix + iconPack.label
                 view.findViewById<ImageView>(R.id.icon_pack_icon).setImageDrawable(iconPack.icon)
                 FontManager.applyFont(parent.context, view)
+                ThemeManager.applyTheme(parent.context, view)
                 return view
             }
         }

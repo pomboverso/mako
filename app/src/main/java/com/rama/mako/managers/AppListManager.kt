@@ -360,6 +360,7 @@ class AppListManager(
 
         val view = LayoutInflater.from(context).inflate(R.layout.dialog_rename_app, null)
         FontManager.applyFont(context, view)
+        ThemeManager.applyTheme(context, view)
         val input = view.findViewById<EditText>(R.id.edit_text)
         val yesButton = view.findViewById<WdButton>(R.id.yes_button)
         val resetButton = view.findViewById<WdButton>(R.id.reset_button)
@@ -431,6 +432,7 @@ class AppListManager(
                 }
 
                 FontManager.applyFont(context, radio)
+                ThemeManager.applyTheme(context, radio)
 
                 radio.setOnClickListener {
                     prefs.setAppGroupId(pkg, app.userHandle, groupId)
@@ -449,6 +451,7 @@ class AppListManager(
         closeBtn.setOnClickListener { dialog.dismiss() }
 
         FontManager.applyFont(context, view)
+        ThemeManager.applyTheme(context, view)
         dialog.show()
     }
 
@@ -514,6 +517,7 @@ class AppListManager(
 
                         text.text = collapseIndicator + groupName.uppercase()
                         FontManager.applyFont(context, text)
+                        ThemeManager.applyTheme(context, text)
 
                         if (collapsible) {
                             view.setOnClickListener {
@@ -596,6 +600,7 @@ class AppListManager(
                         }
 
                         FontManager.applyFont(context, label)
+                        ThemeManager.applyTheme(context, label)
                         view
                     }
                 }
