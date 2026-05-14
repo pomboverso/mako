@@ -123,26 +123,26 @@
                 app:defaultExpanded="true">
 
                 <RadioGroup
-                    android:id="@+id/themes"
+                    android:id="@+id/themes_group"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/bg_secondary"
                     android:padding="16sp">
 
                     <RadioButton
-                        android:id="@+id/theme_catppuccin"
+                        android:id="@+id/theme_mako"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/background_theme_catppuccin_label"
+                        android:text="@string/theme_mako_label"
                         android:textColor="@color/foreground"
                         android:textSize="16sp"
                         android:layout_marginBottom="8sp" />
 
                     <RadioButton
-                        android:id="@+id/theme_mako"
+                        android:id="@+id/theme_catppuccin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/background_theme_mako_label"
+                        android:text="@string/theme_catppuccin_label"
                         android:textColor="@color/foreground"
                         android:textSize="16sp" />
                 </RadioGroup>

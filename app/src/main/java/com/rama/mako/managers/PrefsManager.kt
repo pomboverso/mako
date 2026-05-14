@@ -73,6 +73,7 @@ class PrefsManager private constructor(context: Context) {
         const val CLOCK_APP = "clock:app"
         const val FONT_STYLE = "font:style"
         const val APP_LANGUAGE = "app:language"
+        const val APP_THEME = "app:theme"
         const val MIGRATION_ICON_SOURCE_RADIO = "migration:icon_source_radio"
         const val SYSTEM_BAR_VISIBLE = "system:bar:visible"
 
@@ -153,6 +154,11 @@ class PrefsManager private constructor(context: Context) {
         const val AMOLED = "amoled"
     }
 
+    object Theme {
+        const val MAKO = "mako"
+        const val CATPPUCCIN = "catppuccin"
+    }
+
     fun initPrefs() {
         val ids = prefs.getStringSet(PrefKeys.GROUPS_IDS, null)
 
@@ -189,6 +195,8 @@ class PrefsManager private constructor(context: Context) {
                 .putString(PrefKeys.HOME_BACKGROUND_MODE, BackgroundMode.DEFAULT)
                 .putBoolean(PrefKeys.SYSTEM_BAR_VISIBLE, false)
 
+                .putString(PrefKeys.APP_THEME, Theme.MAKO)
+
                 .putBoolean(PrefKeys.BATTERY_VISIBLE, true)
                 .putBoolean(PrefKeys.BATTERY_TEMPERATURE, true)
                 .putString(PrefKeys.TEMPERATURE_FORMAT, TemperatureFormat.DEFAULT)
@@ -217,6 +225,7 @@ class PrefsManager private constructor(context: Context) {
                 .putBoolean(PrefKeys.SETTINGS_SECTION_DATA, true)
                 .putBoolean(PrefKeys.SETTINGS_SECTION_APPS, true)
                 .putBoolean(PrefKeys.SETTINGS_SECTION_SECURITY, true)
+                .putBoolean(PrefKeys.SETTINGS_SECTION_THEMES, true)
 
                 .apply()
         }
@@ -448,6 +457,12 @@ class PrefsManager private constructor(context: Context) {
 
     fun setFontStyle(style: String) =
         prefs.edit().putString(PrefKeys.FONT_STYLE, style).apply()
+
+    fun getTheme(): String =
+        prefs.getString(PrefKeys.APP_THEME, "") ?: ""
+
+    fun setTheme(style: String) =
+        prefs.edit().putString(PrefKeys.APP_THEME, style).apply()
 
     fun getAppLanguage(): String {
         return prefs.getString(PrefKeys.APP_LANGUAGE, Language.SYSTEM) ?: Language.SYSTEM

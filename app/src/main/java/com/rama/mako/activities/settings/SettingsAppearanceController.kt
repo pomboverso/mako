@@ -12,6 +12,7 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
     fun setup() {
         setupFontStyle()
         setupTemperatureFormat()
+        setupTheme()
         setupBackgroundMode()
     }
 
@@ -52,6 +53,23 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
                 R.id.temperature_celsius -> prefs.setTemperatureFormat(PrefsManager.TemperatureFormat.CELSIUS)
                 R.id.temperature_fahrenheit -> prefs.setTemperatureFormat(PrefsManager.TemperatureFormat.FAHRENHEIT)
                 else -> prefs.setTemperatureFormat(PrefsManager.TemperatureFormat.DEFAULT)
+            }
+        }
+    }
+
+    private fun setupTheme() {
+        val group = activity.findViewById<RadioGroup>(R.id.themes_group)
+
+        when (prefs.getTheme()) {
+            PrefsManager.Theme.MAKO -> group.check(R.id.theme_mako)
+            PrefsManager.Theme.CATPPUCCIN -> group.check(R.id.theme_catppuccin)
+            else -> group.check(R.id.theme_mako)
+        }
+
+        group.setOnCheckedChangeListener { _, id ->
+            when (id) {
+                R.id.theme_mako -> prefs.setTheme(PrefsManager.Theme.MAKO)
+                R.id.theme_catppuccin -> prefs.setTheme(PrefsManager.Theme.CATPPUCCIN)
             }
         }
     }
