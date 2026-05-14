@@ -177,6 +177,7 @@ class PrefsManager private constructor(context: Context) {
         const val DRACULA = "dracula"
         const val MELANGE = "melange"
         const val TOKYO_NIGHT = "tokyo_night"
+        const val CUSTOM = "custom"
     }
 
     fun initPrefs() {
@@ -483,6 +484,12 @@ class PrefsManager private constructor(context: Context) {
 
     fun setTheme(style: String) =
         prefs.edit().putString(PrefKeys.APP_THEME_NAME, style).apply()
+
+    fun getCustomThemeColor(key: String, fallback: Int): Int =
+        prefs.getInt(key, fallback)
+
+    fun setCustomThemeColor(key: String, color: Int) =
+        prefs.edit().putInt(key, color).apply()
 
     fun getAppLanguage(): String {
         return prefs.getString(PrefKeys.APP_LANGUAGE, Language.SYSTEM) ?: Language.SYSTEM

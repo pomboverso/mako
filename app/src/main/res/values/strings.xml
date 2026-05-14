@@ -160,6 +160,7 @@
     <string name="theme_dracula_label">Dracula</string>
     <string name="theme_melange_label">Mélange Dark</string>
     <string name="theme_tokyo_night_label">Tokyo Night</string>
+    <string name="theme_custom_label">Custom</string>
     <string name="lock_settings_label">Lock Settings</string>
     <string name="randomized_keypad_label">Randomized keypad</string>
 

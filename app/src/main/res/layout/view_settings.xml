@@ -179,6 +179,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/theme_tokyo_night_label"
+                        android:layout_marginBottom="8sp"
+                        android:textColor="@color/foreground"
+                        android:textSize="16sp" />
+
+                    <RadioButton
+                        android:id="@+id/theme_custom"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/theme_custom_label"
                         android:textColor="@color/foreground"
                         android:textSize="16sp" />
                 </RadioGroup>

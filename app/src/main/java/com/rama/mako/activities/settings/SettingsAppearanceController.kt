@@ -1,9 +1,14 @@
 package com.rama.mako.activities.settings
 
+import android.graphics.Color
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.EditText
 import android.widget.RadioGroup
 import com.rama.mako.R
 import com.rama.mako.activities.SettingsActivity
 import com.rama.mako.managers.PrefsManager
+import com.rama.mako.managers.ThemeManager
 
 class SettingsAppearanceController(private val activity: SettingsActivity) {
 
@@ -13,6 +18,7 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
         setupFontStyle()
         setupTemperatureFormat()
         setupTheme()
+        setupCustomTheme()
         setupBackgroundMode()
     }
 
@@ -67,19 +73,89 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
             PrefsManager.Theme.DRACULA -> group.check(R.id.theme_dracula)
             PrefsManager.Theme.MELANGE -> group.check(R.id.theme_melange)
             PrefsManager.Theme.TOKYO_NIGHT -> group.check(R.id.theme_tokyo_night)
+            PrefsManager.Theme.CUSTOM -> group.check(R.id.theme_custom)
             else -> group.check(R.id.theme_mako)
         }
 
         group.setOnCheckedChangeListener { _, id ->
-            when (id) {
-                R.id.theme_mako -> prefs.setTheme(PrefsManager.Theme.MAKO)
-                R.id.theme_mako_off -> prefs.setTheme(PrefsManager.Theme.MAKO_OFF)
-                R.id.theme_catppuccin_mocha -> prefs.setTheme(PrefsManager.Theme.CATPPUCCIN_MOCHA)
-                R.id.theme_dracula -> prefs.setTheme(PrefsManager.Theme.DRACULA)
-                R.id.theme_melange -> prefs.setTheme(PrefsManager.Theme.MELANGE)
-                R.id.theme_tokyo_night -> prefs.setTheme(PrefsManager.Theme.TOKYO_NIGHT)
+            val theme = when (id) {
+                R.id.theme_mako -> PrefsManager.Theme.MAKO
+                R.id.theme_mako_off -> PrefsManager.Theme.MAKO_OFF
+                R.id.theme_catppuccin_mocha -> PrefsManager.Theme.CATPPUCCIN_MOCHA
+                R.id.theme_dracula -> PrefsManager.Theme.DRACULA
+                R.id.theme_melange -> PrefsManager.Theme.MELANGE
+                R.id.theme_tokyo_night -> PrefsManager.Theme.TOKYO_NIGHT
+                R.id.theme_custom -> PrefsManager.Theme.CUSTOM
+                else -> PrefsManager.Theme.MAKO_OFF
             }
+            prefs.setTheme(theme)
+            // Populate custom fields with the selected theme's palette
+            populateCustomFields(ThemeManager.paletteFor(theme, activity))
             activity.recreate()
+        }
+    }
+
+    private fun colorToHex(color: Int): String =
+        String.format("#%06X", 0xFFFFFF and color)
+
+    private fun populateCustomFields(palette: ThemeManager.Palette) {
+        activity.findViewById<EditText>(R.id.fg).setText(colorToHex(palette.foreground))
+        activity.findViewById<EditText>(R.id.header).setText(colorToHex(palette.header))
+        activity.findViewById<EditText>(R.id.clock).setText(colorToHex(palette.clock))
+        activity.findViewById<EditText>(R.id.icons).setText(colorToHex(palette.icon))
+        activity.findViewById<EditText>(R.id.accent).setText(colorToHex(palette.accent_1))
+        activity.findViewById<EditText>(R.id.bg_1).setText(colorToHex(palette.bg_1))
+        activity.findViewById<EditText>(R.id.bg_2).setText(colorToHex(palette.bg_2))
+        activity.findViewById<EditText>(R.id.bg_3).setText(colorToHex(palette.bg_3))
+        activity.findViewById<EditText>(R.id.input).setText(colorToHex(palette.input))
+        activity.findViewById<EditText>(R.id.btn_1).setText(colorToHex(palette.button_1))
+        activity.findViewById<EditText>(R.id.btn_2).setText(colorToHex(palette.button_2))
+        activity.findViewById<EditText>(R.id.danger).setText(colorToHex(palette.danger))
+    }
+
+    private fun parseHex(text: String): Int? {
+        val hex = text.trim()
+        if (!hex.matches(Regex("^#[0-9A-Fa-f]{6}$"))) return null
+        return runCatching { Color.parseColor(hex) }.getOrNull()
+    }
+
+    private fun setupCustomTheme() {
+        // Populate fields with current theme palette on open
+        val currentPalette = ThemeManager.paletteFor(prefs.getTheme(), activity)
+        populateCustomFields(currentPalette)
+
+        val saveButton = activity.findViewById<android.view.View>(R.id.save_custom_theme)
+        saveButton.setOnClickListener {
+            val fields = mapOf(
+                PrefsManager.PrefKeys.APP_THEME_FOREGROUND to activity.findViewById<EditText>(R.id.fg),
+                PrefsManager.PrefKeys.APP_THEME_HEADER to activity.findViewById<EditText>(R.id.header),
+                PrefsManager.PrefKeys.APP_THEME_CLOCK to activity.findViewById<EditText>(R.id.clock),
+                PrefsManager.PrefKeys.APP_THEME_ICON to activity.findViewById<EditText>(R.id.icons),
+                PrefsManager.PrefKeys.APP_THEME_ACCENT_1 to activity.findViewById<EditText>(R.id.accent),
+                PrefsManager.PrefKeys.APP_THEME_BG_1 to activity.findViewById<EditText>(R.id.bg_1),
+                PrefsManager.PrefKeys.APP_THEME_BG_2 to activity.findViewById<EditText>(R.id.bg_2),
+                PrefsManager.PrefKeys.APP_THEME_BG_3 to activity.findViewById<EditText>(R.id.bg_3),
+                PrefsManager.PrefKeys.APP_THEME_INPUT to activity.findViewById<EditText>(R.id.input),
+                PrefsManager.PrefKeys.APP_THEME_BUTTON_1 to activity.findViewById<EditText>(R.id.btn_1),
+                PrefsManager.PrefKeys.APP_THEME_BUTTON_2 to activity.findViewById<EditText>(R.id.btn_2),
+                PrefsManager.PrefKeys.APP_THEME_DANGER to activity.findViewById<EditText>(R.id.danger),
+            )
+
+            var allValid = true
+            fields.forEach { (key, editText) ->
+                val color = parseHex(editText.text.toString())
+                if (color != null) {
+                    prefs.setCustomThemeColor(key, color)
+                } else {
+                    editText.error = "Invalid hex"
+                    allValid = false
+                }
+            }
+
+            if (allValid) {
+                prefs.setTheme(PrefsManager.Theme.CUSTOM)
+                activity.recreate()
+            }
         }
     }
 
