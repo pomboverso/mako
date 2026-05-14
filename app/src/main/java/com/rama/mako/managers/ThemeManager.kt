@@ -91,7 +91,7 @@ object ThemeManager {
     private val DRACULA = Palette(
         foreground = 0xFFF8F8F2.toInt(),
         bg_1 = 0xFF282A36.toInt(),
-        bg_2 = 0xFF343746.toInt(),
+        bg_2 = 0xFF2D2F3E.toInt(),
         bg_3 = 0xFF424450.toInt(),
         accent_1 = 0xFF50FA7B.toInt(),
         accent_2 = 0xFFF1FA8C.toInt(),
