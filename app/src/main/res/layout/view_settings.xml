@@ -182,6 +182,299 @@
                         android:textColor="@color/foreground"
                         android:textSize="16sp" />
                 </RadioGroup>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginVertical="16sp"
+                    android:background="@color/disabled" />
+
+                <LinearLayout
+                    android:id="@+id/themes_form"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8sp"
+                    android:background="@color/bg_2"
+                    android:focusableInTouchMode="true"
+                    android:orientation="vertical"
+                    android:padding="16sp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8sp"
+                        android:text="Foreground" />
+
+                    <EditText
+                        android:id="@+id/fg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/input"
+                        android:layout_marginBottom="8sp"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textSize="16sp"
+                        android:paddingTop="16sp"
+                        android:paddingBottom="16sp"
+                        android:paddingStart="8sp"
+                        android:paddingEnd="8sp"
+                        android:inputType="textNoSuggestions"
+                        android:maxLength="7"
+                        android:hint="#RRGGBB" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8sp"
+                        android:text="Collapsible Header" />
+
+                    <EditText
+                        android:id="@+id/header"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/input"
+                        android:layout_marginBottom="8sp"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textSize="16sp"
+                        android:paddingTop="16sp"
+                        android:paddingBottom="16sp"
+                        android:paddingStart="8sp"
+                        android:paddingEnd="8sp"
+                        android:inputType="textNoSuggestions"
+                        android:maxLength="7"
+                        android:hint="#RRGGBB" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8sp"
+                        android:text="Clock" />
+
+                    <EditText
+                        android:id="@+id/clock"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/input"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="8sp"
+                        android:paddingTop="16sp"
+                        android:paddingBottom="16sp"
+                        android:paddingStart="8sp"
+                        android:paddingEnd="8sp"
+                        android:inputType="textNoSuggestions"
+                        android:maxLength="7"
+                        android:hint="#RRGGBB" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8sp"
+                        android:text="Icons" />
+
+                    <EditText
+                        android:id="@+id/icons"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/input"
+                        android:layout_marginBottom="8sp"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textSize="16sp"
+                        android:paddingTop="16sp"
+                        android:paddingBottom="16sp"
+                        android:paddingStart="8sp"
+                        android:paddingEnd="8sp"
+                        android:inputType="textNoSuggestions"
+                        android:maxLength="7"
+                        android:hint="#RRGGBB" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8sp"
+                        android:text="Accent" />
+
+                    <EditText
+                        android:id="@+id/accent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/input"
+                        android:layout_marginBottom="8sp"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textSize="16sp"
+                        android:paddingTop="16sp"
+                        android:paddingBottom="16sp"
+                        android:paddingStart="8sp"
+                        android:paddingEnd="8sp"
+                        android:inputType="textNoSuggestions"
+                        android:maxLength="7"
+                        android:hint="#RRGGBB" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8sp"
+                        android:text="Background 1" />
+
+                    <EditText
+                        android:id="@+id/bg_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/input"
+                        android:layout_marginBottom="8sp"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textSize="16sp"
+                        android:paddingTop="16sp"
+                        android:paddingBottom="16sp"
+                        android:paddingStart="8sp"
+                        android:paddingEnd="8sp"
+                        android:inputType="textNoSuggestions"
+                        android:maxLength="7"
+                        android:hint="#RRGGBB" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8sp"
+                        android:text="Backgrouund 2" />
+
+                    <EditText
+                        android:id="@+id/bg_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8sp"
+                        android:background="@color/input"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textSize="16sp"
+                        android:paddingTop="16sp"
+                        android:paddingBottom="16sp"
+                        android:paddingStart="8sp"
+                        android:paddingEnd="8sp"
+                        android:inputType="textNoSuggestions"
+                        android:maxLength="7"
+                        android:hint="#RRGGBB" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8sp"
+                        android:text="Background 3" />
+
+                    <EditText
+                        android:id="@+id/bg_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/input"
+                        android:layout_marginBottom="8sp"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textSize="16sp"
+                        android:paddingTop="16sp"
+                        android:paddingBottom="16sp"
+                        android:paddingStart="8sp"
+                        android:paddingEnd="8sp"
+                        android:inputType="textNoSuggestions"
+                        android:maxLength="7"
+                        android:hint="#RRGGBB" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8sp"
+                        android:text="Input Background" />
+
+                    <EditText
+                        android:id="@+id/input"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/input"
+                        android:layout_marginBottom="8sp"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textSize="16sp"
+                        android:paddingTop="16sp"
+                        android:paddingBottom="16sp"
+                        android:paddingStart="8sp"
+                        android:paddingEnd="8sp"
+                        android:inputType="textNoSuggestions"
+                        android:maxLength="7"
+                        android:hint="#RRGGBB" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8sp"
+                        android:text="Button 1 Background" />
+
+                    <EditText
+                        android:id="@+id/btn_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/input"
+                        android:layout_marginBottom="8sp"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textSize="16sp"
+                        android:paddingTop="16sp"
+                        android:paddingBottom="16sp"
+                        android:paddingStart="8sp"
+                        android:paddingEnd="8sp"
+                        android:inputType="textNoSuggestions"
+                        android:maxLength="7"
+                        android:hint="#RRGGBB" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8sp"
+                        android:text="Button 2 Background" />
+
+                    <EditText
+                        android:id="@+id/btn_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/input"
+                        android:layout_marginBottom="8sp"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textSize="16sp"
+                        android:paddingTop="16sp"
+                        android:paddingBottom="16sp"
+                        android:paddingStart="8sp"
+                        android:paddingEnd="8sp"
+                        android:inputType="textNoSuggestions"
+                        android:maxLength="7"
+                        android:hint="#RRGGBB" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8sp"
+                        android:text="Danger" />
+
+                    <EditText
+                        android:id="@+id/danger"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/input"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textSize="16sp"
+                        android:paddingTop="16sp"
+                        android:paddingBottom="16sp"
+                        android:paddingStart="8sp"
+                        android:paddingEnd="8sp"
+                        android:inputType="textNoSuggestions"
+                        android:maxLength="7"
+                        android:hint="#RRGGBB" />
+
+                </LinearLayout>
             </com.rama.mako.widgets.WdCollapsibleSection>
             <!--Background-->
             <com.rama.mako.widgets.WdCollapsibleSection
