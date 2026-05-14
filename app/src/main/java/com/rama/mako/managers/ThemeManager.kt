@@ -45,7 +45,7 @@ object ThemeManager {
     )
 
     // Catppuccin Mocha
-    private val CATPPUCCIN = Palette(
+    private val CATPPUCCIN_MOCHA = Palette(
         foreground = 0xFFCDD6F4.toInt(), // text
         bgPrimary = 0xFF1E1E2E.toInt(), // base
         bgSecondary = 0xFF313244.toInt(), // surface0
@@ -61,8 +61,63 @@ object ThemeManager {
         buttonPin = 0xFF1E1E2E.toInt(), // base (same as bg for subtlety)
     )
 
+
+    // Dracula
+    private val DRACULA = Palette(
+        foreground = 0xFFF8F8F2.toInt(), // foreground
+        bgPrimary = 0xFF282A36.toInt(), // background
+        bgSecondary = 0xFF343746.toInt(), // current line
+        bgTertiary = 0xFF424450.toInt(), // comment
+        accentPrimary = 0xFF50FA7B.toInt(), // green
+        accentSecondary = 0xFFF1FA8C.toInt(), // yellow
+        accentTertiary = 0xFFFFB86C.toInt(), // orange
+        disabled = 0xFF6272A4.toInt(), // comment
+        input = 0xFF21222C.toInt(), // darker bg
+        buttonPrimary = 0xFFBD93F9.toInt(), // purple
+        buttonSecondary = 0xFF8BE9FD.toInt(), // cyan
+        buttonDanger = 0xFFFF79C6.toInt(), // pink
+        buttonPin = 0xFF282A36.toInt(), // background
+    )
+
+    // Melange Dark
+    private val MELANGE = Palette(
+        foreground = 0xFFECE1D7.toInt(), // text
+        bgPrimary = 0xFF292522.toInt(), // background
+        bgSecondary = 0xFF352F2A.toInt(), // surface
+        bgTertiary = 0xFF403A34.toInt(), // overlay
+        accentPrimary = 0xFF78997A.toInt(), // green
+        accentSecondary = 0xFFEBC06D.toInt(), // yellow
+        accentTertiary = 0xFFE49B5D.toInt(), // orange
+        disabled = 0xFF867462.toInt(), // muted
+        input = 0xFF211E1B.toInt(), // darker bg
+        buttonPrimary = 0xFF7F91B2.toInt(), // blue
+        buttonSecondary = 0xFF85B695.toInt(), // teal
+        buttonDanger = 0xFFB65C60.toInt(), // red
+        buttonPin = 0xFF292522.toInt(), // background
+    )
+
+    // Tokyo Night
+    private val TOKYO_NIGHT = Palette(
+        foreground = 0xFFC0CAF5.toInt(), // fg
+        bgPrimary = 0xFF1A1B26.toInt(), // bg
+        bgSecondary = 0xFF24283B.toInt(), // bg_highlight
+        bgTertiary = 0xFF292E42.toInt(), // bg_visual
+        accentPrimary = 0xFF9ECE6A.toInt(), // green
+        accentSecondary = 0xFFE0AF68.toInt(), // yellow
+        accentTertiary = 0xFFFF9E64.toInt(), // orange
+        disabled = 0xFF565F89.toInt(), // comment
+        input = 0xFF16161E.toInt(), // bg_dark
+        buttonPrimary = 0xFF7AA2F7.toInt(), // blue
+        buttonSecondary = 0xFF2AC3DE.toInt(), // cyan
+        buttonDanger = 0xFFF7768E.toInt(), // red
+        buttonPin = 0xFF1A1B26.toInt(), // bg
+    )
+
     fun paletteFor(theme: String): Palette = when (theme) {
-        PrefsManager.Theme.CATPPUCCIN -> CATPPUCCIN
+        PrefsManager.Theme.CATPPUCCIN_MOCHA -> CATPPUCCIN_MOCHA
+        PrefsManager.Theme.DRACULA -> DRACULA
+        PrefsManager.Theme.MELANGE -> MELANGE
+        PrefsManager.Theme.TOKYO_NIGHT -> TOKYO_NIGHT
         else -> MAKO
     }
 
@@ -104,39 +159,48 @@ object ThemeManager {
     private fun mapColor(context: Context, color: Int, palette: Palette): Int? {
         return when (color) {
             // bg_primary
-            MAKO.bgPrimary, CATPPUCCIN.bgPrimary,
+            MAKO.bgPrimary, CATPPUCCIN_MOCHA.bgPrimary,
+            DRACULA.bgPrimary, MELANGE.bgPrimary, TOKYO_NIGHT.bgPrimary,
             context.getColor(R.color.bg_primary) -> palette.bgPrimary
 
             // bg_secondary
-            MAKO.bgSecondary, CATPPUCCIN.bgSecondary,
+            MAKO.bgSecondary, CATPPUCCIN_MOCHA.bgSecondary,
+            DRACULA.bgSecondary, MELANGE.bgSecondary, TOKYO_NIGHT.bgSecondary,
             context.getColor(R.color.bg_secondary) -> palette.bgSecondary
 
             // bg_tertiary
-            MAKO.bgTertiary, CATPPUCCIN.bgTertiary,
+            MAKO.bgTertiary, CATPPUCCIN_MOCHA.bgTertiary,
+            DRACULA.bgTertiary, MELANGE.bgTertiary, TOKYO_NIGHT.bgTertiary,
             context.getColor(R.color.bg_tertiary) -> palette.bgTertiary
 
             // button_primary
-            MAKO.buttonPrimary, CATPPUCCIN.buttonPrimary,
+            MAKO.buttonPrimary, CATPPUCCIN_MOCHA.buttonPrimary,
+            DRACULA.buttonPrimary, MELANGE.buttonPrimary, TOKYO_NIGHT.buttonPrimary,
             context.getColor(R.color.button_primary) -> palette.buttonPrimary
 
             // button_secondary
-            MAKO.buttonSecondary, CATPPUCCIN.buttonSecondary,
+            MAKO.buttonSecondary, CATPPUCCIN_MOCHA.buttonSecondary,
+            DRACULA.buttonSecondary, MELANGE.buttonSecondary, TOKYO_NIGHT.buttonSecondary,
             context.getColor(R.color.button_secondary) -> palette.buttonSecondary
 
             // button_danger
-            MAKO.buttonDanger, CATPPUCCIN.buttonDanger,
+            MAKO.buttonDanger, CATPPUCCIN_MOCHA.buttonDanger,
+            DRACULA.buttonDanger, MELANGE.buttonDanger, TOKYO_NIGHT.buttonDanger,
             context.getColor(R.color.button_danger) -> palette.buttonDanger
 
             // button_pin
-            MAKO.buttonPin, CATPPUCCIN.buttonPin,
+            MAKO.buttonPin, CATPPUCCIN_MOCHA.buttonPin,
+            DRACULA.buttonPin, MELANGE.buttonPin, TOKYO_NIGHT.buttonPin,
             context.getColor(R.color.button_pin) -> palette.buttonPin
 
             // input
-            MAKO.input, CATPPUCCIN.input,
+            MAKO.input, CATPPUCCIN_MOCHA.input,
+            DRACULA.input, MELANGE.input, TOKYO_NIGHT.input,
             context.getColor(R.color.input) -> palette.input
 
             // disabled
-            MAKO.disabled, CATPPUCCIN.disabled,
+            MAKO.disabled, CATPPUCCIN_MOCHA.disabled,
+            DRACULA.disabled, MELANGE.disabled, TOKYO_NIGHT.disabled,
             context.getColor(R.color.disabled) -> palette.disabled
 
             else -> null

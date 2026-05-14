@@ -154,8 +154,11 @@
     <string name="background_wallpaper_label">Wallpaper</string>
     <string name="background_dynamic_label">Dynamic colour</string>
     <string name="background_amoled_label">AMOLED black</string>
-    <string name="theme_catppuccin_label">Catppuccin</string>
+    <string name="theme_catppuccin_mocha_label">Catppuccin Mocha</string>
     <string name="theme_mako_label">Mako</string>
+    <string name="theme_dracula_label">Dracula</string>
+    <string name="theme_melange_label">Mélange Dark</string>
+    <string name="theme_tokyo_night_label">Tokyo Night</string>
     <string name="lock_settings_label">Lock Settings</string>
     <string name="randomized_keypad_label">Randomized keypad</string>
 

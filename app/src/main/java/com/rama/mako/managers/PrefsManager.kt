@@ -156,7 +156,10 @@ class PrefsManager private constructor(context: Context) {
 
     object Theme {
         const val MAKO = "mako"
-        const val CATPPUCCIN = "catppuccin"
+        const val CATPPUCCIN_MOCHA = "catppuccin_mocha"
+        const val DRACULA = "dracula"
+        const val MELANGE = "melange"
+        const val TOKYO_NIGHT = "tokyo_night"
     }
 
     fun initPrefs() {

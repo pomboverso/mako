@@ -139,10 +139,37 @@
                         android:layout_marginBottom="8sp" />
 
                     <RadioButton
-                        android:id="@+id/theme_catppuccin"
+                        android:id="@+id/theme_catppuccin_mocha"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/theme_catppuccin_label"
+                        android:text="@string/theme_catppuccin_mocha_label"
+                        android:textColor="@color/foreground"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="8sp" />
+
+                    <RadioButton
+                        android:id="@+id/theme_dracula"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8sp"
+                        android:text="@string/theme_dracula_label"
+                        android:textColor="@color/foreground"
+                        android:textSize="16sp" />
+
+                    <RadioButton
+                        android:id="@+id/theme_melange"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8sp"
+                        android:text="@string/theme_melange_label"
+                        android:textColor="@color/foreground"
+                        android:textSize="16sp" />
+
+                    <RadioButton
+                        android:id="@+id/theme_tokyo_night"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/theme_tokyo_night_label"
                         android:textColor="@color/foreground"
                         android:textSize="16sp" />
                 </RadioGroup>
