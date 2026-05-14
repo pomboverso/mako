@@ -162,6 +162,10 @@
     <string name="lock_settings_label">Lock Settings</string>
     <string name="randomized_keypad_label">Randomized keypad</string>
 
+    <!-- Dialog :: Context Menu App -->
+    <string name="context_menu_theme_label">Theme</string>
+    <string name="context_menu_font_label">Font</string>
+    <string name="font_default_label">System default</string>
     <!-- Popup :: Context Menu App -->
     <string name="rename_app">Rename app...</string>
     <string name="add_to_favorites">Change group...</string>
@@ -171,6 +175,7 @@
     <string name="save">Save</string>
     <string name="reset">Reset</string>
     <string name="cancel">Cancel</string>
+    <string name="label_changed">App label updated</string>
 
     <!-- Dialog :: Rename App -->
     <string name="select_group">Select Group</string>

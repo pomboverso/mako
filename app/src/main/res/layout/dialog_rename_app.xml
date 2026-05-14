@@ -22,26 +22,35 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="8sp"
         android:padding="16sp"
-        android:orientation="vertical"
-        android:background="@color/bg_2"
-        android:focusableInTouchMode="true">
+        android:orientation="horizontal"
+        android:background="@color/bg_2">
 
         <EditText
             android:id="@+id/edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:maxLines="1"
+            android:focusableInTouchMode="true"
+            android:padding="16sp"
+            android:background="@color/input"
             android:singleLine="true"
             android:textSize="16sp" />
-    </LinearLayout>
 
-    <com.rama.mako.widgets.WdButton
-        android:id="@+id/yes_button"
-        android:layout_width="match_parent"
-        android:layout_marginBottom="8sp"
-        android:layout_height="wrap_content"
-        android:background="@color/danger"
-        android:text="@string/save" />
+        <FrameLayout
+            android:id="@+id/yes_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="12sp">
+
+            <ImageView
+                android:layout_width="24sp"
+                android:layout_height="match_parent"
+                android:padding="0dp"
+                android:src="@drawable/icon_disk"
+                android:contentDescription="Save" />
+        </FrameLayout>
+    </LinearLayout>
 
     <com.rama.mako.widgets.WdButton
         android:id="@+id/reset_button"

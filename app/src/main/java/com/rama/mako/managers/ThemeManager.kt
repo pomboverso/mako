@@ -126,6 +126,18 @@ object ThemeManager {
         applyRecursively(context, root, palette)
     }
 
+    /** Directly tints a TextView that has no background (e.g. list headers). */
+    fun applyTextColor(context: Context, view: android.widget.TextView, colorSlot: ColorSlot) {
+        val palette = paletteFor(PrefsManager.getInstance(context).getTheme())
+        view.setTextColor(when (colorSlot) {
+            ColorSlot.FOREGROUND -> palette.foreground
+            ColorSlot.DISABLED   -> palette.disabled
+            ColorSlot.ACCENT_1   -> palette.accent_1
+        })
+    }
+
+    enum class ColorSlot { FOREGROUND, DISABLED, ACCENT_1 }
+
     private fun applyRecursively(context: Context, view: View, palette: Palette) {
         applyToView(context, view, palette)
         if (view is ViewGroup) {

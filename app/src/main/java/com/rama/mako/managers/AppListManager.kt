@@ -5,11 +5,14 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
+import android.provider.Settings.Global.getString
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.generateViewId
 import android.view.ViewGroup
 import android.widget.*
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import com.rama.mako.R
 import com.rama.mako.utils.sp
 import com.rama.mako.activities.SettingsActivity
@@ -362,7 +365,7 @@ class AppListManager(
         FontManager.applyFont(context, view)
         ThemeManager.applyTheme(context, view)
         val input = view.findViewById<EditText>(R.id.edit_text)
-        val yesButton = view.findViewById<WdButton>(R.id.yes_button)
+        val yesButton = view.findViewById<FrameLayout>(R.id.yes_button)
         val resetButton = view.findViewById<WdButton>(R.id.reset_button)
         val noButton = view.findViewById<WdButton>(R.id.no_button)
 
@@ -375,12 +378,22 @@ class AppListManager(
             input.text.toString().trim().takeIf { it.isNotEmpty() }
                 ?.let { prefs.setCustomName(pkg, app.userHandle, it) }
             refresh()
+            Toast.makeText(
+                context,
+                context.getString(R.string.label_changed),
+                Toast.LENGTH_SHORT
+            ).show()
             dialog.dismiss()
         }
 
         resetButton.setOnClickListener {
             prefs.clearCustomName(pkg, app.userHandle)
             refresh()
+            Toast.makeText(
+                context,
+                context.getString(R.string.label_changed),
+                Toast.LENGTH_SHORT
+            ).show()
             dialog.dismiss()
         }
 
@@ -457,26 +470,48 @@ class AppListManager(
 
     private fun showContextMenu(anchor: View, app: AppsProvider.AppEntry) {
         val pkg = app.packageName
-        val popup = PopupMenu(context, anchor)
-        popup.menuInflater.inflate(R.menu.app_context_menu, popup.menu)
-        popup.setOnMenuItemClickListener { item ->
-            when (item.itemId) {
-                R.id.action_rename -> {
-                    showRenameDialog(app); true
-                }
+        val view = LayoutInflater.from(context).inflate(R.layout.dialog_app_context_menu, null)
 
-                R.id.action_favorite -> {
-                    showGroupsDialog(app); true
-                }
+        val dialog = android.app.Dialog(context)
+        dialog.requestWindowFeature(android.view.Window.FEATURE_NO_TITLE)
+        dialog.setContentView(view)
+        dialog.setCancelable(true)
 
-                R.id.action_settings -> {
-                    openAppSettings(pkg); true
-                }
+        // Actions
+        val actionRename = view.findViewById<TextView>(R.id.action_rename)
+        val actionGroup = view.findViewById<TextView>(R.id.action_group)
+        val actionAppSettings = view.findViewById<TextView>(R.id.action_app_settings)
 
-                else -> false
-            }
-        }
-        popup.show()
+        actionRename.text = context.getString(R.string.rename_app)
+        actionGroup.text = context.getString(R.string.add_to_favorites)
+        actionAppSettings.text = context.getString(R.string.open_settings)
+
+        actionRename.setOnClickListener { dialog.dismiss(); showRenameDialog(app) }
+        actionGroup.setOnClickListener { dialog.dismiss(); showGroupsDialog(app) }
+        actionAppSettings.setOnClickListener { dialog.dismiss(); openAppSettings(pkg) }
+
+        FontManager.applyFont(context, view)
+        ThemeManager.applyTheme(context, view)
+        dialog.window?.setBackgroundDrawable(
+            android.graphics.drawable.ColorDrawable(
+                ThemeManager.paletteFor(prefs.getTheme()).bg_2
+            )
+        )
+        dialog.show()
+        dialog.window?.setLayout(
+            android.view.WindowManager.LayoutParams.WRAP_CONTENT,
+            android.view.WindowManager.LayoutParams.WRAP_CONTENT
+        )
+        dialog.window?.decorView?.minimumWidth = 0
+
+        // Position near the anchor view
+        val location = IntArray(2)
+        anchor.getLocationOnScreen(location)
+        val params = dialog.window?.attributes
+        params?.gravity = android.view.Gravity.TOP or android.view.Gravity.START
+        params?.x = location[0]
+        params?.y = location[1]
+        dialog.window?.attributes = params
     }
 
     private fun setupAdapter() {
@@ -517,7 +552,7 @@ class AppListManager(
 
                         text.text = collapseIndicator + groupName.uppercase()
                         FontManager.applyFont(context, text)
-                        ThemeManager.applyTheme(context, text)
+                        ThemeManager.applyTextColor(context, text, ThemeManager.ColorSlot.DISABLED)
 
                         if (collapsible) {
                             view.setOnClickListener {
