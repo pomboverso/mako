@@ -123,7 +123,6 @@ class SettingsIconsController(private val activity: SettingsActivity) {
                     labelPrefix + iconPack.label
                 view.findViewById<ImageView>(R.id.icon_pack_icon).setImageDrawable(iconPack.icon)
                 FontManager.applyFont(parent.context, view)
-                ThemeManager.applyTheme(parent.context, view)
                 return view
             }
         }

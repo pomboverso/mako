@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/bg_primary">
+    android:background="@color/bg_secondary">
 
     <!-- Pin Pad -->
     <LinearLayout
@@ -18,13 +18,13 @@
             android:layout_height="375sp"
             android:columnCount="3"
             android:useDefaultMargins="true">
-
+            
             <EditText
                 android:id="@+id/pin_display"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_columnSpan="3"
-                android:background="#202030"
+                android:background="@color/input"
                 android:padding="16sp"
                 android:inputType="numberPassword"
                 android:singleLine="true"
@@ -108,7 +108,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/button_secondary"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="8sp"
         android:text="@string/unlock_label" />
 
     <com.rama.mako.widgets.WdButton
@@ -116,7 +116,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/button_secondary"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="8sp"
         android:text="@string/clear_label" />
 
     <com.rama.mako.widgets.WdButton

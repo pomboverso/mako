@@ -24,7 +24,7 @@ object ThemeManager {
         val buttonPrimary: Int,
         val buttonSecondary: Int,
         val buttonDanger: Int,
-        val buttonPin: Int,
+        val header: Int,
     )
 
     // Mako (default)
@@ -32,7 +32,7 @@ object ThemeManager {
         foreground = 0xFFCCCCCC.toInt(),
         bgPrimary = 0xFF141417.toInt(),
         bgSecondary = 0xFF1F1F29.toInt(),
-        bgTertiary = 0xFF322F1B.toInt(),
+        bgTertiary = 0xFF24313b.toInt(),
         accentPrimary = 0xFFABD68E.toInt(),
         accentSecondary = 0xFFCDC58B.toInt(),
         accentTertiary = 0xFFDCD07C.toInt(),
@@ -41,76 +41,76 @@ object ThemeManager {
         buttonPrimary = 0xFF459984.toInt(),
         buttonSecondary = 0xFF6194AF.toInt(),
         buttonDanger = 0xFFDC6364.toInt(),
-        buttonPin = 0xFF333355.toInt(),
+        header = 0xff888888.toInt(),
     )
 
     // Catppuccin Mocha
     private val CATPPUCCIN_MOCHA = Palette(
-        foreground = 0xFFCDD6F4.toInt(), // text
-        bgPrimary = 0xFF1E1E2E.toInt(), // base
-        bgSecondary = 0xFF313244.toInt(), // surface0
-        bgTertiary = 0xFF45475A.toInt(), // surface1
-        accentPrimary = 0xFFA6E3A1.toInt(), // green
-        accentSecondary = 0xFFF9E2AF.toInt(), // yellow
-        accentTertiary = 0xFFFFD700.toInt(), // gold (placeholder, tweak as needed)
-        disabled = 0xFF6C7086.toInt(), // overlay0
-        input = 0xFF181825.toInt(), // mantle
-        buttonPrimary = 0xFF89B4FA.toInt(), // blue
-        buttonSecondary = 0xFF74C7EC.toInt(), // sapphire
-        buttonDanger = 0xFFF38BA8.toInt(), // red
-        buttonPin = 0xFF1E1E2E.toInt(), // base (same as bg for subtlety)
+        foreground = 0xFFCDD6F4.toInt(),
+        bgPrimary = 0xFF1E1E2E.toInt(),
+        bgSecondary = 0xFF313244.toInt(),
+        bgTertiary = 0xFF45475A.toInt(),
+        accentPrimary = 0xFFA6E3A1.toInt(),
+        accentSecondary = 0xFFF9E2AF.toInt(),
+        accentTertiary = 0xFFFFD700.toInt(),
+        disabled = 0xFF6C7086.toInt(),
+        input = 0xFF181825.toInt(),
+        buttonPrimary = 0xFF89B4FA.toInt(),
+        buttonSecondary = 0xFF74C7EC.toInt(),
+        buttonDanger = 0xFFF38BA8.toInt(),
+        header = 0xFFB4BEFE.toInt(),
     )
 
 
     // Dracula
     private val DRACULA = Palette(
-        foreground = 0xFFF8F8F2.toInt(), // foreground
-        bgPrimary = 0xFF282A36.toInt(), // background
-        bgSecondary = 0xFF343746.toInt(), // current line
-        bgTertiary = 0xFF424450.toInt(), // comment
-        accentPrimary = 0xFF50FA7B.toInt(), // green
-        accentSecondary = 0xFFF1FA8C.toInt(), // yellow
-        accentTertiary = 0xFFFFB86C.toInt(), // orange
-        disabled = 0xFF6272A4.toInt(), // comment
-        input = 0xFF21222C.toInt(), // darker bg
-        buttonPrimary = 0xFFBD93F9.toInt(), // purple
-        buttonSecondary = 0xFF8BE9FD.toInt(), // cyan
-        buttonDanger = 0xFFFF79C6.toInt(), // pink
-        buttonPin = 0xFF282A36.toInt(), // background
+        foreground = 0xFFF8F8F2.toInt(),
+        bgPrimary = 0xFF282A36.toInt(),
+        bgSecondary = 0xFF343746.toInt(),
+        bgTertiary = 0xFF424450.toInt(),
+        accentPrimary = 0xFF50FA7B.toInt(),
+        accentSecondary = 0xFFF1FA8C.toInt(),
+        accentTertiary = 0xFFFFB86C.toInt(),
+        disabled = 0xFF6272A4.toInt(),
+        input = 0xFF21222C.toInt(),
+        buttonPrimary = 0xFFBD93F9.toInt(),
+        buttonSecondary = 0xFF8BE9FD.toInt(),
+        buttonDanger = 0xFFFF79C6.toInt(),
+        header = 0xFFBD93F9.toInt(),
     )
 
     // Melange Dark
     private val MELANGE = Palette(
-        foreground = 0xFFECE1D7.toInt(), // text
-        bgPrimary = 0xFF292522.toInt(), // background
-        bgSecondary = 0xFF352F2A.toInt(), // surface
-        bgTertiary = 0xFF403A34.toInt(), // overlay
-        accentPrimary = 0xFF78997A.toInt(), // green
-        accentSecondary = 0xFFEBC06D.toInt(), // yellow
-        accentTertiary = 0xFFE49B5D.toInt(), // orange
-        disabled = 0xFF867462.toInt(), // muted
-        input = 0xFF211E1B.toInt(), // darker bg
-        buttonPrimary = 0xFF7F91B2.toInt(), // blue
-        buttonSecondary = 0xFF85B695.toInt(), // teal
-        buttonDanger = 0xFFB65C60.toInt(), // red
-        buttonPin = 0xFF292522.toInt(), // background
+        foreground = 0xFFECE1D7.toInt(),
+        bgPrimary = 0xFF292522.toInt(),
+        bgSecondary = 0xFF352F2A.toInt(),
+        bgTertiary = 0xFF403A34.toInt(),
+        accentPrimary = 0xFF78997A.toInt(),
+        accentSecondary = 0xFFEBC06D.toInt(),
+        accentTertiary = 0xFFE49B5D.toInt(),
+        disabled = 0xFF867462.toInt(),
+        input = 0xFF211E1B.toInt(),
+        buttonPrimary = 0xFF7F91B2.toInt(),
+        buttonSecondary = 0xFF85B695.toInt(),
+        buttonDanger = 0xFFB65C60.toInt(),
+        header = 0xFFEBC06D.toInt(),
     )
 
     // Tokyo Night
     private val TOKYO_NIGHT = Palette(
-        foreground = 0xFFC0CAF5.toInt(), // fg
-        bgPrimary = 0xFF1A1B26.toInt(), // bg
-        bgSecondary = 0xFF24283B.toInt(), // bg_highlight
-        bgTertiary = 0xFF292E42.toInt(), // bg_visual
-        accentPrimary = 0xFF9ECE6A.toInt(), // green
-        accentSecondary = 0xFFE0AF68.toInt(), // yellow
-        accentTertiary = 0xFFFF9E64.toInt(), // orange
-        disabled = 0xFF565F89.toInt(), // comment
-        input = 0xFF16161E.toInt(), // bg_dark
-        buttonPrimary = 0xFF7AA2F7.toInt(), // blue
-        buttonSecondary = 0xFF2AC3DE.toInt(), // cyan
-        buttonDanger = 0xFFF7768E.toInt(), // red
-        buttonPin = 0xFF1A1B26.toInt(), // bg
+        foreground = 0xFFC0CAF5.toInt(),
+        bgPrimary = 0xFF1A1B26.toInt(),
+        bgSecondary = 0xFF24283B.toInt(),
+        bgTertiary = 0xFF292E42.toInt(),
+        accentPrimary = 0xFF9ECE6A.toInt(),
+        accentSecondary = 0xFFE0AF68.toInt(),
+        accentTertiary = 0xFFFF9E64.toInt(),
+        disabled = 0xFF565F89.toInt(),
+        input = 0xFF16161E.toInt(),
+        buttonPrimary = 0xFF7AA2F7.toInt(),
+        buttonSecondary = 0xFF2AC3DE.toInt(),
+        buttonDanger = 0xFFF7768E.toInt(),
+        header = 0xFF7AA2F7.toInt(),
     )
 
     fun paletteFor(theme: String): Palette = when (theme) {
@@ -188,11 +188,6 @@ object ThemeManager {
             DRACULA.buttonDanger, MELANGE.buttonDanger, TOKYO_NIGHT.buttonDanger,
             context.getColor(R.color.button_danger) -> palette.buttonDanger
 
-            // button_pin
-            MAKO.buttonPin, CATPPUCCIN_MOCHA.buttonPin,
-            DRACULA.buttonPin, MELANGE.buttonPin, TOKYO_NIGHT.buttonPin,
-            context.getColor(R.color.button_pin) -> palette.buttonPin
-
             // input
             MAKO.input, CATPPUCCIN_MOCHA.input,
             DRACULA.input, MELANGE.input, TOKYO_NIGHT.input,
@@ -201,7 +196,7 @@ object ThemeManager {
             // disabled
             MAKO.disabled, CATPPUCCIN_MOCHA.disabled,
             DRACULA.disabled, MELANGE.disabled, TOKYO_NIGHT.disabled,
-            context.getColor(R.color.disabled) -> palette.disabled
+            context.getColor(R.color.header) -> palette.disabled
 
             else -> null
         }
