@@ -25,6 +25,7 @@ object ThemeManager {
         val button_2: Int,
         val danger: Int,
         val header: Int,
+        val icon: Int,
     )
 
     // Mako (default)
@@ -42,6 +43,7 @@ object ThemeManager {
         button_2 = 0xFF6194AF.toInt(),
         danger = 0xFFDC6364.toInt(),
         header = 0xff888888.toInt(),
+        icon = 0xFFCCCCCC.toInt(),
     )
 
     // Catppuccin Mocha
@@ -59,6 +61,7 @@ object ThemeManager {
         button_2 = 0xFF74C7EC.toInt(),
         danger = 0xFFF38BA8.toInt(),
         header = 0xFFB4BEFE.toInt(),
+        icon = 0xFFCDD6F4.toInt(),
     )
 
 
@@ -77,6 +80,7 @@ object ThemeManager {
         button_2 = 0xFF8BE9FD.toInt(),
         danger = 0xFFFF79C6.toInt(),
         header = 0xFFBD93F9.toInt(),
+        icon = 0xFFF8F8F2.toInt(),
     )
 
     // Melange Dark
@@ -94,6 +98,7 @@ object ThemeManager {
         button_2 = 0xFF85B695.toInt(),
         danger = 0xFFB65C60.toInt(),
         header = 0xFFEBC06D.toInt(),
+        icon = 0xFFECE1D7.toInt(),
     )
 
     // Tokyo Night
@@ -111,6 +116,7 @@ object ThemeManager {
         button_2 = 0xFF2AC3DE.toInt(),
         danger = 0xFFF7768E.toInt(),
         header = 0xFF7AA2F7.toInt(),
+        icon = 0xFFC0CAF5.toInt(),
     )
 
     fun paletteFor(theme: String): Palette = when (theme) {
@@ -164,7 +170,7 @@ object ThemeManager {
         if (view is ImageView) {
             val tint = view.imageTintList?.defaultColor
             if (tint != null) {
-                val mapped = mapColor(context, tint, palette) ?: palette.foreground
+                val mapped = mapColor(context, tint, palette) ?: palette.icon
                 view.imageTintList = android.content.res.ColorStateList.valueOf(mapped)
             }
         }
@@ -231,6 +237,12 @@ object ThemeManager {
             MAKO.foreground, CATPPUCCIN_MOCHA.foreground,
             DRACULA.foreground, MELANGE.foreground, TOKYO_NIGHT.foreground,
             context.resources.getColor(R.color.foreground) -> palette.foreground
+
+            // icon
+            MAKO.icon, CATPPUCCIN_MOCHA.icon,
+            DRACULA.icon, MELANGE.icon, TOKYO_NIGHT.icon,
+            context.resources.getColor(R.color.icon) -> palette.icon
+
 
             else -> null
         }

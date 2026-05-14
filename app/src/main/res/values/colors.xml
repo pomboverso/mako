@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="foreground">#CCCCCC</color>
+    <color name="icon">#CCCCCC</color>
     <color name="bg_1">#141417</color>
     <color name="bg_2">#1f1f29</color>
     <color name="bg_3">#24313b</color>

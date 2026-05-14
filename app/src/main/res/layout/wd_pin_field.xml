@@ -15,6 +15,7 @@
             android:id="@+id/toggle_visibility_img"
             android:layout_width="24sp"
             android:layout_height="24sp"
+            android:tint="@color/icon"
             android:src="@drawable/icon_eye"
             android:contentDescription="Toggle Visibility" />
     </FrameLayout>
@@ -43,6 +44,7 @@
         <ImageView
             android:layout_width="24sp"
             android:layout_height="24sp"
+            android:tint="@color/icon"
             android:src="@drawable/icon_disk"
             android:contentDescription="Save Button" />
     </FrameLayout>
