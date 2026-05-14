@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.ImageView
 import android.widget.RadioButton
 import android.widget.TextView
 import com.rama.mako.R
@@ -147,18 +148,28 @@ object ThemeManager {
         palette: Palette,
         typeface: android.graphics.Typeface?
     ) {
+        // Font + text color
         if (view is TextView) {
             typeface?.let { view.typeface = it }
             when (view) {
                 is RadioButton, is CheckBox -> Unit
                 else -> {
-                    val currentTextColor = view.currentTextColor
-                    val mappedTextColor = mapColor(context, currentTextColor, palette)
-                    view.setTextColor(mappedTextColor ?: palette.foreground)
+                    val mapped = mapColor(context, view.currentTextColor, palette)
+                    view.setTextColor(mapped ?: palette.foreground)
                 }
             }
         }
 
+        // Icon tint on ImageViews
+        if (view is ImageView) {
+            val tint = view.imageTintList?.defaultColor
+            if (tint != null) {
+                val mapped = mapColor(context, tint, palette) ?: palette.foreground
+                view.imageTintList = android.content.res.ColorStateList.valueOf(mapped)
+            }
+        }
+
+        // Background
         val currentColor = resolveDrawableColor(view.background ?: return) ?: return
         val mapped = mapColor(context, currentColor, palette) ?: return
         view.setBackgroundColor(mapped)
@@ -209,7 +220,17 @@ object ThemeManager {
             // disabled
             MAKO.disabled, CATPPUCCIN_MOCHA.disabled,
             DRACULA.disabled, MELANGE.disabled, TOKYO_NIGHT.disabled,
-            context.resources.getColor(R.color.header) -> palette.disabled
+            context.resources.getColor(R.color.disabled) -> palette.disabled
+
+            // header
+            MAKO.header, CATPPUCCIN_MOCHA.header,
+            DRACULA.header, MELANGE.header, TOKYO_NIGHT.header,
+            context.resources.getColor(R.color.header) -> palette.header
+
+            // foreground
+            MAKO.foreground, CATPPUCCIN_MOCHA.foreground,
+            DRACULA.foreground, MELANGE.foreground, TOKYO_NIGHT.foreground,
+            context.resources.getColor(R.color.foreground) -> palette.foreground
 
             else -> null
         }
