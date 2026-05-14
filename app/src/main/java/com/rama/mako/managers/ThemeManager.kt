@@ -123,43 +123,45 @@ object ThemeManager {
     fun applyTheme(context: Context, root: View) {
         val prefs = PrefsManager.getInstance(context)
         val palette = paletteFor(prefs.getTheme())
-        applyRecursively(context, root, palette)
+        val typeface = FontManager.getTypeface(context, prefs.getFontStyle())
+        applyRecursively(context, root, palette, typeface)
     }
 
-    /** Directly tints a TextView that has no background (e.g. list headers). */
-    fun applyTextColor(context: Context, view: android.widget.TextView, colorSlot: ColorSlot) {
-        val palette = paletteFor(PrefsManager.getInstance(context).getTheme())
-        view.setTextColor(when (colorSlot) {
-            ColorSlot.FOREGROUND -> palette.foreground
-            ColorSlot.DISABLED   -> palette.disabled
-            ColorSlot.ACCENT_1   -> palette.accent_1
-        })
-    }
-
-    enum class ColorSlot { FOREGROUND, DISABLED, ACCENT_1 }
-
-    private fun applyRecursively(context: Context, view: View, palette: Palette) {
-        applyToView(context, view, palette)
+    private fun applyRecursively(
+        context: Context,
+        view: View,
+        palette: Palette,
+        typeface: android.graphics.Typeface?
+    ) {
+        applyToView(context, view, palette, typeface)
         if (view is ViewGroup) {
             for (i in 0 until view.childCount) {
-                applyRecursively(context, view.getChildAt(i), palette)
+                applyRecursively(context, view.getChildAt(i), palette, typeface)
             }
         }
     }
 
-    private fun applyToView(context: Context, view: View, palette: Palette) {
-        val bg = view.background ?: return
+    private fun applyToView(
+        context: Context,
+        view: View,
+        palette: Palette,
+        typeface: android.graphics.Typeface?
+    ) {
+        if (view is TextView) {
+            typeface?.let { view.typeface = it }
+            when (view) {
+                is RadioButton, is CheckBox -> Unit
+                else -> {
+                    val currentTextColor = view.currentTextColor
+                    val mappedTextColor = mapColor(context, currentTextColor, palette)
+                    view.setTextColor(mappedTextColor ?: palette.foreground)
+                }
+            }
+        }
 
-        // Map the view's current background color to the matching palette slot
-        val currentColor = resolveDrawableColor(bg) ?: return
-
+        val currentColor = resolveDrawableColor(view.background ?: return) ?: return
         val mapped = mapColor(context, currentColor, palette) ?: return
         view.setBackgroundColor(mapped)
-
-        // Also tint text on views where we set a background
-        if (view is TextView && view !is CheckBox && view !is RadioButton) {
-            view.setTextColor(palette.foreground)
-        }
     }
 
     /**

@@ -64,8 +64,7 @@ abstract class CsActivity : Activity() {
         }
 
         val root = findViewById<View>(android.R.id.content)
-        FontManager.applyFont(this, root)
-        applyCurrentTheme(root)
+        ThemeManager.applyTheme(this, root)
     }
 
     fun refreshFont() {

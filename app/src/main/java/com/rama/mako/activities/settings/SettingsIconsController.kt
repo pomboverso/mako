@@ -96,7 +96,6 @@ class SettingsIconsController(private val activity: SettingsActivity) {
         }
 
         val dialogView = activity.layoutInflater.inflate(R.layout.dialog_pick_icon_pack, null)
-        FontManager.applyFont(activity, dialogView)
         ThemeManager.applyTheme(activity, dialogView)
 
         val dialog = android.app.Dialog(activity).apply {
@@ -122,7 +121,7 @@ class SettingsIconsController(private val activity: SettingsActivity) {
                 view.findViewById<TextView>(R.id.icon_pack_label).text =
                     labelPrefix + iconPack.label
                 view.findViewById<ImageView>(R.id.icon_pack_icon).setImageDrawable(iconPack.icon)
-                FontManager.applyFont(parent.context, view)
+                ThemeManager.applyTheme(parent.context, view)
                 return view
             }
         }

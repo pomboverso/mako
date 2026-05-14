@@ -57,7 +57,6 @@ class SettingsClockController(private val activity: SettingsActivity) {
 
     private fun showAppPickerDialog() {
         val dialogView = activity.layoutInflater.inflate(R.layout.dialog_pick_clock_app, null)
-        FontManager.applyFont(activity, dialogView)
         ThemeManager.applyTheme(activity, dialogView)
 
         val dialog = android.app.Dialog(activity).apply {
@@ -82,7 +81,6 @@ class SettingsClockController(private val activity: SettingsActivity) {
                 view.findViewById<TextView>(R.id.open_app_button).text = app.label
                 view.findViewById<ImageView>(R.id.app_icon)
                     .setImageDrawable(iconManager.getIcon(app))
-                FontManager.applyFont(parent.context, view)
                 ThemeManager.applyTheme(parent.context, view)
                 return view
             }

@@ -19,7 +19,7 @@ object FontManager {
         applyRecursively(root, typeface)
     }
 
-    private fun getTypeface(context: Context, style: String): Typeface? {
+    fun getTypeface(context: Context, style: String): Typeface? {
 
         if (style == PrefsManager.FontStyle.DEFAULT) return null
 

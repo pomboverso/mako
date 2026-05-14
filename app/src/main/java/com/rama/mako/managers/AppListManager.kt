@@ -362,7 +362,6 @@ class AppListManager(
             ?: app.label
 
         val view = LayoutInflater.from(context).inflate(R.layout.dialog_rename_app, null)
-        FontManager.applyFont(context, view)
         ThemeManager.applyTheme(context, view)
         val input = view.findViewById<EditText>(R.id.edit_text)
         val yesButton = view.findViewById<FrameLayout>(R.id.yes_button)
@@ -444,7 +443,6 @@ class AppListManager(
                     }
                 }
 
-                FontManager.applyFont(context, radio)
                 ThemeManager.applyTheme(context, radio)
 
                 radio.setOnClickListener {
@@ -463,7 +461,6 @@ class AppListManager(
 
         closeBtn.setOnClickListener { dialog.dismiss() }
 
-        FontManager.applyFont(context, view)
         ThemeManager.applyTheme(context, view)
         dialog.show()
     }
@@ -490,7 +487,6 @@ class AppListManager(
         actionGroup.setOnClickListener { dialog.dismiss(); showGroupsDialog(app) }
         actionAppSettings.setOnClickListener { dialog.dismiss(); openAppSettings(pkg) }
 
-        FontManager.applyFont(context, view)
         ThemeManager.applyTheme(context, view)
         dialog.window?.setBackgroundDrawable(
             android.graphics.drawable.ColorDrawable(
@@ -551,8 +547,7 @@ class AppListManager(
                         } else ""
 
                         text.text = collapseIndicator + groupName.uppercase()
-                        FontManager.applyFont(context, text)
-                        ThemeManager.applyTextColor(context, text, ThemeManager.ColorSlot.DISABLED)
+                        ThemeManager.applyTheme(context, text)
 
                         if (collapsible) {
                             view.setOnClickListener {
@@ -634,7 +629,6 @@ class AppListManager(
                             true
                         }
 
-                        FontManager.applyFont(context, label)
                         ThemeManager.applyTheme(context, label)
                         view
                     }

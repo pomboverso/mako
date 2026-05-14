@@ -39,7 +39,6 @@ class SettingsGroupsController(private val activity: SettingsActivity) {
 
     private fun addGroupRow(groupId: String, groupLabel: String, container: LinearLayout) {
         val row = activity.layoutInflater.inflate(R.layout.list_item_group, container, false)
-        FontManager.applyFont(activity, row)
         ThemeManager.applyTheme(activity, row)
 
         val name = row.findViewById<EditText>(R.id.group_name)
@@ -148,7 +147,6 @@ class SettingsGroupsController(private val activity: SettingsActivity) {
 
             SettingsUiUtils.setClickWithHaptics(no) { dialog.dismiss() }
 
-            FontManager.applyFont(activity, dialogView)
             ThemeManager.applyTheme(activity, dialogView)
             dialog.show()
             dialog.window?.setLayout(
