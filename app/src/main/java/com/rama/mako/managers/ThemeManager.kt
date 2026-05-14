@@ -160,42 +160,42 @@ object ThemeManager {
             // bg_primary
             MAKO.bg_1, CATPPUCCIN_MOCHA.bg_1,
             DRACULA.bg_1, MELANGE.bg_1, TOKYO_NIGHT.bg_1,
-            context.getColor(R.color.bg_1) -> palette.bg_1
+            context.resources.getColor(R.color.bg_1) -> palette.bg_1
 
             // bg_secondary
             MAKO.bg_2, CATPPUCCIN_MOCHA.bg_2,
             DRACULA.bg_2, MELANGE.bg_2, TOKYO_NIGHT.bg_2,
-            context.getColor(R.color.bg_2) -> palette.bg_2
+            context.resources.getColor(R.color.bg_2) -> palette.bg_2
 
             // bg_tertiary
             MAKO.bg_3, CATPPUCCIN_MOCHA.bg_3,
             DRACULA.bg_3, MELANGE.bg_3, TOKYO_NIGHT.bg_3,
-            context.getColor(R.color.bg_3) -> palette.bg_3
+            context.resources.getColor(R.color.bg_3) -> palette.bg_3
 
             // button_primary
             MAKO.button_1, CATPPUCCIN_MOCHA.button_1,
             DRACULA.button_1, MELANGE.button_1, TOKYO_NIGHT.button_1,
-            context.getColor(R.color.button_1) -> palette.button_1
+            context.resources.getColor(R.color.button_1) -> palette.button_1
 
             // button_secondary
             MAKO.button_2, CATPPUCCIN_MOCHA.button_2,
             DRACULA.button_2, MELANGE.button_2, TOKYO_NIGHT.button_2,
-            context.getColor(R.color.button_2) -> palette.button_2
+            context.resources.getColor(R.color.button_2) -> palette.button_2
 
             // button_danger
             MAKO.danger, CATPPUCCIN_MOCHA.danger,
             DRACULA.danger, MELANGE.danger, TOKYO_NIGHT.danger,
-            context.getColor(R.color.danger) -> palette.danger
+            context.resources.getColor(R.color.danger) -> palette.danger
 
             // input
             MAKO.input, CATPPUCCIN_MOCHA.input,
             DRACULA.input, MELANGE.input, TOKYO_NIGHT.input,
-            context.getColor(R.color.input) -> palette.input
+            context.resources.getColor(R.color.input) -> palette.input
 
             // disabled
             MAKO.disabled, CATPPUCCIN_MOCHA.disabled,
             DRACULA.disabled, MELANGE.disabled, TOKYO_NIGHT.disabled,
-            context.getColor(R.color.header) -> palette.disabled
+            context.resources.getColor(R.color.header) -> palette.disabled
 
             else -> null
         }
