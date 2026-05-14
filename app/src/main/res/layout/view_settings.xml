@@ -212,7 +212,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
-                        android:text="Foreground" />
+                        android:text="@string/theme_foreground_label" />
 
                     <EditText
                         android:id="@+id/fg"
@@ -235,7 +235,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
-                        android:text="Collapsible Header" />
+                        android:text="@string/theme_collapsible_header_label" />
 
                     <EditText
                         android:id="@+id/header"
@@ -258,7 +258,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
-                        android:text="Clock" />
+                        android:text="@string/theme_clock_label" />
 
                     <EditText
                         android:id="@+id/clock"
@@ -281,7 +281,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
-                        android:text="Icons" />
+                        android:text="@string/theme_icons_label" />
 
                     <EditText
                         android:id="@+id/icons"
@@ -304,7 +304,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
-                        android:text="Accent" />
+                        android:text="@string/theme_accent_label" />
 
                     <EditText
                         android:id="@+id/accent"
@@ -327,7 +327,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
-                        android:text="Background 1" />
+                        android:text="@string/theme_background_1_label" />
 
                     <EditText
                         android:id="@+id/bg_1"
@@ -350,7 +350,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
-                        android:text="Backgrouund 2" />
+                        android:text="@string/theme_background_2_label" />
 
                     <EditText
                         android:id="@+id/bg_2"
@@ -373,7 +373,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
-                        android:text="Background 3" />
+                        android:text="@string/theme_background_3_label" />
 
                     <EditText
                         android:id="@+id/bg_3"
@@ -396,7 +396,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
-                        android:text="Input Background" />
+                        android:text="@string/theme_input_background_label" />
 
                     <EditText
                         android:id="@+id/input"
@@ -419,7 +419,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
-                        android:text="Button 1 Background" />
+                        android:text="@string/theme_button_1_background_label" />
 
                     <EditText
                         android:id="@+id/btn_1"
@@ -442,7 +442,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
-                        android:text="Button 2 Background" />
+                        android:text="@string/theme_button_2_background_label" />
 
                     <EditText
                         android:id="@+id/btn_2"
@@ -465,7 +465,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
-                        android:text="Danger" />
+                        android:text="@string/theme_danger_label" />
 
                     <EditText
                         android:id="@+id/danger"
@@ -490,8 +490,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
                         android:background="@color/button_2"
-                        android:text="Apply Custom Theme" />
-
+                        android:text="@string/theme_apply_custom_label" />
                 </LinearLayout>
             </com.rama.mako.widgets.WdCollapsibleSection>
             <!--Background-->

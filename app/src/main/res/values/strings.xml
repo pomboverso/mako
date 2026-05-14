@@ -154,6 +154,9 @@
     <string name="background_wallpaper_label">Wallpaper</string>
     <string name="background_dynamic_label">Dynamic colour</string>
     <string name="background_amoled_label">AMOLED black</string>
+    <string name="lock_settings_label">Lock Settings</string>
+    <string name="randomized_keypad_label">Randomized keypad</string>
+
     <string name="theme_catppuccin_mocha_label">Catppuccin Mocha</string>
     <string name="theme_rama_label">Rama</string>
     <string name="theme_mako_label">Mako</string>
@@ -161,8 +164,19 @@
     <string name="theme_melange_label">Mélange Dark</string>
     <string name="theme_tokyo_night_label">Tokyo Night</string>
     <string name="theme_custom_label">Custom</string>
-    <string name="lock_settings_label">Lock Settings</string>
-    <string name="randomized_keypad_label">Randomized keypad</string>
+    <string name="theme_foreground_label">Foreground</string>
+    <string name="theme_collapsible_header_label">Collapsible Header</string>
+    <string name="theme_clock_label">Clock</string>
+    <string name="theme_icons_label">Icons</string>
+    <string name="theme_accent_label">Accent</string>
+    <string name="theme_background_1_label">Background 1</string>
+    <string name="theme_background_2_label">Background 2</string>
+    <string name="theme_background_3_label">Background 3</string>
+    <string name="theme_input_background_label">Input Background</string>
+    <string name="theme_button_1_background_label">Button 1 Background</string>
+    <string name="theme_button_2_background_label">Button 2 Background</string>
+    <string name="theme_danger_label">Danger</string>
+    <string name="theme_apply_custom_label">Apply Custom Theme</string>
 
     <!-- Dialog :: Context Menu App -->
     <string name="context_menu_theme_label">Theme</string>
