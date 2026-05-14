@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/bg_primary"
+    android:background="@color/bg_1"
     android:gravity="center_horizontal">
 
     <ScrollView
@@ -310,6 +310,6 @@
         android:id="@+id/close_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/button_primary"
+        android:background="@color/button_1"
         android:text="@string/go_back_label" />
 </LinearLayout>

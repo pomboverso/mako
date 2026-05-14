@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:padding="16sp"
     android:orientation="vertical"
-    android:background="@color/bg_primary"
+    android:background="@color/bg_1"
     android:focusableInTouchMode="true">
 
     <TextView
@@ -23,7 +23,7 @@
         android:layout_marginBottom="8sp"
         android:padding="16sp"
         android:orientation="vertical"
-        android:background="@color/bg_secondary"
+        android:background="@color/bg_2"
         android:focusableInTouchMode="true">
 
         <EditText
@@ -40,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_marginBottom="8sp"
         android:layout_height="wrap_content"
-        android:background="@color/button_danger"
+        android:background="@color/danger"
         android:text="@string/save" />
 
     <com.rama.mako.widgets.WdButton
@@ -48,13 +48,13 @@
         android:layout_width="match_parent"
         android:layout_marginBottom="8sp"
         android:layout_height="wrap_content"
-        android:background="@color/button_danger"
+        android:background="@color/danger"
         android:text="@string/reset" />
 
     <com.rama.mako.widgets.WdButton
         android:id="@+id/no_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/button_primary"
+        android:background="@color/button_1"
         android:text="@string/cancel" />
 </LinearLayout>

@@ -1,7 +1,6 @@
 package com.rama.mako.managers
 
 import android.content.Context
-import android.graphics.Color
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
@@ -13,51 +12,51 @@ object ThemeManager {
 
     data class Palette(
         val foreground: Int,
-        val bgPrimary: Int,
-        val bgSecondary: Int,
-        val bgTertiary: Int,
-        val accentPrimary: Int,
-        val accentSecondary: Int,
-        val accentTertiary: Int,
+        val bg_1: Int,
+        val bg_2: Int,
+        val bg_3: Int,
+        val accent_1: Int,
+        val accent_2: Int,
+        val accent_3: Int,
         val disabled: Int,
         val input: Int,
-        val buttonPrimary: Int,
-        val buttonSecondary: Int,
-        val buttonDanger: Int,
+        val button_1: Int,
+        val button_2: Int,
+        val danger: Int,
         val header: Int,
     )
 
     // Mako (default)
     private val MAKO = Palette(
         foreground = 0xFFCCCCCC.toInt(),
-        bgPrimary = 0xFF141417.toInt(),
-        bgSecondary = 0xFF1F1F29.toInt(),
-        bgTertiary = 0xFF24313b.toInt(),
-        accentPrimary = 0xFFABD68E.toInt(),
-        accentSecondary = 0xFFCDC58B.toInt(),
-        accentTertiary = 0xFFDCD07C.toInt(),
+        bg_1 = 0xFF141417.toInt(),
+        bg_2 = 0xFF1F1F29.toInt(),
+        bg_3 = 0xFF24313b.toInt(),
+        accent_1 = 0xFFABD68E.toInt(),
+        accent_2 = 0xFFCDC58B.toInt(),
+        accent_3 = 0xFFDCD07C.toInt(),
         disabled = 0xFF888888.toInt(),
         input = 0xFF16161F.toInt(),
-        buttonPrimary = 0xFF459984.toInt(),
-        buttonSecondary = 0xFF6194AF.toInt(),
-        buttonDanger = 0xFFDC6364.toInt(),
+        button_1 = 0xFF459984.toInt(),
+        button_2 = 0xFF6194AF.toInt(),
+        danger = 0xFFDC6364.toInt(),
         header = 0xff888888.toInt(),
     )
 
     // Catppuccin Mocha
     private val CATPPUCCIN_MOCHA = Palette(
         foreground = 0xFFCDD6F4.toInt(),
-        bgPrimary = 0xFF1E1E2E.toInt(),
-        bgSecondary = 0xFF313244.toInt(),
-        bgTertiary = 0xFF45475A.toInt(),
-        accentPrimary = 0xFFA6E3A1.toInt(),
-        accentSecondary = 0xFFF9E2AF.toInt(),
-        accentTertiary = 0xFFFFD700.toInt(),
+        bg_1 = 0xFF1E1E2E.toInt(),
+        bg_2 = 0xFF313244.toInt(),
+        bg_3 = 0xFF45475A.toInt(),
+        accent_1 = 0xFFA6E3A1.toInt(),
+        accent_2 = 0xFFF9E2AF.toInt(),
+        accent_3 = 0xFFFFD700.toInt(),
         disabled = 0xFF6C7086.toInt(),
         input = 0xFF181825.toInt(),
-        buttonPrimary = 0xFF89B4FA.toInt(),
-        buttonSecondary = 0xFF74C7EC.toInt(),
-        buttonDanger = 0xFFF38BA8.toInt(),
+        button_1 = 0xFF89B4FA.toInt(),
+        button_2 = 0xFF74C7EC.toInt(),
+        danger = 0xFFF38BA8.toInt(),
         header = 0xFFB4BEFE.toInt(),
     )
 
@@ -65,51 +64,51 @@ object ThemeManager {
     // Dracula
     private val DRACULA = Palette(
         foreground = 0xFFF8F8F2.toInt(),
-        bgPrimary = 0xFF282A36.toInt(),
-        bgSecondary = 0xFF343746.toInt(),
-        bgTertiary = 0xFF424450.toInt(),
-        accentPrimary = 0xFF50FA7B.toInt(),
-        accentSecondary = 0xFFF1FA8C.toInt(),
-        accentTertiary = 0xFFFFB86C.toInt(),
+        bg_1 = 0xFF282A36.toInt(),
+        bg_2 = 0xFF343746.toInt(),
+        bg_3 = 0xFF424450.toInt(),
+        accent_1 = 0xFF50FA7B.toInt(),
+        accent_2 = 0xFFF1FA8C.toInt(),
+        accent_3 = 0xFFFFB86C.toInt(),
         disabled = 0xFF6272A4.toInt(),
         input = 0xFF21222C.toInt(),
-        buttonPrimary = 0xFFBD93F9.toInt(),
-        buttonSecondary = 0xFF8BE9FD.toInt(),
-        buttonDanger = 0xFFFF79C6.toInt(),
+        button_1 = 0xFFBD93F9.toInt(),
+        button_2 = 0xFF8BE9FD.toInt(),
+        danger = 0xFFFF79C6.toInt(),
         header = 0xFFBD93F9.toInt(),
     )
 
     // Melange Dark
     private val MELANGE = Palette(
         foreground = 0xFFECE1D7.toInt(),
-        bgPrimary = 0xFF292522.toInt(),
-        bgSecondary = 0xFF352F2A.toInt(),
-        bgTertiary = 0xFF403A34.toInt(),
-        accentPrimary = 0xFF78997A.toInt(),
-        accentSecondary = 0xFFEBC06D.toInt(),
-        accentTertiary = 0xFFE49B5D.toInt(),
+        bg_1 = 0xFF292522.toInt(),
+        bg_2 = 0xFF352F2A.toInt(),
+        bg_3 = 0xFF403A34.toInt(),
+        accent_1 = 0xFF78997A.toInt(),
+        accent_2 = 0xFFEBC06D.toInt(),
+        accent_3 = 0xFFE49B5D.toInt(),
         disabled = 0xFF867462.toInt(),
         input = 0xFF211E1B.toInt(),
-        buttonPrimary = 0xFF7F91B2.toInt(),
-        buttonSecondary = 0xFF85B695.toInt(),
-        buttonDanger = 0xFFB65C60.toInt(),
+        button_1 = 0xFF7F91B2.toInt(),
+        button_2 = 0xFF85B695.toInt(),
+        danger = 0xFFB65C60.toInt(),
         header = 0xFFEBC06D.toInt(),
     )
 
     // Tokyo Night
     private val TOKYO_NIGHT = Palette(
         foreground = 0xFFC0CAF5.toInt(),
-        bgPrimary = 0xFF1A1B26.toInt(),
-        bgSecondary = 0xFF24283B.toInt(),
-        bgTertiary = 0xFF292E42.toInt(),
-        accentPrimary = 0xFF9ECE6A.toInt(),
-        accentSecondary = 0xFFE0AF68.toInt(),
-        accentTertiary = 0xFFFF9E64.toInt(),
+        bg_1 = 0xFF1A1B26.toInt(),
+        bg_2 = 0xFF24283B.toInt(),
+        bg_3 = 0xFF292E42.toInt(),
+        accent_1 = 0xFF9ECE6A.toInt(),
+        accent_2 = 0xFFE0AF68.toInt(),
+        accent_3 = 0xFFFF9E64.toInt(),
         disabled = 0xFF565F89.toInt(),
         input = 0xFF16161E.toInt(),
-        buttonPrimary = 0xFF7AA2F7.toInt(),
-        buttonSecondary = 0xFF2AC3DE.toInt(),
-        buttonDanger = 0xFFF7768E.toInt(),
+        button_1 = 0xFF7AA2F7.toInt(),
+        button_2 = 0xFF2AC3DE.toInt(),
+        danger = 0xFFF7768E.toInt(),
         header = 0xFF7AA2F7.toInt(),
     )
 
@@ -159,34 +158,34 @@ object ThemeManager {
     private fun mapColor(context: Context, color: Int, palette: Palette): Int? {
         return when (color) {
             // bg_primary
-            MAKO.bgPrimary, CATPPUCCIN_MOCHA.bgPrimary,
-            DRACULA.bgPrimary, MELANGE.bgPrimary, TOKYO_NIGHT.bgPrimary,
-            context.getColor(R.color.bg_primary) -> palette.bgPrimary
+            MAKO.bg_1, CATPPUCCIN_MOCHA.bg_1,
+            DRACULA.bg_1, MELANGE.bg_1, TOKYO_NIGHT.bg_1,
+            context.getColor(R.color.bg_1) -> palette.bg_1
 
             // bg_secondary
-            MAKO.bgSecondary, CATPPUCCIN_MOCHA.bgSecondary,
-            DRACULA.bgSecondary, MELANGE.bgSecondary, TOKYO_NIGHT.bgSecondary,
-            context.getColor(R.color.bg_secondary) -> palette.bgSecondary
+            MAKO.bg_2, CATPPUCCIN_MOCHA.bg_2,
+            DRACULA.bg_2, MELANGE.bg_2, TOKYO_NIGHT.bg_2,
+            context.getColor(R.color.bg_2) -> palette.bg_2
 
             // bg_tertiary
-            MAKO.bgTertiary, CATPPUCCIN_MOCHA.bgTertiary,
-            DRACULA.bgTertiary, MELANGE.bgTertiary, TOKYO_NIGHT.bgTertiary,
-            context.getColor(R.color.bg_tertiary) -> palette.bgTertiary
+            MAKO.bg_3, CATPPUCCIN_MOCHA.bg_3,
+            DRACULA.bg_3, MELANGE.bg_3, TOKYO_NIGHT.bg_3,
+            context.getColor(R.color.bg_3) -> palette.bg_3
 
             // button_primary
-            MAKO.buttonPrimary, CATPPUCCIN_MOCHA.buttonPrimary,
-            DRACULA.buttonPrimary, MELANGE.buttonPrimary, TOKYO_NIGHT.buttonPrimary,
-            context.getColor(R.color.button_primary) -> palette.buttonPrimary
+            MAKO.button_1, CATPPUCCIN_MOCHA.button_1,
+            DRACULA.button_1, MELANGE.button_1, TOKYO_NIGHT.button_1,
+            context.getColor(R.color.button_1) -> palette.button_1
 
             // button_secondary
-            MAKO.buttonSecondary, CATPPUCCIN_MOCHA.buttonSecondary,
-            DRACULA.buttonSecondary, MELANGE.buttonSecondary, TOKYO_NIGHT.buttonSecondary,
-            context.getColor(R.color.button_secondary) -> palette.buttonSecondary
+            MAKO.button_2, CATPPUCCIN_MOCHA.button_2,
+            DRACULA.button_2, MELANGE.button_2, TOKYO_NIGHT.button_2,
+            context.getColor(R.color.button_2) -> palette.button_2
 
             // button_danger
-            MAKO.buttonDanger, CATPPUCCIN_MOCHA.buttonDanger,
-            DRACULA.buttonDanger, MELANGE.buttonDanger, TOKYO_NIGHT.buttonDanger,
-            context.getColor(R.color.button_danger) -> palette.buttonDanger
+            MAKO.danger, CATPPUCCIN_MOCHA.danger,
+            DRACULA.danger, MELANGE.danger, TOKYO_NIGHT.danger,
+            context.getColor(R.color.danger) -> palette.danger
 
             // input
             MAKO.input, CATPPUCCIN_MOCHA.input,

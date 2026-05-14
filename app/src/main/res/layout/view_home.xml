@@ -130,7 +130,7 @@
             android:paddingBottom="16sp"
             android:paddingStart="8sp"
             android:paddingEnd="8sp"
-            android:background="@color/bg_secondary"
+            android:background="@color/bg_2"
             android:textColor="?attr/foregroundColor"
             android:textColorHint="@color/disabled"
             android:hint="@string/search_apps_hint"

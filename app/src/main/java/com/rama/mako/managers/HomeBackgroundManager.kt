@@ -49,9 +49,10 @@ class HomeBackgroundManager(context: Context) {
             PrefsManager.BackgroundMode.WALLPAPER -> ColorDrawable(
                 ContextCompat.getColor(
                     appContext,
-                    R.color.bg_primary
+                    R.color.bg_1
                 )
             )
+
             PrefsManager.BackgroundMode.DYNAMIC -> ColorDrawable(resolveDynamicSolidColor())
             PrefsManager.BackgroundMode.AMOLED -> ColorDrawable(
                 ContextCompat.getColor(
@@ -60,7 +61,7 @@ class HomeBackgroundManager(context: Context) {
                 )
             )
 
-            else -> ColorDrawable(ContextCompat.getColor(appContext, R.color.bg_primary))
+            else -> ColorDrawable(ContextCompat.getColor(appContext, R.color.bg_1))
         }
     }
 

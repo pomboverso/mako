@@ -81,8 +81,8 @@ abstract class CsActivity : Activity() {
 
     private fun applyNavBarColor() {
         val palette = ThemeManager.paletteFor(prefs.getTheme())
-        window.navigationBarColor = palette.bgPrimary
-        window.setBackgroundDrawable(android.graphics.drawable.ColorDrawable(palette.bgPrimary))
+        window.navigationBarColor = palette.bg_1
+        window.setBackgroundDrawable(android.graphics.drawable.ColorDrawable(palette.bg_1))
     }
 
     protected fun updateSystemBars(root: View) {
