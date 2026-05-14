@@ -26,6 +26,7 @@ object ThemeManager {
         val danger: Int,
         val header: Int,
         val icon: Int,
+        val clock: Int,
     )
 
     // Mako (default)
@@ -44,6 +45,7 @@ object ThemeManager {
         danger = 0xFFDC6364.toInt(),
         header = 0xff888888.toInt(),
         icon = 0xFFCCCCCC.toInt(),
+        clock = 0xFFCCCCCC.toInt(),
     )
 
     // Catppuccin Mocha
@@ -62,6 +64,7 @@ object ThemeManager {
         danger = 0xFFF38BA8.toInt(),
         header = 0xFFB4BEFE.toInt(),
         icon = 0xFFCDD6F4.toInt(),
+        clock = 0xFFB4BEFE.toInt(),
     )
 
 
@@ -81,6 +84,7 @@ object ThemeManager {
         danger = 0xFFFF79C6.toInt(),
         header = 0xFFBD93F9.toInt(),
         icon = 0xFFF8F8F2.toInt(),
+        clock = 0xFF8BE9FD.toInt(),
     )
 
     // Melange Dark
@@ -99,6 +103,7 @@ object ThemeManager {
         danger = 0xFFB65C60.toInt(),
         header = 0xFFEBC06D.toInt(),
         icon = 0xFFECE1D7.toInt(),
+        clock = 0xFFEBC06D.toInt(),
     )
 
     // Tokyo Night
@@ -117,6 +122,7 @@ object ThemeManager {
         danger = 0xFFF7768E.toInt(),
         header = 0xFF7AA2F7.toInt(),
         icon = 0xFFC0CAF5.toInt(),
+        clock = 0xFF7AA2F7.toInt(),
     )
 
     fun paletteFor(theme: String): Palette = when (theme) {
@@ -231,7 +237,7 @@ object ThemeManager {
             // header
             MAKO.header, CATPPUCCIN_MOCHA.header,
             DRACULA.header, MELANGE.header, TOKYO_NIGHT.header,
-            context.resources.getColor(R.color.header) -> palette.header
+            context.resources.getColor(R.color.collapse_header) -> palette.header
 
             // foreground
             MAKO.foreground, CATPPUCCIN_MOCHA.foreground,
@@ -243,6 +249,10 @@ object ThemeManager {
             DRACULA.icon, MELANGE.icon, TOKYO_NIGHT.icon,
             context.resources.getColor(R.color.icon) -> palette.icon
 
+            // clock
+            MAKO.clock, CATPPUCCIN_MOCHA.clock,
+            DRACULA.clock, MELANGE.clock, TOKYO_NIGHT.clock,
+            context.resources.getColor(R.color.clock) -> palette.clock
 
             else -> null
         }
