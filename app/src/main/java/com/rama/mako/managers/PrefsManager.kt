@@ -73,9 +73,25 @@ class PrefsManager private constructor(context: Context) {
         const val CLOCK_APP = "clock:app"
         const val FONT_STYLE = "font:style"
         const val APP_LANGUAGE = "app:language"
-        const val APP_THEME = "app:theme"
         const val MIGRATION_ICON_SOURCE_RADIO = "migration:icon_source_radio"
         const val SYSTEM_BAR_VISIBLE = "system:bar:visible"
+
+        const val APP_THEME_NAME = "app:theme:name"
+        const val APP_THEME_FOREGROUND = "app:theme:foreground"
+        const val APP_THEME_BG_1 = "app:theme:bg_1"
+        const val APP_THEME_BG_2 = "app:theme:bg_2"
+        const val APP_THEME_BG_3 = "app:theme:bg_3"
+        const val APP_THEME_ACCENT_1 = "app:theme:accent_1"
+        const val APP_THEME_ACCENT_2 = "app:theme:accent_2"
+        const val APP_THEME_ACCENT_3 = "app:theme:accent_3"
+        const val APP_THEME_DISABLED = "app:theme:disabled"
+        const val APP_THEME_INPUT = "app:theme:input"
+        const val APP_THEME_BUTTON_1 = "app:theme:button_1"
+        const val APP_THEME_BUTTON_2 = "app:theme:button_2"
+        const val APP_THEME_DANGER = "app:theme:danger"
+        const val APP_THEME_HEADER = "app:theme:header"
+        const val APP_THEME_ICON = "app:theme:icon"
+        const val APP_THEME_CLOCK = "app:theme:clock"
 
         const val SECURITY_KEYPAD_VISIBLE = "security:keypad:visible"
         const val SECURITY_KEYPAD_RANDOMIZED = "security:keypad:randomized"
@@ -199,7 +215,7 @@ class PrefsManager private constructor(context: Context) {
                 .putString(PrefKeys.HOME_BACKGROUND_MODE, BackgroundMode.DEFAULT)
                 .putBoolean(PrefKeys.SYSTEM_BAR_VISIBLE, false)
 
-                .putString(PrefKeys.APP_THEME, Theme.MAKO_OFF)
+                .putString(PrefKeys.APP_THEME_NAME, Theme.MAKO_OFF)
 
                 .putBoolean(PrefKeys.BATTERY_VISIBLE, true)
                 .putBoolean(PrefKeys.BATTERY_TEMPERATURE, true)
@@ -463,10 +479,10 @@ class PrefsManager private constructor(context: Context) {
         prefs.edit().putString(PrefKeys.FONT_STYLE, style).apply()
 
     fun getTheme(): String =
-        prefs.getString(PrefKeys.APP_THEME, "") ?: ""
+        prefs.getString(PrefKeys.APP_THEME_NAME, "") ?: ""
 
     fun setTheme(style: String) =
-        prefs.edit().putString(PrefKeys.APP_THEME, style).apply()
+        prefs.edit().putString(PrefKeys.APP_THEME_NAME, style).apply()
 
     fun getAppLanguage(): String {
         return prefs.getString(PrefKeys.APP_LANGUAGE, Language.SYSTEM) ?: Language.SYSTEM

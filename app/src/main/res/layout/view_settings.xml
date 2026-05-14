@@ -465,6 +465,7 @@
                         android:background="@color/input"
                         android:maxLines="1"
                         android:singleLine="true"
+                        android:layout_marginBottom="8sp"
                         android:textSize="16sp"
                         android:paddingTop="16sp"
                         android:paddingBottom="16sp"
@@ -473,6 +474,14 @@
                         android:inputType="textNoSuggestions"
                         android:maxLength="7"
                         android:hint="#RRGGBB" />
+
+                    <com.rama.mako.widgets.WdButton
+                        android:id="@+id/save_custom_theme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8sp"
+                        android:background="@color/button_2"
+                        android:text="Apply Custom Theme" />
 
                 </LinearLayout>
             </com.rama.mako.widgets.WdCollapsibleSection>
