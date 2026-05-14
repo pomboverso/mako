@@ -94,6 +94,7 @@ class PrefsManager private constructor(context: Context) {
         const val SETTINGS_SECTION_DATA = "settings:section:data"
         const val SETTINGS_SECTION_APPS = "settings:section:apps"
         const val SETTINGS_SECTION_SECURITY = "settings:section:apps"
+        const val SETTINGS_SECTION_THEMES = "settings:section:themes"
 
         fun appKey(pkg: String, userHandle: UserHandle): String {
             val userId = userHandle.hashCode()

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/settings_root"
@@ -112,6 +112,40 @@
                     android:background="@color/button_secondary"
                     android:text="@string/add_group_label" />
 
+            </com.rama.mako.widgets.WdCollapsibleSection>
+
+            <!--Themes-->
+            <com.rama.mako.widgets.WdCollapsibleSection
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:key="SETTINGS_SECTION_THEMES"
+                app:label="@string/themes_header"
+                app:defaultExpanded="true">
+
+                <RadioGroup
+                    android:id="@+id/themes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/bg_secondary"
+                    android:padding="16sp">
+
+                    <RadioButton
+                        android:id="@+id/theme_catppuccin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/background_theme_catppuccin_label"
+                        android:textColor="@color/foreground"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="8sp" />
+
+                    <RadioButton
+                        android:id="@+id/theme_mako"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/background_theme_mako_label"
+                        android:textColor="@color/foreground"
+                        android:textSize="16sp" />
+                </RadioGroup>
             </com.rama.mako.widgets.WdCollapsibleSection>
             <!--Background-->
             <com.rama.mako.widgets.WdCollapsibleSection

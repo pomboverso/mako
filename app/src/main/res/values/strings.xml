@@ -83,6 +83,7 @@
     <string name="security_header">Security</string>
     <string name="system_header">System</string>
     <string name="background_header">Background</string>
+    <string name="themes_header">Themes</string>
 
     <string name="activity_settings_header">Settings</string>
     <string name="activity_about_mako_header">About Mako</string>
@@ -153,6 +154,8 @@
     <string name="background_wallpaper_label">Wallpaper</string>
     <string name="background_dynamic_label">Dynamic colour</string>
     <string name="background_amoled_label">AMOLED black</string>
+    <string name="background_theme_catppuccin_label">Catppuccin</string>
+    <string name="background_theme_mako_label">Mako</string>
     <string name="lock_settings_label">Lock Settings</string>
     <string name="randomized_keypad_label">Randomized keypad</string>
 

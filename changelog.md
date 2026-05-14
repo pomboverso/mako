@@ -1,5 +1,9 @@
 # Changelog
 
+## 38
+
+- Themes
+
 ## 37
 
 - Missing font on radio group for dialog_group_delete
