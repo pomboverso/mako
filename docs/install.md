@@ -1,10 +1,19 @@
 # Commands
 
+## Base Android Studio Commands
+
+### Start App
+```
+./gradlew installBaseDebug &&
+adb shell am start -n com.rama.mako.debug/com.rama.mako.activities.MainActivity &&
+adb logcat --pid=$(adb shell pidof -s com.rama.mako.debug)
+```
+
 ## Building
 
 ### Debug build
 ```
-./gradlew assembleDebug
+./gradlew assembleBaseDebug
 ```
 
 ### Release APK (unsigned)
@@ -21,7 +30,7 @@
 
 ### Install debug APK directly to connected device
 ```
-./gradlew installDebug
+./gradlew installBaseDebug
 ```
 
 ### Or manually with adb
@@ -31,7 +40,7 @@ adb install app/build/outputs/apk/debug/app-debug.apk
 
 ### Launch the app after install
 ```
-adb shell am start -n com.yourpackage/.MainActivity
+adb shell am start -n com.rama.mako/.activities.MainActivity
 ```
 
 ## Gradle
