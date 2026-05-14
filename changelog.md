@@ -2,7 +2,10 @@
 
 ## 38
 
-- Themes
+- Adding Catppuccin Mocha Theme
+- Adding Dracula Theme
+- Adding Mélange Dark Theme
+- Adding Tokyo Night Theme
 
 ## 37
 
