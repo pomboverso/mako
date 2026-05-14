@@ -25,7 +25,7 @@ minimum by emphasizing clarity and intentional interaction.
     - Custom app icon support improvements
     - Wallpaper functionality
 - [etwasmitbaum](https://github.com/etwasmitbaum)
-  - Search bar always on display
+    - Search bar always on display
 
 ---
 
@@ -54,5 +54,52 @@ Icons used in this project:
     - License link: https://creativecommons.org/licenses/by/4.0/
 
 ---
+
+## Theme Attribution
+
+This project includes themes inspired by or derived from the following open-source theme projects.
+
+### Catppuccin
+
+- Theme name: **Catppuccin**
+- Authors: [Catppuccin Contributors](https://github.com/catppuccin)
+- Source: https://github.com/catppuccin
+- Website: https://catppuccin.com
+- License: **MIT**
+- License link: https://opensource.org/licenses/MIT
+
+---
+
+### Dracula
+
+- Theme name: **Dracula**
+- Authors: [Dracula Contributors](https://github.com/dracula)
+- Source: https://github.com/dracula
+- Website: https://draculatheme.com
+- License: **MIT**
+- License link: https://opensource.org/licenses/MIT
+
+---
+
+### Tokyo Night
+
+- Theme name: **Tokyo Night**
+- Author: [enkia](https://github.com/enkia)
+- Source: https://github.com/enkia/tokyo-night-vscode-theme
+- License: **MIT**
+- License link: https://opensource.org/licenses/MIT
+
+---
+
+### Mélange
+
+- Theme name: **Mélange**
+- Author: [savq](https://github.com/savq)
+- Source: https://github.com/savq/melange-nvim
+- License: **MIT**
+- License link: https://opensource.org/licenses/MIT
+
+The original licenses apply to their respective theme definitions, palettes, and related assets
+where applicable.
 
 [Go Back To Readme](../readme.md)
