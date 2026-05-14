@@ -71,6 +71,7 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
                 R.id.theme_mako -> prefs.setTheme(PrefsManager.Theme.MAKO)
                 R.id.theme_catppuccin -> prefs.setTheme(PrefsManager.Theme.CATPPUCCIN)
             }
+            activity.recreate()
         }
     }
 

@@ -80,6 +80,7 @@ class MainActivity : CsActivity() {
 
         rootView = findViewById(R.id.root)
         applyEdgeToEdgePadding(rootView)
+        applyCurrentTheme(rootView)
 
         // --- Prefs ---
         homeBackgroundManager = HomeBackgroundManager(this)
