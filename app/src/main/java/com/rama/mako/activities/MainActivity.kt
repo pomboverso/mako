@@ -29,6 +29,7 @@ import com.rama.mako.managers.BatteryManager
 import com.rama.mako.managers.ClockManager
 import com.rama.mako.managers.HomeBackgroundManager
 import com.rama.mako.managers.PrefsManager
+import com.rama.mako.managers.ThemeManager
 
 class MainActivity : CsActivity() {
 
@@ -81,6 +82,7 @@ class MainActivity : CsActivity() {
         rootView = findViewById(R.id.root)
         applyEdgeToEdgePadding(rootView)
         applyCurrentTheme(rootView)
+        val palette = ThemeManager.paletteFor(prefs.getTheme())
 
         // --- Prefs ---
         homeBackgroundManager = HomeBackgroundManager(this)
@@ -116,6 +118,8 @@ class MainActivity : CsActivity() {
             }
         }
         appListManager.setup()
+
+        timeText.setTextColor(palette.clock)
 
         val appLayout = findViewById<LinearLayout>(R.id.apps_layout)
         appLayout.setOnLongClickListener {

@@ -62,6 +62,7 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
 
         when (prefs.getTheme()) {
             PrefsManager.Theme.MAKO -> group.check(R.id.theme_mako)
+            PrefsManager.Theme.MAKO_OFF -> group.check(R.id.theme_mako_off)
             PrefsManager.Theme.CATPPUCCIN_MOCHA -> group.check(R.id.theme_catppuccin_mocha)
             PrefsManager.Theme.DRACULA -> group.check(R.id.theme_dracula)
             PrefsManager.Theme.MELANGE -> group.check(R.id.theme_melange)
@@ -72,6 +73,7 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
         group.setOnCheckedChangeListener { _, id ->
             when (id) {
                 R.id.theme_mako -> prefs.setTheme(PrefsManager.Theme.MAKO)
+                R.id.theme_mako_off -> prefs.setTheme(PrefsManager.Theme.MAKO_OFF)
                 R.id.theme_catppuccin_mocha -> prefs.setTheme(PrefsManager.Theme.CATPPUCCIN_MOCHA)
                 R.id.theme_dracula -> prefs.setTheme(PrefsManager.Theme.DRACULA)
                 R.id.theme_melange -> prefs.setTheme(PrefsManager.Theme.MELANGE)

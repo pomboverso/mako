@@ -130,6 +130,15 @@
                     android:padding="16sp">
 
                     <RadioButton
+                        android:id="@+id/theme_mako_off"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/theme_mako_off_label"
+                        android:textColor="@color/foreground"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="8sp" />
+
+                    <RadioButton
                         android:id="@+id/theme_mako"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

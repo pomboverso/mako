@@ -156,6 +156,7 @@ class PrefsManager private constructor(context: Context) {
 
     object Theme {
         const val MAKO = "mako"
+        const val MAKO_OFF = "mako_off"
         const val CATPPUCCIN_MOCHA = "catppuccin_mocha"
         const val DRACULA = "dracula"
         const val MELANGE = "melange"
@@ -198,7 +199,7 @@ class PrefsManager private constructor(context: Context) {
                 .putString(PrefKeys.HOME_BACKGROUND_MODE, BackgroundMode.DEFAULT)
                 .putBoolean(PrefKeys.SYSTEM_BAR_VISIBLE, false)
 
-                .putString(PrefKeys.APP_THEME, Theme.MAKO)
+                .putString(PrefKeys.APP_THEME, Theme.MAKO_OFF)
 
                 .putBoolean(PrefKeys.BATTERY_VISIBLE, true)
                 .putBoolean(PrefKeys.BATTERY_TEMPERATURE, true)
