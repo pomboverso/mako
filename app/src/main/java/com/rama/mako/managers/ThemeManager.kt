@@ -48,22 +48,22 @@ object ThemeManager {
         clock = 0xFFCCCCCC.toInt(),
     )
 
-    // Mako Neon
+    // Mako Forest
     private val MAKO = Palette(
-        foreground = 0xFFCCCCCC.toInt(),
-        bg_1 = 0xFF141417.toInt(),
-        bg_2 = 0xFF1F1F29.toInt(),
-        bg_3 = 0xFF24313b.toInt(),
+        foreground = 0xFFcbdecd.toInt(),
+        bg_1 = 0xFF0e190e.toInt(),
+        bg_2 = 0xFF1f2920.toInt(),
+        bg_3 = 0xFF2d3b24.toInt(),
         accent_1 = 0xFFABD68E.toInt(),
         accent_2 = 0xFFCDC58B.toInt(),
         accent_3 = 0xFFDCD07C.toInt(),
         disabled = 0xFF888888.toInt(),
-        input = 0xFF16161F.toInt(),
-        button_1 = 0xFF459984.toInt(),
-        button_2 = 0xFF6194AF.toInt(),
+        input = 0xFF161f16.toInt(),
+        button_1 = 0xFF45995a.toInt(),
+        button_2 = 0xFFb8e39d.toInt(),
         danger = 0xFFDC6364.toInt(),
         header = 0xff888888.toInt(),
-        icon = 0xFFCCCCCC.toInt(),
+        icon = 0xFFd4efc3.toInt(),
         clock = 0xFFABD68E.toInt(),
     )
 
@@ -144,15 +144,16 @@ object ThemeManager {
         clock = 0xFF7AA2F7.toInt(),
     )
 
-    fun paletteFor(theme: String, context: android.content.Context? = null): Palette = when (theme) {
-        PrefsManager.Theme.MAKO -> MAKO
-        PrefsManager.Theme.CATPPUCCIN_MOCHA -> CATPPUCCIN_MOCHA
-        PrefsManager.Theme.DRACULA -> DRACULA
-        PrefsManager.Theme.MELANGE -> MELANGE
-        PrefsManager.Theme.TOKYO_NIGHT -> TOKYO_NIGHT
-        PrefsManager.Theme.CUSTOM -> if (context != null) buildCustomPalette(context) else MAKO_OFF
-        else -> MAKO_OFF
-    }
+    fun paletteFor(theme: String, context: android.content.Context? = null): Palette =
+        when (theme) {
+            PrefsManager.Theme.RAMA -> MAKO
+            PrefsManager.Theme.CATPPUCCIN_MOCHA -> CATPPUCCIN_MOCHA
+            PrefsManager.Theme.DRACULA -> DRACULA
+            PrefsManager.Theme.MELANGE -> MELANGE
+            PrefsManager.Theme.TOKYO_NIGHT -> TOKYO_NIGHT
+            PrefsManager.Theme.CUSTOM -> if (context != null) buildCustomPalette(context) else MAKO_OFF
+            else -> MAKO_OFF
+        }
 
     private fun buildCustomPalette(context: android.content.Context): Palette {
         val prefs = PrefsManager.getInstance(context)
@@ -160,20 +161,20 @@ object ThemeManager {
         fun get(key: String, fallback: Int) = prefs.getCustomThemeColor(key, fallback)
         return Palette(
             foreground = get(PrefsManager.PrefKeys.APP_THEME_FOREGROUND, base.foreground),
-            bg_1       = get(PrefsManager.PrefKeys.APP_THEME_BG_1,       base.bg_1),
-            bg_2       = get(PrefsManager.PrefKeys.APP_THEME_BG_2,       base.bg_2),
-            bg_3       = get(PrefsManager.PrefKeys.APP_THEME_BG_3,       base.bg_3),
-            accent_1   = get(PrefsManager.PrefKeys.APP_THEME_ACCENT_1,   base.accent_1),
-            accent_2   = get(PrefsManager.PrefKeys.APP_THEME_ACCENT_2,   base.accent_2),
-            accent_3   = get(PrefsManager.PrefKeys.APP_THEME_ACCENT_3,   base.accent_3),
-            disabled   = get(PrefsManager.PrefKeys.APP_THEME_DISABLED,   base.disabled),
-            input      = get(PrefsManager.PrefKeys.APP_THEME_INPUT,      base.input),
-            button_1   = get(PrefsManager.PrefKeys.APP_THEME_BUTTON_1,   base.button_1),
-            button_2   = get(PrefsManager.PrefKeys.APP_THEME_BUTTON_2,   base.button_2),
-            danger     = get(PrefsManager.PrefKeys.APP_THEME_DANGER,     base.danger),
-            header     = get(PrefsManager.PrefKeys.APP_THEME_HEADER,     base.header),
-            icon       = get(PrefsManager.PrefKeys.APP_THEME_ICON,       base.icon),
-            clock      = get(PrefsManager.PrefKeys.APP_THEME_CLOCK,      base.clock),
+            bg_1 = get(PrefsManager.PrefKeys.APP_THEME_BG_1, base.bg_1),
+            bg_2 = get(PrefsManager.PrefKeys.APP_THEME_BG_2, base.bg_2),
+            bg_3 = get(PrefsManager.PrefKeys.APP_THEME_BG_3, base.bg_3),
+            accent_1 = get(PrefsManager.PrefKeys.APP_THEME_ACCENT_1, base.accent_1),
+            accent_2 = get(PrefsManager.PrefKeys.APP_THEME_ACCENT_2, base.accent_2),
+            accent_3 = get(PrefsManager.PrefKeys.APP_THEME_ACCENT_3, base.accent_3),
+            disabled = get(PrefsManager.PrefKeys.APP_THEME_DISABLED, base.disabled),
+            input = get(PrefsManager.PrefKeys.APP_THEME_INPUT, base.input),
+            button_1 = get(PrefsManager.PrefKeys.APP_THEME_BUTTON_1, base.button_1),
+            button_2 = get(PrefsManager.PrefKeys.APP_THEME_BUTTON_2, base.button_2),
+            danger = get(PrefsManager.PrefKeys.APP_THEME_DANGER, base.danger),
+            header = get(PrefsManager.PrefKeys.APP_THEME_HEADER, base.header),
+            icon = get(PrefsManager.PrefKeys.APP_THEME_ICON, base.icon),
+            clock = get(PrefsManager.PrefKeys.APP_THEME_CLOCK, base.clock),
         )
     }
 

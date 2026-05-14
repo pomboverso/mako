@@ -1,8 +1,6 @@
 package com.rama.mako.activities.settings
 
 import android.graphics.Color
-import android.text.Editable
-import android.text.TextWatcher
 import android.widget.EditText
 import android.widget.RadioGroup
 import com.rama.mako.R
@@ -67,8 +65,8 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
         val group = activity.findViewById<RadioGroup>(R.id.themes_group)
 
         when (prefs.getTheme()) {
-            PrefsManager.Theme.MAKO -> group.check(R.id.theme_mako)
-            PrefsManager.Theme.MAKO_OFF -> group.check(R.id.theme_mako_off)
+            PrefsManager.Theme.RAMA -> group.check(R.id.theme_mako)
+            PrefsManager.Theme.MAKO -> group.check(R.id.theme_mako_off)
             PrefsManager.Theme.CATPPUCCIN_MOCHA -> group.check(R.id.theme_catppuccin_mocha)
             PrefsManager.Theme.DRACULA -> group.check(R.id.theme_dracula)
             PrefsManager.Theme.MELANGE -> group.check(R.id.theme_melange)
@@ -79,14 +77,14 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
 
         group.setOnCheckedChangeListener { _, id ->
             val theme = when (id) {
-                R.id.theme_mako -> PrefsManager.Theme.MAKO
-                R.id.theme_mako_off -> PrefsManager.Theme.MAKO_OFF
+                R.id.theme_mako -> PrefsManager.Theme.RAMA
+                R.id.theme_mako_off -> PrefsManager.Theme.MAKO
                 R.id.theme_catppuccin_mocha -> PrefsManager.Theme.CATPPUCCIN_MOCHA
                 R.id.theme_dracula -> PrefsManager.Theme.DRACULA
                 R.id.theme_melange -> PrefsManager.Theme.MELANGE
                 R.id.theme_tokyo_night -> PrefsManager.Theme.TOKYO_NIGHT
                 R.id.theme_custom -> PrefsManager.Theme.CUSTOM
-                else -> PrefsManager.Theme.MAKO_OFF
+                else -> PrefsManager.Theme.MAKO
             }
             prefs.setTheme(theme)
             // Populate custom fields with the selected theme's palette
