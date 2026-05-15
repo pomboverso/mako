@@ -10,4 +10,4 @@
     android:letterSpacing="0.1"
     android:focusable="false"
     android:clickable="false"
-    android:textColor="@color/collapse_header" />
+    android:textColor="@color/collapsible_header" />

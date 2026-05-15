@@ -1,6 +1,7 @@
 package com.rama.mako.activities.settings
 
 import android.graphics.Color
+import android.view.View
 import android.widget.EditText
 import android.widget.RadioGroup
 import com.rama.mako.R
@@ -63,6 +64,11 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
 
     private fun setupTheme() {
         val group = activity.findViewById<RadioGroup>(R.id.themes_group)
+        val form = activity.findViewById<View>(R.id.themes_form)
+
+        // Show form only if custom is already selected
+        form.visibility =
+            if (prefs.getTheme() == PrefsManager.Theme.CUSTOM) View.VISIBLE else View.GONE
 
         when (prefs.getTheme()) {
             PrefsManager.Theme.RAMA -> group.check(R.id.theme_rama)
@@ -86,10 +92,18 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
                 R.id.theme_custom -> PrefsManager.Theme.CUSTOM
                 else -> PrefsManager.Theme.MAKO
             }
-            prefs.setTheme(theme)
-            // Populate custom fields with the selected theme's palette
-            populateCustomFields(ThemeManager.paletteFor(theme, activity))
-            activity.recreate()
+
+            // Show/hide the custom form
+            form.visibility = if (theme == PrefsManager.Theme.CUSTOM) View.VISIBLE else View.GONE
+
+            if (theme != PrefsManager.Theme.CUSTOM) {
+                // For built-in themes: save and apply immediately
+                prefs.setTheme(theme)
+                activity.recreate()
+            } else {
+                // For custom: populate fields with current palette but don't apply yet
+                populateCustomFields(ThemeManager.paletteFor(prefs.getTheme(), activity))
+            }
         }
     }
 
@@ -98,7 +112,8 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
 
     private fun populateCustomFields(palette: ThemeManager.Palette) {
         activity.findViewById<EditText>(R.id.fg).setText(colorToHex(palette.foreground))
-        activity.findViewById<EditText>(R.id.header).setText(colorToHex(palette.header))
+        activity.findViewById<EditText>(R.id.collapsible_header)
+            .setText(colorToHex(palette.collapsible_header))
         activity.findViewById<EditText>(R.id.clock).setText(colorToHex(palette.clock))
         activity.findViewById<EditText>(R.id.icons).setText(colorToHex(palette.icon))
         activity.findViewById<EditText>(R.id.accent).setText(colorToHex(palette.accent_1))
@@ -126,7 +141,9 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
         saveButton.setOnClickListener {
             val fields = mapOf(
                 PrefsManager.PrefKeys.APP_THEME_FOREGROUND to activity.findViewById<EditText>(R.id.fg),
-                PrefsManager.PrefKeys.APP_THEME_HEADER to activity.findViewById<EditText>(R.id.header),
+                PrefsManager.PrefKeys.APP_THEME_COLLAPSIBLE_HEADER to activity.findViewById<EditText>(
+                    R.id.collapsible_header
+                ),
                 PrefsManager.PrefKeys.APP_THEME_CLOCK to activity.findViewById<EditText>(R.id.clock),
                 PrefsManager.PrefKeys.APP_THEME_ICON to activity.findViewById<EditText>(R.id.icons),
                 PrefsManager.PrefKeys.APP_THEME_ACCENT_1 to activity.findViewById<EditText>(R.id.accent),

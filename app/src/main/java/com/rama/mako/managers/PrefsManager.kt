@@ -89,7 +89,7 @@ class PrefsManager private constructor(context: Context) {
         const val APP_THEME_BUTTON_1 = "app:theme:button_1"
         const val APP_THEME_BUTTON_2 = "app:theme:button_2"
         const val APP_THEME_DANGER = "app:theme:danger"
-        const val APP_THEME_HEADER = "app:theme:header"
+        const val APP_THEME_COLLAPSIBLE_HEADER = "app:theme:collapsible_header"
         const val APP_THEME_ICON = "app:theme:icon"
         const val APP_THEME_CLOCK = "app:theme:clock"
 

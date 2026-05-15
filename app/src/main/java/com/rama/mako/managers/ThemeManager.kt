@@ -24,7 +24,7 @@ object ThemeManager {
         val button_1: Int,
         val button_2: Int,
         val danger: Int,
-        val header: Int,
+        val collapsible_header: Int,
         val icon: Int,
         val clock: Int,
     )
@@ -43,7 +43,7 @@ object ThemeManager {
         button_1 = 0xFF459984.toInt(),
         button_2 = 0xFF6194AF.toInt(),
         danger = 0xFFDC6364.toInt(),
-        header = 0xff888888.toInt(),
+        collapsible_header = 0xff888888.toInt(),
         icon = 0xFFCCCCCC.toInt(),
         clock = 0xFFCCCCCC.toInt(),
     )
@@ -62,7 +62,7 @@ object ThemeManager {
         button_1 = 0xFF45995a.toInt(),
         button_2 = 0xFFb8e39d.toInt(),
         danger = 0xFFDC6364.toInt(),
-        header = 0xff8cde285.toInt(),
+        collapsible_header = 0xff8cde285.toInt(),
         icon = 0xFFd4efc3.toInt(),
         clock = 0xFFABD68E.toInt(),
     )
@@ -81,7 +81,7 @@ object ThemeManager {
         button_1 = 0xFF89B4FA.toInt(),
         button_2 = 0xFF74C7EC.toInt(),
         danger = 0xFFF38BA8.toInt(),
-        header = 0xFFB4BEFE.toInt(),
+        collapsible_header = 0xFFB4BEFE.toInt(),
         icon = 0xFFCDD6F4.toInt(),
         clock = 0xFFCBA6F7.toInt(),
     )
@@ -101,7 +101,7 @@ object ThemeManager {
         button_1 = 0xFFBD93F9.toInt(),
         button_2 = 0xFF8BE9FD.toInt(),
         danger = 0xFFFF79C6.toInt(),
-        header = 0xFFBD93F9.toInt(),
+        collapsible_header = 0xFFBD93F9.toInt(),
         icon = 0xFFF8F8F2.toInt(),
         clock = 0xFFBD93F9.toInt(),
     )
@@ -120,7 +120,7 @@ object ThemeManager {
         button_1 = 0xFF7F91B2.toInt(),
         button_2 = 0xFF85B695.toInt(),
         danger = 0xFFB65C60.toInt(),
-        header = 0xFFEBC06D.toInt(),
+        collapsible_header = 0xFFEBC06D.toInt(),
         icon = 0xFFECE1D7.toInt(),
         clock = 0xFFEBC06D.toInt(),
     )
@@ -139,7 +139,7 @@ object ThemeManager {
         button_1 = 0xFF7AA2F7.toInt(),
         button_2 = 0xFF2AC3DE.toInt(),
         danger = 0xFFF7768E.toInt(),
-        header = 0xFF7AA2F7.toInt(),
+        collapsible_header = 0xFF7AA2F7.toInt(),
         icon = 0xFFC0CAF5.toInt(),
         clock = 0xFF7AA2F7.toInt(),
     )
@@ -172,7 +172,10 @@ object ThemeManager {
             button_1 = get(PrefsManager.PrefKeys.APP_THEME_BUTTON_1, base.button_1),
             button_2 = get(PrefsManager.PrefKeys.APP_THEME_BUTTON_2, base.button_2),
             danger = get(PrefsManager.PrefKeys.APP_THEME_DANGER, base.danger),
-            header = get(PrefsManager.PrefKeys.APP_THEME_HEADER, base.header),
+            collapsible_header = get(
+                PrefsManager.PrefKeys.APP_THEME_COLLAPSIBLE_HEADER,
+                base.collapsible_header
+            ),
             icon = get(PrefsManager.PrefKeys.APP_THEME_ICON, base.icon),
             clock = get(PrefsManager.PrefKeys.APP_THEME_CLOCK, base.clock),
         )
@@ -280,9 +283,9 @@ object ThemeManager {
             context.resources.getColor(R.color.disabled) -> palette.disabled
 
             // header
-            MAKO.header, RAMA.header, CATPPUCCIN_MOCHA.header,
-            DRACULA.header, MELANGE.header, TOKYO_NIGHT.header,
-            context.resources.getColor(R.color.collapse_header) -> palette.header
+            MAKO.collapsible_header, RAMA.collapsible_header, CATPPUCCIN_MOCHA.collapsible_header,
+            DRACULA.collapsible_header, MELANGE.collapsible_header, TOKYO_NIGHT.collapsible_header,
+            context.resources.getColor(R.color.collapsible_header) -> palette.collapsible_header
 
             // foreground
             MAKO.foreground, RAMA.foreground, CATPPUCCIN_MOCHA.foreground,
