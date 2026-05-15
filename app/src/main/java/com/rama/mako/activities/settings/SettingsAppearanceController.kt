@@ -8,6 +8,7 @@ import com.rama.mako.R
 import com.rama.mako.activities.SettingsActivity
 import com.rama.mako.managers.PrefsManager
 import com.rama.mako.managers.ThemeManager
+import com.rama.mako.widgets.WdColorPicker
 
 class SettingsAppearanceController(private val activity: SettingsActivity) {
 
@@ -111,9 +112,10 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
         String.format("#%06X", 0xFFFFFF and color)
 
     private fun populateCustomFields(palette: ThemeManager.Palette) {
-        activity.findViewById<EditText>(R.id.fg).setText(colorToHex(palette.foreground))
-        activity.findViewById<EditText>(R.id.collapsible_header)
-            .setText(colorToHex(palette.collapsible_header))
+        activity.findViewById<WdColorPicker>(R.id.foreground).setColor(palette.foreground)
+        activity.findViewById<WdColorPicker>(R.id.collapsible_header)
+            .setColor(palette.collapsible_header)
+        
         activity.findViewById<EditText>(R.id.clock).setText(colorToHex(palette.clock))
         activity.findViewById<EditText>(R.id.icons).setText(colorToHex(palette.icon))
         activity.findViewById<EditText>(R.id.accent).setText(colorToHex(palette.accent_1))
@@ -140,7 +142,7 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
         val saveButton = activity.findViewById<android.view.View>(R.id.save_custom_theme)
         saveButton.setOnClickListener {
             val fields = mapOf(
-                PrefsManager.PrefKeys.APP_THEME_FOREGROUND to activity.findViewById<EditText>(R.id.fg),
+                PrefsManager.PrefKeys.APP_THEME_FOREGROUND to activity.findViewById<EditText>(R.id.foreground),
                 PrefsManager.PrefKeys.APP_THEME_COLLAPSIBLE_HEADER to activity.findViewById<EditText>(
                     R.id.collapsible_header
                 ),

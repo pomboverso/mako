@@ -208,57 +208,24 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="8sp"
                         android:background="@color/bg_2"
                         android:focusableInTouchMode="true"
                         android:orientation="vertical"
                         android:padding="16sp">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="8sp"
-                            android:text="@string/theme_foreground_label" />
-
-                        <EditText
-                            android:id="@+id/fg"
+                        <com.rama.mako.widgets.WdColorPicker
+                            android:id="@+id/foreground"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@color/input"
                             android:layout_marginBottom="8sp"
-                            android:maxLines="1"
-                            android:singleLine="true"
-                            android:textSize="16sp"
-                            android:paddingTop="16sp"
-                            android:paddingBottom="16sp"
-                            android:paddingStart="8sp"
-                            android:paddingEnd="8sp"
-                            android:inputType="textNoSuggestions"
-                            android:maxLength="7"
-                            android:hint="#RRGGBB" />
+                            app:text="@string/theme_foreground_label" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="8sp"
-                            android:text="@string/theme_collapsible_header_label" />
-
-                        <EditText
+                        <com.rama.mako.widgets.WdColorPicker
                             android:id="@+id/collapsible_header"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@color/input"
                             android:layout_marginBottom="8sp"
-                            android:maxLines="1"
-                            android:singleLine="true"
-                            android:textSize="16sp"
-                            android:paddingTop="16sp"
-                            android:paddingBottom="16sp"
-                            android:paddingStart="8sp"
-                            android:paddingEnd="8sp"
-                            android:inputType="textNoSuggestions"
-                            android:maxLength="7"
-                            android:hint="#RRGGBB" />
+                            app:text="@string/theme_collapsible_header_label" />
 
                         <TextView
                             android:layout_width="wrap_content"
