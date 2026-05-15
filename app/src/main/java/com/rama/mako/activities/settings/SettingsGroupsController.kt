@@ -9,6 +9,7 @@ import android.widget.*
 import com.rama.mako.R
 import com.rama.mako.activities.SettingsActivity
 import com.rama.mako.managers.FontManager
+import com.rama.mako.managers.ThemeManager
 import com.rama.mako.utils.SettingsUiUtils
 import com.rama.mako.widgets.WdButton
 
@@ -38,7 +39,7 @@ class SettingsGroupsController(private val activity: SettingsActivity) {
 
     private fun addGroupRow(groupId: String, groupLabel: String, container: LinearLayout) {
         val row = activity.layoutInflater.inflate(R.layout.list_item_group, container, false)
-        FontManager.applyFont(activity, row)
+        ThemeManager.applyTheme(activity, row)
 
         val name = row.findViewById<EditText>(R.id.group_name)
         val delete = row.findViewById<FrameLayout>(R.id.delete_group)
@@ -123,7 +124,7 @@ class SettingsGroupsController(private val activity: SettingsActivity) {
                 }
 
                 radioGroup.addView(radio)
-                
+
                 if (index == 0) {
                     radio.isChecked = true
                     selectedGroupId = targetId
@@ -146,7 +147,7 @@ class SettingsGroupsController(private val activity: SettingsActivity) {
 
             SettingsUiUtils.setClickWithHaptics(no) { dialog.dismiss() }
 
-            FontManager.applyFont(activity, dialogView)
+            ThemeManager.applyTheme(activity, dialogView)
             dialog.show()
             dialog.window?.setLayout(
                 ViewGroup.LayoutParams.MATCH_PARENT,

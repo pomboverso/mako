@@ -37,6 +37,7 @@
     <string name="icon_location_desc">Keine Tracker</string>
     <string name="icon_offline_desc">Funktioniert offline</string>
     <string name="app_header">App</string>
+    <string name="discord_label">Discord beitreten</string>
     <string name="contributors_header">Beitragende</string>
     <string name="icons_header">Icons</string>
     <string name="fonts_header">Schriftarten</string>
@@ -81,8 +82,8 @@
     <string name="none_label">Nichts</string>
     <string name="default_label">Standard</string>
     <string name="default_system_label">Systemstandard</string>
-    <string name="icons_monochrome_label">Monochrom (Systemfarben / Material You)</string>
-    <string name="icons_icon_pack_label">Benutzerdefiniertes Icon-Paket</string>
+    <string name="icons_monochrome_label">Monochrom</string>
+    <string name="custom_icon_pack_label">Benutzerdefiniertes Icon-Paket</string>
     <string name="select_icon_pack_label">Icon-Paket auswählen</string>
     <string name="selected_icon_pack_label">Ausgewähltes Paket: %1$s</string>
     <string name="icon_pack_not_selected_label">Kein Icon-Paket ausgewählt</string>
@@ -111,8 +112,6 @@
     <string name="font_style_header">Schriftart</string>
     <string name="background_default_label">Standard-Design</string>
     <string name="background_wallpaper_label">Hintergrundbild</string>
-    <string name="background_dynamic_label">Dynamische Farben</string>
-    <string name="background_amoled_label">AMOLED schwarz</string>
 
     <!-- Popup :: Context Menu App -->
     <string name="rename_app">App umbenennen...</string>

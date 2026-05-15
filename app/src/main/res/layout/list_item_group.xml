@@ -16,6 +16,7 @@
             android:id="@+id/toggle_visibility_img"
             android:layout_width="24sp"
             android:layout_height="24sp"
+            android:tint="@color/icon"
             android:src="@drawable/icon_eye"
             android:contentDescription="Toggle Visibility" />
     </FrameLayout>
@@ -29,6 +30,7 @@
         <ImageView
             android:layout_width="24sp"
             android:layout_height="24sp"
+            android:tint="@color/icon"
             android:src="@drawable/icon_chevron_up_solid"
             android:contentDescription="Ascend Group" />
     </FrameLayout>
@@ -42,6 +44,7 @@
         <ImageView
             android:layout_width="24sp"
             android:layout_height="24sp"
+            android:tint="@color/icon"
             android:src="@drawable/icon_chevron_down_solid"
             android:contentDescription="Descend Group" />
     </FrameLayout>
@@ -71,6 +74,7 @@
             android:layout_width="24sp"
             android:layout_height="match_parent"
             android:padding="0dp"
+            android:tint="@color/icon"
             android:src="@drawable/icon_disk"
             android:contentDescription="Save" />
     </FrameLayout>
@@ -85,6 +89,7 @@
             android:layout_width="24sp"
             android:layout_height="match_parent"
             android:padding="0dp"
+            android:tint="@color/icon"
             android:src="@drawable/icon_close"
             android:contentDescription="Delete" />
     </FrameLayout>

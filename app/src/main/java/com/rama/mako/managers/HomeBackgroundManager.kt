@@ -31,10 +31,6 @@ class HomeBackgroundManager(context: Context) {
         return ColorDrawable(resolveWallpaperScrimColor())
     }
 
-    fun shouldTrackWallpaperChangesForMode(mode: String): Boolean {
-        return mode == PrefsManager.BackgroundMode.DYNAMIC && supportsWallpaperReactiveBackground()
-    }
-
     fun getWallpaperSignature(): Int? {
         if (!supportsWallpaperReactiveBackground()) return null
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) return null
@@ -49,40 +45,12 @@ class HomeBackgroundManager(context: Context) {
             PrefsManager.BackgroundMode.WALLPAPER -> ColorDrawable(
                 ContextCompat.getColor(
                     appContext,
-                    R.color.bg_primary
-                )
-            )
-            PrefsManager.BackgroundMode.DYNAMIC -> ColorDrawable(resolveDynamicSolidColor())
-            PrefsManager.BackgroundMode.AMOLED -> ColorDrawable(
-                ContextCompat.getColor(
-                    appContext,
-                    R.color.bg_amoled
+                    R.color.bg_1
                 )
             )
 
-            else -> ColorDrawable(ContextCompat.getColor(appContext, R.color.bg_primary))
+            else -> ColorDrawable(ContextCompat.getColor(appContext, R.color.bg_1))
         }
-    }
-
-    private fun resolveDynamicSolidColor(): Int {
-        val fallback = ContextCompat.getColor(appContext, R.color.bg_dynamic_fallback)
-
-        resolveSystemDynamicColor()?.let { return darkenForReadability(it) }
-
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O_MR1) {
-            return fallback
-        }
-
-        val wallpaperColors = runCatching {
-            wallpaperManager.getWallpaperColors(WallpaperManager.FLAG_SYSTEM)
-        }.getOrNull() ?: return fallback
-
-        val sourceColor = wallpaperColors.primaryColor?.toArgb()
-            ?: wallpaperColors.secondaryColor?.toArgb()
-            ?: wallpaperColors.tertiaryColor?.toArgb()
-            ?: return fallback
-
-        return darkenForReadability(sourceColor)
     }
 
     private fun resolveWallpaperScrimColor(): Int {
@@ -105,14 +73,6 @@ class HomeBackgroundManager(context: Context) {
 
     private fun supportsWallpaperReactiveBackground(): Boolean {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1
-    }
-
-    private fun resolveSystemDynamicColor(): Int? {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) return null
-
-        return runCatching {
-            ContextCompat.getColor(appContext, android.R.color.system_accent1_900)
-        }.getOrNull()
     }
 
     private fun darkenForReadability(color: Int): Int {

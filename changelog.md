@@ -1,10 +1,22 @@
 # Changelog
 
+## 38
+
+- Add Rama Theme
+- Add Catppuccin Mocha Theme
+- Add Dracula Theme
+- Add Mélange Dark Theme
+- Add Tokyo Night Theme
+- Fix Keyboard Navigation
+- Integrate background options with the theme section
+- Add Custom Font Option
+- Add Custom Color Picker
+
 ## 37
 
-- Missing font on radio group for dialog_group_delete
-- Missing scroll area for dialog_group_delete and dialog_group_add
-- Adding default new group when deleting a group
+- Fix missing font on radio group for dialog_group_delete
+- Fix missing scroll area for dialog_group_delete and dialog_group_add
+- Add default new group when deleting a group
 
 ## 36
 

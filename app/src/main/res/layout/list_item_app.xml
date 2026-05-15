@@ -3,12 +3,14 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center_vertical">
+    android:gravity="center_vertical"
+    android:descendantFocusability="blocksDescendants">
 
     <ImageView
         android:id="@+id/app_icon"
         android:layout_width="32sp"
         android:layout_height="32sp"
+        android:focusable="false"
         android:paddingEnd="8sp" />
 
     <TextView
@@ -17,6 +19,8 @@
         android:layout_height="wrap_content"
         android:paddingTop="12sp"
         android:paddingBottom="12sp"
+        android:focusable="false"
+        android:clickable="false"
         android:textSize="32sp"
         android:textColor="@color/foreground" />
 
@@ -25,5 +29,7 @@
         android:layout_width="0dp"
         android:background="@android:color/transparent"
         android:layout_height="match_parent"
+        android:focusable="false"
+        android:clickable="false"
         android:layout_weight="1" />
 </LinearLayout>

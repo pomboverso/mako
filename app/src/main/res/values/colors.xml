@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="foreground">#CCCCCC</color>
-    <color name="bg_primary">#141417</color>
-    <color name="bg_secondary">#1f1f29</color>
-    <color name="bg_tertiary">#322f1b</color>
-    <color name="accent_primary">#abd68e</color>
-    <color name="accent_secondary">#cdc58b</color>
-    <color name="accent_tertiary">#DCD07C</color>
+    <color name="icon">#CBCBCB</color>
+    <color name="bg_1">#141417</color>
+    <color name="bg_2">#1f1f29</color>
+    <color name="bg_3">#24313b</color>
+    <color name="accent_1">#abd68e</color>
+    <color name="accent_2">#cdc58b</color>
+    <color name="accent_3">#DCD07C</color>
     <color name="disabled">#888</color>
     <color name="input">#16161F</color>
-    <color name="button_primary">#459984</color>
-    <color name="button_secondary">#6194AF</color>
-    <color name="button_danger">#DC6364</color>
-    <color name="button_pin">#335</color>
-    <color name="bg_amoled">#000000</color>
+    <color name="button_1">#459984</color>
+    <color name="button_2">#6194AF</color>
+    <color name="danger">#DC6364</color>
+    <color name="collapsible_header">#878787</color>
+    <color name="clock">#CACACA</color>
+
     <color name="bg_wallpaper_scrim">#99000000</color>
-    <color name="bg_dynamic_fallback">#1A2A2F</color>
 </resources>

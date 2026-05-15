@@ -34,10 +34,11 @@ class SettingsActivity : CsActivity() {
 
     private var lastAppliedBackgroundMode: String? = null
     private var lastAppliedWallpaperSignature: Int? = null
-    
+
     private var isUnlocked = false
     private var isLockScreenShowing = false
     private val LOCK_REQUEST = 1001
+    val FONT_PICK_REQUEST = 1002
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +46,7 @@ class SettingsActivity : CsActivity() {
 
         settingsRootView = findViewById(R.id.settings_root)
         applyEdgeToEdgePadding(settingsRootView)
+        applyCurrentTheme(settingsRootView)
 
         homeBackgroundManager = HomeBackgroundManager(this)
         applySettingsBackground(force = true)
@@ -91,13 +93,7 @@ class SettingsActivity : CsActivity() {
 
     fun applySettingsBackground(force: Boolean = false) {
         val mode = prefs.getHomeBackgroundMode()
-
-        val wallpaperSignature =
-            if (homeBackgroundManager.shouldTrackWallpaperChangesForMode(mode)) {
-                homeBackgroundManager.getWallpaperSignature()
-            } else {
-                null
-            }
+        val wallpaperSignature = null
 
         if (!force &&
             mode == lastAppliedBackgroundMode &&
@@ -147,5 +143,6 @@ class SettingsActivity : CsActivity() {
         }
 
         clockController.onActivityResult(requestCode, resultCode, data)
+        appearanceController.onActivityResult(requestCode, resultCode, data)
     }
 }

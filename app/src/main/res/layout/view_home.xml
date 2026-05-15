@@ -37,7 +37,8 @@
                         android:background="@android:color/transparent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="?attr/foregroundColor" />
+                        android:focusable="false"
+                        android:textColor="@color/clock" />
 
                     <LinearLayout
                         android:id="@+id/date_row"
@@ -50,6 +51,7 @@
                         <ImageView
                             android:layout_width="16sp"
                             android:layout_height="16sp"
+                            android:tint="@color/icon"
                             android:layout_marginEnd="4sp"
                             android:src="@drawable/icon_calendar_today" />
 
@@ -71,6 +73,7 @@
                         <ImageView
                             android:layout_width="16sp"
                             android:layout_height="16sp"
+                            android:tint="@color/icon"
                             android:layout_marginEnd="4sp"
                             android:src="@drawable/icon_battery_full_alt" />
 
@@ -92,6 +95,7 @@
                     <ImageView
                         android:layout_width="24sp"
                         android:layout_height="24sp"
+                        android:tint="@color/icon"
                         android:layout_gravity="center"
                         android:src="@drawable/icon_search"
                         android:contentDescription="@string/search_icon_desc" />
@@ -104,6 +108,7 @@
                 android:layout_height="wrap_content"
                 android:dividerHeight="0dp"
                 android:divider="@null"
+                android:focusableInTouchMode="false"
                 android:nestedScrollingEnabled="false" />
 
         </LinearLayout>
@@ -130,7 +135,7 @@
             android:paddingBottom="16sp"
             android:paddingStart="8sp"
             android:paddingEnd="8sp"
-            android:background="@color/bg_secondary"
+            android:background="@color/bg_2"
             android:textColor="?attr/foregroundColor"
             android:textColorHint="@color/disabled"
             android:hint="@string/search_apps_hint"
@@ -146,6 +151,7 @@
             <ImageView
                 android:layout_width="24sp"
                 android:layout_height="24sp"
+                android:tint="@color/icon"
                 android:layout_gravity="center"
                 android:src="@drawable/icon_close"
                 android:contentDescription="@string/clear_search_desc" />
