@@ -30,7 +30,7 @@ object ThemeManager {
     )
 
     // Mako (default)
-    private val MAKO_OFF = Palette(
+    private val MAKO = Palette(
         foreground = 0xFFCCCCCC.toInt(),
         bg_1 = 0xFF141417.toInt(),
         bg_2 = 0xFF1F1F29.toInt(),
@@ -48,8 +48,8 @@ object ThemeManager {
         clock = 0xFFCCCCCC.toInt(),
     )
 
-    // Mako Forest
-    private val MAKO = Palette(
+    // Rama
+    private val RAMA = Palette(
         foreground = 0xFFcbdecd.toInt(),
         bg_1 = 0xFF0e190e.toInt(),
         bg_2 = 0xFF1f2920.toInt(),
@@ -62,7 +62,7 @@ object ThemeManager {
         button_1 = 0xFF45995a.toInt(),
         button_2 = 0xFFb8e39d.toInt(),
         danger = 0xFFDC6364.toInt(),
-        header = 0xff888888.toInt(),
+        header = 0xff8cde285.toInt(),
         icon = 0xFFd4efc3.toInt(),
         clock = 0xFFABD68E.toInt(),
     )
@@ -146,18 +146,18 @@ object ThemeManager {
 
     fun paletteFor(theme: String, context: android.content.Context? = null): Palette =
         when (theme) {
-            PrefsManager.Theme.RAMA -> MAKO
+            PrefsManager.Theme.RAMA -> RAMA
             PrefsManager.Theme.CATPPUCCIN_MOCHA -> CATPPUCCIN_MOCHA
             PrefsManager.Theme.DRACULA -> DRACULA
             PrefsManager.Theme.MELANGE -> MELANGE
             PrefsManager.Theme.TOKYO_NIGHT -> TOKYO_NIGHT
-            PrefsManager.Theme.CUSTOM -> if (context != null) buildCustomPalette(context) else MAKO_OFF
-            else -> MAKO_OFF
+            PrefsManager.Theme.CUSTOM -> if (context != null) buildCustomPalette(context) else MAKO
+            else -> MAKO
         }
 
     private fun buildCustomPalette(context: android.content.Context): Palette {
         val prefs = PrefsManager.getInstance(context)
-        val base = MAKO_OFF
+        val base = MAKO
         fun get(key: String, fallback: Int) = prefs.getCustomThemeColor(key, fallback)
         return Palette(
             foreground = get(PrefsManager.PrefKeys.APP_THEME_FOREGROUND, base.foreground),
@@ -240,62 +240,62 @@ object ThemeManager {
     private fun mapColor(context: Context, color: Int, palette: Palette): Int? {
         return when (color) {
             // bg_primary
-            MAKO_OFF.bg_1, MAKO.bg_1, CATPPUCCIN_MOCHA.bg_1,
+            MAKO.bg_1, RAMA.bg_1, CATPPUCCIN_MOCHA.bg_1,
             DRACULA.bg_1, MELANGE.bg_1, TOKYO_NIGHT.bg_1,
             context.resources.getColor(R.color.bg_1) -> palette.bg_1
 
             // bg_secondary
-            MAKO_OFF.bg_2, MAKO.bg_2, CATPPUCCIN_MOCHA.bg_2,
+            MAKO.bg_2, RAMA.bg_2, CATPPUCCIN_MOCHA.bg_2,
             DRACULA.bg_2, MELANGE.bg_2, TOKYO_NIGHT.bg_2,
             context.resources.getColor(R.color.bg_2) -> palette.bg_2
 
             // bg_tertiary
-            MAKO_OFF.bg_3, MAKO.bg_3, CATPPUCCIN_MOCHA.bg_3,
+            MAKO.bg_3, RAMA.bg_3, CATPPUCCIN_MOCHA.bg_3,
             DRACULA.bg_3, MELANGE.bg_3, TOKYO_NIGHT.bg_3,
             context.resources.getColor(R.color.bg_3) -> palette.bg_3
 
             // button_primary
-            MAKO_OFF.button_1, MAKO.button_1, CATPPUCCIN_MOCHA.button_1,
+            MAKO.button_1, RAMA.button_1, CATPPUCCIN_MOCHA.button_1,
             DRACULA.button_1, MELANGE.button_1, TOKYO_NIGHT.button_1,
             context.resources.getColor(R.color.button_1) -> palette.button_1
 
             // button_secondary
-            MAKO_OFF.button_2, MAKO.button_2, CATPPUCCIN_MOCHA.button_2,
+            MAKO.button_2, RAMA.button_2, CATPPUCCIN_MOCHA.button_2,
             DRACULA.button_2, MELANGE.button_2, TOKYO_NIGHT.button_2,
             context.resources.getColor(R.color.button_2) -> palette.button_2
 
             // button_danger
-            MAKO_OFF.danger, MAKO.danger, CATPPUCCIN_MOCHA.danger,
+            MAKO.danger, RAMA.danger, CATPPUCCIN_MOCHA.danger,
             DRACULA.danger, MELANGE.danger, TOKYO_NIGHT.danger,
             context.resources.getColor(R.color.danger) -> palette.danger
 
             // input
-            MAKO_OFF.input, MAKO.input, CATPPUCCIN_MOCHA.input,
+            MAKO.input, RAMA.input, CATPPUCCIN_MOCHA.input,
             DRACULA.input, MELANGE.input, TOKYO_NIGHT.input,
             context.resources.getColor(R.color.input) -> palette.input
 
             // disabled
-            MAKO_OFF.disabled, MAKO.disabled, CATPPUCCIN_MOCHA.disabled,
+            MAKO.disabled, RAMA.disabled, CATPPUCCIN_MOCHA.disabled,
             DRACULA.disabled, MELANGE.disabled, TOKYO_NIGHT.disabled,
             context.resources.getColor(R.color.disabled) -> palette.disabled
 
             // header
-            MAKO_OFF.header, MAKO.header, CATPPUCCIN_MOCHA.header,
+            MAKO.header, RAMA.header, CATPPUCCIN_MOCHA.header,
             DRACULA.header, MELANGE.header, TOKYO_NIGHT.header,
             context.resources.getColor(R.color.collapse_header) -> palette.header
 
             // foreground
-            MAKO_OFF.foreground, MAKO.foreground, CATPPUCCIN_MOCHA.foreground,
+            MAKO.foreground, RAMA.foreground, CATPPUCCIN_MOCHA.foreground,
             DRACULA.foreground, MELANGE.foreground, TOKYO_NIGHT.foreground,
             context.resources.getColor(R.color.foreground) -> palette.foreground
 
             // icon
-            MAKO_OFF.icon, MAKO.icon, CATPPUCCIN_MOCHA.icon,
+            MAKO.icon, RAMA.icon, CATPPUCCIN_MOCHA.icon,
             DRACULA.icon, MELANGE.icon, TOKYO_NIGHT.icon,
             context.resources.getColor(R.color.icon) -> palette.icon
 
             // clock
-            MAKO_OFF.clock, MAKO.clock, CATPPUCCIN_MOCHA.clock,
+            MAKO.clock, RAMA.clock, CATPPUCCIN_MOCHA.clock,
             DRACULA.clock, MELANGE.clock, TOKYO_NIGHT.clock,
             context.resources.getColor(R.color.clock) -> palette.clock
 

@@ -130,7 +130,7 @@
                     android:padding="16sp">
 
                     <RadioButton
-                        android:id="@+id/theme_mako_off"
+                        android:id="@+id/theme_mako"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/theme_mako_label"
@@ -139,7 +139,7 @@
                         android:layout_marginBottom="8sp" />
 
                     <RadioButton
-                        android:id="@+id/theme_mako"
+                        android:id="@+id/theme_rama"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/theme_rama_label"
