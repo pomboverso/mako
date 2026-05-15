@@ -83,6 +83,7 @@
     <string name="security_header">Security</string>
     <string name="system_header">System</string>
     <string name="background_header">Background</string>
+    <string name="themes_header">Themes</string>
 
     <string name="activity_settings_header">Settings</string>
     <string name="activity_about_mako_header">About Mako</string>
@@ -117,7 +118,7 @@
     <string name="none_label">None</string>
     <string name="default_label">Default</string>
     <string name="default_system_label">Default (System)</string>
-    <string name="icons_monochrome_label">Monochrome (System colors / Material You)</string>
+    <string name="icons_monochrome_label">Monochrome</string>
     <string name="icons_icon_pack_label">Custom icon pack</string>
     <string name="select_icon_pack_label">Select icon pack</string>
     <string name="selected_icon_pack_label">Selected pack: %1$s</string>
@@ -156,6 +157,31 @@
     <string name="lock_settings_label">Lock Settings</string>
     <string name="randomized_keypad_label">Randomized keypad</string>
 
+    <string name="theme_catppuccin_mocha_label">Catppuccin Mocha</string>
+    <string name="theme_rama_label">Rama</string>
+    <string name="theme_mako_label">Mako</string>
+    <string name="theme_dracula_label">Dracula</string>
+    <string name="theme_melange_label">Mélange Dark</string>
+    <string name="theme_tokyo_night_label">Tokyo Night</string>
+    <string name="theme_custom_label">Custom</string>
+    <string name="theme_foreground_label">Foreground</string>
+    <string name="theme_collapsible_header_label">Collapsible Header</string>
+    <string name="theme_clock_label">Clock</string>
+    <string name="theme_icons_label">Icons</string>
+    <string name="theme_accent_label">Accent</string>
+    <string name="theme_background_1_label">Background 1</string>
+    <string name="theme_background_2_label">Background 2</string>
+    <string name="theme_background_3_label">Background 3</string>
+    <string name="theme_input_background_label">Input Background</string>
+    <string name="theme_button_1_background_label">Button 1 Background</string>
+    <string name="theme_button_2_background_label">Button 2 Background</string>
+    <string name="theme_danger_label">Danger</string>
+    <string name="theme_apply_custom_label">Apply Custom Theme</string>
+
+    <!-- Dialog :: Context Menu App -->
+    <string name="context_menu_theme_label">Theme</string>
+    <string name="context_menu_font_label">Font</string>
+    <string name="font_default_label">System default</string>
     <!-- Popup :: Context Menu App -->
     <string name="rename_app">Rename app...</string>
     <string name="add_to_favorites">Change group...</string>
@@ -165,6 +191,7 @@
     <string name="save">Save</string>
     <string name="reset">Reset</string>
     <string name="cancel">Cancel</string>
+    <string name="label_changed">App label updated</string>
 
     <!-- Dialog :: Rename App -->
     <string name="select_group">Select Group</string>

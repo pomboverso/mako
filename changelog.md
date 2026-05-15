@@ -1,5 +1,12 @@
 # Changelog
 
+## 38
+
+- Adding Catppuccin Mocha Theme
+- Adding Dracula Theme
+- Adding Mélange Dark Theme
+- Adding Tokyo Night Theme
+
 ## 37
 
 - Missing font on radio group for dialog_group_delete

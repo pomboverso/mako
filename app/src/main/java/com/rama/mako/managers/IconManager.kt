@@ -99,24 +99,8 @@ class IconManager(
     }
 
     private fun resolveSystemMonochromeTintColor(): Int {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            val isNightMode =
-                (context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
-
-            val dynamicColorId = if (isNightMode) {
-                android.R.color.system_accent1_200
-            } else {
-                android.R.color.system_accent1_700
-            }
-
-            return runCatching {
-                context.getColor(dynamicColorId)
-            }.getOrElse {
-                ContextCompat.getColor(context, R.color.foreground)
-            }
-        }
-
-        return ContextCompat.getColor(context, R.color.foreground)
+        val prefs = PrefsManager.getInstance(context)
+        return ThemeManager.paletteFor(prefs.getTheme(), context).accent_1
     }
 
     private fun getIconFromPack(

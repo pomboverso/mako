@@ -8,6 +8,7 @@ import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import com.rama.mako.managers.FontManager
+import com.rama.mako.managers.ThemeManager
 import com.rama.mako.utils.dp
 import com.rama.mako.managers.PrefsManager
 import com.rama.mako.utils.LocaleHelper
@@ -16,6 +17,7 @@ abstract class CsActivity : Activity() {
 
     val prefs by lazy { PrefsManager.getInstance(this) }
     private var lastKnownAppLanguage: String? = null
+    private var lastKnownTheme: String? = null
 
     override fun attachBaseContext(newBase: Context) {
         super.attachBaseContext(LocaleHelper.wrapContext(newBase))
@@ -24,9 +26,7 @@ abstract class CsActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         lastKnownAppLanguage = prefs.getAppLanguage()
-
-        val root = findViewById<View>(android.R.id.content)
-        FontManager.applyFont(this, root)
+        lastKnownTheme = prefs.getTheme()
 
         // Allow drawing behind system bars
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -56,13 +56,32 @@ abstract class CsActivity : Activity() {
             return
         }
 
+        val currentTheme = prefs.getTheme()
+        if (currentTheme != lastKnownTheme) {
+            lastKnownTheme = currentTheme
+            recreate()
+            return
+        }
+
         val root = findViewById<View>(android.R.id.content)
-        FontManager.applyFont(this, root)
+        ThemeManager.applyTheme(this, root)
     }
 
     fun refreshFont() {
         val root = findViewById<View>(android.R.id.content)
         FontManager.applyFont(this, root)
+    }
+
+    fun applyCurrentTheme(root: View? = null) {
+        val target = root ?: findViewById<View>(android.R.id.content)
+        ThemeManager.applyTheme(this, target)
+        applyNavBarColor()
+    }
+
+    private fun applyNavBarColor() {
+        val palette = ThemeManager.paletteFor(prefs.getTheme())
+        window.navigationBarColor = palette.bg_1
+        window.setBackgroundDrawable(android.graphics.drawable.ColorDrawable(palette.bg_1))
     }
 
     protected fun updateSystemBars(root: View) {

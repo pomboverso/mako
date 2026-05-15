@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/settings_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_primary"
+    android:background="@color/bg_1"
     android:orientation="vertical">
 
     <ScrollView
@@ -46,7 +46,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8sp"
-                    android:background="@color/button_secondary"
+                    android:background="@color/button_2"
                     android:text="@string/set_default_label" />
 
                 <com.rama.mako.widgets.WdButton
@@ -54,7 +54,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8sp"
-                    android:background="@color/button_secondary"
+                    android:background="@color/button_2"
                     android:text="@string/refresh_launcher_label" />
 
                 <com.rama.mako.widgets.WdButton
@@ -62,7 +62,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8sp"
-                    android:background="@color/button_secondary"
+                    android:background="@color/button_2"
                     android:text="@string/edit_apps_label" />
             </com.rama.mako.widgets.WdCollapsibleSection>
             <!--Groups-->
@@ -96,7 +96,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8sp"
-                    android:background="@color/bg_secondary"
+                    android:background="@color/bg_2"
                     android:focusableInTouchMode="true"
                     android:orientation="vertical"
                     android:paddingStart="8sp"
@@ -109,9 +109,400 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8sp"
-                    android:background="@color/button_secondary"
+                    android:background="@color/button_2"
                     android:text="@string/add_group_label" />
 
+            </com.rama.mako.widgets.WdCollapsibleSection>
+
+            <!--Themes-->
+            <com.rama.mako.widgets.WdCollapsibleSection
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:key="SETTINGS_SECTION_THEMES"
+                app:label="@string/themes_header"
+                app:defaultExpanded="true">
+
+                <RadioGroup
+                    android:id="@+id/themes_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/bg_2"
+                    android:padding="16sp">
+
+                    <RadioButton
+                        android:id="@+id/theme_mako"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/theme_mako_label"
+                        android:textColor="@color/foreground"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="8sp" />
+
+                    <RadioButton
+                        android:id="@+id/theme_rama"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/theme_rama_label"
+                        android:textColor="@color/foreground"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="8sp" />
+
+                    <RadioButton
+                        android:id="@+id/theme_catppuccin_mocha"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/theme_catppuccin_mocha_label"
+                        android:textColor="@color/foreground"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="8sp" />
+
+                    <RadioButton
+                        android:id="@+id/theme_dracula"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8sp"
+                        android:text="@string/theme_dracula_label"
+                        android:textColor="@color/foreground"
+                        android:textSize="16sp" />
+
+                    <RadioButton
+                        android:id="@+id/theme_melange"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8sp"
+                        android:text="@string/theme_melange_label"
+                        android:textColor="@color/foreground"
+                        android:textSize="16sp" />
+
+                    <RadioButton
+                        android:id="@+id/theme_tokyo_night"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/theme_tokyo_night_label"
+                        android:layout_marginBottom="8sp"
+                        android:textColor="@color/foreground"
+                        android:textSize="16sp" />
+
+                    <RadioButton
+                        android:id="@+id/theme_custom"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/theme_custom_label"
+                        android:textColor="@color/foreground"
+                        android:textSize="16sp" />
+                </RadioGroup>
+
+                <LinearLayout
+                    android:id="@+id/themes_form"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginVertical="16sp"
+                        android:background="@color/disabled" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8sp"
+                        android:background="@color/bg_2"
+                        android:focusableInTouchMode="true"
+                        android:orientation="vertical"
+                        android:padding="16sp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8sp"
+                            android:text="@string/theme_foreground_label" />
+
+                        <EditText
+                            android:id="@+id/fg"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/input"
+                            android:layout_marginBottom="8sp"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:textSize="16sp"
+                            android:paddingTop="16sp"
+                            android:paddingBottom="16sp"
+                            android:paddingStart="8sp"
+                            android:paddingEnd="8sp"
+                            android:inputType="textNoSuggestions"
+                            android:maxLength="7"
+                            android:hint="#RRGGBB" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8sp"
+                            android:text="@string/theme_collapsible_header_label" />
+
+                        <EditText
+                            android:id="@+id/collapsible_header"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/input"
+                            android:layout_marginBottom="8sp"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:textSize="16sp"
+                            android:paddingTop="16sp"
+                            android:paddingBottom="16sp"
+                            android:paddingStart="8sp"
+                            android:paddingEnd="8sp"
+                            android:inputType="textNoSuggestions"
+                            android:maxLength="7"
+                            android:hint="#RRGGBB" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8sp"
+                            android:text="@string/theme_clock_label" />
+
+                        <EditText
+                            android:id="@+id/clock"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/input"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:textSize="16sp"
+                            android:layout_marginBottom="8sp"
+                            android:paddingTop="16sp"
+                            android:paddingBottom="16sp"
+                            android:paddingStart="8sp"
+                            android:paddingEnd="8sp"
+                            android:inputType="textNoSuggestions"
+                            android:maxLength="7"
+                            android:hint="#RRGGBB" />
+
+                        <TextView
+                            android:visibility="gone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8sp"
+                            android:text="@string/theme_icons_label" />
+
+                        <EditText
+                            android:visibility="gone"
+                            android:id="@+id/icons"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/input"
+                            android:layout_marginBottom="8sp"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:textSize="16sp"
+                            android:paddingTop="16sp"
+                            android:paddingBottom="16sp"
+                            android:paddingStart="8sp"
+                            android:paddingEnd="8sp"
+                            android:inputType="textNoSuggestions"
+                            android:maxLength="7"
+                            android:hint="#RRGGBB" />
+
+                        <TextView
+                            android:visibility="gone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8sp"
+                            android:text="@string/theme_accent_label" />
+
+                        <EditText
+                            android:visibility="gone"
+                            android:id="@+id/accent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/input"
+                            android:layout_marginBottom="8sp"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:textSize="16sp"
+                            android:paddingTop="16sp"
+                            android:paddingBottom="16sp"
+                            android:paddingStart="8sp"
+                            android:paddingEnd="8sp"
+                            android:inputType="textNoSuggestions"
+                            android:maxLength="7"
+                            android:hint="#RRGGBB" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8sp"
+                            android:text="@string/theme_background_1_label" />
+
+                        <EditText
+                            android:id="@+id/bg_1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/input"
+                            android:layout_marginBottom="8sp"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:textSize="16sp"
+                            android:paddingTop="16sp"
+                            android:paddingBottom="16sp"
+                            android:paddingStart="8sp"
+                            android:paddingEnd="8sp"
+                            android:inputType="textNoSuggestions"
+                            android:maxLength="7"
+                            android:hint="#RRGGBB" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8sp"
+                            android:text="@string/theme_background_2_label" />
+
+                        <EditText
+                            android:id="@+id/bg_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8sp"
+                            android:background="@color/input"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:textSize="16sp"
+                            android:paddingTop="16sp"
+                            android:paddingBottom="16sp"
+                            android:paddingStart="8sp"
+                            android:paddingEnd="8sp"
+                            android:inputType="textNoSuggestions"
+                            android:maxLength="7"
+                            android:hint="#RRGGBB" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8sp"
+                            android:text="@string/theme_background_3_label" />
+
+                        <EditText
+                            android:id="@+id/bg_3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/input"
+                            android:layout_marginBottom="8sp"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:textSize="16sp"
+                            android:paddingTop="16sp"
+                            android:paddingBottom="16sp"
+                            android:paddingStart="8sp"
+                            android:paddingEnd="8sp"
+                            android:inputType="textNoSuggestions"
+                            android:maxLength="7"
+                            android:hint="#RRGGBB" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8sp"
+                            android:text="@string/theme_input_background_label" />
+
+                        <EditText
+                            android:id="@+id/input"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/input"
+                            android:layout_marginBottom="8sp"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:textSize="16sp"
+                            android:paddingTop="16sp"
+                            android:paddingBottom="16sp"
+                            android:paddingStart="8sp"
+                            android:paddingEnd="8sp"
+                            android:inputType="textNoSuggestions"
+                            android:maxLength="7"
+                            android:hint="#RRGGBB" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8sp"
+                            android:text="@string/theme_button_1_background_label" />
+
+                        <EditText
+                            android:id="@+id/btn_1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/input"
+                            android:layout_marginBottom="8sp"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:textSize="16sp"
+                            android:paddingTop="16sp"
+                            android:paddingBottom="16sp"
+                            android:paddingStart="8sp"
+                            android:paddingEnd="8sp"
+                            android:inputType="textNoSuggestions"
+                            android:maxLength="7"
+                            android:hint="#RRGGBB" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8sp"
+                            android:text="@string/theme_button_2_background_label" />
+
+                        <EditText
+                            android:id="@+id/btn_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/input"
+                            android:layout_marginBottom="8sp"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:textSize="16sp"
+                            android:paddingTop="16sp"
+                            android:paddingBottom="16sp"
+                            android:paddingStart="8sp"
+                            android:paddingEnd="8sp"
+                            android:inputType="textNoSuggestions"
+                            android:maxLength="7"
+                            android:hint="#RRGGBB" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8sp"
+                            android:text="@string/theme_danger_label" />
+
+                        <EditText
+                            android:id="@+id/danger"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/input"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:layout_marginBottom="8sp"
+                            android:textSize="16sp"
+                            android:paddingTop="16sp"
+                            android:paddingBottom="16sp"
+                            android:paddingStart="8sp"
+                            android:paddingEnd="8sp"
+                            android:inputType="textNoSuggestions"
+                            android:maxLength="7"
+                            android:hint="#RRGGBB" />
+
+                        <com.rama.mako.widgets.WdButton
+                            android:id="@+id/save_custom_theme"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8sp"
+                            android:background="@color/button_2"
+                            android:text="@string/theme_apply_custom_label" />
+                    </LinearLayout>
+                </LinearLayout>
             </com.rama.mako.widgets.WdCollapsibleSection>
             <!--Background-->
             <com.rama.mako.widgets.WdCollapsibleSection
@@ -125,7 +516,7 @@
                     android:id="@+id/home_background_mode_group"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/bg_secondary"
+                    android:background="@color/bg_2"
                     android:padding="16sp">
 
                     <RadioButton
@@ -169,7 +560,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8sp"
-                    android:background="@color/button_secondary"
+                    android:background="@color/button_2"
                     android:text="@string/change_wallpaper_label" />
             </com.rama.mako.widgets.WdCollapsibleSection>
             <!--Icons-->
@@ -185,7 +576,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="16sp"
-                    android:background="@color/bg_secondary">
+                    android:background="@color/bg_2">
 
                     <RadioButton
                         android:id="@+id/icon_source_none"
@@ -228,7 +619,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8sp"
-                    android:background="@color/bg_secondary"
+                    android:background="@color/bg_2"
                     android:orientation="vertical">
 
                     <TextView
@@ -245,7 +636,7 @@
                         android:id="@+id/select_icon_pack_button"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/button_secondary"
+                        android:background="@color/button_2"
                         android:text="@string/select_icon_pack_label" />
                 </LinearLayout>
             </com.rama.mako.widgets.WdCollapsibleSection>
@@ -261,7 +652,7 @@
                     android:id="@+id/font_style_group"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/bg_secondary"
+                    android:background="@color/bg_2"
                     android:padding="16sp">
 
                     <RadioButton
@@ -323,7 +714,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="16sp"
-                    android:background="@color/bg_secondary">
+                    android:background="@color/bg_2">
 
                     <RadioButton
                         android:id="@+id/clock_none"
@@ -365,7 +756,7 @@
                     android:id="@+id/set_clock_app_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/button_secondary"
+                    android:background="@color/button_2"
                     android:text="@string/set_clock_app_label" />
             </com.rama.mako.widgets.WdCollapsibleSection>
             <!--Date-->
@@ -427,7 +818,7 @@
                     android:id="@+id/temperature_format_group"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/bg_secondary"
+                    android:background="@color/bg_2"
                     android:padding="16sp">
 
                     <RadioButton
@@ -514,7 +905,7 @@
 
                 <LinearLayout
                     android:id="@+id/pin_field"
-                    android:background="@color/bg_secondary"
+                    android:background="@color/bg_2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -540,7 +931,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8sp"
-                    android:background="@color/bg_secondary"
+                    android:background="@color/bg_2"
                     android:padding="16sp"
                     android:orientation="vertical" />
             </com.rama.mako.widgets.WdCollapsibleSection>
@@ -557,14 +948,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8sp"
-                    android:background="@color/button_danger"
+                    android:background="@color/danger"
                     android:text="@string/export_data_label" />
 
                 <com.rama.mako.widgets.WdButton
                     android:id="@+id/clear_prefs_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/button_danger"
+                    android:background="@color/danger"
                     android:text="@string/clear_data_label" />
             </com.rama.mako.widgets.WdCollapsibleSection>
         </LinearLayout>
@@ -582,13 +973,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8sp"
         android:layout_marginBottom="8sp"
-        android:background="@color/button_primary"
+        android:background="@color/button_1"
         android:text="@string/activity_about_mako_header" />
 
     <com.rama.mako.widgets.WdButton
         android:id="@+id/close_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/button_primary"
+        android:background="@color/button_1"
         android:text="@string/go_back_label" />
 </LinearLayout>

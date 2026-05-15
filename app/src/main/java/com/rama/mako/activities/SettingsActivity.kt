@@ -45,6 +45,7 @@ class SettingsActivity : CsActivity() {
 
         settingsRootView = findViewById(R.id.settings_root)
         applyEdgeToEdgePadding(settingsRootView)
+        applyCurrentTheme(settingsRootView)
 
         homeBackgroundManager = HomeBackgroundManager(this)
         applySettingsBackground(force = true)

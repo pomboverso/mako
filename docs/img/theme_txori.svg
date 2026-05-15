@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="700"
+   height="1200"
+   viewBox="0 0 185.20834 317.49999"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   sodipodi:docname="theme_txori.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="0.9035917"
+     inkscape:cx="271.69351"
+     inkscape:cy="375.16945"
+     inkscape:window-width="1680"
+     inkscape:window-height="1000"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <inkscape:page
+       x="0"
+       y="0"
+       width="185.20834"
+       height="317.5"
+       id="page50"
+       margin="0"
+       bleed="0" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1">
+    <rect
+       x="140.05583"
+       y="19.633995"
+       width="198.30334"
+       height="210.7382"
+       id="rect2" />
+    <rect
+       x="140.05583"
+       y="19.633995"
+       width="98.000809"
+       height="14.387251"
+       id="rect3" />
+  </defs>
+  <g
+     inkscape:label="Camada 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#efefef;fill-opacity:1;stroke-width:4.303;stroke-linecap:square"
+       id="rect50"
+       width="26.458338"
+       height="317.5"
+       x="158.75"
+       y="0" />
+    <g
+       id="g50"
+       style="fill:#282038;fill-opacity:1">
+      <rect
+         style="fill:#282038;stroke-width:25.8179;stroke-linecap:square;fill-opacity:1"
+         id="rect1"
+         width="158.75"
+         height="317.5"
+         x="0"
+         y="0" />
+      <circle
+         style="fill:#282038;fill-opacity:1;stroke-width:4.303;stroke-linecap:square"
+         id="circle45"
+         cx="172.46054"
+         cy="81.119843"
+         r="6.0253286" />
+    </g>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-31.764982,14.989931)"
+       id="text3"
+       style="font-size:5.33333px;font-family:'Jersey 25';-inkscape-font-specification:'Jersey 25, ';text-align:start;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect3);display:inline;fill:#b8e39d;stroke-width:16.2633;stroke-linecap:square"
+       x="-11.056907"
+       y="0" />
+    <g
+       id="g37">
+      <rect
+         style="fill:#17263f;fill-opacity:1;stroke-width:4.303;stroke-linecap:square"
+         id="rect4"
+         width="4.2333331"
+         height="4.2333331"
+         x="0"
+         y="2.220446e-16" />
+      <rect
+         style="fill:#17263f;fill-opacity:1;stroke-width:4.303;stroke-linecap:square"
+         id="rect5"
+         width="4.2333331"
+         height="4.2333331"
+         x="154.51666"
+         y="2.220446e-16" />
+      <rect
+         style="fill:#17263f;fill-opacity:1;stroke-width:4.303;stroke-linecap:square"
+         id="rect6"
+         width="4.2333331"
+         height="4.2333331"
+         x="0"
+         y="313.26666" />
+      <rect
+         style="fill:#17263f;fill-opacity:1;stroke-width:4.303;stroke-linecap:square"
+         id="rect7"
+         width="4.2333331"
+         height="4.2333331"
+         x="154.51666"
+         y="313.26666" />
+    </g>
+    <g
+       id="g47"
+       style="fill:#7367ea;fill-opacity:1">
+      <text
+         xml:space="preserve"
+         style="font-size:22.5778px;font-family:'Jersey 25';-inkscape-font-specification:'Jersey 25, ';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#7367ea;fill-opacity:1;stroke-width:4.303;stroke-linecap:square"
+         x="5.568532"
+         y="19.734152"
+         id="text7"><tspan
+           sodipodi:role="line"
+           id="tspan7"
+           style="stroke-width:4.303;fill:#7367ea;fill-opacity:1"
+           x="5.568532"
+           y="19.734152">10:00</tspan></text>
+      <circle
+         style="fill:#7367ea;fill-opacity:1;stroke-width:4.303;stroke-linecap:square"
+         id="path43"
+         cx="172.46054"
+         cy="14.44485"
+         r="6.0253286" />
+    </g>
+    <g
+       id="g48"
+       style="fill:#ada0ce;fill-opacity:1">
+      <text
+         xml:space="preserve"
+         style="font-size:5.64444px;font-family:'Jersey 25';-inkscape-font-specification:'Jersey 25, ';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#ada0ce;fill-opacity:1;stroke-width:4.303;stroke-linecap:square"
+         x="6.3945503"
+         y="25.292553"
+         id="text8"><tspan
+           sodipodi:role="line"
+           style="font-size:5.64444px;stroke-width:4.303;fill:#ada0ce;fill-opacity:1"
+           x="6.3945503"
+           y="25.292553"
+           id="tspan9">SEGUNDA :: 5/14/26 :: 134/365</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:5.64444px;font-family:'Jersey 25';-inkscape-font-specification:'Jersey 25, ';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#ada0ce;fill-opacity:1;stroke-width:4.303;stroke-linecap:square"
+         x="6.3945503"
+         y="30.584225"
+         id="text10"><tspan
+           sodipodi:role="line"
+           style="font-size:5.64444px;stroke-width:4.303;fill:#ada0ce;fill-opacity:1"
+           x="6.3945503"
+           y="30.584225"
+           id="tspan10">100% :: 68f</tspan></text>
+      <g
+         id="g42"
+         style="fill:#ada0ce;fill-opacity:1">
+        <text
+           xml:space="preserve"
+           style="font-size:11.2889px;font-family:'Jersey 25';-inkscape-font-specification:'Jersey 25, ';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#ada0ce;fill-opacity:1;stroke-width:4.303;stroke-linecap:square"
+           x="6.3945503"
+           y="54.000755"
+           id="text13"><tspan
+             sodipodi:role="line"
+             style="font-size:11.2889px;stroke-width:4.303;fill:#ada0ce;fill-opacity:1"
+             x="6.3945503"
+             y="54.000755"
+             id="tspan13">Mako</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-size:11.2889px;font-family:'Jersey 25';-inkscape-font-specification:'Jersey 25, ';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#ada0ce;fill-opacity:1;stroke-width:4.303;stroke-linecap:square"
+           x="6.3945503"
+           y="66.833939"
+           id="text14"><tspan
+             sodipodi:role="line"
+             style="font-size:11.2889px;stroke-width:4.303;fill:#ada0ce;fill-opacity:1"
+             x="6.3945503"
+             y="66.833939"
+             id="tspan14">Txori</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-size:11.2889px;font-family:'Jersey 25';-inkscape-font-specification:'Jersey 25, ';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#ada0ce;fill-opacity:1;stroke-width:4.303;stroke-linecap:square"
+           x="6.3945503"
+           y="79.667122"
+           id="text15"><tspan
+             sodipodi:role="line"
+             style="font-size:11.2889px;stroke-width:4.303;fill:#ada0ce;fill-opacity:1"
+             x="6.3945503"
+             y="79.667122"
+             id="tspan15">Tui</tspan></text>
+      </g>
+      <g
+         id="g40"
+         style="fill:#ada0ce;fill-opacity:1">
+        <text
+           xml:space="preserve"
+           style="font-size:11.2889px;font-family:'Jersey 25';-inkscape-font-specification:'Jersey 25, ';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#ada0ce;fill-opacity:1;stroke-width:4.303;stroke-linecap:square"
+           x="6.3945503"
+           y="191.58638"
+           id="text26"><tspan
+             sodipodi:role="line"
+             style="font-size:11.2889px;stroke-width:4.303;fill:#ada0ce;fill-opacity:1"
+             x="6.3945503"
+             y="191.58638"
+             id="tspan26">SDK Monitor</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-size:11.2889px;font-family:'Jersey 25';-inkscape-font-specification:'Jersey 25, ';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#ada0ce;fill-opacity:1;stroke-width:4.303;stroke-linecap:square"
+           x="6.3945503"
+           y="204.41956"
+           id="text30"><tspan
+             sodipodi:role="line"
+             style="font-size:11.2889px;stroke-width:4.303;fill:#ada0ce;fill-opacity:1"
+             x="6.3945503"
+             y="204.41956"
+             id="tspan30">LibreFind</tspan></text>
+      </g>
+      <g
+         id="g39"
+         style="fill:#ada0ce;fill-opacity:1">
+        <text
+           xml:space="preserve"
+           style="font-size:11.2889px;font-family:'Jersey 25';-inkscape-font-specification:'Jersey 25, ';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#ada0ce;fill-opacity:1;stroke-width:4.303;stroke-linecap:square"
+           x="6.3945503"
+           y="226.64418"
+           id="text16"><tspan
+             sodipodi:role="line"
+             style="font-size:11.2889px;stroke-width:4.303;fill:#ada0ce;fill-opacity:1"
+             x="6.3945503"
+             y="226.64418"
+             id="tspan16">NewPipe</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-size:11.2889px;font-family:'Jersey 25';-inkscape-font-specification:'Jersey 25, ';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#ada0ce;fill-opacity:1;stroke-width:4.303;stroke-linecap:square"
+           x="6.3945503"
+           y="241.12941"
+           id="text31"><tspan
+             sodipodi:role="line"
+             style="font-size:11.2889px;stroke-width:4.303;fill:#ada0ce;fill-opacity:1"
+             x="6.3945503"
+             y="241.12941"
+             id="tspan31">DeepDenoiser</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-size:11.2889px;font-family:'Jersey 25';-inkscape-font-specification:'Jersey 25, ';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#ada0ce;fill-opacity:1;stroke-width:4.303;stroke-linecap:square"
+           x="6.3945503"
+           y="255.61462"
+           id="text35"><tspan
+             sodipodi:role="line"
+             style="font-size:11.2889px;stroke-width:4.303;fill:#ada0ce;fill-opacity:1"
+             x="6.3945503"
+             y="255.61462"
+             id="tspan35">Noice</tspan></text>
+      </g>
+      <g
+         id="g41"
+         style="fill:#ada0ce;fill-opacity:1">
+        <text
+           xml:space="preserve"
+           style="font-size:11.2889px;font-family:'Jersey 25';-inkscape-font-specification:'Jersey 25, ';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#ada0ce;fill-opacity:1;stroke-width:4.303;stroke-linecap:square"
+           x="6.3945503"
+           y="101.89175"
+           id="text12"><tspan
+             sodipodi:role="line"
+             style="font-size:11.2889px;stroke-width:4.303;fill:#ada0ce;fill-opacity:1"
+             x="6.3945503"
+             y="101.89175"
+             id="tspan12">Obtanium</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-size:11.2889px;font-family:'Jersey 25';-inkscape-font-specification:'Jersey 25, ';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#ada0ce;fill-opacity:1;stroke-width:4.303;stroke-linecap:square"
+           x="6.3945503"
+           y="114.72494"
+           id="text21"><tspan
+             sodipodi:role="line"
+             style="font-size:11.2889px;stroke-width:4.303;fill:#ada0ce;fill-opacity:1"
+             x="6.3945503"
+             y="114.72494"
+             id="tspan21">F-Droid</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-size:11.2889px;font-family:'Jersey 25';-inkscape-font-specification:'Jersey 25, ';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#ada0ce;fill-opacity:1;stroke-width:4.303;stroke-linecap:square"
+           x="6.3945503"
+           y="140.39131"
+           id="text24"><tspan
+             sodipodi:role="line"
+             style="font-size:11.2889px;stroke-width:4.303;fill:#ada0ce;fill-opacity:1"
+             x="6.3945503"
+             y="140.39131"
+             id="tspan24">Zapstore</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-size:11.2889px;font-family:'Jersey 25';-inkscape-font-specification:'Jersey 25, ';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#ada0ce;fill-opacity:1;stroke-width:4.303;stroke-linecap:square"
+           x="6.3945503"
+           y="154.87653"
+           id="text25"><tspan
+             sodipodi:role="line"
+             style="font-size:11.2889px;stroke-width:4.303;fill:#ada0ce;fill-opacity:1"
+             x="6.3945503"
+             y="154.87653"
+             id="tspan25">Neo Store</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-size:11.2889px;font-family:'Jersey 25';-inkscape-font-specification:'Jersey 25, ';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#ada0ce;fill-opacity:1;stroke-width:4.303;stroke-linecap:square"
+           x="6.3945503"
+           y="167.70972"
+           id="text27"><tspan
+             sodipodi:role="line"
+             style="font-size:11.2889px;stroke-width:4.303;fill:#ada0ce;fill-opacity:1"
+             x="6.3945503"
+             y="167.70972"
+             id="tspan27">Appteka</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-size:11.2889px;font-family:'Jersey 25';-inkscape-font-specification:'Jersey 25, ';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#ada0ce;fill-opacity:1;stroke-width:4.303;stroke-linecap:square"
+           x="6.3945503"
+           y="127.55812"
+           id="text36"><tspan
+             sodipodi:role="line"
+             style="font-size:11.2889px;stroke-width:4.303;fill:#ada0ce;fill-opacity:1"
+             x="6.3945503"
+             y="127.55812"
+             id="tspan36">Aurora Store</tspan></text>
+      </g>
+      <g
+         id="g38"
+         style="fill:#ada0ce;fill-opacity:1">
+        <text
+           xml:space="preserve"
+           style="font-size:11.2889px;font-family:'Jersey 25';-inkscape-font-specification:'Jersey 25, ';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#ada0ce;fill-opacity:1;stroke-width:4.303;stroke-linecap:square"
+           x="6.3945503"
+           y="277.83926"
+           id="text33"><tspan
+             sodipodi:role="line"
+             style="font-size:11.2889px;stroke-width:4.303;fill:#ada0ce;fill-opacity:1"
+             x="6.3945503"
+             y="277.83926"
+             id="tspan33">Mindustry</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-size:11.2889px;font-family:'Jersey 25';-inkscape-font-specification:'Jersey 25, ';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#ada0ce;fill-opacity:1;stroke-width:4.303;stroke-linecap:square"
+           x="6.3945503"
+           y="292.32446"
+           id="text34"><tspan
+             sodipodi:role="line"
+             style="font-size:11.2889px;stroke-width:4.303;fill:#ada0ce;fill-opacity:1"
+             x="6.3945503"
+             y="292.32446"
+             id="tspan34">ChipDefense</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-size:11.2889px;font-family:'Jersey 25';-inkscape-font-specification:'Jersey 25, ';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#ada0ce;fill-opacity:1;stroke-width:4.303;stroke-linecap:square"
+           x="6.3945503"
+           y="306.80969"
+           id="text37"><tspan
+             sodipodi:role="line"
+             style="font-size:11.2889px;stroke-width:4.303;fill:#ada0ce;fill-opacity:1"
+             x="6.3945503"
+             y="306.80969"
+             id="tspan37">Anuto TD</tspan></text>
+      </g>
+      <circle
+         style="fill:#ada0ce;fill-opacity:1;stroke-width:4.303;stroke-linecap:square"
+         id="circle43"
+         cx="172.46054"
+         cy="36.669846"
+         r="6.0253286" />
+    </g>
+    <g
+       id="g49"
+       style="fill:#7160a5;fill-opacity:1">
+      <g
+         id="g43"
+         style="fill:#7160a5;fill-opacity:1">
+        <text
+           xml:space="preserve"
+           style="font-size:5.64444px;font-family:'Jersey 25';-inkscape-font-specification:'Jersey 25, ';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#7160a5;fill-opacity:1;stroke-width:4.303;stroke-linecap:square"
+           x="6.3945503"
+           y="41.167568"
+           id="text11"><tspan
+             sodipodi:role="line"
+             style="font-size:5.64444px;stroke-width:4.303;fill:#7160a5;fill-opacity:1"
+             x="6.3945503"
+             y="41.167568"
+             id="tspan11">------------ RAMA</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-size:5.64444px;font-family:'Jersey 25';-inkscape-font-specification:'Jersey 25, ';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#7160a5;fill-opacity:1;stroke-width:4.303;stroke-linecap:square"
+           x="6.3945503"
+           y="89.058563"
+           id="text17"><tspan
+             sodipodi:role="line"
+             style="font-size:5.64444px;stroke-width:4.303;fill:#7160a5;fill-opacity:1"
+             x="6.3945503"
+             y="89.058563"
+             id="tspan17">------------ STORES</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-size:5.64444px;font-family:'Jersey 25';-inkscape-font-specification:'Jersey 25, ';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#7160a5;fill-opacity:1;stroke-width:4.303;stroke-linecap:square"
+           x="6.3945503"
+           y="213.811"
+           id="text28"><tspan
+             sodipodi:role="line"
+             style="font-size:5.64444px;stroke-width:4.303;fill:#7160a5;fill-opacity:1"
+             x="6.3945503"
+             y="213.811"
+             id="tspan28">------------ MULTIMEDIA</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-size:5.64444px;font-family:'Jersey 25';-inkscape-font-specification:'Jersey 25, ';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#7160a5;fill-opacity:1;stroke-width:4.303;stroke-linecap:square"
+           x="6.3945503"
+           y="178.75319"
+           id="text29"><tspan
+             sodipodi:role="line"
+             style="font-size:5.64444px;stroke-width:4.303;fill:#7160a5;fill-opacity:1"
+             x="6.3945503"
+             y="178.75319"
+             id="tspan29">------------ DEV</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-size:5.64444px;font-family:'Jersey 25';-inkscape-font-specification:'Jersey 25, ';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#7160a5;fill-opacity:1;stroke-width:4.303;stroke-linecap:square"
+           x="6.3945503"
+           y="265.00607"
+           id="text32"><tspan
+             sodipodi:role="line"
+             style="font-size:5.64444px;stroke-width:4.303;fill:#7160a5;fill-opacity:1"
+             x="6.3945503"
+             y="265.00607"
+             id="tspan32">------------ GAMES</tspan></text>
+      </g>
+      <circle
+         style="fill:#7160a5;fill-opacity:1;stroke-width:4.303;stroke-linecap:square"
+         id="circle44"
+         cx="172.46054"
+         cy="58.894844"
+         r="6.0253286" />
+    </g>
+  </g>
+</svg>

@@ -1,7 +1,7 @@
 <resources>
     <!-- Base theme -->
     <style name="Theme.Mako" parent="android:Theme.DeviceDefault.NoActionBar">
-        <item name="bgColor">@color/bg_primary</item>
+        <item name="bgColor">@color/bg_1</item>
         <item name="foregroundColor">@color/foreground</item>
 
         <item name="android:windowBackground">?attr/bgColor</item>
@@ -16,7 +16,7 @@
         <item name="android:layout_margin">8sp</item>
         <item name="android:layout_columnWeight">1</item>
         <item name="android:layout_rowWeight">1</item>
-        <item name="android:background">@color/button_pin</item>
+        <item name="android:background">@color/bg_3</item>
         <item name="android:textColor">@color/foreground</item>
         <item name="android:textSize">24sp</item>
     </style>

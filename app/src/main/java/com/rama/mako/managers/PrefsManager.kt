@@ -76,6 +76,23 @@ class PrefsManager private constructor(context: Context) {
         const val MIGRATION_ICON_SOURCE_RADIO = "migration:icon_source_radio"
         const val SYSTEM_BAR_VISIBLE = "system:bar:visible"
 
+        const val APP_THEME_NAME = "app:theme:name"
+        const val APP_THEME_FOREGROUND = "app:theme:foreground"
+        const val APP_THEME_BG_1 = "app:theme:bg_1"
+        const val APP_THEME_BG_2 = "app:theme:bg_2"
+        const val APP_THEME_BG_3 = "app:theme:bg_3"
+        const val APP_THEME_ACCENT_1 = "app:theme:accent_1"
+        const val APP_THEME_ACCENT_2 = "app:theme:accent_2"
+        const val APP_THEME_ACCENT_3 = "app:theme:accent_3"
+        const val APP_THEME_DISABLED = "app:theme:disabled"
+        const val APP_THEME_INPUT = "app:theme:input"
+        const val APP_THEME_BUTTON_1 = "app:theme:button_1"
+        const val APP_THEME_BUTTON_2 = "app:theme:button_2"
+        const val APP_THEME_DANGER = "app:theme:danger"
+        const val APP_THEME_COLLAPSIBLE_HEADER = "app:theme:collapsible_header"
+        const val APP_THEME_ICON = "app:theme:icon"
+        const val APP_THEME_CLOCK = "app:theme:clock"
+
         const val SECURITY_KEYPAD_VISIBLE = "security:keypad:visible"
         const val SECURITY_KEYPAD_RANDOMIZED = "security:keypad:randomized"
         const val SECURITY_PIN = "security:pin"
@@ -94,6 +111,7 @@ class PrefsManager private constructor(context: Context) {
         const val SETTINGS_SECTION_DATA = "settings:section:data"
         const val SETTINGS_SECTION_APPS = "settings:section:apps"
         const val SETTINGS_SECTION_SECURITY = "settings:section:apps"
+        const val SETTINGS_SECTION_THEMES = "settings:section:themes"
 
         fun appKey(pkg: String, userHandle: UserHandle): String {
             val userId = userHandle.hashCode()
@@ -152,6 +170,16 @@ class PrefsManager private constructor(context: Context) {
         const val AMOLED = "amoled"
     }
 
+    object Theme {
+        const val RAMA = "rama"
+        const val MAKO = "mako"
+        const val CATPPUCCIN_MOCHA = "catppuccin_mocha"
+        const val DRACULA = "dracula"
+        const val MELANGE = "melange"
+        const val TOKYO_NIGHT = "tokyo_night"
+        const val CUSTOM = "custom"
+    }
+
     fun initPrefs() {
         val ids = prefs.getStringSet(PrefKeys.GROUPS_IDS, null)
 
@@ -188,6 +216,8 @@ class PrefsManager private constructor(context: Context) {
                 .putString(PrefKeys.HOME_BACKGROUND_MODE, BackgroundMode.DEFAULT)
                 .putBoolean(PrefKeys.SYSTEM_BAR_VISIBLE, false)
 
+                .putString(PrefKeys.APP_THEME_NAME, Theme.MAKO)
+
                 .putBoolean(PrefKeys.BATTERY_VISIBLE, true)
                 .putBoolean(PrefKeys.BATTERY_TEMPERATURE, true)
                 .putString(PrefKeys.TEMPERATURE_FORMAT, TemperatureFormat.DEFAULT)
@@ -216,6 +246,7 @@ class PrefsManager private constructor(context: Context) {
                 .putBoolean(PrefKeys.SETTINGS_SECTION_DATA, true)
                 .putBoolean(PrefKeys.SETTINGS_SECTION_APPS, true)
                 .putBoolean(PrefKeys.SETTINGS_SECTION_SECURITY, true)
+                .putBoolean(PrefKeys.SETTINGS_SECTION_THEMES, true)
 
                 .apply()
         }
@@ -447,6 +478,18 @@ class PrefsManager private constructor(context: Context) {
 
     fun setFontStyle(style: String) =
         prefs.edit().putString(PrefKeys.FONT_STYLE, style).apply()
+
+    fun getTheme(): String =
+        prefs.getString(PrefKeys.APP_THEME_NAME, "") ?: ""
+
+    fun setTheme(style: String) =
+        prefs.edit().putString(PrefKeys.APP_THEME_NAME, style).apply()
+
+    fun getCustomThemeColor(key: String, fallback: Int): Int =
+        prefs.getInt(key, fallback)
+
+    fun setCustomThemeColor(key: String, color: Int) =
+        prefs.edit().putInt(key, color).apply()
 
     fun getAppLanguage(): String {
         return prefs.getString(PrefKeys.APP_LANGUAGE, Language.SYSTEM) ?: Language.SYSTEM

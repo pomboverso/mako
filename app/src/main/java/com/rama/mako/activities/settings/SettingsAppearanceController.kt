@@ -1,9 +1,13 @@
 package com.rama.mako.activities.settings
 
+import android.graphics.Color
+import android.view.View
+import android.widget.EditText
 import android.widget.RadioGroup
 import com.rama.mako.R
 import com.rama.mako.activities.SettingsActivity
 import com.rama.mako.managers.PrefsManager
+import com.rama.mako.managers.ThemeManager
 
 class SettingsAppearanceController(private val activity: SettingsActivity) {
 
@@ -12,6 +16,8 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
     fun setup() {
         setupFontStyle()
         setupTemperatureFormat()
+        setupTheme()
+        setupCustomTheme()
         setupBackgroundMode()
     }
 
@@ -52,6 +58,118 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
                 R.id.temperature_celsius -> prefs.setTemperatureFormat(PrefsManager.TemperatureFormat.CELSIUS)
                 R.id.temperature_fahrenheit -> prefs.setTemperatureFormat(PrefsManager.TemperatureFormat.FAHRENHEIT)
                 else -> prefs.setTemperatureFormat(PrefsManager.TemperatureFormat.DEFAULT)
+            }
+        }
+    }
+
+    private fun setupTheme() {
+        val group = activity.findViewById<RadioGroup>(R.id.themes_group)
+        val form = activity.findViewById<View>(R.id.themes_form)
+
+        // Show form only if custom is already selected
+        form.visibility =
+            if (prefs.getTheme() == PrefsManager.Theme.CUSTOM) View.VISIBLE else View.GONE
+
+        when (prefs.getTheme()) {
+            PrefsManager.Theme.RAMA -> group.check(R.id.theme_rama)
+            PrefsManager.Theme.MAKO -> group.check(R.id.theme_mako)
+            PrefsManager.Theme.CATPPUCCIN_MOCHA -> group.check(R.id.theme_catppuccin_mocha)
+            PrefsManager.Theme.DRACULA -> group.check(R.id.theme_dracula)
+            PrefsManager.Theme.MELANGE -> group.check(R.id.theme_melange)
+            PrefsManager.Theme.TOKYO_NIGHT -> group.check(R.id.theme_tokyo_night)
+            PrefsManager.Theme.CUSTOM -> group.check(R.id.theme_custom)
+            else -> group.check(R.id.theme_mako)
+        }
+
+        group.setOnCheckedChangeListener { _, id ->
+            val theme = when (id) {
+                R.id.theme_rama -> PrefsManager.Theme.RAMA
+                R.id.theme_mako -> PrefsManager.Theme.MAKO
+                R.id.theme_catppuccin_mocha -> PrefsManager.Theme.CATPPUCCIN_MOCHA
+                R.id.theme_dracula -> PrefsManager.Theme.DRACULA
+                R.id.theme_melange -> PrefsManager.Theme.MELANGE
+                R.id.theme_tokyo_night -> PrefsManager.Theme.TOKYO_NIGHT
+                R.id.theme_custom -> PrefsManager.Theme.CUSTOM
+                else -> PrefsManager.Theme.MAKO
+            }
+
+            // Show/hide the custom form
+            form.visibility = if (theme == PrefsManager.Theme.CUSTOM) View.VISIBLE else View.GONE
+
+            if (theme != PrefsManager.Theme.CUSTOM) {
+                // For built-in themes: save and apply immediately
+                prefs.setTheme(theme)
+                activity.recreate()
+            } else {
+                // For custom: populate fields with current palette but don't apply yet
+                populateCustomFields(ThemeManager.paletteFor(prefs.getTheme(), activity))
+            }
+        }
+    }
+
+    private fun colorToHex(color: Int): String =
+        String.format("#%06X", 0xFFFFFF and color)
+
+    private fun populateCustomFields(palette: ThemeManager.Palette) {
+        activity.findViewById<EditText>(R.id.fg).setText(colorToHex(palette.foreground))
+        activity.findViewById<EditText>(R.id.collapsible_header)
+            .setText(colorToHex(palette.collapsible_header))
+        activity.findViewById<EditText>(R.id.clock).setText(colorToHex(palette.clock))
+        activity.findViewById<EditText>(R.id.icons).setText(colorToHex(palette.icon))
+        activity.findViewById<EditText>(R.id.accent).setText(colorToHex(palette.accent_1))
+        activity.findViewById<EditText>(R.id.bg_1).setText(colorToHex(palette.bg_1))
+        activity.findViewById<EditText>(R.id.bg_2).setText(colorToHex(palette.bg_2))
+        activity.findViewById<EditText>(R.id.bg_3).setText(colorToHex(palette.bg_3))
+        activity.findViewById<EditText>(R.id.input).setText(colorToHex(palette.input))
+        activity.findViewById<EditText>(R.id.btn_1).setText(colorToHex(palette.button_1))
+        activity.findViewById<EditText>(R.id.btn_2).setText(colorToHex(palette.button_2))
+        activity.findViewById<EditText>(R.id.danger).setText(colorToHex(palette.danger))
+    }
+
+    private fun parseHex(text: String): Int? {
+        val hex = text.trim()
+        if (!hex.matches(Regex("^#[0-9A-Fa-f]{6}$"))) return null
+        return runCatching { Color.parseColor(hex) }.getOrNull()
+    }
+
+    private fun setupCustomTheme() {
+        // Populate fields with current theme palette on open
+        val currentPalette = ThemeManager.paletteFor(prefs.getTheme(), activity)
+        populateCustomFields(currentPalette)
+
+        val saveButton = activity.findViewById<android.view.View>(R.id.save_custom_theme)
+        saveButton.setOnClickListener {
+            val fields = mapOf(
+                PrefsManager.PrefKeys.APP_THEME_FOREGROUND to activity.findViewById<EditText>(R.id.fg),
+                PrefsManager.PrefKeys.APP_THEME_COLLAPSIBLE_HEADER to activity.findViewById<EditText>(
+                    R.id.collapsible_header
+                ),
+                PrefsManager.PrefKeys.APP_THEME_CLOCK to activity.findViewById<EditText>(R.id.clock),
+                PrefsManager.PrefKeys.APP_THEME_ICON to activity.findViewById<EditText>(R.id.icons),
+                PrefsManager.PrefKeys.APP_THEME_ACCENT_1 to activity.findViewById<EditText>(R.id.accent),
+                PrefsManager.PrefKeys.APP_THEME_BG_1 to activity.findViewById<EditText>(R.id.bg_1),
+                PrefsManager.PrefKeys.APP_THEME_BG_2 to activity.findViewById<EditText>(R.id.bg_2),
+                PrefsManager.PrefKeys.APP_THEME_BG_3 to activity.findViewById<EditText>(R.id.bg_3),
+                PrefsManager.PrefKeys.APP_THEME_INPUT to activity.findViewById<EditText>(R.id.input),
+                PrefsManager.PrefKeys.APP_THEME_BUTTON_1 to activity.findViewById<EditText>(R.id.btn_1),
+                PrefsManager.PrefKeys.APP_THEME_BUTTON_2 to activity.findViewById<EditText>(R.id.btn_2),
+                PrefsManager.PrefKeys.APP_THEME_DANGER to activity.findViewById<EditText>(R.id.danger),
+            )
+
+            var allValid = true
+            fields.forEach { (key, editText) ->
+                val color = parseHex(editText.text.toString())
+                if (color != null) {
+                    prefs.setCustomThemeColor(key, color)
+                } else {
+                    editText.error = "Invalid hex"
+                    allValid = false
+                }
+            }
+
+            if (allValid) {
+                prefs.setTheme(PrefsManager.Theme.CUSTOM)
+                activity.recreate()
             }
         }
     }
