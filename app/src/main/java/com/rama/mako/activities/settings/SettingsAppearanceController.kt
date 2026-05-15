@@ -141,37 +141,29 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
         val saveButton = activity.findViewById<android.view.View>(R.id.save_custom_theme)
         saveButton.setOnClickListener {
             val fields = mapOf(
-                PrefsManager.PrefKeys.APP_THEME_FOREGROUND to activity.findViewById<EditText>(R.id.foreground),
-                PrefsManager.PrefKeys.APP_THEME_COLLAPSIBLE_HEADER to activity.findViewById<EditText>(
+                PrefsManager.PrefKeys.APP_THEME_FOREGROUND to activity.findViewById<WdColorPicker>(R.id.foreground),
+                PrefsManager.PrefKeys.APP_THEME_COLLAPSIBLE_HEADER to activity.findViewById<WdColorPicker>(
                     R.id.collapsible_header
                 ),
-                PrefsManager.PrefKeys.APP_THEME_CLOCK to activity.findViewById<EditText>(R.id.clock),
-                PrefsManager.PrefKeys.APP_THEME_ICON to activity.findViewById<EditText>(R.id.icons),
-                PrefsManager.PrefKeys.APP_THEME_ACCENT_1 to activity.findViewById<EditText>(R.id.accent),
-                PrefsManager.PrefKeys.APP_THEME_BG_1 to activity.findViewById<EditText>(R.id.bg_1),
-                PrefsManager.PrefKeys.APP_THEME_BG_2 to activity.findViewById<EditText>(R.id.bg_2),
-                PrefsManager.PrefKeys.APP_THEME_BG_3 to activity.findViewById<EditText>(R.id.bg_3),
-                PrefsManager.PrefKeys.APP_THEME_INPUT to activity.findViewById<EditText>(R.id.input),
-                PrefsManager.PrefKeys.APP_THEME_BUTTON_1 to activity.findViewById<EditText>(R.id.btn_1),
-                PrefsManager.PrefKeys.APP_THEME_BUTTON_2 to activity.findViewById<EditText>(R.id.btn_2),
-                PrefsManager.PrefKeys.APP_THEME_DANGER to activity.findViewById<EditText>(R.id.danger),
+                PrefsManager.PrefKeys.APP_THEME_CLOCK to activity.findViewById<WdColorPicker>(R.id.clock),
+                PrefsManager.PrefKeys.APP_THEME_ICON to activity.findViewById<WdColorPicker>(R.id.icons),
+                PrefsManager.PrefKeys.APP_THEME_ACCENT_1 to activity.findViewById<WdColorPicker>(R.id.accent),
+                PrefsManager.PrefKeys.APP_THEME_BG_1 to activity.findViewById<WdColorPicker>(R.id.bg_1),
+                PrefsManager.PrefKeys.APP_THEME_BG_2 to activity.findViewById<WdColorPicker>(R.id.bg_2),
+                PrefsManager.PrefKeys.APP_THEME_BG_3 to activity.findViewById<WdColorPicker>(R.id.bg_3),
+                PrefsManager.PrefKeys.APP_THEME_INPUT to activity.findViewById<WdColorPicker>(R.id.input),
+                PrefsManager.PrefKeys.APP_THEME_BUTTON_1 to activity.findViewById<WdColorPicker>(R.id.btn_1),
+                PrefsManager.PrefKeys.APP_THEME_BUTTON_2 to activity.findViewById<WdColorPicker>(R.id.btn_2),
+                PrefsManager.PrefKeys.APP_THEME_DANGER to activity.findViewById<WdColorPicker>(R.id.danger),
             )
-
-            var allValid = true
-            fields.forEach { (key, editText) ->
-                val color = parseHex(editText.text.toString())
-                if (color != null) {
-                    prefs.setCustomThemeColor(key, color)
-                } else {
-                    editText.error = "Invalid hex"
-                    allValid = false
-                }
+            
+            fields.forEach { (key, colorPicker) ->
+                val color = colorPicker.getColor()
+                prefs.setCustomThemeColor(key, color)
             }
+            prefs.setTheme(PrefsManager.Theme.CUSTOM)
+            activity.recreate()
 
-            if (allValid) {
-                prefs.setTheme(PrefsManager.Theme.CUSTOM)
-                activity.recreate()
-            }
         }
     }
 

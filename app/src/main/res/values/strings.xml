@@ -214,7 +214,7 @@
     <string name="always_show_search_bar">Always visible</string>
 
     <!-- Dialog :: Pick color -->
-    <string name="color_picker_title">Pick Color</string>
+    <string name="color_picker_title">Pick a Color</string>
 
     <string name="pin_saved_label">PIN saved</string>
     <string name="pin_too_short_label">PIN must be at least 1 digits</string>
