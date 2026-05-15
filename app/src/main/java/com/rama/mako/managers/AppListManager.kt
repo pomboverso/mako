@@ -519,8 +519,8 @@ class AppListManager(
                 else -> 1
             }
 
-            override fun isEnabled(position: Int) = getItem(position) is ListItem.App
-            override fun areAllItemsEnabled() = false
+            override fun isEnabled(position: Int) = true
+            override fun areAllItemsEnabled() = true
 
             override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
                 val item = getItem(position)!!
@@ -637,6 +637,39 @@ class AppListManager(
         }
 
         listView.adapter = adapter
+
+        // When focus enters the list from outside (e.g. D-pad down from clock),
+        // always land on the first item. focusedChild is null when focus arrives
+        // from an external view, so this won't interfere with navigating within the list.
+        listView.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus && listView.focusedChild == null) {
+                listView.setSelection(0)
+            }
+        }
+
+        listView.setOnItemClickListener { _, _, position, _ ->
+            when (val item = items[position]) {
+                is ListItem.Header -> {
+                    if (prefs.hasCollapsibleGroups()) {
+                        val isExpanded = prefs.isGroupExpanded(item.id)
+                        prefs.setGroupExpanded(item.id, !isExpanded)
+                        refresh()
+                    }
+                }
+                is ListItem.App -> {
+                    if (!appsProvider.launch(item.info)) {
+                        Toast.makeText(
+                            context,
+                            context.getString(R.string.unable_launch_app_toast),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        refresh()
+                    } else {
+                        onAppLaunched?.invoke()
+                    }
+                }
+            }
+        }
     }
 
     private fun setupScrollListener() {

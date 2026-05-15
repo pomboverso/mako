@@ -37,6 +37,7 @@
                         android:background="@android:color/transparent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:focusable="false"
                         android:textColor="@color/clock" />
 
                     <LinearLayout
@@ -107,6 +108,7 @@
                 android:layout_height="wrap_content"
                 android:dividerHeight="0dp"
                 android:divider="@null"
+                android:focusableInTouchMode="false"
                 android:nestedScrollingEnabled="false" />
 
         </LinearLayout>

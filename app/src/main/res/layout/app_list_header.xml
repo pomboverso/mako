@@ -8,4 +8,6 @@
     android:paddingTop="6sp"
     android:paddingBottom="6sp"
     android:letterSpacing="0.1"
+    android:focusable="false"
+    android:clickable="false"
     android:textColor="@color/collapse_header" />

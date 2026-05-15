@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.HapticFeedbackConstants
+import android.view.KeyEvent
 import android.view.View
 import android.view.WindowManager
 import android.view.animation.OvershootInterpolator
@@ -74,6 +75,18 @@ class MainActivity : CsActivity() {
         }
     }
 
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        return when (keyCode) {
+            KeyEvent.KEYCODE_MENU,
+            KeyEvent.KEYCODE_F10 -> {
+                startActivity(Intent(this, SettingsActivity::class.java))
+                true
+            }
+
+            else -> super.onKeyDown(keyCode, event)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         PrefsManager.getInstance(this).initPrefs()
@@ -82,6 +95,8 @@ class MainActivity : CsActivity() {
         rootView = findViewById(R.id.root)
         applyEdgeToEdgePadding(rootView)
         applyCurrentTheme(rootView)
+        rootView.isFocusableInTouchMode = false
+        rootView.requestFocus()
         val palette = ThemeManager.paletteFor(prefs.getTheme())
 
         // --- Prefs ---
@@ -346,8 +361,14 @@ class MainActivity : CsActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
+                return
             }
         }
+        // Fallback: launch system clock via standard intent
+        val intent = Intent(android.provider.AlarmClock.ACTION_SHOW_ALARMS).apply {
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        }
+        runCatching { startActivity(intent) }
     }
 
     private fun applyHomeBackground(force: Boolean = false) {

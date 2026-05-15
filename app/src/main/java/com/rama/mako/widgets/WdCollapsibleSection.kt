@@ -3,6 +3,7 @@ package com.rama.mako.widgets
 import android.content.Context
 import android.util.AttributeSet
 import android.view.HapticFeedbackConstants
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
@@ -63,6 +64,22 @@ class WdCollapsibleSection @JvmOverloads constructor(
             val newState = !isExpanded()
             applyState(newState)
             saveState(newState)
+        }
+
+        header.isFocusable = true
+        header.isFocusableInTouchMode = false
+        header.setOnKeyListener { v, keyCode, event ->
+            if (event.action == KeyEvent.ACTION_DOWN &&
+                (keyCode == KeyEvent.KEYCODE_ENTER || keyCode == KeyEvent.KEYCODE_DPAD_CENTER)
+            ) {
+                v.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                val newState = !isExpanded()
+                applyState(newState)
+                saveState(newState)
+                true
+            } else {
+                false
+            }
         }
     }
 
