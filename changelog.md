@@ -2,16 +2,19 @@
 
 ## 38
 
-- Adding Catppuccin Mocha Theme
-- Adding Dracula Theme
-- Adding Mélange Dark Theme
-- Adding Tokyo Night Theme
+- Add Rama Theme
+- Add Catppuccin Mocha Theme
+- Add Dracula Theme
+- Add Mélange Dark Theme
+- Add Tokyo Night Theme
+- Fix Keyboard Navigation
+- Integrate background options with the theme section
 
 ## 37
 
-- Missing font on radio group for dialog_group_delete
-- Missing scroll area for dialog_group_delete and dialog_group_add
-- Adding default new group when deleting a group
+- Fix missing font on radio group for dialog_group_delete
+- Fix missing scroll area for dialog_group_delete and dialog_group_add
+- Add default new group when deleting a group
 
 ## 36
 
