@@ -115,17 +115,16 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
         activity.findViewById<WdColorPicker>(R.id.foreground).setColor(palette.foreground)
         activity.findViewById<WdColorPicker>(R.id.collapsible_header)
             .setColor(palette.collapsible_header)
-        
-        activity.findViewById<EditText>(R.id.clock).setText(colorToHex(palette.clock))
-        activity.findViewById<EditText>(R.id.icons).setText(colorToHex(palette.icon))
-        activity.findViewById<EditText>(R.id.accent).setText(colorToHex(palette.accent_1))
-        activity.findViewById<EditText>(R.id.bg_1).setText(colorToHex(palette.bg_1))
-        activity.findViewById<EditText>(R.id.bg_2).setText(colorToHex(palette.bg_2))
-        activity.findViewById<EditText>(R.id.bg_3).setText(colorToHex(palette.bg_3))
-        activity.findViewById<EditText>(R.id.input).setText(colorToHex(palette.input))
-        activity.findViewById<EditText>(R.id.btn_1).setText(colorToHex(palette.button_1))
-        activity.findViewById<EditText>(R.id.btn_2).setText(colorToHex(palette.button_2))
-        activity.findViewById<EditText>(R.id.danger).setText(colorToHex(palette.danger))
+        activity.findViewById<WdColorPicker>(R.id.clock).setColor(palette.clock)
+        activity.findViewById<WdColorPicker>(R.id.icons).setColor(palette.icon)
+        activity.findViewById<WdColorPicker>(R.id.accent).setColor(palette.accent_1)
+        activity.findViewById<WdColorPicker>(R.id.bg_2).setColor(palette.bg_2)
+        activity.findViewById<WdColorPicker>(R.id.bg_3).setColor(palette.bg_3)
+        activity.findViewById<WdColorPicker>(R.id.bg_1).setColor(palette.bg_1)
+        activity.findViewById<WdColorPicker>(R.id.input).setColor(palette.input)
+        activity.findViewById<WdColorPicker>(R.id.btn_1).setColor(palette.button_1)
+        activity.findViewById<WdColorPicker>(R.id.btn_2).setColor(palette.button_2)
+        activity.findViewById<WdColorPicker>(R.id.danger).setColor(palette.danger)
     }
 
     private fun parseHex(text: String): Int? {
