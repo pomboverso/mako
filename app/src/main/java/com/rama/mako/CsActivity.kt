@@ -79,7 +79,7 @@ abstract class CsActivity : Activity() {
     }
 
     private fun applyNavBarColor() {
-        val palette = ThemeManager.paletteFor(prefs.getTheme())
+        val palette = ThemeManager.paletteFor(prefs.getTheme(), this)
         window.navigationBarColor = palette.bg_1
         window.setBackgroundDrawable(android.graphics.drawable.ColorDrawable(palette.bg_1))
     }

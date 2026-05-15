@@ -102,8 +102,11 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
                 prefs.setTheme(theme)
                 activity.recreate()
             } else {
-                // For custom: populate fields with current palette but don't apply yet
-                populateCustomFields(ThemeManager.paletteFor(prefs.getTheme(), activity))
+                // For custom: save selection immediately so it persists navigation,
+                // then populate fields with current custom palette (or MAKO defaults)
+                val previousTheme = prefs.getTheme()
+                prefs.setTheme(PrefsManager.Theme.CUSTOM)
+                populateCustomFields(ThemeManager.paletteFor(previousTheme, activity))
             }
         }
     }
