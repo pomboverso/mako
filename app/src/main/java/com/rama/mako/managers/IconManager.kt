@@ -99,7 +99,8 @@ class IconManager(
     }
 
     private fun resolveSystemMonochromeTintColor(): Int {
-        return ContextCompat.getColor(context, R.color.accent_1)
+        val prefs = PrefsManager.getInstance(context)
+        return ThemeManager.paletteFor(prefs.getTheme(), context).accent_1
     }
 
     private fun getIconFromPack(

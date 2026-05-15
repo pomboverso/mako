@@ -43,9 +43,9 @@ object ThemeManager {
         button_1 = 0xFF459984.toInt(),
         button_2 = 0xFF6194AF.toInt(),
         danger = 0xFFDC6364.toInt(),
-        collapsible_header = 0xff888888.toInt(),
-        icon = 0xFFCCCCCC.toInt(),
-        clock = 0xFFCCCCCC.toInt(),
+        collapsible_header = 0xFF878787.toInt(),
+        icon = 0xFFCBCBCB.toInt(),
+        clock = 0xFFCACACA.toInt(),
     )
 
     // Rama
@@ -214,8 +214,10 @@ object ThemeManager {
             when (view) {
                 is RadioButton, is CheckBox -> Unit
                 else -> {
+                    // Only remap if we recognise the color — don't blindly overwrite
+                    // with foreground, as that would clobber clock/icon/header text colors
                     val mapped = mapColor(context, view.currentTextColor, palette)
-                    view.setTextColor(mapped ?: palette.foreground)
+                    if (mapped != null) view.setTextColor(mapped)
                 }
             }
         }
@@ -282,15 +284,15 @@ object ThemeManager {
             DRACULA.disabled, MELANGE.disabled, TOKYO_NIGHT.disabled,
             context.resources.getColor(R.color.disabled) -> palette.disabled
 
-            // header
+            // accent_1
+            MAKO.accent_1, RAMA.accent_1, CATPPUCCIN_MOCHA.accent_1,
+            DRACULA.accent_1, MELANGE.accent_1, TOKYO_NIGHT.accent_1,
+            context.resources.getColor(R.color.accent_1) -> palette.accent_1
+
+            // collapsible_header
             MAKO.collapsible_header, RAMA.collapsible_header, CATPPUCCIN_MOCHA.collapsible_header,
             DRACULA.collapsible_header, MELANGE.collapsible_header, TOKYO_NIGHT.collapsible_header,
             context.resources.getColor(R.color.collapsible_header) -> palette.collapsible_header
-
-            // foreground
-            MAKO.foreground, RAMA.foreground, CATPPUCCIN_MOCHA.foreground,
-            DRACULA.foreground, MELANGE.foreground, TOKYO_NIGHT.foreground,
-            context.resources.getColor(R.color.foreground) -> palette.foreground
 
             // icon
             MAKO.icon, RAMA.icon, CATPPUCCIN_MOCHA.icon,
@@ -301,6 +303,11 @@ object ThemeManager {
             MAKO.clock, RAMA.clock, CATPPUCCIN_MOCHA.clock,
             DRACULA.clock, MELANGE.clock, TOKYO_NIGHT.clock,
             context.resources.getColor(R.color.clock) -> palette.clock
+
+            // foreground — must come after icon/clock/header since MAKO shares similar values
+            MAKO.foreground, RAMA.foreground, CATPPUCCIN_MOCHA.foreground,
+            DRACULA.foreground, MELANGE.foreground, TOKYO_NIGHT.foreground,
+            context.resources.getColor(R.color.foreground) -> palette.foreground
 
             else -> null
         }

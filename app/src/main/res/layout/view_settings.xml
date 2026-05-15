@@ -284,12 +284,14 @@
                             android:hint="#RRGGBB" />
 
                         <TextView
+                            android:visibility="gone"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8sp"
                             android:text="@string/theme_icons_label" />
 
                         <EditText
+                            android:visibility="gone"
                             android:id="@+id/icons"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -307,12 +309,14 @@
                             android:hint="#RRGGBB" />
 
                         <TextView
+                            android:visibility="gone"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8sp"
                             android:text="@string/theme_accent_label" />
 
                         <EditText
+                            android:visibility="gone"
                             android:id="@+id/accent"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
