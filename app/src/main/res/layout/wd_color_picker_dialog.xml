@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pick Color"
+        android:text="@string/color_picker_title"
         android:layout_marginBottom="8dp"
         android:textStyle="bold"
         android:textSize="32sp"
