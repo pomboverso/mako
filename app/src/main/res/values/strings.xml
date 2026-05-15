@@ -3,6 +3,7 @@
     <string name="unlock_label">Unlock</string>
     <string name="clear_label">Clear</string>
     <string name="go_back_label">Go Back</string>
+    <string name="apply_label">Apply</string>
     <string name="new_group_header">------ New Group</string>
     <string name="new_group_header_count">------ New Group %d</string>
     <string name="no_clock_app_found_label">No clock app found</string>

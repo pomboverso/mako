@@ -1,5 +1,6 @@
 package com.rama.mako.widgets
 
+import android.app.Activity
 import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
@@ -7,8 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
-
 import com.rama.mako.R
+import com.rama.mako.dialogs.ColorPickerDialog
 
 class WdColorPicker @JvmOverloads constructor(
     context: Context,
@@ -21,7 +22,11 @@ class WdColorPicker @JvmOverloads constructor(
 
     private var currentColor: Int = Color.WHITE
 
+    // external override (optional)
     private var listener: ((Int) -> Unit)? = null
+
+    // enables internal default picker
+    private var useDefaultPicker: Boolean = true
 
     init {
         orientation = HORIZONTAL
@@ -34,7 +39,6 @@ class WdColorPicker @JvmOverloads constructor(
         colorPreview = findViewById(R.id.colorPreview)
 
         attrs?.let {
-
             val ta = context.obtainStyledAttributes(
                 it,
                 intArrayOf(R.attr.text)
@@ -52,8 +56,32 @@ class WdColorPicker @JvmOverloads constructor(
         updateUI()
 
         setOnClickListener {
+            handleClick()
+        }
+    }
+
+    private fun handleClick() {
+
+        val activity = context as? Activity ?: return
+
+        if (useDefaultPicker) {
+
+            ColorPickerDialog.show(
+                activity = activity,
+                initialColor = currentColor
+            ) { selectedColor ->
+
+                setColor(selectedColor)
+                listener?.invoke(selectedColor)
+            }
+
+        } else {
             listener?.invoke(currentColor)
         }
+    }
+
+    fun setUseDefaultPicker(enabled: Boolean) {
+        useDefaultPicker = enabled
     }
 
     fun setTitle(text: String) {
@@ -77,7 +105,6 @@ class WdColorPicker @JvmOverloads constructor(
         val hex = String.format("#%06X", 0xFFFFFF and currentColor)
 
         hexValue.text = hex
-
         colorPreview.background.setTint(currentColor)
     }
 }
