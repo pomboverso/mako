@@ -16,7 +16,7 @@ class SettingsCheckboxController(private val activity: SettingsActivity) {
             R.id.show_search,
             PrefKeys.APPS_SEARCH,
             false,
-            dependentViewIds = listOf(R.id.always_show_search)
+            listOf(R.id.always_show_search)
         )
         bindWdCheckbox(R.id.always_show_search, PrefKeys.APPS_SEARCH_ALWAYS_VISIBLE, false)
         bindWdCheckbox(
@@ -37,6 +37,18 @@ class SettingsCheckboxController(private val activity: SettingsActivity) {
         bindWdCheckbox(R.id.show_battery_charge_status, PrefKeys.BATTERY_CHARGE_STATUS, false)
         bindWdCheckbox(R.id.show_system_bar, PrefKeys.SYSTEM_BAR_VISIBLE, false)
         bindWdCheckbox(R.id.show_profile_indicator, PrefKeys.APPS_PROFILE_INDICATOR, true)
+
+        bindWdCheckbox(
+            R.id.lock_settings,
+            PrefKeys.SECURITY_KEYPAD_VISIBLE,
+            false,
+            listOf(R.id.randomized_keypad, R.id.pin_field)
+        )
+        bindWdCheckbox(
+            R.id.randomized_keypad,
+            PrefKeys.SECURITY_KEYPAD_RANDOMIZED,
+            true,
+        )
     }
 
     private fun bindWdCheckbox(

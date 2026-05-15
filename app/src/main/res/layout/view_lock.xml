@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg_primary">
+
+    <!-- Pin Pad -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <GridLayout
+            android:layout_width="250sp"
+            android:layout_height="375sp"
+            android:columnCount="3"
+            android:useDefaultMargins="true">
+
+            <EditText
+                android:id="@+id/pin_display"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_columnSpan="3"
+                android:background="#202030"
+                android:padding="16sp"
+                android:inputType="numberPassword"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:layout_margin="8sp"
+                android:gravity="center"
+                android:maxLength="25"
+                android:focusable="false"
+                android:textSize="24sp"
+                android:textColor="@color/foreground"
+                android:clickable="false"
+                android:layout_marginBottom="8sp"
+                android:text="" />
+
+            <Button
+                android:id="@+id/btn1"
+                android:text="1"
+                style="@style/PinButton" />
+
+            <Button
+                android:id="@+id/btn2"
+                android:text="2"
+                style="@style/PinButton" />
+
+            <Button
+                android:id="@+id/btn3"
+                android:text="3"
+                style="@style/PinButton" />
+
+            <Button
+                android:id="@+id/btn4"
+                android:text="4"
+                style="@style/PinButton" />
+
+            <Button
+                android:id="@+id/btn5"
+                android:text="5"
+                style="@style/PinButton" />
+
+            <Button
+                android:id="@+id/btn6"
+                android:text="6"
+                style="@style/PinButton" />
+
+            <Button
+                android:id="@+id/btn7"
+                android:text="7"
+                style="@style/PinButton" />
+
+            <Button
+                android:id="@+id/btn8"
+                android:text="8"
+                style="@style/PinButton" />
+
+            <Button
+                android:id="@+id/btn9"
+                android:text="9"
+                style="@style/PinButton" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_columnWeight="1" />
+
+            <Button
+                android:id="@+id/btn0"
+                android:text="0"
+                style="@style/PinButton" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_columnWeight="1" />
+
+        </GridLayout>
+    </LinearLayout>
+
+    <!-- Actions -->
+    <com.rama.mako.widgets.WdButton
+        android:id="@+id/unlock_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/button_secondary"
+        android:layout_marginBottom="8dp"
+        android:text="@string/unlock_label" />
+
+    <com.rama.mako.widgets.WdButton
+        android:id="@+id/clear_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/button_secondary"
+        android:layout_marginBottom="8dp"
+        android:text="@string/clear_label" />
+
+    <com.rama.mako.widgets.WdButton
+        android:id="@+id/close_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/button_primary"
+        android:text="@string/go_back_label" />
+
+</LinearLayout>

@@ -9,7 +9,6 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.rama.mako.R
 import com.rama.mako.managers.PrefsManager
-import com.rama.mako.managers.PrefsManager.PrefKeys
 
 class WdCollapsibleSection @JvmOverloads constructor(
     context: Context,

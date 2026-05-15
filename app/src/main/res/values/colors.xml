@@ -12,6 +12,7 @@
     <color name="button_primary">#459984</color>
     <color name="button_secondary">#6194AF</color>
     <color name="button_danger">#DC6364</color>
+    <color name="button_pin">#335</color>
     <color name="bg_amoled">#000000</color>
     <color name="bg_wallpaper_scrim">#99000000</color>
     <color name="bg_dynamic_fallback">#1A2A2F</color>

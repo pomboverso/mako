@@ -391,7 +391,6 @@ class AppListManager(
         val pkg = app.packageName
 
         val view = View.inflate(context, R.layout.dialog_groups_add, null)
-        FontManager.applyFont(context, view)
 
         val dialog = AlertDialog.Builder(context)
             .setView(view)
@@ -449,6 +448,7 @@ class AppListManager(
 
         closeBtn.setOnClickListener { dialog.dismiss() }
 
+        FontManager.applyFont(context, view)
         dialog.show()
     }
 

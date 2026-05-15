@@ -110,7 +110,7 @@ class MainActivity : CsActivity() {
             listView,
             appsProvider
         ) {
-            if (isSearchExpanded && !isSearchBarAlwaysVisible) {
+            if (isSearchExpanded) {
                 collapseSearch()
             }
         }
