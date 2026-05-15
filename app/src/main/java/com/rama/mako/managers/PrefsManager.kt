@@ -72,6 +72,7 @@ class PrefsManager private constructor(context: Context) {
         const val CLOCK_FORMAT = "clock:format"
         const val CLOCK_APP = "clock:app"
         const val FONT_STYLE = "font:style"
+        const val FONT_CUSTOM_PATH = "font:custom_path"
         const val APP_LANGUAGE = "app:language"
         const val MIGRATION_ICON_SOURCE_RADIO = "migration:icon_source_radio"
         const val SYSTEM_BAR_VISIBLE = "system:bar:visible"
@@ -132,10 +133,8 @@ class PrefsManager private constructor(context: Context) {
 
     object FontStyle {
         const val DEFAULT = "default"
-        const val MONTSERRAT = "montserrat"
-        const val QUICKSAND = "quicksand"
-        const val ROBOTO_SLAB = "roboto-slab"
         const val JERSEY_25 = "jersey-25"
+        const val CUSTOM = "custom"
     }
 
     object ClockFormat {
@@ -472,6 +471,12 @@ class PrefsManager private constructor(context: Context) {
 
     fun setFontStyle(style: String) =
         prefs.edit().putString(PrefKeys.FONT_STYLE, style).apply()
+
+    fun getCustomFontPath(): String =
+        prefs.getString(PrefKeys.FONT_CUSTOM_PATH, "") ?: ""
+
+    fun setCustomFontPath(path: String) =
+        prefs.edit().putString(PrefKeys.FONT_CUSTOM_PATH, path).apply()
 
     fun getTheme(): String =
         prefs.getString(PrefKeys.APP_THEME_NAME, "") ?: ""

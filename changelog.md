@@ -9,6 +9,7 @@
 - Add Tokyo Night Theme
 - Fix Keyboard Navigation
 - Integrate background options with the theme section
+- Add Custom Font Option
 
 ## 37
 

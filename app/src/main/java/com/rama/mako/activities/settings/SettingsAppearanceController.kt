@@ -1,13 +1,20 @@
 package com.rama.mako.activities.settings
 
+import android.app.Activity
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.view.View
 import android.widget.EditText
 import android.widget.RadioGroup
+import android.widget.TextView
 import com.rama.mako.R
 import com.rama.mako.activities.SettingsActivity
+import com.rama.mako.managers.FontManager
 import com.rama.mako.managers.PrefsManager
 import com.rama.mako.managers.ThemeManager
+import java.io.File
+import java.io.FileOutputStream
 
 class SettingsAppearanceController(private val activity: SettingsActivity) {
 
@@ -21,27 +28,89 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
         setupBackgroundMode()
     }
 
+    fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == activity.FONT_PICK_REQUEST && resultCode == Activity.RESULT_OK) {
+            val uri: Uri = data?.data ?: return
+            val savedPath = copyFontToInternalStorage(uri)
+            if (savedPath != null) {
+                FontManager.clearCustomCache()
+                prefs.setCustomFontPath(savedPath)
+                prefs.setFontStyle(PrefsManager.FontStyle.CUSTOM)
+                updateCustomFontLabel()
+                activity.refreshFont()
+            }
+        }
+    }
+
     private fun setupFontStyle() {
         val group = activity.findViewById<RadioGroup>(R.id.font_style_group)
 
         when (prefs.getFontStyle()) {
             PrefsManager.FontStyle.JERSEY_25 -> group.check(R.id.font_jersey)
-            PrefsManager.FontStyle.MONTSERRAT -> group.check(R.id.font_montserrat)
-            PrefsManager.FontStyle.ROBOTO_SLAB -> group.check(R.id.font_robotoslab)
-            PrefsManager.FontStyle.QUICKSAND -> group.check(R.id.font_quicksand)
+            PrefsManager.FontStyle.CUSTOM -> group.check(R.id.font_custom)
             else -> group.check(R.id.font_default)
         }
 
         group.setOnCheckedChangeListener { _, id ->
             when (id) {
-                R.id.font_jersey -> prefs.setFontStyle(PrefsManager.FontStyle.JERSEY_25)
-                R.id.font_quicksand -> prefs.setFontStyle(PrefsManager.FontStyle.QUICKSAND)
-                R.id.font_robotoslab -> prefs.setFontStyle(PrefsManager.FontStyle.ROBOTO_SLAB)
-                R.id.font_montserrat -> prefs.setFontStyle(PrefsManager.FontStyle.MONTSERRAT)
-                R.id.font_default -> prefs.setFontStyle(PrefsManager.FontStyle.DEFAULT)
+                R.id.font_jersey -> {
+                    prefs.setFontStyle(PrefsManager.FontStyle.JERSEY_25)
+                    activity.refreshFont()
+                }
+                R.id.font_default -> {
+                    prefs.setFontStyle(PrefsManager.FontStyle.DEFAULT)
+                    activity.refreshFont()
+                }
+                R.id.font_custom -> {
+                    // If a font is already saved, apply it immediately;
+                    // otherwise open the picker right away.
+                    if (prefs.getCustomFontPath().isNotBlank()) {
+                        prefs.setFontStyle(PrefsManager.FontStyle.CUSTOM)
+                        activity.refreshFont()
+                    } else {
+                        openFontPicker()
+                    }
+                }
             }
-            activity.refreshFont()
         }
+
+        // Button to (re-)pick a font file
+        activity.findViewById<View>(R.id.font_custom_pick_btn).setOnClickListener {
+            openFontPicker()
+        }
+
+        updateCustomFontLabel()
+    }
+
+    private fun openFontPicker() {
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = "*/*"
+            putExtra(Intent.EXTRA_MIME_TYPES, arrayOf(
+                "font/ttf", "font/otf", "application/x-font-ttf",
+                "application/x-font-otf", "application/octet-stream"
+            ))
+        }
+        activity.startActivityForResult(intent, activity.FONT_PICK_REQUEST)
+    }
+
+    private fun copyFontToInternalStorage(uri: Uri): String? {
+        return runCatching {
+            val inputStream = activity.contentResolver.openInputStream(uri) ?: return null
+            val dir = File(activity.filesDir, "fonts").also { it.mkdirs() }
+            // Preserve extension (.ttf / .otf) for Typeface.createFromFile
+            val ext = activity.contentResolver.getType(uri)
+                ?.let { if (it.contains("otf")) "otf" else "ttf" } ?: "ttf"
+            val dest = File(dir, "custom_font.$ext")
+            FileOutputStream(dest).use { out -> inputStream.copyTo(out) }
+            dest.absolutePath
+        }.getOrNull()
+    }
+
+    private fun updateCustomFontLabel() {
+        val label = activity.findViewById<TextView>(R.id.font_custom_name_label)
+        val path = prefs.getCustomFontPath()
+        label.text = if (path.isNotBlank()) File(path).name else activity.getString(R.string.font_custom_none_label)
     }
 
     private fun setupTemperatureFormat() {

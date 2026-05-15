@@ -634,6 +634,7 @@
                     android:id="@+id/font_style_group"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8sp"
                     android:background="@color/bg_2"
                     android:padding="16sp">
 
@@ -656,31 +657,38 @@
                         android:textSize="16sp" />
 
                     <RadioButton
-                        android:id="@+id/font_quicksand"
+                        android:id="@+id/font_custom"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="8sp"
-                        android:text="@string/font_quicksand_label"
-                        android:textColor="@color/foreground"
-                        android:textSize="16sp" />
-
-                    <RadioButton
-                        android:id="@+id/font_montserrat"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8sp"
-                        android:text="@string/font_montserrat_label"
-                        android:textColor="@color/foreground"
-                        android:textSize="16sp" />
-
-                    <RadioButton
-                        android:id="@+id/font_robotoslab"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/font_robotoslab_label"
+                        android:text="@string/font_custom_label"
                         android:textColor="@color/foreground"
                         android:textSize="16sp" />
                 </RadioGroup>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@color/bg_2"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/font_custom_name_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/foreground"
+                        android:textSize="16sp"
+                        android:padding="16sp"
+                        android:text="@string/font_custom_none_label" />
+
+                    <com.rama.mako.widgets.WdButton
+                        android:id="@+id/font_custom_pick_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/button_2"
+                        android:text="@string/font_custom_pick_label" />
+
+                </LinearLayout>
 
             </com.rama.mako.widgets.WdCollapsibleSection>
             <!--Clock-->

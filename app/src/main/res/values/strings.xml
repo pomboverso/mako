@@ -59,12 +59,6 @@
     <string name="hackernoon_product" translatable="false">Pixel Icon Library</string>
     <string name="jersey_creator" translatable="false">Sarah Cadigan-Fried</string>
     <string name="jersey_url" translatable="false">github.com/scfried/soft-type-jersey</string>
-    <string name="montserrat_creator" translatable="false">Julieta Ulanovsky, Sol Matas, Juan Pablo del Peral, Jacques Le Bailly</string>
-    <string name="montserrat_url" translatable="false">github.com/JulietaUla/Montserrat</string>
-    <string name="quicksand_creator" translatable="false">Andrew Paglinawan</string>
-    <string name="quicksand_url" translatable="false">github.com/andrew-paglinawan/QuicksandFamily</string>
-    <string name="robotoslab_creator" translatable="false">Christian Robertson</string>
-    <string name="robotoslab_url" translatable="false">github.com/googlefonts/robotoslab</string>
     <string name="isotjs" translatable="false">isotjs</string>
     <string name="isotjs_url" translatable="false">github.com/isotjs</string>
     <string name="etwasmitbaum" translatable="false">etwasmitbaum</string>
@@ -120,7 +114,7 @@
     <string name="default_system_label">Default (System)</string>
     <string name="icons_monochrome_label">Monochrome</string>
     <string name="icons_icon_pack_label">Custom icon pack</string>
-    <string name="select_icon_pack_label">Select icon pack</string>
+    <string name="select_icon_pack_label">Choose icon pack</string>
     <string name="selected_icon_pack_label">Selected pack: %1$s</string>
     <string name="icon_pack_not_selected_label">No icon pack selected</string>
     <string name="no_icon_pack_found_label">No compatible icon pack found</string>
@@ -146,9 +140,9 @@
     <string name="group_label_updated_toast">Label Updated</string>
     <string name="select_target_group_toast">Select a target group</string>
     <string name="font_jersey_label" translatable="false">Jersey 25</string>
-    <string name="font_quicksand_label" translatable="false">Quicksand</string>
-    <string name="font_montserrat_label" translatable="false">Montserrat</string>
-    <string name="font_robotoslab_label" translatable="false">Roboto Slab</string>
+    <string name="font_custom_label">Custom font…</string>
+    <string name="font_custom_none_label">No font selected</string>
+    <string name="font_custom_pick_label">Choose Font file</string>
     <string name="font_style_header">Font Style</string>
     <string name="background_default_label">Default theme</string>
     <string name="background_wallpaper_label">Wallpaper</string>
