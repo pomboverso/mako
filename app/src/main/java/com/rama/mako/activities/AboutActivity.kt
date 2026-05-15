@@ -1,5 +1,7 @@
 package com.rama.mako.activities
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -19,6 +21,12 @@ class AboutActivity : CsActivity() {
         val closeButton = findViewById<View>(R.id.close_button)
         closeButton.setOnClickListener {
             finish()
+        }
+
+        val discordButton = findViewById<View>(R.id.discord_button)
+        discordButton.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://discord.gg/zFFupY8PFE"))
+            startActivity(intent)
         }
 
         val version = packageManager.getPackageInfo(packageName, 0).versionCode

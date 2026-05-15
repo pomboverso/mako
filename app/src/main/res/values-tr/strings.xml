@@ -42,6 +42,7 @@
     <string name="icon_offline_desc">Tamamen Çevrimdışı</string>
     <string name="mako_url" translatable="false">github.com/rama-io/mako</string>
     <string name="app_header">Uygulama</string>
+    <string name="discord_label">Discord\'a Katıl</string>
     <string name="contributors_header">Katkıda Bulunanlar</string>
     <string name="icons_header">İkonlar</string>
     <string name="fonts_header">Yazı Tipleri</string>

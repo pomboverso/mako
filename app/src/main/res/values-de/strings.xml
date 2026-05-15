@@ -37,6 +37,7 @@
     <string name="icon_location_desc">Keine Tracker</string>
     <string name="icon_offline_desc">Funktioniert offline</string>
     <string name="app_header">App</string>
+    <string name="discord_label">Discord beitreten</string>
     <string name="contributors_header">Beitragende</string>
     <string name="icons_header">Icons</string>
     <string name="fonts_header">Schriftarten</string>

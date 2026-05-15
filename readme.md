@@ -50,6 +50,7 @@ No network access is required.
 - Long-press in an empty area of the **App List** to open **Settings**.
 - Watch the **[Mako Demo / Walkthrough](https://www.youtube.com/watch?v=cfble2DRqyM)** for a quick
   overview.
+- Join the **[Discord Community](https://discord.gg/zFFupY8PFE)** for support and updates.
 
 ---
 
