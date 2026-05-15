@@ -82,7 +82,7 @@
     <string name="default_label">Standard</string>
     <string name="default_system_label">Systemstandard</string>
     <string name="icons_monochrome_label">Monochrom</string>
-    <string name="icons_icon_pack_label">Benutzerdefiniertes Icon-Paket</string>
+    <string name="custom_icon_pack_label">Benutzerdefiniertes Icon-Paket</string>
     <string name="select_icon_pack_label">Icon-Paket auswählen</string>
     <string name="selected_icon_pack_label">Ausgewähltes Paket: %1$s</string>
     <string name="icon_pack_not_selected_label">Kein Icon-Paket ausgewählt</string>

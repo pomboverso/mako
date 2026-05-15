@@ -38,6 +38,7 @@ class SettingsActivity : CsActivity() {
     private var isUnlocked = false
     private var isLockScreenShowing = false
     private val LOCK_REQUEST = 1001
+    val FONT_PICK_REQUEST = 1002
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -142,5 +143,6 @@ class SettingsActivity : CsActivity() {
         }
 
         clockController.onActivityResult(requestCode, resultCode, data)
+        appearanceController.onActivityResult(requestCode, resultCode, data)
     }
 }

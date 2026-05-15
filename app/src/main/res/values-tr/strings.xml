@@ -114,7 +114,7 @@
     <string name="default_label">Varsayılan</string>
     <string name="default_system_label">Varsayılan (Sistem)</string>
     <string name="icons_monochrome_label">Monokrom</string>
-    <string name="icons_icon_pack_label">Özel ikon paketi</string>
+    <string name="custom_icon_pack_label">Özel ikon paketi</string>
     <string name="select_icon_pack_label">İkon paketi seç</string>
     <string name="selected_icon_pack_label">Seçili paket: %1$s</string>
     <string name="icon_pack_not_selected_label">İkon paketi seçilmedi</string>
