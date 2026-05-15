@@ -181,16 +181,12 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
 
         when (initialMode) {
             PrefsManager.BackgroundMode.WALLPAPER -> group.check(R.id.home_background_wallpaper)
-            PrefsManager.BackgroundMode.DYNAMIC -> group.check(R.id.home_background_dynamic)
-            PrefsManager.BackgroundMode.AMOLED -> group.check(R.id.home_background_amoled)
             else -> group.check(R.id.home_background_default)
         }
 
         group.setOnCheckedChangeListener { _, id ->
             val mode = when (id) {
                 R.id.home_background_wallpaper -> PrefsManager.BackgroundMode.WALLPAPER
-                R.id.home_background_dynamic -> PrefsManager.BackgroundMode.DYNAMIC
-                R.id.home_background_amoled -> PrefsManager.BackgroundMode.AMOLED
                 else -> PrefsManager.BackgroundMode.DEFAULT
             }
 

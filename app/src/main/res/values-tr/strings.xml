@@ -147,8 +147,6 @@
     <string name="font_style_header">Yazı Tipi Stili</string>
     <string name="background_default_label">Varsayılan tema</string>
     <string name="background_wallpaper_label">Duvar kağıdı</string>
-    <string name="background_dynamic_label">Dinamik renk</string>
-    <string name="background_amoled_label">AMOLED siyahı</string>
 
     <!-- Popup :: Context Menu App -->
     <string name="rename_app">Uygulamayı yeniden adlandır...</string>

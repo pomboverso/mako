@@ -152,8 +152,6 @@
     <string name="font_style_header">Font Style</string>
     <string name="background_default_label">Default theme</string>
     <string name="background_wallpaper_label">Wallpaper</string>
-    <string name="background_dynamic_label">Dynamic colour</string>
-    <string name="background_amoled_label">AMOLED black</string>
     <string name="lock_settings_label">Lock Settings</string>
     <string name="randomized_keypad_label">Randomized keypad</string>
 

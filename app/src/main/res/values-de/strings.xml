@@ -111,8 +111,6 @@
     <string name="font_style_header">Schriftart</string>
     <string name="background_default_label">Standard-Design</string>
     <string name="background_wallpaper_label">Hintergrundbild</string>
-    <string name="background_dynamic_label">Dynamische Farben</string>
-    <string name="background_amoled_label">AMOLED schwarz</string>
 
     <!-- Popup :: Context Menu App -->
     <string name="rename_app">App umbenennen...</string>
