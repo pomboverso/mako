@@ -166,8 +166,6 @@ class PrefsManager private constructor(context: Context) {
     object BackgroundMode {
         const val DEFAULT = "default"
         const val WALLPAPER = "wallpaper"
-        const val DYNAMIC = "dynamic"
-        const val AMOLED = "amoled"
     }
 
     object Theme {
@@ -456,8 +454,6 @@ class PrefsManager private constructor(context: Context) {
     fun getHomeBackgroundMode(): String {
         return when (prefs.getString(PrefKeys.HOME_BACKGROUND_MODE, BackgroundMode.DEFAULT)) {
             BackgroundMode.WALLPAPER -> BackgroundMode.WALLPAPER
-            BackgroundMode.DYNAMIC -> BackgroundMode.DYNAMIC
-            BackgroundMode.AMOLED -> BackgroundMode.AMOLED
             else -> BackgroundMode.DEFAULT
         }
     }
@@ -465,8 +461,6 @@ class PrefsManager private constructor(context: Context) {
     fun setHomeBackgroundMode(mode: String) {
         val normalized = when (mode) {
             BackgroundMode.WALLPAPER -> BackgroundMode.WALLPAPER
-            BackgroundMode.DYNAMIC -> BackgroundMode.DYNAMIC
-            BackgroundMode.AMOLED -> BackgroundMode.AMOLED
             else -> BackgroundMode.DEFAULT
         }
 

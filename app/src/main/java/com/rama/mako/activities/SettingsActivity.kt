@@ -34,7 +34,7 @@ class SettingsActivity : CsActivity() {
 
     private var lastAppliedBackgroundMode: String? = null
     private var lastAppliedWallpaperSignature: Int? = null
-    
+
     private var isUnlocked = false
     private var isLockScreenShowing = false
     private val LOCK_REQUEST = 1001
@@ -92,13 +92,7 @@ class SettingsActivity : CsActivity() {
 
     fun applySettingsBackground(force: Boolean = false) {
         val mode = prefs.getHomeBackgroundMode()
-
-        val wallpaperSignature =
-            if (homeBackgroundManager.shouldTrackWallpaperChangesForMode(mode)) {
-                homeBackgroundManager.getWallpaperSignature()
-            } else {
-                null
-            }
+        val wallpaperSignature = null
 
         if (!force &&
             mode == lastAppliedBackgroundMode &&

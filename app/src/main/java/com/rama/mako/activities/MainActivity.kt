@@ -280,11 +280,7 @@ class MainActivity : CsActivity() {
     override fun onResume() {
         super.onResume()
         applyHomeBackground()
-        if (shouldListenWallpaperChanges()) {
-            registerWallpaperReceiverIfNeeded()
-        } else {
-            unregisterWallpaperReceiverIfNeeded()
-        }
+        unregisterWallpaperReceiverIfNeeded()
         syncSettings()
         schedulePostResumeRefresh()
 
@@ -373,12 +369,7 @@ class MainActivity : CsActivity() {
 
     private fun applyHomeBackground(force: Boolean = false) {
         val mode = prefs.getHomeBackgroundMode()
-        val wallpaperSignature =
-            if (homeBackgroundManager.shouldTrackWallpaperChangesForMode(mode)) {
-                homeBackgroundManager.getWallpaperSignature()
-            } else {
-                null
-            }
+        val wallpaperSignature = null
 
         if (!force && mode == lastAppliedBackgroundMode && wallpaperSignature == lastAppliedWallpaperSignature) {
             return
@@ -427,11 +418,6 @@ class MainActivity : CsActivity() {
             rootView.removeCallbacks(it)
         }
         resumeRefreshRunnable = null
-    }
-
-    private fun shouldListenWallpaperChanges(): Boolean {
-        val mode = prefs.getHomeBackgroundMode()
-        return homeBackgroundManager.shouldTrackWallpaperChangesForMode(mode)
     }
 
     private fun registerWallpaperReceiverIfNeeded() {

@@ -16,7 +16,5 @@
     <color name="collapsible_header">#878787</color>
     <color name="clock">#CACACA</color>
 
-    <color name="bg_amoled">#000000</color>
     <color name="bg_wallpaper_scrim">#99000000</color>
-    <color name="bg_dynamic_fallback">#1A2A2F</color>
 </resources>
