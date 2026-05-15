@@ -58,19 +58,15 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
                     prefs.setFontStyle(PrefsManager.FontStyle.JERSEY_25)
                     activity.refreshFont()
                 }
+
                 R.id.font_default -> {
                     prefs.setFontStyle(PrefsManager.FontStyle.DEFAULT)
                     activity.refreshFont()
                 }
+
                 R.id.font_custom -> {
-                    // If a font is already saved, apply it immediately;
-                    // otherwise open the picker right away.
-                    if (prefs.getCustomFontPath().isNotBlank()) {
-                        prefs.setFontStyle(PrefsManager.FontStyle.CUSTOM)
-                        activity.refreshFont()
-                    } else {
-                        openFontPicker()
-                    }
+                    prefs.setFontStyle(PrefsManager.FontStyle.CUSTOM)
+                    activity.refreshFont()
                 }
             }
         }
@@ -87,10 +83,12 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE)
             type = "*/*"
-            putExtra(Intent.EXTRA_MIME_TYPES, arrayOf(
-                "font/ttf", "font/otf", "application/x-font-ttf",
-                "application/x-font-otf", "application/octet-stream"
-            ))
+            putExtra(
+                Intent.EXTRA_MIME_TYPES, arrayOf(
+                    "font/ttf", "font/otf", "application/x-font-ttf",
+                    "application/x-font-otf", "application/octet-stream"
+                )
+            )
         }
         activity.startActivityForResult(intent, activity.FONT_PICK_REQUEST)
     }
@@ -111,7 +109,8 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
     private fun updateCustomFontLabel() {
         val label = activity.findViewById<TextView>(R.id.font_custom_name_label)
         val path = prefs.getCustomFontPath()
-        label.text = if (path.isNotBlank()) File(path).name else activity.getString(R.string.font_custom_none_label)
+        label.text =
+            if (path.isNotBlank()) File(path).name else activity.getString(R.string.font_custom_none_label)
     }
 
     private fun setupTemperatureFormat() {
@@ -228,7 +227,7 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
                 PrefsManager.PrefKeys.APP_THEME_BUTTON_2 to activity.findViewById<WdColorPicker>(R.id.btn_2),
                 PrefsManager.PrefKeys.APP_THEME_DANGER to activity.findViewById<WdColorPicker>(R.id.danger),
             )
-            
+
             fields.forEach { (key, colorPicker) ->
                 val color = colorPicker.getColor()
                 prefs.setCustomThemeColor(key, color)
