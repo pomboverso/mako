@@ -212,7 +212,19 @@ object ThemeManager {
         if (view is TextView) {
             typeface?.let { view.typeface = it }
             when (view) {
-                is RadioButton, is CheckBox -> Unit
+                is RadioButton, is CheckBox -> {
+                    // Apply foreground text color
+                    view.setTextColor(palette.foreground)
+                    // Apply accent tint to the button drawable (the circle/tick)
+                    val tintList = android.content.res.ColorStateList(
+                        arrayOf(
+                            intArrayOf(android.R.attr.state_checked),
+                            intArrayOf(-android.R.attr.state_checked)
+                        ),
+                        intArrayOf(palette.accent_1, palette.disabled)
+                    )
+                    view.buttonTintList = tintList
+                }
                 else -> {
                     // Only remap if we recognise the color — don't blindly overwrite
                     // with foreground, as that would clobber clock/icon/header text colors
@@ -240,73 +252,76 @@ object ThemeManager {
     /**
      * Maps a color from any palette to the equivalent slot in [palette].
      * This works by comparing the incoming color against all known palette
-     * slots across both themes.
+     * slots across both themes, including the currently-active custom palette.
      */
     private fun mapColor(context: Context, color: Int, palette: Palette): Int? {
+        // Also resolve the live custom palette so custom-theme colors survive navigation
+        val custom = buildCustomPalette(context)
+
         return when (color) {
             // bg_primary
             MAKO.bg_1, RAMA.bg_1, CATPPUCCIN_MOCHA.bg_1,
-            DRACULA.bg_1, MELANGE.bg_1, TOKYO_NIGHT.bg_1,
+            DRACULA.bg_1, MELANGE.bg_1, TOKYO_NIGHT.bg_1, custom.bg_1,
             context.resources.getColor(R.color.bg_1) -> palette.bg_1
 
             // bg_secondary
             MAKO.bg_2, RAMA.bg_2, CATPPUCCIN_MOCHA.bg_2,
-            DRACULA.bg_2, MELANGE.bg_2, TOKYO_NIGHT.bg_2,
+            DRACULA.bg_2, MELANGE.bg_2, TOKYO_NIGHT.bg_2, custom.bg_2,
             context.resources.getColor(R.color.bg_2) -> palette.bg_2
 
             // bg_tertiary
             MAKO.bg_3, RAMA.bg_3, CATPPUCCIN_MOCHA.bg_3,
-            DRACULA.bg_3, MELANGE.bg_3, TOKYO_NIGHT.bg_3,
+            DRACULA.bg_3, MELANGE.bg_3, TOKYO_NIGHT.bg_3, custom.bg_3,
             context.resources.getColor(R.color.bg_3) -> palette.bg_3
 
             // button_primary
             MAKO.button_1, RAMA.button_1, CATPPUCCIN_MOCHA.button_1,
-            DRACULA.button_1, MELANGE.button_1, TOKYO_NIGHT.button_1,
+            DRACULA.button_1, MELANGE.button_1, TOKYO_NIGHT.button_1, custom.button_1,
             context.resources.getColor(R.color.button_1) -> palette.button_1
 
             // button_secondary
             MAKO.button_2, RAMA.button_2, CATPPUCCIN_MOCHA.button_2,
-            DRACULA.button_2, MELANGE.button_2, TOKYO_NIGHT.button_2,
+            DRACULA.button_2, MELANGE.button_2, TOKYO_NIGHT.button_2, custom.button_2,
             context.resources.getColor(R.color.button_2) -> palette.button_2
 
             // button_danger
             MAKO.danger, RAMA.danger, CATPPUCCIN_MOCHA.danger,
-            DRACULA.danger, MELANGE.danger, TOKYO_NIGHT.danger,
+            DRACULA.danger, MELANGE.danger, TOKYO_NIGHT.danger, custom.danger,
             context.resources.getColor(R.color.danger) -> palette.danger
 
             // input
             MAKO.input, RAMA.input, CATPPUCCIN_MOCHA.input,
-            DRACULA.input, MELANGE.input, TOKYO_NIGHT.input,
+            DRACULA.input, MELANGE.input, TOKYO_NIGHT.input, custom.input,
             context.resources.getColor(R.color.input) -> palette.input
 
             // disabled
             MAKO.disabled, RAMA.disabled, CATPPUCCIN_MOCHA.disabled,
-            DRACULA.disabled, MELANGE.disabled, TOKYO_NIGHT.disabled,
+            DRACULA.disabled, MELANGE.disabled, TOKYO_NIGHT.disabled, custom.disabled,
             context.resources.getColor(R.color.disabled) -> palette.disabled
 
             // accent_1
             MAKO.accent_1, RAMA.accent_1, CATPPUCCIN_MOCHA.accent_1,
-            DRACULA.accent_1, MELANGE.accent_1, TOKYO_NIGHT.accent_1,
+            DRACULA.accent_1, MELANGE.accent_1, TOKYO_NIGHT.accent_1, custom.accent_1,
             context.resources.getColor(R.color.accent_1) -> palette.accent_1
 
             // collapsible_header
             MAKO.collapsible_header, RAMA.collapsible_header, CATPPUCCIN_MOCHA.collapsible_header,
-            DRACULA.collapsible_header, MELANGE.collapsible_header, TOKYO_NIGHT.collapsible_header,
+            DRACULA.collapsible_header, MELANGE.collapsible_header, TOKYO_NIGHT.collapsible_header, custom.collapsible_header,
             context.resources.getColor(R.color.collapsible_header) -> palette.collapsible_header
 
             // icon
             MAKO.icon, RAMA.icon, CATPPUCCIN_MOCHA.icon,
-            DRACULA.icon, MELANGE.icon, TOKYO_NIGHT.icon,
+            DRACULA.icon, MELANGE.icon, TOKYO_NIGHT.icon, custom.icon,
             context.resources.getColor(R.color.icon) -> palette.icon
 
             // clock
             MAKO.clock, RAMA.clock, CATPPUCCIN_MOCHA.clock,
-            DRACULA.clock, MELANGE.clock, TOKYO_NIGHT.clock,
+            DRACULA.clock, MELANGE.clock, TOKYO_NIGHT.clock, custom.clock,
             context.resources.getColor(R.color.clock) -> palette.clock
 
             // foreground — must come after icon/clock/header since MAKO shares similar values
             MAKO.foreground, RAMA.foreground, CATPPUCCIN_MOCHA.foreground,
-            DRACULA.foreground, MELANGE.foreground, TOKYO_NIGHT.foreground,
+            DRACULA.foreground, MELANGE.foreground, TOKYO_NIGHT.foreground, custom.foreground,
             context.resources.getColor(R.color.foreground) -> palette.foreground
 
             else -> null

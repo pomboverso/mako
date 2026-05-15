@@ -10,6 +10,7 @@
 - Fix Keyboard Navigation
 - Integrate background options with the theme section
 - Add Custom Font Option
+- Add Custom Color Picker
 
 ## 37
 
