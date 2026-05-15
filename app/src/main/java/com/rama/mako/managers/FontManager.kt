@@ -5,6 +5,7 @@ import android.graphics.Typeface
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.rama.mako.R
 import java.io.File
 
 object FontManager {
@@ -14,6 +15,13 @@ object FontManager {
     fun applyFont(context: Context, root: View) {
         val prefs = PrefsManager.getInstance(context)
         val fontStyle = prefs.getFontStyle() ?: "system"
+
+        root.findViewById<View?>(R.id.custom_font_container)?.visibility =
+            if (fontStyle == PrefsManager.FontStyle.CUSTOM) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
 
         val typeface = getTypeface(context, fontStyle)
 

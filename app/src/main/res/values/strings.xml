@@ -113,7 +113,7 @@
     <string name="default_label">Default</string>
     <string name="default_system_label">Default (System)</string>
     <string name="icons_monochrome_label">Monochrome</string>
-    <string name="icons_icon_pack_label">Custom icon pack</string>
+    <string name="custom_icon_pack_label">Custom icon pack</string>
     <string name="select_icon_pack_label">Choose icon pack</string>
     <string name="selected_icon_pack_label">Selected pack: %1$s</string>
     <string name="icon_pack_not_selected_label">No icon pack selected</string>
@@ -140,7 +140,7 @@
     <string name="group_label_updated_toast">Label Updated</string>
     <string name="select_target_group_toast">Select a target group</string>
     <string name="font_jersey_label" translatable="false">Jersey 25</string>
-    <string name="font_custom_label">Custom font…</string>
+    <string name="font_custom_label">Custom font</string>
     <string name="font_custom_none_label">No font selected</string>
     <string name="font_custom_pick_label">Choose Font file</string>
     <string name="font_style_header">Font Style</string>

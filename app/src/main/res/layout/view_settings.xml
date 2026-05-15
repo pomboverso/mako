@@ -591,7 +591,7 @@
                         android:id="@+id/icon_source_icon_pack"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/icons_icon_pack_label"
+                        android:text="@string/custom_icon_pack_label"
                         android:textColor="@color/foreground"
                         android:textSize="16sp" />
                 </RadioGroup>
@@ -634,7 +634,6 @@
                     android:id="@+id/font_style_group"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8sp"
                     android:background="@color/bg_2"
                     android:padding="16sp">
 
@@ -666,8 +665,11 @@
                 </RadioGroup>
 
                 <LinearLayout
+                    android:id="@+id/custom_font_container"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8sp"
                     android:orientation="vertical"
                     android:background="@color/bg_2"
                     android:gravity="center_vertical">
@@ -677,6 +679,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/foreground"
+                        android:layout_marginBottom="8sp"
                         android:textSize="16sp"
                         android:padding="16sp"
                         android:text="@string/font_custom_none_label" />
