@@ -1,9 +1,10 @@
 ![Preview](./docs/img/mako_header_1200x630.svg)
 
 <p align="center">
-  <a href="https://github.com/rama-io/mako/releases/latest"><img src="https://img.shields.io/github/v/release/rama-io/mako?label=release&color=127c77" alt="Release"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-GPLv3%20or%20Later-1d8f58" alt="License: GPLv3 or Later"></a>
-  <a href="https://github.com/rama-io/mako/releases"><img src="https://img.shields.io/github/downloads/rama-io/mako/total?color=blue" alt="Downloads"></a>
+  <a href="https://github.com/rama-io/mako/releases/latest"><img src="https://img.shields.io/github/v/release/rama-io/mako?colorA=363a4f&colorB=a6da95&style=for-the-badge" alt="Release"></a>
+  <a href="https://github.com/rama-io/mako/stargazers"><img src="https://img.shields.io/github/stars/rama-io/mako?colorA=363a4f&colorB=b7bdf8&style=for-the-badge"></a>
+  <a href="https://github.com/rama-io/mako/issues"><img src="https://img.shields.io/github/issues/rama-io/mako?colorA=363a4f&colorB=f5a97f&style=for-the-badge"></a>
+  <a href="https://github.com/rama-io/mako/releases"><img src="https://img.shields.io/github/downloads/rama-io/mako/total?colorA=363a4f&colorB=ea999c&style=for-the-badge" alt="Downloads"></a>
 </p>
 
 # Mako
@@ -18,8 +19,8 @@ distractions to a minimum by emphasizing clarity and intentional interaction.
 
 ## Screenshots
 
-| Home                                                                     | Settings                                                                     | About                                                                     |
-| ------------------------------------------------------------------------ | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| Home | Settings | About |
+| - | - | - |
 | ![Home](./fastlane/metadata/android/en-US/images/phoneScreenshots/1.png) | ![Settings](./fastlane/metadata/android/en-US/images/phoneScreenshots/2.png) | ![About](./fastlane/metadata/android/en-US/images/phoneScreenshots/3.png) |
 
 ---
