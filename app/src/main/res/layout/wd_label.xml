@@ -2,13 +2,9 @@
 
     <LinearLayout
         android:id="@+id/root"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:padding="8sp"
-        android:layout_marginBottom="8sp"
         android:background="@color/bg_2"
-        android:gravity="center_vertical">
+        style="@style/HorizontalList">
 
         <FrameLayout
             android:id="@+id/icon_container"

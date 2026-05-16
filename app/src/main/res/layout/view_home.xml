@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/root"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
+    android:background="?attr/bgColor"
     android:layout_height="match_parent"
-    android:background="?attr/bgColor">
+    style="@style/VerticalListDivided">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -15,14 +14,11 @@
 
         <LinearLayout
             android:id="@+id/apps_layout"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            style="@style/VerticalList">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
+                android:gravity="start"
+                style="@style/HorizontalList">
 
                 <LinearLayout
                     android:orientation="vertical"
@@ -42,11 +38,9 @@
 
                     <LinearLayout
                         android:id="@+id/date_row"
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
                         android:paddingBottom="4sp"
-                        android:gravity="center_vertical">
+                        android:gravity="start"
+                        style="@style/HorizontalList">
 
                         <ImageView
                             android:layout_width="16sp"
@@ -65,10 +59,7 @@
 
                     <LinearLayout
                         android:id="@+id/battery_row"
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical">
+                        style="@style/HorizontalList">
 
                         <ImageView
                             android:layout_width="16sp"
@@ -93,12 +84,10 @@
                     android:padding="12sp">
 
                     <ImageView
-                        android:layout_width="24sp"
-                        android:layout_height="24sp"
-                        android:tint="@color/icon"
                         android:layout_gravity="center"
                         android:src="@drawable/icon_search"
-                        android:contentDescription="@string/altdescr_search_icon" />
+                        android:contentDescription="@string/altdescr_search_icon"
+                        style="@style/Icon24" />
                 </FrameLayout>
             </LinearLayout>
 
@@ -119,27 +108,18 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8sp"
-        android:gravity="center_vertical"
-        android:paddingTop="16sp">
+        android:gravity="center_vertical">
 
         <EditText
             android:id="@+id/search_field"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:textSize="16sp"
-            android:paddingTop="16sp"
-            android:paddingBottom="16sp"
-            android:paddingStart="8sp"
-            android:paddingEnd="8sp"
             android:background="@color/bg_2"
-            android:textColor="?attr/foregroundColor"
             android:textColorHint="@color/disabled"
             android:hint="@string/hint_search_apps"
-            android:visibility="gone" />
+            android:visibility="gone"
+            style="@style/EditText" />
 
         <FrameLayout
             android:id="@+id/clear_field"
@@ -149,12 +129,9 @@
             android:visibility="gone">
 
             <ImageView
-                android:layout_width="24sp"
-                android:layout_height="24sp"
-                android:tint="@color/icon"
-                android:layout_gravity="center"
                 android:src="@drawable/icon_close"
-                android:contentDescription="@string/altdescr_clear_search" />
+                android:contentDescription="@string/altdescr_clear_search"
+                style="@style/Icon24" />
         </FrameLayout>
     </LinearLayout>
 

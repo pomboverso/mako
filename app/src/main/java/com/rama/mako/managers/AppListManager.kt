@@ -402,7 +402,7 @@ class AppListManager(
     private fun showGroupsDialog(app: AppsProvider.AppEntry) {
         val pkg = app.packageName
 
-        val view = View.inflate(context, R.layout.dialog_groups_add, null)
+        val view = View.inflate(context, R.layout.dialog_groups_pick, null)
 
         val dialog = AlertDialog.Builder(context)
             .setView(view)

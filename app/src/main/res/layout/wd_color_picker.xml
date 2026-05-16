@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     android:layout_height="56dp"
-    android:orientation="horizontal"
-    android:gravity="center_vertical"
     android:padding="16dp"
     android:background="@color/input"
     android:focusable="false"
-    android:clickable="false">
+    android:clickable="false"
+    style="@style/HorizontalList">
 
     <TextView
         android:id="@+id/title"

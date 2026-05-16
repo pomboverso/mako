@@ -10,6 +10,122 @@
         <item name="android:windowFullscreen">false</item>
     </style>
 
+    <!-- Global -->
+
+    <style name="BlockFlow">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="HorizontalList" parent="BlockFlow">
+        <item name="android:orientation">horizontal</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="HorizontalList_BG2" parent="HorizontalList">
+        <item name="android:background">@color/bg_2</item>
+        <item name="android:padding">16sp</item>
+    </style>
+
+    <!--    <style name="HorizontalListDivided" parent="HorizontalList">-->
+    <!--        <item name="android:showDividers">middle</item>-->
+    <!--        <item name="android:divider">@drawable/list_divider</item>-->
+    <!--    </style>-->
+
+    <style name="VerticalList" parent="BlockFlow">
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="VerticalList_BG2" parent="VerticalList">
+        <item name="android:background">@color/bg_2</item>
+        <item name="android:padding">16sp</item>
+    </style>
+
+    <style name="VerticalListDivided" parent="VerticalList">
+        <item name="android:showDividers">middle</item>
+        <item name="android:divider">@drawable/list_divider</item>
+    </style>
+
+    <style name="VerticalListDivided_BG2" parent="VerticalList_BG2">
+        <item name="android:showDividers">middle</item>
+        <item name="android:divider">@drawable/list_divider</item>
+    </style>
+
+    <style name="H1" parent="BlockFlow">
+        <item name="android:textColor">@color/foreground</item>
+        <item name="android:textSize">32sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="H1_center" parent="H1">
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="H2" parent="BlockFlow">
+        <item name="android:textColor">@color/foreground</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Disclaimer" parent="BlockFlow">
+        <item name="android:textColor">@color/foreground</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="BTN1" parent="BlockFlow">
+        <item name="android:background">@color/button_1</item>
+    </style>
+
+    <style name="BTN2" parent="BlockFlow">
+        <item name="android:background">@color/button_2</item>
+    </style>
+
+    <style name="BTN_danger" parent="BlockFlow">
+        <item name="android:background">@color/danger</item>
+    </style>
+
+    <style name="RadioGroup" parent="VerticalListDivided_BG2" />
+
+    <style name="Radio" parent="BlockFlow">
+        <item name="android:textColor">@color/foreground</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Checkbox" parent="BlockFlow" />
+
+    <style name="EditText" parent="BlockFlow">
+        <item name="android:textColor">@color/foreground</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:background">@color/input</item>
+        <item name="android:paddingTop">16sp</item>
+        <item name="android:paddingBottom">16sp</item>
+        <item name="android:paddingStart">8sp</item>
+        <item name="android:paddingEnd">8sp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="Icon24">
+        <item name="android:layout_width">24sp</item>
+        <item name="android:layout_height">24sp</item>
+        <item name="android:tint">@color/icon</item>
+    </style>
+
+    <style name="ColorPickerBtn" parent="BlockFlow">
+        <item name="android:layout_marginBottom">8sp</item>
+    </style>
+
+    <style name="Separator">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:background">@color/disabled</item>
+        <item name="android:layout_marginTop">16sp</item>
+        <item name="android:layout_marginBottom">16sp</item>
+    </style>
+
     <style name="PinButton">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">0dp</item>

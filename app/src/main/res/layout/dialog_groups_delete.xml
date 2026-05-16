@@ -1,58 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:padding="16sp"
-    android:orientation="vertical"
     android:background="@color/bg_1"
-    android:focusableInTouchMode="true">
+    android:focusableInTouchMode="true"
+    style="@style/VerticalListDivided">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8sp"
-        android:textSize="32sp"
-        android:textColor="@color/foreground"
         android:text="@string/h1_delete_group"
-        android:gravity="center"
-        android:textStyle="bold" />
+        style="@style/H1_center" />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8sp"
-        android:textSize="18sp"
-        android:textColor="@color/foreground"
         android:text="@string/disclaimer_delete_group"
         android:gravity="center"
-        android:textStyle="bold" />
+        style="@style/Disclaimer" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginBottom="8sp">
+        android:layout_weight="1">
 
         <RadioGroup
             android:id="@+id/groups"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16sp"
-            android:background="@color/bg_2" />
+            style="@style/RadioGroup" />
     </ScrollView>
 
     <com.rama.mako.widgets.WdButton
         android:id="@+id/yes_button"
-        android:layout_width="match_parent"
-        android:layout_marginBottom="8sp"
-        android:layout_height="wrap_content"
-        android:background="@color/danger"
-        android:text="@string/btn_delete_group" />
+        android:text="@string/btn_delete_group"
+        style="@style/BTN_danger" />
 
     <com.rama.mako.widgets.WdButton
         android:id="@+id/no_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/button_1"
-        android:text="@string/btn_cancel" />
+        android:text="@string/btn_cancel"
+        style="@style/BTN1" />
 </LinearLayout>

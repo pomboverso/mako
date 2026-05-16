@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/bg_1"
-    android:gravity="center_horizontal">
+    style="@style/VerticalListDivided">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -15,17 +13,14 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            style="@style/VerticalListDivided">
 
             <ImageView
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:src="@drawable/mako"
-                android:layout_gravity="center"
-                android:layout_marginBottom="16sp" />
+                android:layout_gravity="center" />
 
             <TextView
                 android:id="@+id/name_version"
@@ -42,18 +37,12 @@
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16sp"
                 android:textAlignment="center"
                 android:textColor="@color/foreground" />
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8sp"
-                android:textSize="18sp"
-                android:textColor="@color/foreground"
                 android:text="@string/h2_app"
-                android:textStyle="bold" />
+                style="@style/H2" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
@@ -104,13 +93,8 @@
                 android:text="@string/license_gpl3" />
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8sp"
-                android:textSize="18sp"
-                android:textColor="@color/foreground"
                 android:text="@string/h2_contributors"
-                android:textStyle="bold" />
+                style="@style/H2" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
@@ -124,11 +108,7 @@
                 android:icon="@drawable/icon_github"
                 android:text="@string/contributor_isotjs_url" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/disabled"
-                android:layout_marginVertical="16sp" />
+            <View style="@style/Separator" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
@@ -143,13 +123,8 @@
                 android:text="@string/contributor_etwasmitbaum_url" />
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8sp"
-                android:textSize="18sp"
-                android:textColor="@color/foreground"
                 android:text="@string/h2_icons"
-                android:textStyle="bold" />
+                style="@style/H2" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
@@ -176,13 +151,8 @@
                 android:text="@string/license_cc_4" />
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8sp"
-                android:textSize="18sp"
-                android:textColor="@color/foreground"
                 android:text="@string/h2_fonts"
-                android:textStyle="bold" />
+                style="@style/H2" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
@@ -209,13 +179,8 @@
                 android:text="@string/license_ofl_1_1" />
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8sp"
-                android:textSize="18sp"
-                android:textColor="@color/foreground"
                 android:text="@string/h2_themes"
-                android:textStyle="bold" />
+                style="@style/H2" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
@@ -241,11 +206,7 @@
                 android:icon="@drawable/icon_octagon_check_solid"
                 android:text="@string/license_mit" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/disabled"
-                android:layout_marginVertical="16sp" />
+            <View style="@style/Separator" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
@@ -271,11 +232,7 @@
                 android:icon="@drawable/icon_octagon_check_solid"
                 android:text="@string/license_mit" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/disabled"
-                android:layout_marginVertical="16sp" />
+            <View style="@style/Separator" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
@@ -301,11 +258,7 @@
                 android:icon="@drawable/icon_octagon_check_solid"
                 android:text="@string/license_mit" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/disabled"
-                android:layout_marginVertical="16sp" />
+            <View style="@style/Separator" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
@@ -334,24 +287,15 @@
         </LinearLayout>
     </ScrollView>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/disabled"
-        android:layout_marginVertical="16sp" />
+    <View style="@style/Separator" />
 
     <com.rama.mako.widgets.WdButton
         android:id="@+id/discord_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8sp"
-        android:background="@color/button_2"
-        android:text="@string/btn_join_discord" />
+        android:text="@string/btn_join_discord"
+        style="@style/BTN2" />
 
     <com.rama.mako.widgets.WdButton
         android:id="@+id/close_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/button_1"
-        android:text="@string/btn_go_back" />
+        android:text="@string/btn_go_back"
+        style="@style/BTN1" />
 </LinearLayout>

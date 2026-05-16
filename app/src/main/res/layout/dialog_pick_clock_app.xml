@@ -1,46 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     android:padding="16sp"
-    android:orientation="vertical"
     android:background="@color/bg_1"
-    android:focusableInTouchMode="true">
+    android:focusableInTouchMode="true"
+    style="@style/VerticalListDivided">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="32sp"
-        android:textColor="@color/foreground"
         android:text="@string/btn_set_clock_app"
-        android:gravity="center"
-        android:textStyle="bold" />
+        style="@style/H1_center" />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16sp"
-        android:textSize="16sp"
-        android:textColor="@color/foreground"
         android:text="@string/disclaimer_pick_clock_app"
         android:gravity="center"
-        android:textStyle="bold" />
+        style="@style/Disclaimer" />
 
     <ListView
         android:id="@+id/app_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:dividerHeight="0dp"
-        android:divider="@null"
-        android:padding="16sp"
-        android:background="@color/bg_2"
-        android:layout_marginBottom="8sp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        style="@style/VerticalListDivided_BG2" />
 
     <com.rama.mako.widgets.WdButton
         android:id="@+id/close_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/button_1"
-        android:text="@string/btn_go_back" />
+        android:text="@string/btn_go_back"
+        style="@style/BTN1" />
 </LinearLayout>

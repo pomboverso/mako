@@ -1,41 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:padding="16sp"
-    android:orientation="vertical"
     android:background="@color/bg_1"
-    android:focusableInTouchMode="true">
+    android:focusableInTouchMode="true"
+    style="@style/VerticalListDivided">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16sp"
-        android:textSize="32sp"
-        android:textColor="@color/foreground"
         android:text="@string/h1_rename_app"
-        android:gravity="center"
-        android:textStyle="bold" />
+        style="@style/H1_center" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="8sp"
-        android:padding="16sp"
-        android:orientation="horizontal"
-        android:background="@color/bg_2">
+    <LinearLayout style="@style/HorizontalList_BG2">
 
         <EditText
             android:id="@+id/edit_text"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:maxLines="1"
             android:focusableInTouchMode="true"
-            android:padding="16sp"
-            android:background="@color/input"
-            android:singleLine="true"
-            android:textSize="16sp" />
+            style="@style/EditText" />
 
         <FrameLayout
             android:id="@+id/yes_button"
@@ -44,27 +26,19 @@
             android:padding="12sp">
 
             <ImageView
-                android:layout_width="24sp"
-                android:layout_height="match_parent"
-                android:padding="0dp"
-                android:tint="@color/icon"
                 android:src="@drawable/icon_disk"
-                android:contentDescription="@string/altdescr_save" />
+                android:contentDescription="@string/altdescr_save"
+                style="@style/Icon24" />
         </FrameLayout>
     </LinearLayout>
 
     <com.rama.mako.widgets.WdButton
         android:id="@+id/reset_button"
-        android:layout_width="match_parent"
-        android:layout_marginBottom="8sp"
-        android:layout_height="wrap_content"
-        android:background="@color/danger"
-        android:text="@string/btn_reset" />
+        android:text="@string/btn_reset"
+        style="@style/BTN_danger" />
 
     <com.rama.mako.widgets.WdButton
         android:id="@+id/no_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/button_1"
-        android:text="@string/btn_cancel" />
+        android:text="@string/btn_cancel"
+        style="@style/BTN1" />
 </LinearLayout>
