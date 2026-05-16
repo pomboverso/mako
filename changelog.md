@@ -1,5 +1,9 @@
 # Changelog
 
+## 39
+
+- Adding Themes Attributions
+
 ## 38
 
 - Add Rama Theme

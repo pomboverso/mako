@@ -1,9 +1,9 @@
 <resources>
     <!-- Global -->
-    <string name="go_back_label">Geri Dön</string>
+    <string name="go_back_btn">Geri Dön</string>
     <string name="new_group_header">------ Yeni Grup</string>
     <string name="new_group_header_count">------ Yeni Grup %d</string>
-    <string name="no_clock_app_found_label">Saat uygulaması bulunamadı</string>
+    <string name="no_clock_app_found_toast">Saat uygulaması bulunamadı</string>
     <string name="unable_open_settings_toast">Başlatıcı ayarları açılamadı</string>
     <string name="unable_open_wallpaper_app_toast">Duvar kağıdı uygulaması bulunamadı</string>
     <string name="unable_launch_app_toast">Uygulama başlatılamadı</string>
@@ -42,15 +42,15 @@
     <string name="icon_offline_desc">Tamamen Çevrimdışı</string>
     <string name="mako_url" translatable="false">github.com/rama-io/mako</string>
     <string name="app_header">Uygulama</string>
-    <string name="discord_label">Discord\'a Katıl</string>
+    <string name="join_discord_btn">Discord\'a Katıl</string>
     <string name="contributors_header">Katkıda Bulunanlar</string>
     <string name="icons_header">İkonlar</string>
     <string name="fonts_header">Yazı Tipleri</string>
 
-    <string name="gpl3_desc" translatable="false">GPL 3.0</string>
-    <string name="ofl_1_1_desc" translatable="false">OFL 1.1</string>
-    <string name="apache_2_desc" translatable="false">Apache 2.0</string>
-    <string name="cc_4_desc" translatable="false">CC 4.0</string>
+    <string name="gpl3_license" translatable="false">GPL 3.0</string>
+    <string name="ofl_1_1_license" translatable="false">OFL 1.1</string>
+    <string name="apache_2_license" translatable="false">Apache 2.0</string>
+    <string name="cc_4_license" translatable="false">CC 4.0</string>
 
     <string name="hackernoon_url" translatable="false">github.com/hackernoon/pixel-icon-library</string>
     <string name="app_creator" translatable="false">Pombo</string>
@@ -64,7 +64,7 @@
     <string name="etwasmitbaum_url" translatable="false">github.com/etwasmitbaum</string>
 
     <!-- Settings -->
-    <string name="activity_settings_header">Ayarlar</string>
+    <string name="activity_settings_h1">Ayarlar</string>
 
     <string name="apps_header">Uygulamalar</string>
     <string name="clock_header">Saat</string>
@@ -87,12 +87,12 @@
     <string name="settings_section_data_title">Veri ve Hata Ayıklama</string>
     <string name="settings_section_expand_indicator" translatable="false">[+]</string>
     <string name="settings_section_collapse_indicator" translatable="false">[-]</string>
-    <string name="set_default_label">Başlatıcıyı varsayılan yap</string>
-    <string name="set_clock_app_label">Saat dokunuş eylemini değiştir</string>
-    <string name="refresh_launcher_label">Başlatıcıyı yenile</string>
-    <string name="change_wallpaper_label">Sistem duvar kağıdını değiştir</string>
-    <string name="activity_about_mako_header">Mako hakkında</string>
-    <string name="edit_apps_label">Yüklü uygulamaları yönet</string>
+    <string name="set_default_btn">Başlatıcıyı varsayılan yap</string>
+    <string name="set_clock_app_btn">Saat dokunuş eylemini değiştir</string>
+    <string name="refresh_launcher_btn">Başlatıcıyı yenile</string>
+    <string name="change_wallpaper_btn">Sistem duvar kağıdını değiştir</string>
+    <string name="about_mako_btn">Mako hakkında</string>
+    <string name="edit_apps_btn">Yüklü uygulamaları yönet</string>
     <string name="show_battery_label">Pili göster</string>
     <string name="show_system_bar_label">Sistem çubuğunu göster</string>
     <string name="language_system_default">Sistem Varsayılanı (Desteklemiyorsa İngilizce olur)</string>
@@ -106,19 +106,19 @@
     <string name="show_group_header_label">Grup başlığını göster</string>
     <string name="icons_settings_header">İkonlar</string>
     <string name="none_label">Yok</string>
-    <string name="default_label">Varsayılan</string>
-    <string name="default_system_label">Varsayılan (Sistem)</string>
+    <string name="default_radio">Varsayılan</string>
+    <string name="default_system_radio">Varsayılan (Sistem)</string>
     <string name="icons_monochrome_label">Monokrom</string>
     <string name="custom_icon_pack_label">Özel ikon paketi</string>
-    <string name="select_icon_pack_label">İkon paketi seç</string>
+    <string name="select_icon_pack_btn">İkon paketi seç</string>
     <string name="selected_icon_pack_label">Seçili paket: %1$s</string>
     <string name="icon_pack_not_selected_label">İkon paketi seçilmedi</string>
-    <string name="no_icon_pack_found_label">Uyumlu ikon paketi bulunamadı</string>
+    <string name="no_icon_pack_found_toast">Uyumlu ikon paketi bulunamadı</string>
     <string name="icon_pack_selected_toast">Seçili ikon paketi: %1$s</string>
     <string name="monochrome_fallback_toast">Monokrom ikonlar Android 13+ gerektirir, mevcut olmayan yerlerde alternatif kullanılıyor</string>
     <string name="show_ungrouped_apps_label">Gruplanmamış uygulamaları göster</string>
     <string name="has_collapsible_groups">Grupların daraltılmasına izin ver</string>
-    <string name="add_group_label">+ Yeni Grup Ekle</string>
+    <string name="add_group_btn">+ Yeni Grup Ekle</string>
     <string name="clock_none_label">Saati gizle</string>
     <string name="clock_24_label">24 saat</string>
     <string name="clock_12_label">12 saat (AM/PM)</string>
@@ -128,16 +128,16 @@
     <string name="show_battery_temperature_label">Pil sıcaklığını göster</string>
     <string name="show_battery_charge_status_label">Pil şarj durumunu göster</string>
     <string name="debug_header">Hata Ayıklama</string>
-    <string name="export_data_label">Veriyi Dışa Aktar</string>
-    <string name="clear_data_label">Veriyi Temizle</string>
+    <string name="export_data_btn">Veriyi Dışa Aktar</string>
+    <string name="clear_data_btn">Veriyi Temizle</string>
     <string name="reset_done_toast">Sıfırlama tamamlandı</string>
     <string name="reset_failed_toast">Sıfırlama başarısız</string>
     <string name="clock_app_selected_toast">Seçildi: %1$s</string>
     <string name="group_label_updated_toast">Etiket Güncellendi</string>
     <string name="select_target_group_toast">Bir hedef grup seçin</string>
-    <string name="font_jersey_label" translatable="false">Jersey 25</string>
+    <string name="jersey_product" translatable="false">Jersey 25</string>
     <string name="font_style_header">Yazı Tipi Stili</string>
-    <string name="background_default_label">Varsayılan tema</string>
+    <string name="default_radio">Varsayılan tema</string>
     <string name="background_wallpaper_label">Duvar kağıdı</string>
 
     <!-- Popup :: Context Menu App -->
@@ -146,12 +146,12 @@
     <string name="open_settings">Uygulama ayarları...</string>
 
     <!-- Dialog -->
-    <string name="save">Kaydet</string>
-    <string name="reset">Sıfırla</string>
-    <string name="cancel">İptal</string>
+    <string name="save_btn">Kaydet</string>
+    <string name="reset_btn">Sıfırla</string>
+    <string name="cancel_btn">İptal</string>
 
     <!-- Dialog :: Rename App -->
-    <string name="select_group">Grup Seç</string>
+    <string name="select_group_h1">Grup Seç</string>
 
     <!-- Dialog :: Search -->
     <string name="search_apps_header">Uygulama ara</string>
@@ -160,9 +160,9 @@
     <string name="clear_search_desc">Aramayı temizle</string>
 
     <!-- Dialog :: Delete Group -->
-    <string name="delete_group_title">Bu grubu silmek istediğinizden emin misiniz?</string>
+    <string name="delete_group_h1">Bu grubu silmek istediğinizden emin misiniz?</string>
     <string name="delete_group_disclaimer">Uygulamalarınız aşağıdaki gruba taşınacaktır.</string>
-    <string name="delete_group">Grubu sil</string>
+    <string name="delete_group_btn">Grubu sil</string>
 
     <!-- Dialog :: Pick Clock App -->
     <string name="pick_clock_app_disclaimer">Buradan bir uygulama seçmek, onu varsayılan saat eylemi olarak ayarlar. Ana ekranınızdaki saate dokunduğunuzda bu uygulama açılır.</string>

@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
-import android.provider.Settings.Global.getString
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.generateViewId
@@ -379,7 +378,7 @@ class AppListManager(
             refresh()
             Toast.makeText(
                 context,
-                context.getString(R.string.label_changed),
+                context.getString(R.string.label_changed_toast),
                 Toast.LENGTH_SHORT
             ).show()
             dialog.dismiss()
@@ -390,7 +389,7 @@ class AppListManager(
             refresh()
             Toast.makeText(
                 context,
-                context.getString(R.string.label_changed),
+                context.getString(R.string.label_changed_toast),
                 Toast.LENGTH_SHORT
             ).show()
             dialog.dismiss()
@@ -656,6 +655,7 @@ class AppListManager(
                         refresh()
                     }
                 }
+
                 is ListItem.App -> {
                     if (!appsProvider.launch(item.info)) {
                         Toast.makeText(

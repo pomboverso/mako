@@ -13,7 +13,7 @@
         android:layout_marginBottom="8sp"
         android:textSize="32sp"
         android:textColor="@color/foreground"
-        android:text="@string/delete_group_title"
+        android:text="@string/delete_group_h1"
         android:gravity="center"
         android:textStyle="bold" />
 
@@ -47,12 +47,12 @@
         android:layout_marginBottom="8sp"
         android:layout_height="wrap_content"
         android:background="@color/danger"
-        android:text="@string/delete_group" />
+        android:text="@string/delete_group_btn" />
 
     <com.rama.mako.widgets.WdButton
         android:id="@+id/no_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/button_1"
-        android:text="@string/cancel" />
+        android:text="@string/cancel_btn" />
 </LinearLayout>

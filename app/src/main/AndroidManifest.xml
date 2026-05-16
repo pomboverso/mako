@@ -39,17 +39,17 @@
         <activity
             android:exported="false"
             android:name=".activities.AboutActivity"
-            android:label="@string/activity_about_mako_header" />
+            android:label="@string/about_mako_btn" />
 
         <activity
             android:exported="false"
             android:name=".activities.LockActivity"
-            android:label="@string/activity_lock_header" />
+            android:label="@string/lock_btn" />
 
         <activity
             android:exported="false"
             android:name=".activities.SettingsActivity"
-            android:label="@string/activity_settings_header" />
+            android:label="@string/activity_settings_h1" />
 
         <activity
             android:name=".activities.MainActivity"

@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/color_picker_title"
+        android:text="@string/color_picker_h1"
         android:layout_marginBottom="8dp"
         android:textStyle="bold"
         android:textSize="32sp"
@@ -82,12 +82,12 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8sp"
         android:background="@color/button_2"
-        android:text="@string/apply_label" />
+        android:text="@string/apply_btn" />
 
     <com.rama.mako.widgets.WdButton
         android:id="@+id/close_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/button_1"
-        android:text="@string/cancel" />
+        android:text="@string/cancel_btn" />
 </LinearLayout>

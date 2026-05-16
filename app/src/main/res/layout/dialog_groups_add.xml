@@ -13,7 +13,7 @@
         android:layout_marginBottom="8sp"
         android:textSize="32sp"
         android:textColor="@color/foreground"
-        android:text="@string/select_group"
+        android:text="@string/select_group_h1"
         android:gravity="center"
         android:textStyle="bold" />
 
@@ -38,5 +38,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/button_1"
-        android:text="@string/cancel" />
+        android:text="@string/cancel_btn" />
 </LinearLayout>

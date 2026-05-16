@@ -22,7 +22,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/activity_settings_header"
+                android:text="@string/activity_settings_h1"
                 android:textColor="@color/foreground"
                 android:textSize="32sp"
                 android:textStyle="bold" />
@@ -47,7 +47,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8sp"
                     android:background="@color/button_2"
-                    android:text="@string/set_default_label" />
+                    android:text="@string/set_default_btn" />
 
                 <com.rama.mako.widgets.WdButton
                     android:id="@+id/reset_button"
@@ -55,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8sp"
                     android:background="@color/button_2"
-                    android:text="@string/refresh_launcher_label" />
+                    android:text="@string/refresh_launcher_btn" />
 
                 <com.rama.mako.widgets.WdButton
                     android:id="@+id/change_apps_button"
@@ -63,7 +63,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8sp"
                     android:background="@color/button_2"
-                    android:text="@string/edit_apps_label" />
+                    android:text="@string/edit_apps_btn" />
             </com.rama.mako.widgets.WdCollapsibleSection>
             <!--Groups-->
             <com.rama.mako.widgets.WdCollapsibleSection
@@ -110,7 +110,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8sp"
                     android:background="@color/button_2"
-                    android:text="@string/add_group_label" />
+                    android:text="@string/add_group_btn" />
 
             </com.rama.mako.widgets.WdCollapsibleSection>
 
@@ -133,7 +133,7 @@
                         android:id="@+id/theme_mako"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/theme_mako_label"
+                        android:text="@string/app_name"
                         android:textColor="@color/foreground"
                         android:textSize="16sp"
                         android:layout_marginBottom="8sp" />
@@ -151,7 +151,7 @@
                         android:id="@+id/theme_catppuccin_mocha"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/theme_catppuccin_mocha_label"
+                        android:text="@string/catppuccin_product"
                         android:textColor="@color/foreground"
                         android:textSize="16sp"
                         android:layout_marginBottom="8sp" />
@@ -161,7 +161,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
-                        android:text="@string/theme_dracula_label"
+                        android:text="@string/dracula_product"
                         android:textColor="@color/foreground"
                         android:textSize="16sp" />
 
@@ -170,7 +170,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
-                        android:text="@string/theme_melange_label"
+                        android:text="@string/melange_product"
                         android:textColor="@color/foreground"
                         android:textSize="16sp" />
 
@@ -178,7 +178,7 @@
                         android:id="@+id/theme_tokyo_night"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/theme_tokyo_night_label"
+                        android:text="@string/tokyo_product"
                         android:layout_marginBottom="8sp"
                         android:textColor="@color/foreground"
                         android:textSize="16sp" />
@@ -305,7 +305,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8sp"
                             android:background="@color/button_2"
-                            android:text="@string/theme_apply_custom_label" />
+                            android:text="@string/theme_apply_custom_btn" />
                     </LinearLayout>
                 </LinearLayout>
             </com.rama.mako.widgets.WdCollapsibleSection>
@@ -329,7 +329,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
-                        android:text="@string/background_default_label"
+                        android:text="@string/default_radio"
                         android:textColor="@color/foreground"
                         android:textSize="16sp" />
 
@@ -348,7 +348,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8sp"
                     android:background="@color/button_2"
-                    android:text="@string/change_wallpaper_label" />
+                    android:text="@string/change_wallpaper_btn" />
             </com.rama.mako.widgets.WdCollapsibleSection>
             <!--Icons-->
             <com.rama.mako.widgets.WdCollapsibleSection
@@ -379,7 +379,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
-                        android:text="@string/default_label"
+                        android:text="@string/default_radio"
                         android:textColor="@color/foreground"
                         android:textSize="16sp" />
 
@@ -424,7 +424,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/button_2"
-                        android:text="@string/select_icon_pack_label" />
+                        android:text="@string/select_icon_pack_btn" />
                 </LinearLayout>
             </com.rama.mako.widgets.WdCollapsibleSection>
             <!--Fonts-->
@@ -447,7 +447,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
-                        android:text="@string/default_system_label"
+                        android:text="@string/default_system_radio"
                         android:textColor="@color/foreground"
                         android:textSize="16sp" />
 
@@ -456,7 +456,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
-                        android:text="@string/font_jersey_label"
+                        android:text="@string/jersey_product"
                         android:textColor="@color/foreground"
                         android:textSize="16sp" />
 
@@ -494,7 +494,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/button_2"
-                        android:text="@string/font_custom_pick_label" />
+                        android:text="@string/font_custom_pick_btn" />
 
                 </LinearLayout>
 
@@ -529,7 +529,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
-                        android:text="@string/default_system_label"
+                        android:text="@string/default_system_radio"
                         android:textColor="@color/foreground"
                         android:textSize="16sp" />
 
@@ -556,7 +556,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/button_2"
-                    android:text="@string/set_clock_app_label" />
+                    android:text="@string/set_clock_app_btn" />
             </com.rama.mako.widgets.WdCollapsibleSection>
             <!--Date-->
             <com.rama.mako.widgets.WdCollapsibleSection
@@ -625,7 +625,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
-                        android:text="@string/default_system_label"
+                        android:text="@string/default_system_radio"
                         android:textColor="@color/foreground"
                         android:textSize="16sp" />
 
@@ -748,14 +748,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8sp"
                     android:background="@color/danger"
-                    android:text="@string/export_data_label" />
+                    android:text="@string/export_data_btn" />
 
                 <com.rama.mako.widgets.WdButton
                     android:id="@+id/clear_prefs_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/danger"
-                    android:text="@string/clear_data_label" />
+                    android:text="@string/clear_data_btn" />
             </com.rama.mako.widgets.WdCollapsibleSection>
         </LinearLayout>
     </ScrollView>
@@ -773,12 +773,12 @@
         android:layout_marginTop="8sp"
         android:layout_marginBottom="8sp"
         android:background="@color/button_1"
-        android:text="@string/activity_about_mako_header" />
+        android:text="@string/about_mako_btn" />
 
     <com.rama.mako.widgets.WdButton
         android:id="@+id/close_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/button_1"
-        android:text="@string/go_back_label" />
+        android:text="@string/go_back_btn" />
 </LinearLayout>

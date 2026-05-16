@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import android.widget.*
 import com.rama.mako.R
 import com.rama.mako.activities.SettingsActivity
-import com.rama.mako.managers.FontManager
 import com.rama.mako.managers.PrefsManager
 import com.rama.mako.managers.ThemeManager
 import com.rama.mako.utils.SettingsUiUtils
@@ -89,7 +88,7 @@ class SettingsIconsController(private val activity: SettingsActivity) {
         if (iconPacks.isEmpty()) {
             Toast.makeText(
                 activity,
-                activity.getString(R.string.no_icon_pack_found_label),
+                activity.getString(R.string.no_icon_pack_found_toast),
                 Toast.LENGTH_SHORT
             ).show()
             return
