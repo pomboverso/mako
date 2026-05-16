@@ -41,7 +41,7 @@
     <string name="btn_delete_group">Grubu sil</string>
 
     <!--BTN2-->
-    <string name="btn_join_discord">Discord'a Katıl</string>
+    <string name="btn_join_discord">Discord\'a Katıl</string>
     <string name="btn_select_icon_pack">İkon paketi seç</string>
     <string name="btn_export_data">Veriyi Dışa Aktar</string>
     <string name="btn_clear_data">Veriyi Temizle</string>
