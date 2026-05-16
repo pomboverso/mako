@@ -9,7 +9,6 @@ import com.rama.mako.activities.SettingsActivity
 import com.rama.mako.managers.PrefsManager
 import com.rama.mako.managers.ThemeManager
 import com.rama.mako.utils.SettingsUiUtils
-import com.rama.mako.widgets.WdButton
 
 class SettingsClockController(private val activity: SettingsActivity) {
 
@@ -64,7 +63,7 @@ class SettingsClockController(private val activity: SettingsActivity) {
         }
 
         val listView = dialogView.findViewById<ListView>(R.id.app_list)
-        val closeBtn = dialogView.findViewById<WdButton>(R.id.close_button)
+        val closeBtn = dialogView.findViewById<Button>(R.id.close_button)
         val apps = appsProvider.getAll().sortedBy { it.label.lowercase() }
 
         val adapter = object : BaseAdapter() {

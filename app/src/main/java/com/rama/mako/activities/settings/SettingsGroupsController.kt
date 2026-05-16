@@ -10,7 +10,6 @@ import com.rama.mako.R
 import com.rama.mako.activities.SettingsActivity
 import com.rama.mako.managers.ThemeManager
 import com.rama.mako.utils.SettingsUiUtils
-import com.rama.mako.widgets.WdButton
 
 class SettingsGroupsController(private val activity: SettingsActivity) {
 
@@ -108,8 +107,8 @@ class SettingsGroupsController(private val activity: SettingsActivity) {
                 setCancelable(true)
             }
 
-            val yes = dialogView.findViewById<WdButton>(R.id.yes_button)
-            val no = dialogView.findViewById<WdButton>(R.id.no_button)
+            val yes = dialogView.findViewById<Button>(R.id.yes_button)
+            val no = dialogView.findViewById<Button>(R.id.no_button)
             val radioGroup = dialogView.findViewById<RadioGroup>(R.id.groups)
 
             val currentGroupId = name.tag as String

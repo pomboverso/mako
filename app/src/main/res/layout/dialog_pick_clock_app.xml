@@ -21,7 +21,7 @@
         android:layout_weight="1"
         style="@style/VerticalListDivided_BG2" />
 
-    <com.rama.mako.widgets.WdButton
+    <Button
         android:id="@+id/close_button"
         android:text="@string/btn_go_back"
         style="@style/BTN1" />

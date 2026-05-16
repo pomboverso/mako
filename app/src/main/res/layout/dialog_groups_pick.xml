@@ -20,7 +20,7 @@
             style="@style/RadioGroup" />
     </ScrollView>
 
-    <com.rama.mako.widgets.WdButton
+    <Button
         android:id="@+id/close_button"
         android:text="@string/btn_cancel"
         style="@style/BTN1" />

@@ -289,12 +289,12 @@
 
     <View style="@style/Separator" />
 
-    <com.rama.mako.widgets.WdButton
+    <Button
         android:id="@+id/discord_button"
         android:text="@string/btn_join_discord"
         style="@style/BTN2" />
 
-    <com.rama.mako.widgets.WdButton
+    <Button
         android:id="@+id/close_button"
         android:text="@string/btn_go_back"
         style="@style/BTN1" />

@@ -95,17 +95,17 @@
     </LinearLayout>
 
     <!-- Actions -->
-    <com.rama.mako.widgets.WdButton
+    <Button
         android:id="@+id/unlock_button"
         android:text="@string/btn_unlock"
         style="@style/BTN2" />
 
-    <com.rama.mako.widgets.WdButton
+    <Button
         android:id="@+id/clear_button"
         android:text="@string/btn_clear"
         style="@style/BTN2" />
 
-    <com.rama.mako.widgets.WdButton
+    <Button
         android:id="@+id/close_button"
         android:text="@string/btn_go_back"
         style="@style/BTN1" />

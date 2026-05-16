@@ -15,7 +15,6 @@ import android.widget.RadioGroup
 import com.rama.mako.R
 import com.rama.mako.utils.sp
 import com.rama.mako.activities.SettingsActivity
-import com.rama.mako.widgets.WdButton
 import java.text.Normalizer
 import java.util.Locale
 import kotlin.math.abs
@@ -364,8 +363,8 @@ class AppListManager(
         ThemeManager.applyTheme(context, view)
         val input = view.findViewById<EditText>(R.id.edit_text)
         val yesButton = view.findViewById<FrameLayout>(R.id.yes_button)
-        val resetButton = view.findViewById<WdButton>(R.id.reset_button)
-        val noButton = view.findViewById<WdButton>(R.id.no_button)
+        val resetButton = view.findViewById<Button>(R.id.reset_button)
+        val noButton = view.findViewById<Button>(R.id.no_button)
 
         input.setText(currentName)
         input.setSelection(input.text.length)

@@ -34,17 +34,17 @@
                     android:text="@string/checkbox_show_system_bar"
                     style="@style/Checkbox" />
 
-                <com.rama.mako.widgets.WdButton
+                <Button
                     android:id="@+id/activate_button"
                     android:text="@string/btn_set_default"
                     style="@style/BTN2" />
 
-                <com.rama.mako.widgets.WdButton
+                <Button
                     android:id="@+id/reset_button"
                     android:text="@string/btn_refresh_launcher"
                     style="@style/BTN2" />
 
-                <com.rama.mako.widgets.WdButton
+                <Button
                     android:id="@+id/change_apps_button"
                     android:text="@string/btn_edit_apps"
                     style="@style/BTN2" />
@@ -74,7 +74,7 @@
                     android:focusableInTouchMode="true"
                     style="@style/VerticalListDivided_BG2" />
 
-                <com.rama.mako.widgets.WdButton
+                <Button
                     android:id="@+id/add_group"
                     android:text="@string/btn_add_group"
                     style="@style/BTN2" />
@@ -202,7 +202,7 @@
                             app:text="@string/colorpicker_theme_danger"
                             style="@style/ColorPickerBtn" />
 
-                        <com.rama.mako.widgets.WdButton
+                        <Button
                             android:id="@+id/save_custom_theme"
                             android:text="@string/btn_theme_apply_custom"
                             style="@style/BTN2" />
@@ -232,7 +232,7 @@
                         style="@style/Radio" />
                 </RadioGroup>
 
-                <com.rama.mako.widgets.WdButton
+                <Button
                     android:id="@+id/wallpaper_button"
                     android:text="@string/btn_change_wallpaper"
                     style="@style/BTN2" />
@@ -283,7 +283,7 @@
                         android:textColor="@color/foreground"
                         android:textSize="16sp" />
 
-                    <com.rama.mako.widgets.WdButton
+                    <Button
                         android:id="@+id/select_icon_pack_button"
                         android:text="@string/btn_select_icon_pack"
                         style="@style/BTN2" />
@@ -331,7 +331,7 @@
                         android:padding="16sp"
                         android:text="@string/filepicker_font_custom_none" />
 
-                    <com.rama.mako.widgets.WdButton
+                    <Button
                         android:id="@+id/font_custom_pick_btn"
                         android:text="@string/btn_font_custom_pick"
                         style="@style/BTN2" />
@@ -372,7 +372,7 @@
                         style="@style/Radio" />
                 </RadioGroup>
 
-                <com.rama.mako.widgets.WdButton
+                <Button
                     android:id="@+id/set_clock_app_button"
                     android:text="@string/btn_set_clock_app"
                     style="@style/BTN2" />
@@ -528,12 +528,12 @@
                 app:label="@string/h2_data"
                 app:defaultExpanded="true">
 
-                <com.rama.mako.widgets.WdButton
+                <Button
                     android:id="@+id/export_button"
                     android:text="@string/btn_export_data"
                     style="@style/BTN_danger" />
 
-                <com.rama.mako.widgets.WdButton
+                <Button
                     android:id="@+id/clear_prefs_button"
                     android:text="@string/btn_clear_data"
                     style="@style/BTN_danger" />
@@ -543,12 +543,12 @@
 
     <View style="@style/Separator" />
 
-    <com.rama.mako.widgets.WdButton
+    <Button
         android:id="@+id/about_button"
         android:text="@string/btn_about_mako"
         style="@style/BTN1" />
 
-    <com.rama.mako.widgets.WdButton
+    <Button
         android:id="@+id/close_button"
         android:text="@string/btn_go_back"
         style="@style/BTN1" />

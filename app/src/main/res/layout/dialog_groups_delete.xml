@@ -24,12 +24,12 @@
             style="@style/RadioGroup" />
     </ScrollView>
 
-    <com.rama.mako.widgets.WdButton
+    <Button
         android:id="@+id/yes_button"
         android:text="@string/btn_delete_group"
         style="@style/BTN_danger" />
 
-    <com.rama.mako.widgets.WdButton
+    <Button
         android:id="@+id/no_button"
         android:text="@string/btn_cancel"
         style="@style/BTN1" />

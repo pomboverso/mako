@@ -7,11 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.rama.mako.R
 import com.rama.mako.managers.ThemeManager
-import com.rama.mako.widgets.WdButton
 import com.rama.mako.widgets.color.HSVSquareView
 import com.rama.mako.widgets.color.HueStripView
 
@@ -39,8 +39,8 @@ object ColorPickerDialog {
         // Views
         val preview = view.findViewById<View>(R.id.preview)
         val hexInput = view.findViewById<EditText>(R.id.hex_input)
-        val applyButton = view.findViewById<WdButton>(R.id.apply_button)
-        val closeButton = view.findViewById<WdButton>(R.id.close_button)
+        val applyButton = view.findViewById<Button>(R.id.apply_button)
+        val closeButton = view.findViewById<Button>(R.id.close_button)
 
         val hsvSquare = view.findViewById<HSVSquareView>(R.id.hsv_square)
         val hueSlider = view.findViewById<HueStripView>(R.id.hue_slider)
@@ -94,7 +94,11 @@ object ColorPickerDialog {
                 updateUI()
 
             } catch (_: Exception) {
-                Toast.makeText(activity, activity.getString(R.string.toast_invalid_color), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    activity,
+                    activity.getString(R.string.toast_invalid_color),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
 
             true
