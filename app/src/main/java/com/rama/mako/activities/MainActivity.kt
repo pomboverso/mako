@@ -353,7 +353,7 @@ class MainActivity : CsActivity() {
                 if (!appsProvider.launch(app)) {
                     Toast.makeText(
                         this,
-                        getString(R.string.unable_launch_app_toast),
+                        getString(R.string.toast_unable_launch_app),
                         Toast.LENGTH_SHORT
                     ).show()
                 }

@@ -5,7 +5,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.view.View
-import android.widget.EditText
 import android.widget.RadioGroup
 import android.widget.TextView
 import com.rama.mako.R
@@ -110,7 +109,7 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
         val label = activity.findViewById<TextView>(R.id.font_custom_name_label)
         val path = prefs.getCustomFontPath()
         label.text =
-            if (path.isNotBlank()) File(path).name else activity.getString(R.string.font_custom_none_label)
+            if (path.isNotBlank()) File(path).name else activity.getString(R.string.filepicker_font_custom_none)
     }
 
     private fun setupTemperatureFormat() {

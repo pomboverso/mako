@@ -378,7 +378,7 @@ class AppListManager(
             refresh()
             Toast.makeText(
                 context,
-                context.getString(R.string.label_changed_toast),
+                context.getString(R.string.toast_label_changed),
                 Toast.LENGTH_SHORT
             ).show()
             dialog.dismiss()
@@ -389,7 +389,7 @@ class AppListManager(
             refresh()
             Toast.makeText(
                 context,
-                context.getString(R.string.label_changed_toast),
+                context.getString(R.string.toast_label_changed),
                 Toast.LENGTH_SHORT
             ).show()
             dialog.dismiss()
@@ -478,9 +478,9 @@ class AppListManager(
         val actionGroup = view.findViewById<TextView>(R.id.action_group)
         val actionAppSettings = view.findViewById<TextView>(R.id.action_app_settings)
 
-        actionRename.text = context.getString(R.string.rename_app)
-        actionGroup.text = context.getString(R.string.add_to_favorites)
-        actionAppSettings.text = context.getString(R.string.open_settings)
+        actionRename.text = context.getString(R.string.ctxmenu_rename_app)
+        actionGroup.text = context.getString(R.string.ctxmenu_add_to_favorites)
+        actionAppSettings.text = context.getString(R.string.ctxmenu_open_settings)
 
         actionRename.setOnClickListener { dialog.dismiss(); showRenameDialog(app) }
         actionGroup.setOnClickListener { dialog.dismiss(); showGroupsDialog(app) }
@@ -580,7 +580,7 @@ class AppListManager(
                                 if (!appsProvider.launch(app)) {
                                     Toast.makeText(
                                         context,
-                                        context.getString(R.string.unable_launch_app_toast),
+                                        context.getString(R.string.toast_unable_launch_app),
                                         Toast.LENGTH_SHORT
                                     ).show()
                                     refresh()
@@ -601,7 +601,7 @@ class AppListManager(
                             if (!appsProvider.launch(app)) {
                                 Toast.makeText(
                                     context,
-                                    context.getString(R.string.unable_launch_app_toast),
+                                    context.getString(R.string.toast_unable_launch_app),
                                     Toast.LENGTH_SHORT
                                 ).show()
                                 refresh()
@@ -613,7 +613,7 @@ class AppListManager(
                             if (!appsProvider.launch(app)) {
                                 Toast.makeText(
                                     context,
-                                    context.getString(R.string.unable_launch_app_toast),
+                                    context.getString(R.string.toast_unable_launch_app),
                                     Toast.LENGTH_SHORT
                                 ).show()
                                 refresh()
@@ -660,7 +660,7 @@ class AppListManager(
                     if (!appsProvider.launch(item.info)) {
                         Toast.makeText(
                             context,
-                            context.getString(R.string.unable_launch_app_toast),
+                            context.getString(R.string.toast_unable_launch_app),
                             Toast.LENGTH_SHORT
                         ).show()
                         refresh()

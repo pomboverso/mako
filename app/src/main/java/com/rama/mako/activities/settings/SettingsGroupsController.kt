@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.*
 import com.rama.mako.R
 import com.rama.mako.activities.SettingsActivity
-import com.rama.mako.managers.FontManager
 import com.rama.mako.managers.ThemeManager
 import com.rama.mako.utils.SettingsUiUtils
 import com.rama.mako.widgets.WdButton
@@ -90,7 +89,7 @@ class SettingsGroupsController(private val activity: SettingsActivity) {
 
                 Toast.makeText(
                     activity,
-                    activity.getString(R.string.group_label_updated_toast),
+                    activity.getString(R.string.toast_group_label_updated),
                     Toast.LENGTH_SHORT
                 ).show()
 
@@ -135,7 +134,7 @@ class SettingsGroupsController(private val activity: SettingsActivity) {
                 if (selectedGroupId == null) {
                     Toast.makeText(
                         activity,
-                        activity.getString(R.string.select_target_group_toast),
+                        activity.getString(R.string.toast_select_target_group),
                         Toast.LENGTH_SHORT
                     ).show()
                 } else {

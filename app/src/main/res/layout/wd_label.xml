@@ -22,7 +22,7 @@
                 android:id="@+id/icon_image"
                 android:layout_width="24sp"
                 android:layout_height="24sp"
-                android:contentDescription="@string/icon_block_desc" />
+                android:contentDescription="@string/app_background_tasks_desc" />
         </FrameLayout>
 
         <TextView

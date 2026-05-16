@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import android.widget.*
 import com.rama.mako.R
 import com.rama.mako.activities.SettingsActivity
-import com.rama.mako.managers.FontManager
 import com.rama.mako.managers.PrefsManager
 import com.rama.mako.managers.ThemeManager
 import com.rama.mako.utils.SettingsUiUtils
@@ -94,7 +93,7 @@ class SettingsClockController(private val activity: SettingsActivity) {
             prefs.setClockApp(selectedApp.packageName)
             Toast.makeText(
                 activity,
-                activity.getString(R.string.clock_app_selected_toast, selectedApp.label),
+                activity.getString(R.string.toast_clock_app_selected, selectedApp.label),
                 Toast.LENGTH_SHORT
             ).show()
             dialog.dismiss()

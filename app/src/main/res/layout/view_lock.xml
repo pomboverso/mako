@@ -109,7 +109,7 @@
         android:layout_height="wrap_content"
         android:background="@color/button_2"
         android:layout_marginBottom="8sp"
-        android:text="@string/unlock_btn" />
+        android:text="@string/btn_unlock" />
 
     <com.rama.mako.widgets.WdButton
         android:id="@+id/clear_button"
@@ -117,13 +117,13 @@
         android:layout_height="wrap_content"
         android:background="@color/button_2"
         android:layout_marginBottom="8sp"
-        android:text="@string/clear_btn" />
+        android:text="@string/btn_clear" />
 
     <com.rama.mako.widgets.WdButton
         android:id="@+id/close_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/button_1"
-        android:text="@string/go_back_btn" />
+        android:text="@string/btn_go_back" />
 
 </LinearLayout>

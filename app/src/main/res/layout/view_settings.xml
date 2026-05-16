@@ -22,7 +22,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/activity_settings_h1"
+                android:text="@string/activity_settings_label"
                 android:textColor="@color/foreground"
                 android:textSize="32sp"
                 android:textStyle="bold" />
@@ -32,14 +32,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:key="SETTINGS_SECTION_SYSTEM"
-                app:label="@string/system_header"
+                app:label="@string/h2_system"
                 app:defaultExpanded="true">
 
                 <com.rama.mako.widgets.WdCheckbox
                     android:id="@+id/show_system_bar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/show_system_bar_label" />
+                    android:text="@string/checkbox_show_system_bar" />
 
                 <com.rama.mako.widgets.WdButton
                     android:id="@+id/activate_button"
@@ -47,7 +47,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8sp"
                     android:background="@color/button_2"
-                    android:text="@string/set_default_btn" />
+                    android:text="@string/btn_set_default" />
 
                 <com.rama.mako.widgets.WdButton
                     android:id="@+id/reset_button"
@@ -55,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8sp"
                     android:background="@color/button_2"
-                    android:text="@string/refresh_launcher_btn" />
+                    android:text="@string/btn_refresh_launcher" />
 
                 <com.rama.mako.widgets.WdButton
                     android:id="@+id/change_apps_button"
@@ -63,27 +63,27 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8sp"
                     android:background="@color/button_2"
-                    android:text="@string/edit_apps_btn" />
+                    android:text="@string/btn_edit_apps" />
             </com.rama.mako.widgets.WdCollapsibleSection>
             <!--Groups-->
             <com.rama.mako.widgets.WdCollapsibleSection
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:key="SETTINGS_SECTION_GROUPS"
-                app:label="@string/groups_header"
+                app:label="@string/h2_groups"
                 app:defaultExpanded="true">
 
                 <com.rama.mako.widgets.WdCheckbox
                     android:id="@+id/show_group_header"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/show_group_header_label" />
+                    android:text="@string/checkbox_show_group_header" />
 
                 <com.rama.mako.widgets.WdCheckbox
                     android:id="@+id/has_collapsible_groups"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/has_collapsible_groups" />
+                    android:text="@string/checkbox_has_collapsible_groups" />
 
                 <View
                     android:layout_width="match_parent"
@@ -110,7 +110,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8sp"
                     android:background="@color/button_2"
-                    android:text="@string/add_group_btn" />
+                    android:text="@string/btn_add_group" />
 
             </com.rama.mako.widgets.WdCollapsibleSection>
 
@@ -119,7 +119,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:key="SETTINGS_SECTION_THEMES"
-                app:label="@string/themes_header"
+                app:label="@string/h2_themes"
                 app:defaultExpanded="true">
 
                 <RadioGroup
@@ -142,7 +142,7 @@
                         android:id="@+id/theme_rama"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/theme_rama_label"
+                        android:text="@string/radio_theme_rama"
                         android:textColor="@color/foreground"
                         android:textSize="16sp"
                         android:layout_marginBottom="8sp" />
@@ -151,7 +151,7 @@
                         android:id="@+id/theme_catppuccin_mocha"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/catppuccin_product"
+                        android:text="@string/product_catppuccin_name"
                         android:textColor="@color/foreground"
                         android:textSize="16sp"
                         android:layout_marginBottom="8sp" />
@@ -161,7 +161,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
-                        android:text="@string/dracula_product"
+                        android:text="@string/product_dracula_name"
                         android:textColor="@color/foreground"
                         android:textSize="16sp" />
 
@@ -170,7 +170,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
-                        android:text="@string/melange_product"
+                        android:text="@string/product_melange_name"
                         android:textColor="@color/foreground"
                         android:textSize="16sp" />
 
@@ -178,7 +178,7 @@
                         android:id="@+id/theme_tokyo_night"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/tokyo_product"
+                        android:text="@string/product_tokyo_name"
                         android:layout_marginBottom="8sp"
                         android:textColor="@color/foreground"
                         android:textSize="16sp" />
@@ -187,7 +187,7 @@
                         android:id="@+id/theme_custom"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/theme_custom_label"
+                        android:text="@string/radio_theme_custom"
                         android:textColor="@color/foreground"
                         android:textSize="16sp" />
                 </RadioGroup>
@@ -218,21 +218,21 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8sp"
-                            app:text="@string/theme_foreground_label" />
+                            app:text="@string/colorpicker_theme_foreground" />
 
                         <com.rama.mako.widgets.WdColorPicker
                             android:id="@+id/collapsible_header"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8sp"
-                            app:text="@string/theme_collapsible_header_label" />
+                            app:text="@string/colorpicker_theme_collapsible_header" />
 
                         <com.rama.mako.widgets.WdColorPicker
                             android:id="@+id/clock"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8sp"
-                            app:text="@string/theme_clock_label" />
+                            app:text="@string/colorpicker_theme_clock" />
 
                         <com.rama.mako.widgets.WdColorPicker
                             android:id="@+id/icons"
@@ -240,7 +240,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8sp"
-                            app:text="@string/theme_icons_label" />
+                            app:text="@string/colorpicker_theme_icons" />
 
                         <com.rama.mako.widgets.WdColorPicker
                             android:id="@+id/accent"
@@ -248,56 +248,56 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8sp"
-                            app:text="@string/theme_accent_label" />
+                            app:text="@string/colorpicker_theme_accent" />
 
                         <com.rama.mako.widgets.WdColorPicker
                             android:id="@+id/bg_1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8sp"
-                            app:text="@string/theme_background_1_label" />
+                            app:text="@string/colorpicker_theme_background_1" />
 
                         <com.rama.mako.widgets.WdColorPicker
                             android:id="@+id/bg_2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8sp"
-                            app:text="@string/theme_background_2_label" />
+                            app:text="@string/colorpicker_theme_background_2" />
 
                         <com.rama.mako.widgets.WdColorPicker
                             android:id="@+id/bg_3"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8sp"
-                            app:text="@string/theme_background_3_label" />
+                            app:text="@string/colorpicker_theme_background_3" />
 
                         <com.rama.mako.widgets.WdColorPicker
                             android:id="@+id/input"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8sp"
-                            app:text="@string/theme_input_background_label" />
+                            app:text="@string/colorpicker_theme_input_background" />
 
                         <com.rama.mako.widgets.WdColorPicker
                             android:id="@+id/btn_1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8sp"
-                            app:text="@string/theme_button_1_background_label" />
+                            app:text="@string/colorpicker_theme_button_1_background" />
 
                         <com.rama.mako.widgets.WdColorPicker
                             android:id="@+id/btn_2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8sp"
-                            app:text="@string/theme_button_2_background_label" />
+                            app:text="@string/colorpicker_theme_button_2_background" />
 
                         <com.rama.mako.widgets.WdColorPicker
                             android:id="@+id/danger"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8sp"
-                            app:text="@string/theme_danger_label" />
+                            app:text="@string/colorpicker_theme_danger" />
 
                         <com.rama.mako.widgets.WdButton
                             android:id="@+id/save_custom_theme"
@@ -305,7 +305,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8sp"
                             android:background="@color/button_2"
-                            android:text="@string/theme_apply_custom_btn" />
+                            android:text="@string/btn_theme_apply_custom" />
                     </LinearLayout>
                 </LinearLayout>
             </com.rama.mako.widgets.WdCollapsibleSection>
@@ -314,7 +314,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:key="SETTINGS_SECTION_BACKGROUND"
-                app:label="@string/background_header"
+                app:label="@string/h2_background"
                 app:defaultExpanded="true">
 
                 <RadioGroup
@@ -329,7 +329,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
-                        android:text="@string/default_radio"
+                        android:text="@string/radio_default"
                         android:textColor="@color/foreground"
                         android:textSize="16sp" />
 
@@ -337,7 +337,7 @@
                         android:id="@+id/home_background_wallpaper"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/background_wallpaper_label"
+                        android:text="@string/radio_background_wallpaper"
                         android:textColor="@color/foreground"
                         android:textSize="16sp" />
                 </RadioGroup>
@@ -348,14 +348,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8sp"
                     android:background="@color/button_2"
-                    android:text="@string/change_wallpaper_btn" />
+                    android:text="@string/btn_change_wallpaper" />
             </com.rama.mako.widgets.WdCollapsibleSection>
             <!--Icons-->
             <com.rama.mako.widgets.WdCollapsibleSection
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:key="SETTINGS_SECTION_ICONS"
-                app:label="@string/icons_header"
+                app:label="@string/h2_icons"
                 app:defaultExpanded="true">
 
                 <RadioGroup
@@ -370,7 +370,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
-                        android:text="@string/none_label"
+                        android:text="@string/radio_none"
                         android:textColor="@color/foreground"
                         android:textSize="16sp" />
 
@@ -379,7 +379,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
-                        android:text="@string/default_radio"
+                        android:text="@string/radio_default"
                         android:textColor="@color/foreground"
                         android:textSize="16sp" />
 
@@ -388,7 +388,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
-                        android:text="@string/icons_monochrome_label"
+                        android:text="@string/radio_icons_monochrome"
                         android:textColor="@color/foreground"
                         android:textSize="16sp" />
 
@@ -396,7 +396,7 @@
                         android:id="@+id/icon_source_icon_pack"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/custom_icon_pack_label"
+                        android:text="@string/radio_custom_icon_pack"
                         android:textColor="@color/foreground"
                         android:textSize="16sp" />
                 </RadioGroup>
@@ -415,7 +415,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
                         android:padding="16sp"
-                        android:text="@string/icon_pack_not_selected_label"
+                        android:text="@string/filepicker_icon_pack_not_selected"
                         android:textColor="@color/foreground"
                         android:textSize="16sp" />
 
@@ -424,7 +424,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/button_2"
-                        android:text="@string/select_icon_pack_btn" />
+                        android:text="@string/btn_select_icon_pack" />
                 </LinearLayout>
             </com.rama.mako.widgets.WdCollapsibleSection>
             <!--Fonts-->
@@ -432,7 +432,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:key="SETTINGS_SECTION_FONTS"
-                app:label="@string/fonts_header"
+                app:label="@string/h2_fonts"
                 app:defaultExpanded="true">
 
                 <RadioGroup
@@ -447,7 +447,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
-                        android:text="@string/default_system_radio"
+                        android:text="@string/radio_default_system"
                         android:textColor="@color/foreground"
                         android:textSize="16sp" />
 
@@ -456,7 +456,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
-                        android:text="@string/jersey_product"
+                        android:text="@string/product_jersey_name"
                         android:textColor="@color/foreground"
                         android:textSize="16sp" />
 
@@ -464,7 +464,7 @@
                         android:id="@+id/font_custom"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/font_custom_label"
+                        android:text="@string/radio_font_custom"
                         android:textColor="@color/foreground"
                         android:textSize="16sp" />
                 </RadioGroup>
@@ -487,14 +487,14 @@
                         android:layout_marginBottom="8sp"
                         android:textSize="16sp"
                         android:padding="16sp"
-                        android:text="@string/font_custom_none_label" />
+                        android:text="@string/filepicker_font_custom_none" />
 
                     <com.rama.mako.widgets.WdButton
                         android:id="@+id/font_custom_pick_btn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/button_2"
-                        android:text="@string/font_custom_pick_btn" />
+                        android:text="@string/btn_font_custom_pick" />
 
                 </LinearLayout>
 
@@ -504,7 +504,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:key="SETTINGS_SECTION_CLOCK"
-                app:label="@string/clock_header"
+                app:label="@string/h2_clock"
                 app:defaultExpanded="true">
 
                 <RadioGroup
@@ -520,7 +520,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
-                        android:text="@string/clock_none_label"
+                        android:text="@string/radio_clock_none"
                         android:textColor="@color/foreground"
                         android:textSize="16sp" />
 
@@ -529,7 +529,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
-                        android:text="@string/default_system_radio"
+                        android:text="@string/radio_default_system"
                         android:textColor="@color/foreground"
                         android:textSize="16sp" />
 
@@ -538,7 +538,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
-                        android:text="@string/clock_24_label"
+                        android:text="@string/radio_clock_24"
                         android:textColor="@color/foreground"
                         android:textSize="16sp" />
 
@@ -546,7 +546,7 @@
                         android:id="@+id/clock_12"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/clock_12_label"
+                        android:text="@string/radio_clock_12"
                         android:textColor="@color/foreground"
                         android:textSize="16sp" />
                 </RadioGroup>
@@ -556,53 +556,53 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/button_2"
-                    android:text="@string/set_clock_app_btn" />
+                    android:text="@string/btn_set_clock_app" />
             </com.rama.mako.widgets.WdCollapsibleSection>
             <!--Date-->
             <com.rama.mako.widgets.WdCollapsibleSection
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:key="SETTINGS_SECTION_DATE"
-                app:label="@string/date_header"
+                app:label="@string/h2_date"
                 app:defaultExpanded="true">
 
                 <com.rama.mako.widgets.WdCheckbox
                     android:id="@+id/show_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/show_date_label" />
+                    android:text="@string/checkbox_show_date" />
 
                 <com.rama.mako.widgets.WdCheckbox
                     android:id="@+id/show_year_day"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/show_year_day_label" />
+                    android:text="@string/checkbox_show_year_day" />
             </com.rama.mako.widgets.WdCollapsibleSection>
             <!--Battery-->
             <com.rama.mako.widgets.WdCollapsibleSection
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:key="SETTINGS_SECTION_BATTERY"
-                app:label="@string/battery_header"
+                app:label="@string/h2_battery"
                 app:defaultExpanded="true">
 
                 <com.rama.mako.widgets.WdCheckbox
                     android:id="@+id/show_battery"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/show_battery_label" />
+                    android:text="@string/checkbox_show_battery" />
 
                 <com.rama.mako.widgets.WdCheckbox
                     android:id="@+id/show_battery_temperature"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/show_battery_temperature_label" />
+                    android:text="@string/checkbox_show_battery_temperature" />
 
                 <com.rama.mako.widgets.WdCheckbox
                     android:id="@+id/show_battery_charge_status"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/show_battery_charge_status_label" />
+                    android:text="@string/checkbox_show_battery_charge_status" />
 
             </com.rama.mako.widgets.WdCollapsibleSection>
             <!--Temperature-->
@@ -610,7 +610,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:key="SETTINGS_SECTION_TEMPERATURE"
-                app:label="@string/temperature_header"
+                app:label="@string/h2_temperature"
                 app:defaultExpanded="true">
 
                 <RadioGroup
@@ -625,7 +625,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
-                        android:text="@string/default_system_radio"
+                        android:text="@string/radio_default_system"
                         android:textColor="@color/foreground"
                         android:textSize="16sp" />
 
@@ -634,7 +634,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8sp"
-                        android:text="@string/celsius_label"
+                        android:text="@string/radio_celsius"
                         android:textColor="@color/foreground"
                         android:textSize="16sp" />
 
@@ -642,7 +642,7 @@
                         android:id="@+id/temperature_fahrenheit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/fahrenheit_label"
+                        android:text="@string/radio_fahrenheit"
                         android:textColor="@color/foreground"
                         android:textSize="16sp" />
                 </RadioGroup>
@@ -652,34 +652,34 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:key="SETTINGS_SECTION_SEARCH"
-                app:label="@string/search_header"
+                app:label="@string/h2_search"
                 app:defaultExpanded="true">
 
                 <com.rama.mako.widgets.WdCheckbox
                     android:id="@+id/show_search"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/show_search_label" />
+                    android:text="@string/checkbox_show_search" />
 
                 <com.rama.mako.widgets.WdCheckbox
                     android:id="@+id/always_show_search"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/always_show_search_bar" />
+                    android:text="@string/checkbox_always_show_search_bar" />
             </com.rama.mako.widgets.WdCollapsibleSection>
             <!--Apps-->
             <com.rama.mako.widgets.WdCollapsibleSection
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:key="SETTINGS_SECTION_APPS"
-                app:label="@string/apps_header"
+                app:label="@string/h2_apps"
                 app:defaultExpanded="true">
 
                 <com.rama.mako.widgets.WdCheckbox
                     android:id="@+id/show_profile_indicator"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/show_profile_indicator_label" />
+                    android:text="@string/checkbox_show_profile_indicator" />
 
             </com.rama.mako.widgets.WdCollapsibleSection>
             <!--Security-->
@@ -687,20 +687,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:key="SETTINGS_SECTION_SECURITY"
-                app:label="@string/security_header"
+                app:label="@string/h2_security"
                 app:defaultExpanded="true">
 
                 <com.rama.mako.widgets.WdCheckbox
                     android:id="@+id/lock_settings"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/lock_settings_label" />
+                    android:text="@string/checkbox_lock_settings" />
 
                 <com.rama.mako.widgets.WdCheckbox
                     android:id="@+id/randomized_keypad"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/randomized_keypad_label" />
+                    android:text="@string/checkbox_randomized_keypad" />
 
                 <LinearLayout
                     android:id="@+id/pin_field"
@@ -722,7 +722,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:key="SETTINGS_SECTION_LANGUAGE"
-                app:label="@string/language_header"
+                app:label="@string/h2_language"
                 app:defaultExpanded="true">
 
                 <RadioGroup
@@ -739,7 +739,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:key="SETTINGS_SECTION_DATA"
-                app:label="@string/data_header"
+                app:label="@string/h2_data"
                 app:defaultExpanded="true">
 
                 <com.rama.mako.widgets.WdButton
@@ -748,14 +748,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8sp"
                     android:background="@color/danger"
-                    android:text="@string/export_data_btn" />
+                    android:text="@string/btn_export_data" />
 
                 <com.rama.mako.widgets.WdButton
                     android:id="@+id/clear_prefs_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/danger"
-                    android:text="@string/clear_data_btn" />
+                    android:text="@string/btn_clear_data" />
             </com.rama.mako.widgets.WdCollapsibleSection>
         </LinearLayout>
     </ScrollView>
@@ -773,12 +773,12 @@
         android:layout_marginTop="8sp"
         android:layout_marginBottom="8sp"
         android:background="@color/button_1"
-        android:text="@string/about_mako_btn" />
+        android:text="@string/btn_about_mako" />
 
     <com.rama.mako.widgets.WdButton
         android:id="@+id/close_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/button_1"
-        android:text="@string/go_back_btn" />
+        android:text="@string/btn_go_back" />
 </LinearLayout>

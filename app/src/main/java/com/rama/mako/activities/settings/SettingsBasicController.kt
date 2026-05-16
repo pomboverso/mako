@@ -26,7 +26,7 @@ class SettingsBasicController(private val activity: SettingsActivity) {
             SettingsUiUtils.openIntent(
                 activity,
                 Intent(Settings.ACTION_HOME_SETTINGS),
-                activity.getString(R.string.unable_open_settings_toast)
+                activity.getString(R.string.toast_unable_open_settings)
             )
         }
 
@@ -34,7 +34,7 @@ class SettingsBasicController(private val activity: SettingsActivity) {
             SettingsUiUtils.openIntent(
                 activity,
                 Intent(Intent.ACTION_SET_WALLPAPER),
-                activity.getString(R.string.unable_open_wallpaper_app_toast)
+                activity.getString(R.string.toast_unable_open_wallpaper_app)
             )
         }
 
@@ -64,14 +64,14 @@ class SettingsBasicController(private val activity: SettingsActivity) {
                 .onSuccess {
                     Toast.makeText(
                         activity,
-                        activity.getString(R.string.reset_done_toast),
+                        activity.getString(R.string.toast_reset_done),
                         Toast.LENGTH_SHORT
                     ).show()
                 }
                 .onFailure {
                     Toast.makeText(
                         activity,
-                        activity.getString(R.string.reset_failed_toast),
+                        activity.getString(R.string.toast_reset_failed),
                         Toast.LENGTH_SHORT
                     ).show()
                 }

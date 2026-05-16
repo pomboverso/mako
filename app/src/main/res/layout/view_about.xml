@@ -37,7 +37,7 @@
                 android:textColor="@color/foreground" />
 
             <TextView
-                android:text="@string/app_description"
+                android:text="@string/app_desc"
                 android:textSize="16sp"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
@@ -52,7 +52,7 @@
                 android:layout_marginBottom="8sp"
                 android:textSize="18sp"
                 android:textColor="@color/foreground"
-                android:text="@string/app_header"
+                android:text="@string/h2_app"
                 android:textStyle="bold" />
 
             <com.rama.mako.widgets.WdLabel
@@ -71,37 +71,37 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/icon_github"
-                android:text="@string/mako_url" />
+                android:text="@string/product_mako_url" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/icon_octagon_check_solid"
-                android:text="@string/icon_ads_desc" />
+                android:text="@string/app_ads_desc" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/icon_octagon_check_solid"
-                android:text="@string/icon_block_desc" />
+                android:text="@string/app_background_tasks_desc" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/icon_octagon_check_solid"
-                android:text="@string/icon_location_desc" />
+                android:text="@string/app_trackers_desc" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/icon_octagon_check_solid"
-                android:text="@string/icon_offline_desc" />
+                android:text="@string/app_offline_desc" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/icon_octagon_check_solid"
-                android:text="@string/gpl3_license" />
+                android:text="@string/license_gpl3" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -109,20 +109,20 @@
                 android:layout_marginBottom="8sp"
                 android:textSize="18sp"
                 android:textColor="@color/foreground"
-                android:text="@string/contributors_header"
+                android:text="@string/h2_contributors"
                 android:textStyle="bold" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/icon_user"
-                android:text="@string/isotjs" />
+                android:text="@string/contributor_isotjs" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/icon_github"
-                android:text="@string/isotjs_url" />
+                android:text="@string/contributor_isotjs_url" />
 
             <View
                 android:layout_width="match_parent"
@@ -134,13 +134,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/icon_user"
-                android:text="@string/etwasmitbaum" />
+                android:text="@string/contributor_etwasmitbaum" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/icon_github"
-                android:text="@string/etwasmitbaum_url" />
+                android:text="@string/contributor_etwasmitbaum_url" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -148,32 +148,32 @@
                 android:layout_marginBottom="8sp"
                 android:textSize="18sp"
                 android:textColor="@color/foreground"
-                android:text="@string/icons_header"
+                android:text="@string/h2_icons"
                 android:textStyle="bold" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/icon_user"
-                android:text="@string/hackernoon_creator" />
+                android:text="@string/product_hackernoon_creator" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/icon_seedlings"
-                android:text="@string/hackernoon_product" />
+                android:text="@string/product_hackernoon_name" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/icon_github"
-                android:text="@string/hackernoon_url" />
+                android:text="@string/product_hackernoon_url" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/icon_octagon_check_solid"
-                android:text="@string/cc_4_license" />
+                android:text="@string/license_cc_4" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -181,32 +181,32 @@
                 android:layout_marginBottom="8sp"
                 android:textSize="18sp"
                 android:textColor="@color/foreground"
-                android:text="@string/fonts_header"
+                android:text="@string/h2_fonts"
                 android:textStyle="bold" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/icon_user"
-                android:text="@string/jersey_creator" />
+                android:text="@string/product_jersey_creator" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/icon_seedlings"
-                android:text="@string/jersey_product" />
+                android:text="@string/product_jersey_name" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/icon_github"
-                android:text="@string/jersey_url" />
+                android:text="@string/product_jersey_url" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/icon_octagon_check_solid"
-                android:text="@string/ofl_1_1_license" />
+                android:text="@string/license_ofl_1_1" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -214,32 +214,32 @@
                 android:layout_marginBottom="8sp"
                 android:textSize="18sp"
                 android:textColor="@color/foreground"
-                android:text="@string/themes_header"
+                android:text="@string/h2_themes"
                 android:textStyle="bold" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/icon_user"
-                android:text="@string/dracula_creator" />
+                android:text="@string/product_dracula_creator" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/icon_seedlings"
-                android:text="@string/dracula_product" />
+                android:text="@string/product_dracula_name" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/icon_github"
-                android:text="@string/dracula_url" />
+                android:text="@string/product_dracula_url" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/icon_octagon_check_solid"
-                android:text="@string/mit_license" />
+                android:text="@string/license_mit" />
 
             <View
                 android:layout_width="match_parent"
@@ -251,25 +251,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/icon_user"
-                android:text="@string/catppuccin_creator" />
+                android:text="@string/product_catppuccin_creator" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/icon_seedlings"
-                android:text="@string/catppuccin_product" />
+                android:text="@string/product_catppuccin_name" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/icon_github"
-                android:text="@string/catppuccin_url" />
+                android:text="@string/product_catppuccin_url" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/icon_octagon_check_solid"
-                android:text="@string/mit_license" />
+                android:text="@string/license_mit" />
 
             <View
                 android:layout_width="match_parent"
@@ -281,25 +281,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/icon_user"
-                android:text="@string/tokyo_creator" />
+                android:text="@string/product_tokyo_creator" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/icon_seedlings"
-                android:text="@string/tokyo_product" />
+                android:text="@string/product_tokyo_name" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/icon_github"
-                android:text="@string/tokyo_url" />
+                android:text="@string/product_tokyo_url" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/icon_octagon_check_solid"
-                android:text="@string/mit_license" />
+                android:text="@string/license_mit" />
 
             <View
                 android:layout_width="match_parent"
@@ -311,25 +311,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/icon_user"
-                android:text="@string/melange_creator" />
+                android:text="@string/product_melange_creator" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/icon_seedlings"
-                android:text="@string/melange_product" />
+                android:text="@string/product_melange_name" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/icon_github"
-                android:text="@string/melange_url" />
+                android:text="@string/product_melange_url" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/icon_octagon_check_solid"
-                android:text="@string/mit_license" />
+                android:text="@string/license_mit" />
 
         </LinearLayout>
     </ScrollView>
@@ -346,12 +346,12 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8sp"
         android:background="@color/button_2"
-        android:text="@string/join_discord_btn" />
+        android:text="@string/btn_join_discord" />
 
     <com.rama.mako.widgets.WdButton
         android:id="@+id/close_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/button_1"
-        android:text="@string/go_back_btn" />
+        android:text="@string/btn_go_back" />
 </LinearLayout>

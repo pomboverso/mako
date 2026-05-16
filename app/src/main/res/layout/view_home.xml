@@ -98,7 +98,7 @@
                         android:tint="@color/icon"
                         android:layout_gravity="center"
                         android:src="@drawable/icon_search"
-                        android:contentDescription="@string/search_icon_desc" />
+                        android:contentDescription="@string/altdescr_search_icon" />
                 </FrameLayout>
             </LinearLayout>
 
@@ -138,7 +138,7 @@
             android:background="@color/bg_2"
             android:textColor="?attr/foregroundColor"
             android:textColorHint="@color/disabled"
-            android:hint="@string/search_apps_hint"
+            android:hint="@string/hint_search_apps"
             android:visibility="gone" />
 
         <FrameLayout
@@ -154,7 +154,7 @@
                 android:tint="@color/icon"
                 android:layout_gravity="center"
                 android:src="@drawable/icon_close"
-                android:contentDescription="@string/clear_search_desc" />
+                android:contentDescription="@string/altdescr_clear_search" />
         </FrameLayout>
     </LinearLayout>
 

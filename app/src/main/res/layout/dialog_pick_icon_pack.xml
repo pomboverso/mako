@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:textSize="32sp"
         android:textColor="@color/foreground"
-        android:text="@string/select_icon_pack_btn"
+        android:text="@string/btn_select_icon_pack"
         android:gravity="center"
         android:textStyle="bold" />
 
@@ -22,7 +22,7 @@
         android:layout_marginBottom="16sp"
         android:textSize="16sp"
         android:textColor="@color/foreground"
-        android:text="@string/pick_icon_pack_disclaimer"
+        android:text="@string/disclaimer_pick_icon_pack"
         android:gravity="center"
         android:textStyle="bold" />
 
@@ -42,5 +42,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/button_1"
-        android:text="@string/go_back_btn" />
+        android:text="@string/btn_go_back" />
 </LinearLayout>
