@@ -12,14 +12,14 @@
         android:paddingBottom="16sp"
         android:gravity="center_vertical"
         android:clickable="true"
-        android:focusable="true">
+        android:focusable="true"
+        style="@style/HorizontalListDivided">
 
         <TextView
             android:id="@+id/section_indicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/settings_section_collapse_indicator"
-            android:layout_marginEnd="8sp"
             style="@style/H2" />
 
         <TextView

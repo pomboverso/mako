@@ -27,10 +27,10 @@
         <item name="android:padding">16sp</item>
     </style>
 
-    <!--    <style name="HorizontalListDivided" parent="HorizontalList">-->
-    <!--        <item name="android:showDividers">middle</item>-->
-    <!--        <item name="android:divider">@drawable/list_divider</item>-->
-    <!--    </style>-->
+    <style name="HorizontalListDivided" parent="HorizontalList">
+        <item name="android:showDividers">middle</item>
+        <item name="android:divider">@drawable/list_divider</item>
+    </style>
 
     <style name="VerticalList" parent="BlockFlow">
         <item name="android:orientation">vertical</item>

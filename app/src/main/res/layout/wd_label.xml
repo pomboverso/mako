@@ -4,15 +4,14 @@
         android:id="@+id/root"
         android:padding="8sp"
         android:background="@color/bg_2"
-        style="@style/HorizontalList">
+        style="@style/HorizontalListDivided">
 
         <FrameLayout
             android:id="@+id/icon_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="12sp"
-            android:background="@color/bg_3"
-            android:layout_marginEnd="8sp">
+            android:background="@color/bg_3">
 
             <ImageView
                 android:id="@+id/icon_image"

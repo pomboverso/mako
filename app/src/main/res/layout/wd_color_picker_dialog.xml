@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="24dp" />
 
-        <LinearLayout style="@style/HorizontalList">
+        <LinearLayout style="@style/HorizontalListDivided">
 
             <EditText
                 android:id="@+id/hex_input"
@@ -31,7 +31,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:focusableInTouchMode="true"
-                android:layout_marginEnd="8sp"
                 style="@style/EditText" />
 
             <FrameLayout
