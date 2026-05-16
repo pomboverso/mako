@@ -17,7 +17,7 @@
             android:layout_height="24sp"
             android:tint="@color/icon"
             android:src="@drawable/icon_eye"
-            android:contentDescription="Toggle Visibility" />
+            android:contentDescription="@string/altdescr_toggle_pin_visibility" />
     </FrameLayout>
 
     <EditText
@@ -46,6 +46,6 @@
             android:layout_height="24sp"
             android:tint="@color/icon"
             android:src="@drawable/icon_disk"
-            android:contentDescription="Save Button" />
+            android:contentDescription="@string/altdescr_save_pin" />
     </FrameLayout>
 </LinearLayout>

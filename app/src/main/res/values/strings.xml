@@ -134,10 +134,18 @@
     <string name="toast_icon_pack_selected">Selected icon pack: %1$s</string>
     <string name="toast_monochrome_fallback">Monochrome icons require Android 13+, using fallback where unavailable</string>
     <string name="toast_no_icon_pack_found">No compatible icon pack found</string>
+    <string name="toast_invalid_color">Invalid color</string>
 
     <!-- AltDescription -->
     <string name="altdescr_search_icon">Toggle search</string>
     <string name="altdescr_clear_search">Clear search</string>
+    <string name="altdescr_toggle_group_visibility">Toggle group visibility</string>
+    <string name="altdescr_ascend_group">Move group up</string>
+    <string name="altdescr_descend_group">Move group down</string>
+    <string name="altdescr_save">Save</string>
+    <string name="altdescr_delete_group">Delete group</string>
+    <string name="altdescr_toggle_pin_visibility">Toggle PIN visibility</string>
+    <string name="altdescr_save_pin">Save PIN</string>
 
     <!-- APP -->
     <string name="app_name" translatable="false">Mako</string>

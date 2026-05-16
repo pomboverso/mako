@@ -49,7 +49,7 @@
                 android:padding="0dp"
                 android:tint="@color/icon"
                 android:src="@drawable/icon_disk"
-                android:contentDescription="Save" />
+                android:contentDescription="@string/altdescr_save" />
         </FrameLayout>
     </LinearLayout>
 

@@ -94,7 +94,7 @@ object ColorPickerDialog {
                 updateUI()
 
             } catch (_: Exception) {
-                Toast.makeText(activity, "Invalid color", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, activity.getString(R.string.toast_invalid_color), Toast.LENGTH_SHORT).show()
             }
 
             true

@@ -18,7 +18,7 @@
             android:layout_height="24sp"
             android:tint="@color/icon"
             android:src="@drawable/icon_eye"
-            android:contentDescription="Toggle Visibility" />
+            android:contentDescription="@string/altdescr_toggle_group_visibility" />
     </FrameLayout>
 
     <FrameLayout
@@ -32,7 +32,7 @@
             android:layout_height="24sp"
             android:tint="@color/icon"
             android:src="@drawable/icon_chevron_up_solid"
-            android:contentDescription="Ascend Group" />
+            android:contentDescription="@string/altdescr_ascend_group" />
     </FrameLayout>
 
     <FrameLayout
@@ -46,7 +46,7 @@
             android:layout_height="24sp"
             android:tint="@color/icon"
             android:src="@drawable/icon_chevron_down_solid"
-            android:contentDescription="Descend Group" />
+            android:contentDescription="@string/altdescr_descend_group" />
     </FrameLayout>
 
     <EditText
@@ -76,7 +76,7 @@
             android:padding="0dp"
             android:tint="@color/icon"
             android:src="@drawable/icon_disk"
-            android:contentDescription="Save" />
+            android:contentDescription="@string/altdescr_save" />
     </FrameLayout>
 
     <FrameLayout
@@ -91,6 +91,6 @@
             android:padding="0dp"
             android:tint="@color/icon"
             android:src="@drawable/icon_close"
-            android:contentDescription="Delete" />
+            android:contentDescription="@string/altdescr_delete_group" />
     </FrameLayout>
 </LinearLayout>
