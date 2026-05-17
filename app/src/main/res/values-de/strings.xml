@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <!--H1-->
     <string name="h1_select_group">Gruppe auswählen</string>
     <string name="h1_delete_group">Sind Sie sicher, dass Sie die Gruppe entfernen möchten?</string>

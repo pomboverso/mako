@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <!--H1-->
     <string name="h1_select_group">Grup Seç</string>
     <string name="h1_delete_group">Bu grubu silmek istediğinizden emin misiniz?</string>

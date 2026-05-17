@@ -147,10 +147,6 @@
     <string name="altdescr_toggle_pin_visibility">Toggle PIN visibility</string>
     <string name="altdescr_save_pin">Save PIN</string>
 
-    <!-- Easter Egg -->
-    <string name="easter_eggs_unlock">Can you please stop playing with it xD</string>
-    <string name="easter_eggs_counter">%d more...</string>
-
     <!-- APP -->
     <string name="app_name" translatable="false">Mako</string>
     <string name="app_creator" translatable="false">Pombo</string>
@@ -220,4 +216,8 @@
     <string name="unit_fahrenheit">F</string>
     <string name="battery_temp" translatable="false">%1$d°%2$s</string>
     <string name="battery_temp_labeled" translatable="false">%1$d°%2$s (%3$s)</string>
+
+    <!-- Easter Egg -->
+    <string name="easter_eggs_unlock">Can you please stop playing with it xD</string>
+    <string name="easter_eggs_counter">%d more...</string>
 </resources>
