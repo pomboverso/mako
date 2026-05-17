@@ -147,6 +147,10 @@
     <string name="altdescr_toggle_pin_visibility">Toggle PIN visibility</string>
     <string name="altdescr_save_pin">Save PIN</string>
 
+    <!-- Easter Egg -->
+    <string name="easter_eggs_unlock">Can you please stop playing with it xD</string>
+    <string name="easter_eggs_counter">%d more...</string>
+
     <!-- APP -->
     <string name="app_name" translatable="false">Mako</string>
     <string name="app_creator" translatable="false">Pombo</string>

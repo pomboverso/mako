@@ -110,4 +110,29 @@
         android:text="@string/btn_go_back"
         style="@style/BTN1" />
 
+    <!-- Easter Egg Overlay -->
+    <TextView
+        android:id="@+id/easter_egg_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/easter_eggs_unlock"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:padding="16dp"
+        android:visibility="gone"
+        android:background="@color/bg_2"
+        android:textColor="@color/danger" />
+
+    <!-- Easter Egg Counter -->
+    <TextView
+        android:id="@+id/easter_egg_counter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:padding="8dp"
+        android:visibility="gone"
+        android:textColor="@color/accent_1" />
+
 </LinearLayout>

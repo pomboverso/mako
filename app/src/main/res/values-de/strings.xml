@@ -135,4 +135,8 @@
 
     <string name="unit_celsius">C</string>
     <string name="unit_fahrenheit">F</string>
+
+    <!-- Easter Egg -->
+    <string name="easter_eggs_unlock">Kannst du bitte aufhören damit zu spielen xD</string>
+    <string name="easter_eggs_counter">Noch %d...</string>
 </resources>

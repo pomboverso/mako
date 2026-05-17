@@ -135,4 +135,8 @@
 
     <string name="unit_celsius">C</string>
     <string name="unit_fahrenheit">F</string>
+
+    <!-- Easter Egg -->
+    <string name="easter_eggs_unlock">Lütfen bununla oynamayı bırakır mısın xD</string>
+    <string name="easter_eggs_counter">%d kez daha...</string>
 </resources>
