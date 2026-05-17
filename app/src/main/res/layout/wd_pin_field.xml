@@ -1,9 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/root"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     android:background="@color/input"
-    android:orientation="horizontal">
+    style="@style/HorizontalList">
 
     <FrameLayout
         android:id="@+id/toggle_visibility"
@@ -13,27 +11,18 @@
 
         <ImageView
             android:id="@+id/toggle_visibility_img"
-            android:layout_width="24sp"
-            android:layout_height="24sp"
-            android:tint="@color/icon"
             android:src="@drawable/icon_eye"
-            android:contentDescription="Toggle Visibility" />
+            android:contentDescription="@string/altdescr_toggle_pin_visibility"
+            style="@style/Icon24" />
     </FrameLayout>
 
     <EditText
         android:id="@+id/pin_field"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textSize="16sp"
-        android:textColor="@color/foreground"
-        android:background="@android:color/transparent"
-        android:paddingTop="16sp"
         android:maxLength="25"
-        android:maxLines="1"
-        android:singleLine="true"
-        android:paddingBottom="16sp"
-        android:inputType="numberPassword" />
+        android:inputType="numberPassword"
+        style="@style/EditText" />
 
     <FrameLayout
         android:id="@+id/save_changes"
@@ -42,10 +31,8 @@
         android:padding="12sp">
 
         <ImageView
-            android:layout_width="24sp"
-            android:layout_height="24sp"
-            android:tint="@color/icon"
             android:src="@drawable/icon_disk"
-            android:contentDescription="Save Button" />
+            android:contentDescription="@string/altdescr_save_pin"
+            style="@style/Icon24" />
     </FrameLayout>
 </LinearLayout>

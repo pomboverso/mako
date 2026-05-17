@@ -1,5 +1,10 @@
 # Changelog
 
+## 39
+
+- Add Themes Attributions
+- Clean and organized the project
+
 ## 38
 
 - Add Rama Theme

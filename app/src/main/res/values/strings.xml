@@ -1,33 +1,214 @@
 <resources>
-    <!-- Global -->
-    <string name="unlock_label">Unlock</string>
-    <string name="clear_label">Clear</string>
-    <string name="go_back_label">Go Back</string>
-    <string name="apply_label">Apply</string>
+    <!-- Activities -->
+    <string name="activity_settings_label">Settings</string>
+    <string name="activity_about_label">About</string>
+    <string name="activity_lock_label">Lock</string>
+
+    <!-- H1 -->
+    <string name="h1_color_picker">Pick a Color</string>
+    <string name="h1_delete_group">Are you sure you want to delete this group?</string>
+    <string name="h1_select_group">Select Group</string>
+    <string name="h1_rename_app">Rename app</string>
+    <!-- H2 -->
+    <string name="h2_contributors">Contributors</string>
+    <string name="h2_icons">Icons</string>
+    <string name="h2_fonts">Fonts</string>
+    <string name="h2_themes">Themes</string>
+    <string name="h2_apps">Applications</string>
+    <string name="h2_clock">Clock</string>
+    <string name="h2_search">Search</string>
+    <string name="h2_battery">Battery</string>
+    <string name="h2_date">Date</string>
+    <string name="h2_data">Data</string>
+    <string name="h2_temperature">Temperature</string>
+    <string name="h2_groups">Groups</string>
+    <string name="h2_language">Language</string>
+    <string name="h2_security">Security</string>
+    <string name="h2_system">System</string>
+    <string name="h2_background">Background</string>
+    <string name="h2_app">App</string>
+    <!-- Disclaimers/small -->
+    <string name="disclaimer_delete_group">Your apps will go to the following group.</string>
+    <string name="disclaimer_pick_clock_app">Selecting an app here will set it as your default clock action. When you tap the clock on your home screen, this app will be launched.</string>
+    <string name="disclaimer_pick_icon_pack">Choose an installed icon pack. If an icon is missing, Mako will use the system icon for that app.</string>
+
+    <!-- Buttons 1 -->
+    <string name="btn_unlock">Unlock</string>
+    <string name="btn_go_back">Go Back</string>
+    <string name="btn_apply">Apply</string>
+    <string name="btn_clear">Clear</string>
+    <string name="btn_about_mako">About Mako</string>
+    <string name="btn_lock">Lock</string>
+    <string name="btn_reset">Reset</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_delete_group">Delete group</string>
+    <!-- Buttons 2 -->
+    <string name="btn_join_discord">Join Discord</string>
+    <string name="btn_export_data">Export Data</string>
+    <string name="btn_clear_data">Clear Data</string>
+    <string name="btn_theme_apply_custom">Apply Custom Theme</string>
+    <string name="btn_set_default">Set Launcher as default</string>
+    <string name="btn_set_clock_app">Change Clock Tap Action</string>
+    <string name="btn_refresh_launcher">Refresh launcher</string>
+    <string name="btn_change_wallpaper">Change OS wallpaper</string>
+    <string name="btn_edit_apps">Manage Installed Apps</string>
+    <string name="btn_add_group">+ Add New Group</string>
+    <string name="btn_select_icon_pack">Choose icon pack</string>
+    <string name="btn_font_custom_pick">Choose Font file</string>
+    <!-- ColorPicker -->
+    <string name="colorpicker_theme_foreground">Foreground</string>
+    <string name="colorpicker_theme_collapsible_header">Collapsible Header</string>
+    <string name="colorpicker_theme_clock">Clock</string>
+    <string name="colorpicker_theme_icons">Icons</string>
+    <string name="colorpicker_theme_accent">Accent</string>
+    <string name="colorpicker_theme_background_1">Background 1</string>
+    <string name="colorpicker_theme_background_2">Background 2</string>
+    <string name="colorpicker_theme_background_3">Background 3</string>
+    <string name="colorpicker_theme_input_background">Input Background</string>
+    <string name="colorpicker_theme_button_1_background">Button 1 Background</string>
+    <string name="colorpicker_theme_button_2_background">Button 2 Background</string>
+    <string name="colorpicker_theme_danger">Danger</string>
+    <!-- FilePicker -->
+    <string name="filepicker_selected_icon_pack">Selected pack: %1$s</string>
+    <string name="filepicker_icon_pack_not_selected">No icon pack selected</string>
+    <string name="filepicker_font_custom_none">No font selected</string>
+
+    <!-- Radio -->
+    <string name="radio_default">Default</string>
+    <string name="radio_default_system">Default (System)</string>
+    <string name="radio_none">None</string>
+    <string name="radio_language_system_default">System Default (fallback to English)</string>
+    <string name="radio_language_english" translatable="false">English</string>
+    <string name="radio_language_german" translatable="false">Deutsch</string>
+    <string name="radio_language_turkish" translatable="false">Türkçe</string>
+    <string name="radio_icons_monochrome">Monochrome</string>
+    <string name="radio_custom_icon_pack">Custom icon pack</string>
+    <string name="radio_clock_none">Hide clock</string>
+    <string name="radio_clock_24">24-hour</string>
+    <string name="radio_clock_12">12-hour (AM/PM)</string>
+    <string name="radio_celsius">Celsius</string>
+    <string name="radio_fahrenheit">Fahrenheit</string>
+    <string name="radio_font_custom">Custom font</string>
+    <string name="radio_background_wallpaper">Show Wallpaper on Home Screen</string>
+    <string name="radio_theme_rama">Rama</string>
+    <string name="radio_theme_custom">Custom</string>
+
+    <!-- Checkbox -->
+    <string name="checkbox_lock_settings">Lock Settings</string>
+    <string name="checkbox_show_profile_indicator">Show profile indicator</string>
+    <string name="checkbox_show_battery_temperature">Show battery temperature</string>
+    <string name="checkbox_show_battery_charge_status">Show battery charge status</string>
+    <string name="checkbox_show_ungrouped_apps">Show ungrouped apps</string>
+    <string name="checkbox_has_collapsible_groups">Allow collapsing groups</string>
+    <string name="checkbox_show_search">Show search bar</string>
+    <string name="checkbox_show_battery">Show battery</string>
+    <string name="checkbox_show_system_bar">Show system bar</string>
+    <string name="checkbox_show_date">Show date</string>
+    <string name="checkbox_show_clock">Show clock</string>
+    <string name="checkbox_show_year_day">Show day of the year</string>
+    <string name="checkbox_show_group_header">Show group header</string>
+    <string name="checkbox_randomized_keypad">Randomized keypad</string>
+    <string name="checkbox_always_show_search_bar">Always visible</string>
+
+    <!-- ContextMenu -->
+    <string name="ctxmenu_rename_app">Rename app...</string>
+    <string name="ctxmenu_add_to_favorites">Change group...</string>
+    <string name="ctxmenu_open_settings">App settings...</string>
+
+    <!-- InputHints -->
+    <string name="hint_search_apps">Search apps...</string>
+
+    <!-- Toasts -->
+    <string name="toast_no_clock_app_found">No clock app found</string>
+    <string name="toast_unable_open_settings">Unable to open launcher settings</string>
+    <string name="toast_unable_open_wallpaper_app">No wallpaper app available</string>
+    <string name="toast_unable_launch_app">Unable to launch app</string>
+    <string name="toast_reset_done">Reset done</string>
+    <string name="toast_reset_failed">Reset failed</string>
+    <string name="toast_clock_app_selected">Selected: %1$s</string>
+    <string name="toast_group_label_updated">Label Updated</string>
+    <string name="toast_select_target_group">Select a target group</string>
+    <string name="toast_label_changed">App label updated</string>
+    <string name="toast_pin_saved">PIN saved</string>
+    <string name="toast_pin_too_short">PIN must be at least 1 digits</string>
+    <string name="toast_icon_pack_selected">Selected icon pack: %1$s</string>
+    <string name="toast_monochrome_fallback">Monochrome icons require Android 13+, using fallback where unavailable</string>
+    <string name="toast_no_icon_pack_found">No compatible icon pack found</string>
+    <string name="toast_invalid_color">Invalid color</string>
+
+    <!-- AltDescription -->
+    <string name="altdescr_search_icon">Toggle search</string>
+    <string name="altdescr_clear_search">Clear search</string>
+    <string name="altdescr_toggle_group_visibility">Toggle group visibility</string>
+    <string name="altdescr_ascend_group">Move group up</string>
+    <string name="altdescr_descend_group">Move group down</string>
+    <string name="altdescr_save">Save</string>
+    <string name="altdescr_delete_group">Delete group</string>
+    <string name="altdescr_toggle_pin_visibility">Toggle PIN visibility</string>
+    <string name="altdescr_save_pin">Save PIN</string>
+
+    <!-- APP -->
+    <string name="app_name" translatable="false">Mako</string>
+    <string name="app_creator" translatable="false">Pombo</string>
+    <string name="app_desc">A lightweight, distraction-free Android launcher that’s privacy-first and entirely on-device, designed for focus and simplicity.</string>
+    <string name="app_background_tasks_desc">No Background Tasks</string>
+    <string name="app_ads_desc">No Ads</string>
+    <string name="app_trackers_desc">No Trackers</string>
+    <string name="app_offline_desc">Works Offline</string>
+    <!-- Product -->
+    <string name="product_mako_url" translatable="false">github.com/rama-io/mako</string>
+    <string name="product_hackernoon_creator" translatable="false">HackerNoon</string>
+    <string name="product_hackernoon_name" translatable="false">Pixel Icon Library</string>
+    <string name="product_hackernoon_url" translatable="false">github.com/hackernoon/pixel-icon-library</string>
+    <string name="product_jersey_creator" translatable="false">Sarah Cadigan-Fried</string>
+    <string name="product_jersey_name" translatable="false">Jersey 25</string>
+    <string name="product_jersey_url" translatable="false">github.com/scfried/soft-type-jersey</string>
+    <string name="product_dracula_creator" translatable="false">Zeno Rocha</string>
+    <string name="product_dracula_name" translatable="false">Dracula</string>
+    <string name="product_dracula_url" translatable="false">github.com/dracula</string>
+    <string name="product_catppuccin_creator" translatable="false">Pocco</string>
+    <string name="product_catppuccin_name" translatable="false">Catppuccin Moccha</string>
+    <string name="product_catppuccin_url" translatable="false">github.com/catppuccin</string>
+    <string name="product_tokyo_creator" translatable="false">Enkia</string>
+    <string name="product_tokyo_name" translatable="false">Tokyo Night</string>
+    <string name="product_tokyo_url" translatable="false">github.com/enkia/tokyo-night-vscode-theme</string>
+    <string name="product_melange_creator" translatable="false">Savq</string>
+    <string name="product_melange_name" translatable="false">Mélange Dark</string>
+    <string name="product_melange_url" translatable="false">github.com/savq/melange-nvim</string>
+
+    <!-- License -->
+    <string name="license_gpl3" translatable="false">GPL 3.0 or Later</string>
+    <string name="license_ofl_1_1" translatable="false">OFL 1.1</string>
+    <string name="license_apache_2" translatable="false">Apache 2.0</string>
+    <string name="license_cc_4" translatable="false">CC 4.0</string>
+    <string name="license_mit" translatable="false">MIT</string>
+
+    <!-- Contributors -->
+    <string name="contributor_isotjs" translatable="false">isotjs</string>
+    <string name="contributor_isotjs_url" translatable="false">github.com/isotjs</string>
+    <string name="contributor_etwasmitbaum" translatable="false">etwasmitbaum</string>
+    <string name="contributor_etwasmitbaum_url" translatable="false">github.com/etwasmitbaum</string>
+
+    <!-- Custom Blocks -->
+    <!-- Groups -->
+    <string name="settings_section_expand_indicator" translatable="false">[+]</string>
+    <string name="settings_section_collapse_indicator" translatable="false">[-]</string>
     <string name="new_group_header">------ New Group</string>
     <string name="new_group_header_count">------ New Group %d</string>
-    <string name="no_clock_app_found_label">No clock app found</string>
-    <string name="unable_open_settings_toast">Unable to open launcher settings</string>
-    <string name="unable_open_wallpaper_app_toast">No wallpaper app available</string>
-    <string name="unable_launch_app_toast">Unable to launch app</string>
-
     <!-- Main :: Temperature labels -->
     <string name="temp_warm">Warm</string>
     <string name="temp_hot">Hot</string>
     <string name="temp_critical">Critical</string>
-
     <!-- Main :: Battery status -->
     <string name="status_charging">Charging</string>
     <string name="status_discharging">Discharging</string>
     <string name="status_full">Full</string>
     <string name="status_not_charging">Not charging</string>
     <string name="status_unknown">Unknown</string>
-
     <!-- Main :: Charging types -->
     <string name="charge_usb">USB</string>
     <string name="charge_ac">AC</string>
     <string name="charge_wireless">Wireless</string>
-
     <!-- Main :: Formatting -->
     <string name="battery_status_power" translatable="false">%1$s %2$dx</string>
     <string name="battery_status_power_type" translatable="false">%1$s (%2$s) %3$dx</string>
@@ -35,182 +216,4 @@
     <string name="unit_fahrenheit">F</string>
     <string name="battery_temp" translatable="false">%1$d°%2$s</string>
     <string name="battery_temp_labeled" translatable="false">%1$d°%2$s (%3$s)</string>
-
-    <!-- APP / About -->
-    <string name="app_name" translatable="false">Mako</string>
-    <string name="app_description">A lightweight, distraction-free Android launcher that’s privacy-first and entirely on-device, designed for focus and simplicity.</string>
-    <string name="icon_block_desc">No Background Tasks</string>
-    <string name="icon_ads_desc">No Ads</string>
-    <string name="icon_location_desc">No Trackers</string>
-    <string name="icon_offline_desc">Works Offline</string>
-    <string name="mako_url" translatable="false">github.com/rama-io/mako</string>
-    <string name="app_header">App</string>
-    <string name="discord_label">Join Discord</string>
-    <string name="contributors_header">Contributors</string>
-    <string name="icons_header">Icons</string>
-    <string name="fonts_header">Fonts</string>
-
-    <string name="gpl3_desc" translatable="false">GPL 3.0 or Later</string>
-    <string name="ofl_1_1_desc" translatable="false">OFL 1.1</string>
-    <string name="apache_2_desc" translatable="false">Apache 2.0</string>
-    <string name="cc_4_desc" translatable="false">CC 4.0</string>
-
-    <string name="hackernoon_url" translatable="false">github.com/hackernoon/pixel-icon-library</string>
-    <string name="app_creator" translatable="false">Pombo</string>
-    <string name="hackernoon_creator" translatable="false">HackerNoon</string>
-    <string name="hackernoon_product" translatable="false">Pixel Icon Library</string>
-    <string name="jersey_creator" translatable="false">Sarah Cadigan-Fried</string>
-    <string name="jersey_url" translatable="false">github.com/scfried/soft-type-jersey</string>
-    <string name="isotjs" translatable="false">isotjs</string>
-    <string name="isotjs_url" translatable="false">github.com/isotjs</string>
-    <string name="etwasmitbaum" translatable="false">etwasmitbaum</string>
-    <string name="etwasmitbaum_url" translatable="false">github.com/etwasmitbaum</string>
-
-    <!-- Settings -->
-    <string name="apps_header">Applications</string>
-    <string name="clock_header">Clock</string>
-    <string name="search_header">Search</string>
-    <string name="battery_header">Battery</string>
-    <string name="date_header">Date</string>
-    <string name="data_header">Data</string>
-    <string name="temperature_header">Temperature</string>
-    <string name="groups_header">Groups</string>
-    <string name="language_header">Language</string>
-    <string name="security_header">Security</string>
-    <string name="system_header">System</string>
-    <string name="background_header">Background</string>
-    <string name="themes_header">Themes</string>
-
-    <string name="activity_settings_header">Settings</string>
-    <string name="activity_about_mako_header">About Mako</string>
-    <string name="activity_lock_header">Lock</string>
-
-    <string name="show_profile_indicator_label">Show profile indicator</string>
-    <string name="settings_section_home_title">Home screen</string>
-    <string name="settings_section_appearance_title">Appearance</string>
-    <string name="settings_section_groups_title">Groups</string>
-    <string name="settings_section_apps_title">Applications</string>
-    <string name="settings_section_system_title">System</string>
-    <string name="settings_section_data_title">Data and Debug</string>
-    <string name="settings_section_expand_indicator" translatable="false">[+]</string>
-    <string name="settings_section_collapse_indicator" translatable="false">[-]</string>
-    <string name="set_default_label">Set Launcher as default</string>
-    <string name="set_clock_app_label">Change Clock Tap Action</string>
-    <string name="refresh_launcher_label">Refresh launcher</string>
-    <string name="change_wallpaper_label">Change OS wallpaper</string>
-    <string name="edit_apps_label">Manage Installed Apps</string>
-    <string name="show_battery_label">Show battery</string>
-    <string name="show_system_bar_label">Show system bar</string>
-    <string name="language_system_default">System Default (fallback to English)</string>
-    <string name="language_english" translatable="false">English</string>
-    <string name="language_german" translatable="false">Deutsch</string>
-    <string name="language_turkish" translatable="false">Türkçe</string>
-    <string name="show_search_label">Show search bar</string>
-    <string name="show_date_label">Show date</string>
-    <string name="show_clock_label">Show clock</string>
-    <string name="show_year_day_label">Show day of the year</string>
-    <string name="show_group_header_label">Show group header</string>
-    <string name="icons_settings_header">Icons</string>
-    <string name="none_label">None</string>
-    <string name="default_label">Default</string>
-    <string name="default_system_label">Default (System)</string>
-    <string name="icons_monochrome_label">Monochrome</string>
-    <string name="custom_icon_pack_label">Custom icon pack</string>
-    <string name="select_icon_pack_label">Choose icon pack</string>
-    <string name="selected_icon_pack_label">Selected pack: %1$s</string>
-    <string name="icon_pack_not_selected_label">No icon pack selected</string>
-    <string name="no_icon_pack_found_label">No compatible icon pack found</string>
-    <string name="icon_pack_selected_toast">Selected icon pack: %1$s</string>
-    <string name="monochrome_fallback_toast">Monochrome icons require Android 13+, using fallback where unavailable</string>
-    <string name="show_ungrouped_apps_label">Show ungrouped apps</string>
-    <string name="has_collapsible_groups">Allow collapsing groups</string>
-    <string name="add_group_label">+ Add New Group</string>
-    <string name="clock_none_label">Hide clock</string>
-    <string name="clock_24_label">24-hour</string>
-    <string name="clock_12_label">12-hour (AM/PM)</string>
-    <string name="celsius_label">Celsius</string>
-    <string name="fahrenheit_label">Fahrenheit</string>
-    <string name="open_app_settings_label">Open app settings</string>
-    <string name="show_battery_temperature_label">Show battery temperature</string>
-    <string name="show_battery_charge_status_label">Show battery charge status</string>
-    <string name="debug_header">Debug</string>
-    <string name="export_data_label">Export Data</string>
-    <string name="clear_data_label">Clear Data</string>
-    <string name="reset_done_toast">Reset done</string>
-    <string name="reset_failed_toast">Reset failed</string>
-    <string name="clock_app_selected_toast">Selected: %1$s</string>
-    <string name="group_label_updated_toast">Label Updated</string>
-    <string name="select_target_group_toast">Select a target group</string>
-    <string name="font_jersey_label" translatable="false">Jersey 25</string>
-    <string name="font_custom_label">Custom font</string>
-    <string name="font_custom_none_label">No font selected</string>
-    <string name="font_custom_pick_label">Choose Font file</string>
-    <string name="font_style_header">Font Style</string>
-    <string name="background_default_label">Default theme</string>
-    <string name="background_wallpaper_label">Wallpaper</string>
-    <string name="lock_settings_label">Lock Settings</string>
-    <string name="randomized_keypad_label">Randomized keypad</string>
-
-    <string name="theme_catppuccin_mocha_label">Catppuccin Mocha</string>
-    <string name="theme_rama_label">Rama</string>
-    <string name="theme_mako_label">Mako</string>
-    <string name="theme_dracula_label">Dracula</string>
-    <string name="theme_melange_label">Mélange Dark</string>
-    <string name="theme_tokyo_night_label">Tokyo Night</string>
-    <string name="theme_custom_label">Custom</string>
-    <string name="theme_foreground_label">Foreground</string>
-    <string name="theme_collapsible_header_label">Collapsible Header</string>
-    <string name="theme_clock_label">Clock</string>
-    <string name="theme_icons_label">Icons</string>
-    <string name="theme_accent_label">Accent</string>
-    <string name="theme_background_1_label">Background 1</string>
-    <string name="theme_background_2_label">Background 2</string>
-    <string name="theme_background_3_label">Background 3</string>
-    <string name="theme_input_background_label">Input Background</string>
-    <string name="theme_button_1_background_label">Button 1 Background</string>
-    <string name="theme_button_2_background_label">Button 2 Background</string>
-    <string name="theme_danger_label">Danger</string>
-    <string name="theme_apply_custom_label">Apply Custom Theme</string>
-
-    <!-- Dialog :: Context Menu App -->
-    <string name="context_menu_theme_label">Theme</string>
-    <string name="context_menu_font_label">Font</string>
-    <string name="font_default_label">System default</string>
-    <!-- Popup :: Context Menu App -->
-    <string name="rename_app">Rename app...</string>
-    <string name="add_to_favorites">Change group...</string>
-    <string name="open_settings">App settings...</string>
-
-    <!-- Dialog -->
-    <string name="save">Save</string>
-    <string name="reset">Reset</string>
-    <string name="cancel">Cancel</string>
-    <string name="label_changed">App label updated</string>
-
-    <!-- Dialog :: Rename App -->
-    <string name="select_group">Select Group</string>
-
-    <!-- Dialog :: Search -->
-    <string name="search_apps_header">Search apps</string>
-    <string name="search_apps_hint">Search apps...</string>
-    <string name="search_icon_desc">Toggle search</string>
-    <string name="clear_search_desc">Clear search</string>
-
-    <!-- Dialog :: Delete Group -->
-    <string name="delete_group_title">Are you sure you want to delete this group?</string>
-    <string name="delete_group_disclaimer">Your apps will go to the following group.</string>
-    <string name="delete_group">Delete group</string>
-
-    <!-- Dialog :: Pick Clock App -->
-    <string name="pick_clock_app_disclaimer">Selecting an app here will set it as your default clock action. When you tap the clock on your home screen, this app will be launched.</string>
-
-    <!-- Dialog :: Pick Icon Pack -->
-    <string name="pick_icon_pack_disclaimer">Choose an installed icon pack. If an icon is missing, Mako will use the system icon for that app.</string>
-    <string name="always_show_search_bar">Always visible</string>
-
-    <!-- Dialog :: Pick color -->
-    <string name="color_picker_title">Pick a Color</string>
-
-    <string name="pin_saved_label">PIN saved</string>
-    <string name="pin_too_short_label">PIN must be at least 1 digits</string>
 </resources>

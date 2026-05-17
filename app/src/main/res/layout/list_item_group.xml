@@ -1,10 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/app_row"
-    android:orientation="horizontal"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="16sp"
-    android:gravity="center">
+    style="@style/HorizontalList">
 
     <FrameLayout
         android:id="@+id/toggle_visibility"
@@ -14,11 +10,9 @@
 
         <ImageView
             android:id="@+id/toggle_visibility_img"
-            android:layout_width="24sp"
-            android:layout_height="24sp"
-            android:tint="@color/icon"
             android:src="@drawable/icon_eye"
-            android:contentDescription="Toggle Visibility" />
+            android:contentDescription="@string/altdescr_toggle_group_visibility"
+            style="@style/Icon24" />
     </FrameLayout>
 
     <FrameLayout
@@ -28,11 +22,9 @@
         android:padding="12sp">
 
         <ImageView
-            android:layout_width="24sp"
-            android:layout_height="24sp"
-            android:tint="@color/icon"
             android:src="@drawable/icon_chevron_up_solid"
-            android:contentDescription="Ascend Group" />
+            android:contentDescription="@string/altdescr_ascend_group"
+            style="@style/Icon24" />
     </FrameLayout>
 
     <FrameLayout
@@ -42,26 +34,17 @@
         android:padding="12sp">
 
         <ImageView
-            android:layout_width="24sp"
-            android:layout_height="24sp"
-            android:tint="@color/icon"
             android:src="@drawable/icon_chevron_down_solid"
-            android:contentDescription="Descend Group" />
+            android:contentDescription="@string/altdescr_descend_group"
+            style="@style/Icon24" />
     </FrameLayout>
 
     <EditText
         android:id="@+id/group_name"
         android:layout_weight="1"
         android:layout_width="0dp"
-        android:maxLines="1"
-        android:singleLine="true"
-        android:textSize="16sp"
-        android:paddingTop="16sp"
-        android:paddingBottom="16sp"
-        android:paddingStart="8sp"
-        android:paddingEnd="8sp"
-        android:background="@color/input"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        style="@style/EditText" />
 
     <FrameLayout
         android:visibility="gone"
@@ -71,12 +54,9 @@
         android:padding="12sp">
 
         <ImageView
-            android:layout_width="24sp"
-            android:layout_height="match_parent"
-            android:padding="0dp"
-            android:tint="@color/icon"
             android:src="@drawable/icon_disk"
-            android:contentDescription="Save" />
+            android:contentDescription="@string/altdescr_save"
+            style="@style/Icon24" />
     </FrameLayout>
 
     <FrameLayout
@@ -86,11 +66,8 @@
         android:padding="12sp">
 
         <ImageView
-            android:layout_width="24sp"
-            android:layout_height="match_parent"
-            android:padding="0dp"
-            android:tint="@color/icon"
             android:src="@drawable/icon_close"
-            android:contentDescription="Delete" />
+            android:contentDescription="@string/altdescr_delete_group"
+            style="@style/Icon24" />
     </FrameLayout>
 </LinearLayout>

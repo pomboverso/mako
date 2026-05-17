@@ -5,9 +5,9 @@ import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.view.View
-import android.widget.EditText
 import android.widget.RadioGroup
 import android.widget.TextView
+import com.rama.mako.widgets.WdCheckbox
 import com.rama.mako.R
 import com.rama.mako.activities.SettingsActivity
 import com.rama.mako.managers.FontManager
@@ -110,7 +110,7 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
         val label = activity.findViewById<TextView>(R.id.font_custom_name_label)
         val path = prefs.getCustomFontPath()
         label.text =
-            if (path.isNotBlank()) File(path).name else activity.getString(R.string.font_custom_none_label)
+            if (path.isNotBlank()) File(path).name else activity.getString(R.string.filepicker_font_custom_none)
     }
 
     private fun setupTemperatureFormat() {
@@ -239,19 +239,16 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
     }
 
     private fun setupBackgroundMode() {
-        val group = activity.findViewById<RadioGroup>(R.id.home_background_mode_group)
+        val checkbox = activity.findViewById<WdCheckbox>(R.id.home_background_wallpaper)
 
         val initialMode = prefs.getHomeBackgroundMode()
+        checkbox.setChecked(initialMode == PrefsManager.BackgroundMode.WALLPAPER)
 
-        when (initialMode) {
-            PrefsManager.BackgroundMode.WALLPAPER -> group.check(R.id.home_background_wallpaper)
-            else -> group.check(R.id.home_background_default)
-        }
-
-        group.setOnCheckedChangeListener { _, id ->
-            val mode = when (id) {
-                R.id.home_background_wallpaper -> PrefsManager.BackgroundMode.WALLPAPER
-                else -> PrefsManager.BackgroundMode.DEFAULT
+        checkbox.setOnCheckedChangeListener { isChecked ->
+            val mode = if (isChecked) {
+                PrefsManager.BackgroundMode.WALLPAPER
+            } else {
+                PrefsManager.BackgroundMode.DEFAULT
             }
 
             prefs.setHomeBackgroundMode(mode)

@@ -88,7 +88,7 @@ class LockActivity : CsActivity() {
     }
 
     private fun updateDisplay() {
-        pinDisplay.setText("•".repeat(pinBuilder.length))
+        pinDisplay.setText("*".repeat(pinBuilder.length))
     }
 
     private fun clearPin() {

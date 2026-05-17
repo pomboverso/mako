@@ -40,7 +40,7 @@ class WdCollapsibleSection @JvmOverloads constructor(
         attrs?.let {
             val ta = context.obtainStyledAttributes(it, R.styleable.WdCollapsibleSection)
 
-            labelView.text = ta.getString(R.styleable.WdCollapsibleSection_label) ?: ""
+            labelView.text = ta.getString(R.styleable.WdCollapsibleSection_header) ?: ""
 
             key = resolveKey(
                 ta.getString(R.styleable.WdCollapsibleSection_key)

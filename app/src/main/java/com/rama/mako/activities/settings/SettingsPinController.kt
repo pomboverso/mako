@@ -33,13 +33,13 @@ class SettingsPinController(private val activity: SettingsActivity) {
                 prefs.setPin(pin)
                 android.widget.Toast.makeText(
                     activity,
-                    activity.getString(R.string.pin_saved_label),
+                    activity.getString(R.string.toast_pin_saved),
                     android.widget.Toast.LENGTH_SHORT
                 ).show()
             } else {
                 android.widget.Toast.makeText(
                     activity,
-                    activity.getString(R.string.pin_too_short_label),
+                    activity.getString(R.string.toast_pin_too_short),
                     android.widget.Toast.LENGTH_SHORT
                 ).show()
             }

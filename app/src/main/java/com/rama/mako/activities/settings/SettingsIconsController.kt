@@ -6,11 +6,9 @@ import android.view.ViewGroup
 import android.widget.*
 import com.rama.mako.R
 import com.rama.mako.activities.SettingsActivity
-import com.rama.mako.managers.FontManager
 import com.rama.mako.managers.PrefsManager
 import com.rama.mako.managers.ThemeManager
 import com.rama.mako.utils.SettingsUiUtils
-import com.rama.mako.widgets.WdButton
 
 class SettingsIconsController(private val activity: SettingsActivity) {
 
@@ -23,7 +21,7 @@ class SettingsIconsController(private val activity: SettingsActivity) {
 
     private fun setupIconsSection() {
         val group = activity.findViewById<RadioGroup>(R.id.icon_source_group)
-        val selectIconPackButton = activity.findViewById<WdButton>(R.id.select_icon_pack_button)
+        val selectIconPackButton = activity.findViewById<Button>(R.id.select_icon_pack_button)
 
         when (prefs.getIconSource()) {
             PrefsManager.IconSource.NONE -> group.check(R.id.icon_source_none)
@@ -45,7 +43,7 @@ class SettingsIconsController(private val activity: SettingsActivity) {
             if (id == R.id.icon_source_monochrome && Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
                 Toast.makeText(
                     activity,
-                    activity.getString(R.string.monochrome_fallback_toast),
+                    activity.getString(R.string.toast_monochrome_fallback),
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -68,16 +66,16 @@ class SettingsIconsController(private val activity: SettingsActivity) {
 
         selectedIconPack.text = when {
             currentLabel != null -> activity.getString(
-                R.string.selected_icon_pack_label,
+                R.string.filepicker_selected_icon_pack,
                 currentLabel
             )
 
             currentPackage.isNotBlank() -> activity.getString(
-                R.string.selected_icon_pack_label,
+                R.string.filepicker_selected_icon_pack,
                 currentPackage
             )
 
-            else -> activity.getString(R.string.icon_pack_not_selected_label)
+            else -> activity.getString(R.string.filepicker_icon_pack_not_selected)
         }
 
         iconPackControls.visibility =
@@ -89,7 +87,7 @@ class SettingsIconsController(private val activity: SettingsActivity) {
         if (iconPacks.isEmpty()) {
             Toast.makeText(
                 activity,
-                activity.getString(R.string.no_icon_pack_found_label),
+                activity.getString(R.string.toast_no_icon_pack_found),
                 Toast.LENGTH_SHORT
             ).show()
             return
@@ -104,7 +102,7 @@ class SettingsIconsController(private val activity: SettingsActivity) {
         }
 
         val listView = dialogView.findViewById<ListView>(R.id.icon_pack_list)
-        val closeBtn = dialogView.findViewById<WdButton>(R.id.close_button)
+        val closeBtn = dialogView.findViewById<Button>(R.id.close_button)
         val selectedPackage = prefs.getIconPackPackage()
 
         val adapter = object : BaseAdapter() {
@@ -137,7 +135,7 @@ class SettingsIconsController(private val activity: SettingsActivity) {
                 .check(R.id.icon_source_icon_pack)
             Toast.makeText(
                 activity,
-                activity.getString(R.string.icon_pack_selected_toast, selectedIconPack.label),
+                activity.getString(R.string.toast_icon_pack_selected, selectedIconPack.label),
                 Toast.LENGTH_SHORT
             ).show()
             refreshIconPackSection()

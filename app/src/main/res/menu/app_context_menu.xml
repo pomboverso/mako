@@ -1,14 +1,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/action_rename"
-        android:title="@string/rename_app" />
+        android:title="@string/ctxmenu_rename_app" />
 
     <item
         android:id="@+id/action_favorite"
-        android:title="@string/add_to_favorites"
- />
+        android:title="@string/ctxmenu_add_to_favorites" />
 
     <item
         android:id="@+id/action_settings"
-        android:title="@string/open_settings" />
+        android:title="@string/ctxmenu_open_settings" />
 </menu>

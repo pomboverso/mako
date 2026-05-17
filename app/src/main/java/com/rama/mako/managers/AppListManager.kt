@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
-import android.provider.Settings.Global.getString
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.generateViewId
@@ -16,7 +15,6 @@ import android.widget.RadioGroup
 import com.rama.mako.R
 import com.rama.mako.utils.sp
 import com.rama.mako.activities.SettingsActivity
-import com.rama.mako.widgets.WdButton
 import java.text.Normalizer
 import java.util.Locale
 import kotlin.math.abs
@@ -365,8 +363,8 @@ class AppListManager(
         ThemeManager.applyTheme(context, view)
         val input = view.findViewById<EditText>(R.id.edit_text)
         val yesButton = view.findViewById<FrameLayout>(R.id.yes_button)
-        val resetButton = view.findViewById<WdButton>(R.id.reset_button)
-        val noButton = view.findViewById<WdButton>(R.id.no_button)
+        val resetButton = view.findViewById<Button>(R.id.reset_button)
+        val noButton = view.findViewById<Button>(R.id.no_button)
 
         input.setText(currentName)
         input.setSelection(input.text.length)
@@ -379,7 +377,7 @@ class AppListManager(
             refresh()
             Toast.makeText(
                 context,
-                context.getString(R.string.label_changed),
+                context.getString(R.string.toast_label_changed),
                 Toast.LENGTH_SHORT
             ).show()
             dialog.dismiss()
@@ -390,7 +388,7 @@ class AppListManager(
             refresh()
             Toast.makeText(
                 context,
-                context.getString(R.string.label_changed),
+                context.getString(R.string.toast_label_changed),
                 Toast.LENGTH_SHORT
             ).show()
             dialog.dismiss()
@@ -403,7 +401,7 @@ class AppListManager(
     private fun showGroupsDialog(app: AppsProvider.AppEntry) {
         val pkg = app.packageName
 
-        val view = View.inflate(context, R.layout.dialog_groups_add, null)
+        val view = View.inflate(context, R.layout.dialog_groups_pick, null)
 
         val dialog = AlertDialog.Builder(context)
             .setView(view)
@@ -479,9 +477,9 @@ class AppListManager(
         val actionGroup = view.findViewById<TextView>(R.id.action_group)
         val actionAppSettings = view.findViewById<TextView>(R.id.action_app_settings)
 
-        actionRename.text = context.getString(R.string.rename_app)
-        actionGroup.text = context.getString(R.string.add_to_favorites)
-        actionAppSettings.text = context.getString(R.string.open_settings)
+        actionRename.text = context.getString(R.string.ctxmenu_rename_app)
+        actionGroup.text = context.getString(R.string.ctxmenu_add_to_favorites)
+        actionAppSettings.text = context.getString(R.string.ctxmenu_open_settings)
 
         actionRename.setOnClickListener { dialog.dismiss(); showRenameDialog(app) }
         actionGroup.setOnClickListener { dialog.dismiss(); showGroupsDialog(app) }
@@ -581,7 +579,7 @@ class AppListManager(
                                 if (!appsProvider.launch(app)) {
                                     Toast.makeText(
                                         context,
-                                        context.getString(R.string.unable_launch_app_toast),
+                                        context.getString(R.string.toast_unable_launch_app),
                                         Toast.LENGTH_SHORT
                                     ).show()
                                     refresh()
@@ -602,7 +600,7 @@ class AppListManager(
                             if (!appsProvider.launch(app)) {
                                 Toast.makeText(
                                     context,
-                                    context.getString(R.string.unable_launch_app_toast),
+                                    context.getString(R.string.toast_unable_launch_app),
                                     Toast.LENGTH_SHORT
                                 ).show()
                                 refresh()
@@ -614,7 +612,7 @@ class AppListManager(
                             if (!appsProvider.launch(app)) {
                                 Toast.makeText(
                                     context,
-                                    context.getString(R.string.unable_launch_app_toast),
+                                    context.getString(R.string.toast_unable_launch_app),
                                     Toast.LENGTH_SHORT
                                 ).show()
                                 refresh()
@@ -656,11 +654,12 @@ class AppListManager(
                         refresh()
                     }
                 }
+
                 is ListItem.App -> {
                     if (!appsProvider.launch(item.info)) {
                         Toast.makeText(
                             context,
-                            context.getString(R.string.unable_launch_app_toast),
+                            context.getString(R.string.toast_unable_launch_app),
                             Toast.LENGTH_SHORT
                         ).show()
                         refresh()
