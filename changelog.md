@@ -2,7 +2,8 @@
 
 ## 39
 
-- Adding Themes Attributions
+- Add Themes Attributions
+- Clean and organized the project
 
 ## 38
 

@@ -217,20 +217,10 @@
                 app:header="@string/h2_background"
                 app:defaultExpanded="true">
 
-                <RadioGroup
-                    android:id="@+id/home_background_mode_group"
-                    style="@style/RadioGroup">
-
-                    <RadioButton
-                        android:id="@+id/home_background_default"
-                        android:text="@string/radio_default"
-                        style="@style/Radio" />
-
-                    <RadioButton
-                        android:id="@+id/home_background_wallpaper"
-                        android:text="@string/radio_background_wallpaper"
-                        style="@style/Radio" />
-                </RadioGroup>
+                <com.rama.mako.widgets.WdCheckbox
+                    android:id="@+id/home_background_wallpaper"
+                    android:text="@string/radio_background_wallpaper"
+                    style="@style/Checkbox" />
 
                 <Button
                     android:id="@+id/wallpaper_button"

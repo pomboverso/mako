@@ -7,6 +7,7 @@ import android.net.Uri
 import android.view.View
 import android.widget.RadioGroup
 import android.widget.TextView
+import com.rama.mako.widgets.WdCheckbox
 import com.rama.mako.R
 import com.rama.mako.activities.SettingsActivity
 import com.rama.mako.managers.FontManager
@@ -238,19 +239,16 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
     }
 
     private fun setupBackgroundMode() {
-        val group = activity.findViewById<RadioGroup>(R.id.home_background_mode_group)
+        val checkbox = activity.findViewById<WdCheckbox>(R.id.home_background_wallpaper)
 
         val initialMode = prefs.getHomeBackgroundMode()
+        checkbox.setChecked(initialMode == PrefsManager.BackgroundMode.WALLPAPER)
 
-        when (initialMode) {
-            PrefsManager.BackgroundMode.WALLPAPER -> group.check(R.id.home_background_wallpaper)
-            else -> group.check(R.id.home_background_default)
-        }
-
-        group.setOnCheckedChangeListener { _, id ->
-            val mode = when (id) {
-                R.id.home_background_wallpaper -> PrefsManager.BackgroundMode.WALLPAPER
-                else -> PrefsManager.BackgroundMode.DEFAULT
+        checkbox.setOnCheckedChangeListener { isChecked ->
+            val mode = if (isChecked) {
+                PrefsManager.BackgroundMode.WALLPAPER
+            } else {
+                PrefsManager.BackgroundMode.DEFAULT
             }
 
             prefs.setHomeBackgroundMode(mode)
