@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--H1-->
-    <string name="h1_select_group">Gruppe auswählen</string>
-    <string name="h1_delete_group">Sind Sie sicher, dass Sie die Gruppe entfernen möchten?</string>
+    <string name="h2_select_group">Gruppe auswählen</string>
+    <string name="h2_delete_group">Sind Sie sicher, dass Sie die Gruppe entfernen möchten?</string>
 
     <!--H2-->
-    <string name="h2_app">App</string>
-    <string name="h2_contributors">Beitragende</string>
-    <string name="h2_icons">Icons</string>
-    <string name="h2_fonts">Schriftarten</string>
-    <string name="h2_apps">Anwendungen</string>
-    <string name="h2_clock">Uhr</string>
-    <string name="h2_search">Suche</string>
-    <string name="h2_battery">Batterie</string>
-    <string name="h2_date">Datum</string>
-    <string name="h2_data">Daten</string>
-    <string name="h2_temperature">Temperatur</string>
-    <string name="h2_groups">Gruppen</string>
-    <string name="h2_language">Sprache</string>
-    <string name="h2_system">System</string>
-    <string name="h2_background">Hintergrund</string>
+    <string name="h3_app">App</string>
+    <string name="h3_contributors">Beitragende</string>
+    <string name="h3_icons">Icons</string>
+    <string name="h3_fonts">Schriftarten</string>
+    <string name="h3_apps">Anwendungen</string>
+    <string name="h3_clock">Uhr</string>
+    <string name="h3_search">Suche</string>
+    <string name="h3_battery">Batterie</string>
+    <string name="h3_date">Datum</string>
+    <string name="h3_data">Daten</string>
+    <string name="h3_temperature">Temperatur</string>
+    <string name="h3_groups">Gruppen</string>
+    <string name="h3_language">Sprache</string>
+    <string name="h3_system">System</string>
+    <string name="h3_background">Hintergrund</string>
 
     <!--Disclaimer (Small)-->
     <string name="disclaimer_delete_group">Die Apps werden in die folgende Gruppe verschoben.</string>

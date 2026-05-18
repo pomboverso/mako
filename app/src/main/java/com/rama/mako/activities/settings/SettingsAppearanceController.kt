@@ -2,7 +2,6 @@ package com.rama.mako.activities.settings
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Color
 import android.net.Uri
 import android.view.View
 import android.widget.RadioGroup
@@ -183,7 +182,7 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
         activity.findViewById<WdColorPicker>(R.id.foreground).setColor(palette.foreground)
         activity.findViewById<WdColorPicker>(R.id.collapsible_header)
             .setColor(palette.collapsible_header)
-        activity.findViewById<WdColorPicker>(R.id.clock).setColor(palette.clock)
+        activity.findViewById<WdColorPicker>(R.id.h1).setColor(palette.h1)
         activity.findViewById<WdColorPicker>(R.id.icons).setColor(palette.icon)
         activity.findViewById<WdColorPicker>(R.id.accent).setColor(palette.accent_1)
         activity.findViewById<WdColorPicker>(R.id.bg_2).setColor(palette.bg_2)
@@ -207,7 +206,7 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
                 PrefsManager.PrefKeys.APP_THEME_COLLAPSIBLE_HEADER to activity.findViewById<WdColorPicker>(
                     R.id.collapsible_header
                 ),
-                PrefsManager.PrefKeys.APP_THEME_CLOCK to activity.findViewById<WdColorPicker>(R.id.clock),
+                PrefsManager.PrefKeys.APP_THEME_H1 to activity.findViewById<WdColorPicker>(R.id.h1),
                 PrefsManager.PrefKeys.APP_THEME_ICON to activity.findViewById<WdColorPicker>(R.id.icons),
                 PrefsManager.PrefKeys.APP_THEME_ACCENT_1 to activity.findViewById<WdColorPicker>(R.id.accent),
                 PrefsManager.PrefKeys.APP_THEME_BG_1 to activity.findViewById<WdColorPicker>(R.id.bg_1),

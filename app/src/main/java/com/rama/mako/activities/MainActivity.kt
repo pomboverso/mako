@@ -134,7 +134,7 @@ class MainActivity : CsActivity() {
         }
         appListManager.setup()
 
-        timeText.setTextColor(palette.clock)
+        timeText.setTextColor(palette.h1)
 
         val appLayout = findViewById<LinearLayout>(R.id.apps_layout)
         appLayout.setOnLongClickListener {

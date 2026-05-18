@@ -6,8 +6,8 @@
     style="@style/VerticalListDivided">
 
     <TextView
-        android:text="@string/h1_delete_group"
-        style="@style/H1_center" />
+        android:text="@string/h2_delete_group"
+        style="@style/H2_center" />
 
     <TextView
         android:text="@string/disclaimer_delete_group"

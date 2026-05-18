@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--H1-->
-    <string name="h1_select_group">Grup Seç</string>
-    <string name="h1_delete_group">Bu grubu silmek istediğinizden emin misiniz?</string>
+    <string name="h2_select_group">Grup Seç</string>
+    <string name="h2_delete_group">Bu grubu silmek istediğinizden emin misiniz?</string>
 
     <!--H2-->
-    <string name="h2_app">Uygulama</string>
-    <string name="h2_contributors">Katkıda Bulunanlar</string>
-    <string name="h2_icons">İkonlar</string>
-    <string name="h2_fonts">Yazı Tipleri</string>
-    <string name="h2_apps">Uygulamalar</string>
-    <string name="h2_clock">Saat</string>
-    <string name="h2_search">Ara</string>
-    <string name="h2_battery">Pil</string>
-    <string name="h2_date">Tarih</string>
-    <string name="h2_data">Veri</string>
-    <string name="h2_temperature">Sıcaklık</string>
-    <string name="h2_groups">Gruplar</string>
-    <string name="h2_language">Dil</string>
-    <string name="h2_system">Sistem</string>
-    <string name="h2_background">Arka Plan</string>
+    <string name="h3_app">Uygulama</string>
+    <string name="h3_contributors">Katkıda Bulunanlar</string>
+    <string name="h3_icons">İkonlar</string>
+    <string name="h3_fonts">Yazı Tipleri</string>
+    <string name="h3_apps">Uygulamalar</string>
+    <string name="h3_clock">Saat</string>
+    <string name="h3_search">Ara</string>
+    <string name="h3_battery">Pil</string>
+    <string name="h3_date">Tarih</string>
+    <string name="h3_data">Veri</string>
+    <string name="h3_temperature">Sıcaklık</string>
+    <string name="h3_groups">Gruplar</string>
+    <string name="h3_language">Dil</string>
+    <string name="h3_system">Sistem</string>
+    <string name="h3_background">Arka Plan</string>
 
     <!--Disclaimer (Small)-->
     <string name="disclaimer_delete_group">Uygulamalarınız aşağıdaki gruba taşınacaktır.</string>

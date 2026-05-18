@@ -4,29 +4,29 @@
     <string name="activity_about_label">About</string>
     <string name="activity_lock_label">Lock</string>
 
-    <!-- H1 -->
-    <string name="h1_color_picker">Pick a Color</string>
-    <string name="h1_delete_group">Are you sure you want to delete this group?</string>
-    <string name="h1_select_group">Select Group</string>
-    <string name="h1_rename_app">Rename app</string>
     <!-- H2 -->
-    <string name="h2_contributors">Contributors</string>
-    <string name="h2_icons">Icons</string>
-    <string name="h2_fonts">Fonts</string>
-    <string name="h2_themes">Themes</string>
-    <string name="h2_apps">Applications</string>
-    <string name="h2_clock">Clock</string>
-    <string name="h2_search">Search</string>
-    <string name="h2_battery">Battery</string>
-    <string name="h2_date">Date</string>
-    <string name="h2_data">Data</string>
-    <string name="h2_temperature">Temperature</string>
-    <string name="h2_groups">Groups</string>
-    <string name="h2_language">Language</string>
-    <string name="h2_security">Security</string>
-    <string name="h2_system">System</string>
-    <string name="h2_background">Background</string>
-    <string name="h2_app">App</string>
+    <string name="h2_color_picker">Pick a Color</string>
+    <string name="h2_delete_group">Are you sure you want to delete this group?</string>
+    <string name="h2_select_group">Select Group</string>
+    <string name="h2_rename_app">Rename app</string>
+    <!-- H3 -->
+    <string name="h3_contributors">Contributors</string>
+    <string name="h3_icons">Icons</string>
+    <string name="h3_fonts">Fonts</string>
+    <string name="h3_themes">Themes</string>
+    <string name="h3_apps">Applications</string>
+    <string name="h3_clock">Clock</string>
+    <string name="h3_search">Search</string>
+    <string name="h3_battery">Battery</string>
+    <string name="h3_date">Date</string>
+    <string name="h3_data">Data</string>
+    <string name="h3_temperature">Temperature</string>
+    <string name="h3_groups">Groups</string>
+    <string name="h3_language">Language</string>
+    <string name="h3_security">Security</string>
+    <string name="h3_system">System</string>
+    <string name="h3_background">Background</string>
+    <string name="h3_app">App</string>
     <!-- Disclaimers/small -->
     <string name="disclaimer_delete_group">Your apps will go to the following group.</string>
     <string name="disclaimer_pick_clock_app">Selecting an app here will set it as your default clock action. When you tap the clock on your home screen, this app will be launched.</string>
@@ -58,7 +58,7 @@
     <!-- ColorPicker -->
     <string name="colorpicker_theme_foreground">Foreground</string>
     <string name="colorpicker_theme_collapsible_header">Collapsible Header</string>
-    <string name="colorpicker_theme_clock">Clock</string>
+    <string name="colorpicker_theme_h1">H1</string>
     <string name="colorpicker_theme_icons">Icons</string>
     <string name="colorpicker_theme_accent">Accent</string>
     <string name="colorpicker_theme_background_1">Background 1</string>

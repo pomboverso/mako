@@ -8,8 +8,8 @@
     style="@style/VerticalListDivided">
 
     <TextView
-        android:text="@string/h1_color_picker"
-        style="@style/H1_center" />
+        android:text="@string/h2_color_picker"
+        style="@style/H2_center" />
 
     <LinearLayout style="@style/VerticalListDivided_BG2">
 

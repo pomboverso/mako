@@ -6,8 +6,8 @@
     style="@style/VerticalListDivided">
 
     <TextView
-        android:text="@string/h1_rename_app"
-        style="@style/H1_center" />
+        android:text="@string/h2_rename_app"
+        style="@style/H2_center" />
 
     <LinearLayout style="@style/HorizontalList_BG2">
 

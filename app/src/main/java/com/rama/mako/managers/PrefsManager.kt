@@ -92,7 +92,7 @@ class PrefsManager private constructor(context: Context) {
         const val APP_THEME_DANGER = "app:theme:danger"
         const val APP_THEME_COLLAPSIBLE_HEADER = "app:theme:collapsible_header"
         const val APP_THEME_ICON = "app:theme:icon"
-        const val APP_THEME_CLOCK = "app:theme:clock"
+        const val APP_THEME_H1 = "app:theme:clock"
 
         const val SECURITY_KEYPAD_VISIBLE = "security:keypad:visible"
         const val SECURITY_KEYPAD_RANDOMIZED = "security:keypad:randomized"

@@ -41,8 +41,8 @@
                 android:textColor="@color/foreground" />
 
             <TextView
-                android:text="@string/h2_app"
-                style="@style/H2" />
+                android:text="@string/h3_app"
+                style="@style/H3" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
@@ -93,8 +93,8 @@
                 android:text="@string/license_gpl3" />
 
             <TextView
-                android:text="@string/h2_contributors"
-                style="@style/H2" />
+                android:text="@string/h3_contributors"
+                style="@style/H3" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
@@ -123,8 +123,8 @@
                 android:text="@string/contributor_etwasmitbaum_url" />
 
             <TextView
-                android:text="@string/h2_icons"
-                style="@style/H2" />
+                android:text="@string/h3_icons"
+                style="@style/H3" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
@@ -151,8 +151,8 @@
                 android:text="@string/license_cc_4" />
 
             <TextView
-                android:text="@string/h2_fonts"
-                style="@style/H2" />
+                android:text="@string/h3_fonts"
+                style="@style/H3" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"
@@ -179,8 +179,8 @@
                 android:text="@string/license_ofl_1_1" />
 
             <TextView
-                android:text="@string/h2_themes"
-                style="@style/H2" />
+                android:text="@string/h3_themes"
+                style="@style/H3" />
 
             <com.rama.mako.widgets.WdLabel
                 android:layout_width="match_parent"

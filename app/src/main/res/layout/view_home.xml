@@ -29,12 +29,11 @@
 
                     <Button
                         android:id="@+id/time"
-                        android:textSize="64sp"
                         android:background="@android:color/transparent"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:focusable="false"
-                        android:textColor="@color/clock" />
+                        android:textColor="@color/clock"
+                        style="@style/H1" />
 
                     <LinearLayout
                         android:id="@+id/date_row"
