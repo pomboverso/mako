@@ -179,9 +179,6 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
         }
     }
 
-    private fun colorToHex(color: Int): String =
-        String.format("#%06X", 0xFFFFFF and color)
-
     private fun populateCustomFields(palette: ThemeManager.Palette) {
         activity.findViewById<WdColorPicker>(R.id.foreground).setColor(palette.foreground)
         activity.findViewById<WdColorPicker>(R.id.collapsible_header)
@@ -196,12 +193,6 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
         activity.findViewById<WdColorPicker>(R.id.btn_1).setColor(palette.button_1)
         activity.findViewById<WdColorPicker>(R.id.btn_2).setColor(palette.button_2)
         activity.findViewById<WdColorPicker>(R.id.danger).setColor(palette.danger)
-    }
-
-    private fun parseHex(text: String): Int? {
-        val hex = text.trim()
-        if (!hex.matches(Regex("^#[0-9A-Fa-f]{6}$"))) return null
-        return runCatching { Color.parseColor(hex) }.getOrNull()
     }
 
     private fun setupCustomTheme() {

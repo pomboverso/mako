@@ -225,6 +225,7 @@ object ThemeManager {
                     )
                     view.buttonTintList = tintList
                 }
+
                 else -> {
                     // Only remap if we recognise the color — don't blindly overwrite
                     // with foreground, as that would clobber clock/icon/header text colors
@@ -319,7 +320,7 @@ object ThemeManager {
             DRACULA.clock, MELANGE.clock, TOKYO_NIGHT.clock, custom.clock,
             context.resources.getColor(R.color.clock) -> palette.clock
 
-            // foreground — must come after icon/clock/header since MAKO shares similar values
+            // foreground
             MAKO.foreground, RAMA.foreground, CATPPUCCIN_MOCHA.foreground,
             DRACULA.foreground, MELANGE.foreground, TOKYO_NIGHT.foreground, custom.foreground,
             context.resources.getColor(R.color.foreground) -> palette.foreground
