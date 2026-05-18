@@ -213,7 +213,7 @@ class PrefsManager private constructor(context: Context) {
                 .putString(PrefKeys.HOME_BACKGROUND_MODE, BackgroundMode.DEFAULT)
                 .putBoolean(PrefKeys.SYSTEM_BAR_VISIBLE, false)
 
-                .putString(PrefKeys.APP_THEME_NAME, Theme.MAKO)
+                .putString(PrefKeys.APP_THEME_NAME, Theme.DRACULA)
 
                 .putBoolean(PrefKeys.BATTERY_VISIBLE, true)
                 .putBoolean(PrefKeys.BATTERY_TEMPERATURE, true)
