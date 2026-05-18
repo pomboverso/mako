@@ -10,6 +10,17 @@
         <item name="android:windowFullscreen">false</item>
     </style>
 
+    <style name="PinButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_margin">8sp</item>
+        <item name="android:layout_columnWeight">1</item>
+        <item name="android:layout_rowWeight">1</item>
+        <item name="android:background">@color/bg_3</item>
+        <item name="android:textColor">@color/foreground</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
     <!-- Global -->
 
     <style name="BlockFlow">
@@ -52,7 +63,7 @@
     </style>
 
     <style name="H1" parent="BlockFlow">
-        <item name="android:textColor">@color/clock</item>
+        <item name="android:textColor">@color/h1</item>
         <item name="android:textSize">@dimen/h1</item>
         <item name="android:textStyle">bold</item>
     </style>
@@ -105,6 +116,11 @@
         <item name="android:background">@color/button_2</item>
     </style>
 
+    <style name="BTN3" parent="BTN">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:background">@color/bg_3</item>
+    </style>
+
     <style name="BTN_danger" parent="BTN">
         <item name="android:background">@color/danger</item>
     </style>
@@ -130,9 +146,16 @@
         <item name="android:singleLine">true</item>
     </style>
 
+    <style name="Icon18">
+        <item name="android:layout_width">18sp</item>
+        <item name="android:layout_height">18sp</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
     <style name="Icon24">
         <item name="android:layout_width">24sp</item>
         <item name="android:layout_height">24sp</item>
+        <item name="android:layout_gravity">center</item>
         <item name="android:tint">@color/icon</item>
     </style>
 
@@ -147,16 +170,5 @@
         <item name="android:background">@color/disabled</item>
         <item name="android:layout_marginTop">16sp</item>
         <item name="android:layout_marginBottom">16sp</item>
-    </style>
-
-    <style name="PinButton">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">0dp</item>
-        <item name="android:layout_margin">8sp</item>
-        <item name="android:layout_columnWeight">1</item>
-        <item name="android:layout_rowWeight">1</item>
-        <item name="android:background">@color/bg_3</item>
-        <item name="android:textColor">@color/foreground</item>
-        <item name="android:textSize">24sp</item>
     </style>
 </resources>

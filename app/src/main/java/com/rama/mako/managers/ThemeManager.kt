@@ -315,10 +315,10 @@ object ThemeManager {
             DRACULA.icon, MELANGE.icon, TOKYO_NIGHT.icon, custom.icon,
             context.resources.getColor(R.color.icon) -> palette.icon
 
-            // clock
+            // h1
             MAKO.h1, RAMA.h1, CATPPUCCIN_MOCHA.h1,
             DRACULA.h1, MELANGE.h1, TOKYO_NIGHT.h1, custom.h1,
-            context.resources.getColor(R.color.clock) -> palette.h1
+            context.resources.getColor(R.color.h1) -> palette.h1
 
             // foreground
             MAKO.foreground, RAMA.foreground, CATPPUCCIN_MOCHA.foreground,
