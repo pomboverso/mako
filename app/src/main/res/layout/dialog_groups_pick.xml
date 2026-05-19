@@ -6,8 +6,8 @@
     style="@style/VerticalListDivided">
 
     <TextView
-        android:text="@string/h1_select_group"
-        style="@style/H1_center" />
+        android:text="@string/h2_select_group"
+        style="@style/H2_center" />
 
     <ScrollView
         android:layout_width="match_parent"

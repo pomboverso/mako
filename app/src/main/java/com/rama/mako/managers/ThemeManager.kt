@@ -26,7 +26,7 @@ object ThemeManager {
         val danger: Int,
         val collapsible_header: Int,
         val icon: Int,
-        val clock: Int,
+        val h1: Int,
     )
 
     // Mako (default)
@@ -45,7 +45,7 @@ object ThemeManager {
         danger = 0xFFDC6364.toInt(),
         collapsible_header = 0xFF878787.toInt(),
         icon = 0xFFCBCBCB.toInt(),
-        clock = 0xFFCACACA.toInt(),
+        h1 = 0xFFCACACA.toInt(),
     )
 
     // Rama
@@ -64,7 +64,7 @@ object ThemeManager {
         danger = 0xFFDC6364.toInt(),
         collapsible_header = 0xff8cde285.toInt(),
         icon = 0xFFd4efc3.toInt(),
-        clock = 0xFFABD68E.toInt(),
+        h1 = 0xFFABD68E.toInt(),
     )
 
     // Catppuccin Mocha
@@ -83,7 +83,7 @@ object ThemeManager {
         danger = 0xFFF38BA8.toInt(),
         collapsible_header = 0xFFB4BEFE.toInt(),
         icon = 0xFFCDD6F4.toInt(),
-        clock = 0xFFCBA6F7.toInt(),
+        h1 = 0xFFCBA6F7.toInt(),
     )
 
 
@@ -103,7 +103,7 @@ object ThemeManager {
         danger = 0xFFFF79C6.toInt(),
         collapsible_header = 0xFFBD93F9.toInt(),
         icon = 0xFFF8F8F2.toInt(),
-        clock = 0xFFBD93F9.toInt(),
+        h1 = 0xFFBD93F9.toInt(),
     )
 
     // Melange Dark
@@ -122,7 +122,7 @@ object ThemeManager {
         danger = 0xFFB65C60.toInt(),
         collapsible_header = 0xFFEBC06D.toInt(),
         icon = 0xFFECE1D7.toInt(),
-        clock = 0xFFEBC06D.toInt(),
+        h1 = 0xFFEBC06D.toInt(),
     )
 
     // Tokyo Night
@@ -141,7 +141,7 @@ object ThemeManager {
         danger = 0xFFF7768E.toInt(),
         collapsible_header = 0xFF7AA2F7.toInt(),
         icon = 0xFFC0CAF5.toInt(),
-        clock = 0xFF7AA2F7.toInt(),
+        h1 = 0xFF7AA2F7.toInt(),
     )
 
     fun paletteFor(theme: String, context: android.content.Context? = null): Palette =
@@ -177,7 +177,7 @@ object ThemeManager {
                 base.collapsible_header
             ),
             icon = get(PrefsManager.PrefKeys.APP_THEME_ICON, base.icon),
-            clock = get(PrefsManager.PrefKeys.APP_THEME_CLOCK, base.clock),
+            h1 = get(PrefsManager.PrefKeys.APP_THEME_H1, base.h1),
         )
     }
 
@@ -225,6 +225,7 @@ object ThemeManager {
                     )
                     view.buttonTintList = tintList
                 }
+
                 else -> {
                     // Only remap if we recognise the color — don't blindly overwrite
                     // with foreground, as that would clobber clock/icon/header text colors
@@ -314,12 +315,12 @@ object ThemeManager {
             DRACULA.icon, MELANGE.icon, TOKYO_NIGHT.icon, custom.icon,
             context.resources.getColor(R.color.icon) -> palette.icon
 
-            // clock
-            MAKO.clock, RAMA.clock, CATPPUCCIN_MOCHA.clock,
-            DRACULA.clock, MELANGE.clock, TOKYO_NIGHT.clock, custom.clock,
-            context.resources.getColor(R.color.clock) -> palette.clock
+            // h1
+            MAKO.h1, RAMA.h1, CATPPUCCIN_MOCHA.h1,
+            DRACULA.h1, MELANGE.h1, TOKYO_NIGHT.h1, custom.h1,
+            context.resources.getColor(R.color.h1) -> palette.h1
 
-            // foreground — must come after icon/clock/header since MAKO shares similar values
+            // foreground
             MAKO.foreground, RAMA.foreground, CATPPUCCIN_MOCHA.foreground,
             DRACULA.foreground, MELANGE.foreground, TOKYO_NIGHT.foreground, custom.foreground,
             context.resources.getColor(R.color.foreground) -> palette.foreground

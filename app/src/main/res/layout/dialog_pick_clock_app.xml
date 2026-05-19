@@ -7,7 +7,7 @@
 
     <TextView
         android:text="@string/btn_set_clock_app"
-        style="@style/H1_center" />
+        style="@style/H2_center" />
 
     <TextView
         android:text="@string/disclaimer_pick_clock_app"

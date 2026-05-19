@@ -46,6 +46,7 @@ class AppListManager(
     private val searchableNameCache = mutableMapOf<String, String>()
     private val combiningMarkRegex = Regex("\\p{M}+")
     private val tokenSeparatorRegex = Regex("[^a-z0-9]+")
+    private val specialCharRegex = Regex("[^a-z0-9\\s]+")
 
     fun setup() {
         updateAppsCache()
@@ -139,6 +140,10 @@ class AppListManager(
         return Normalizer.normalize(foldedSpanish, Normalizer.Form.NFD)
             .replace(combiningMarkRegex, "")
             .trim()
+    }
+
+    private fun stripSpecialChars(value: String): String {
+        return value.replace(specialCharRegex, "")
     }
 
     private fun maxFuzzyDistance(queryLength: Int): Int {
@@ -262,7 +267,8 @@ class AppListManager(
 
     fun filter(query: String) {
         val normalizedQuery = normalizeForSearch(query)
-        val isSearchActive = normalizedQuery.isNotEmpty()
+        val strippedQuery = stripSpecialChars(normalizedQuery)
+        val isSearchActive = strippedQuery.isNotEmpty()
 
         if (!isSearchActive) {
             buildItems()
@@ -298,7 +304,8 @@ class AppListManager(
 
             val matchedApps = apps.mapNotNull { app ->
                 val normalizedName = getSearchableName(app)
-                val score = scoreMatch(normalizedName, normalizedQuery) ?: return@mapNotNull null
+                val strippedName = stripSpecialChars(normalizedName)
+                val score = scoreMatch(strippedName, strippedQuery) ?: return@mapNotNull null
                 ScoredApp(app = app, score = score, normalizedName = normalizedName)
             }.sortedWith(
                 compareBy<ScoredApp> { it.score }

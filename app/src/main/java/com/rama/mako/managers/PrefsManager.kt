@@ -78,6 +78,7 @@ class PrefsManager private constructor(context: Context) {
         const val SYSTEM_BAR_VISIBLE = "system:bar:visible"
 
         const val APP_THEME_NAME = "app:theme:name"
+        const val APP_THEME_H1 = "app:theme:clock"
         const val APP_THEME_FOREGROUND = "app:theme:foreground"
         const val APP_THEME_BG_1 = "app:theme:bg_1"
         const val APP_THEME_BG_2 = "app:theme:bg_2"
@@ -92,7 +93,6 @@ class PrefsManager private constructor(context: Context) {
         const val APP_THEME_DANGER = "app:theme:danger"
         const val APP_THEME_COLLAPSIBLE_HEADER = "app:theme:collapsible_header"
         const val APP_THEME_ICON = "app:theme:icon"
-        const val APP_THEME_CLOCK = "app:theme:clock"
 
         const val SECURITY_KEYPAD_VISIBLE = "security:keypad:visible"
         const val SECURITY_KEYPAD_RANDOMIZED = "security:keypad:randomized"
@@ -213,7 +213,7 @@ class PrefsManager private constructor(context: Context) {
                 .putString(PrefKeys.HOME_BACKGROUND_MODE, BackgroundMode.DEFAULT)
                 .putBoolean(PrefKeys.SYSTEM_BAR_VISIBLE, false)
 
-                .putString(PrefKeys.APP_THEME_NAME, Theme.MAKO)
+                .putString(PrefKeys.APP_THEME_NAME, Theme.DRACULA)
 
                 .putBoolean(PrefKeys.BATTERY_VISIBLE, true)
                 .putBoolean(PrefKeys.BATTERY_TEMPERATURE, true)

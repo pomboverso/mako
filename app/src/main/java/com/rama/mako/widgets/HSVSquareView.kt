@@ -8,6 +8,7 @@ import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import kotlin.concurrent.thread
 
 class HSVSquareView @JvmOverloads constructor(
     context: Context,
@@ -18,71 +19,84 @@ class HSVSquareView @JvmOverloads constructor(
 
     private var bitmap: Bitmap? = null
     private var hue: Float = 0f
+    private var pendingHue: Float? = null
+    private var isGenerating = false
 
     var onSaturationValueChanged: ((Float, Float) -> Unit)? = null
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
-        generateBitmap(w, h)
+        generateBitmapAsync(hue, w, h)
     }
 
-    private fun generateBitmap(w: Int, h: Int) {
-
+    private fun generateBitmapAsync(forHue: Float, w: Int, h: Int) {
         if (w <= 0 || h <= 0) return
 
-        bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
+        // Render at half resolution for speed, scale up via paint
+        val sampleW = (w / 2).coerceAtLeast(1)
+        val sampleH = (h / 2).coerceAtLeast(1)
 
-        val pixels = IntArray(w * h)
+        isGenerating = true
 
-        val hsv = floatArrayOf(hue, 1f, 1f)
+        thread {
+            val pixels = IntArray(sampleW * sampleH)
+            val hsv = floatArrayOf(forHue, 1f, 1f)
+            var index = 0
 
-        var index = 0
+            for (y in 0 until sampleH) {
+                val value = 1f - (y / sampleH.toFloat())
+                for (x in 0 until sampleW) {
+                    hsv[1] = x / sampleW.toFloat()
+                    hsv[2] = value
+                    pixels[index++] = Color.HSVToColor(hsv)
+                }
+            }
 
-        for (y in 0 until h) {
-            val value = 1f - (y / h.toFloat())
+            val bmp = Bitmap.createBitmap(sampleW, sampleH, Bitmap.Config.RGB_565)
+            bmp.setPixels(pixels, 0, sampleW, 0, 0, sampleW, sampleH)
+            val scaled = Bitmap.createScaledBitmap(bmp, w, h, true)
+            bmp.recycle()
 
-            for (x in 0 until w) {
-                val saturation = x / w.toFloat()
+            post {
+                isGenerating = false
+                bitmap = scaled
+                invalidate()
 
-                hsv[0] = hue
-                hsv[1] = saturation
-                hsv[2] = value
-
-                pixels[index++] = Color.HSVToColor(hsv)
+                // If hue changed while we were rendering, re-render with the latest value
+                val next = pendingHue
+                if (next != null && next != forHue) {
+                    pendingHue = null
+                    generateBitmapAsync(next, w, h)
+                }
             }
         }
-
-        bitmap?.setPixels(pixels, 0, w, 0, 0, w, h)
     }
 
     override fun onDraw(canvas: Canvas) {
-        bitmap?.let {
-            canvas.drawBitmap(it, 0f, 0f, null)
-        }
+        bitmap?.let { canvas.drawBitmap(it, 0f, 0f, paint) }
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
-
         when (event.action) {
-
             MotionEvent.ACTION_DOWN,
             MotionEvent.ACTION_MOVE -> {
-
                 val s = (event.x / width).coerceIn(0f, 1f)
                 val v = 1f - (event.y / height).coerceIn(0f, 1f)
-
                 onSaturationValueChanged?.invoke(s, v)
-
                 return true
             }
         }
-
         return super.onTouchEvent(event)
     }
 
     fun setHue(h: Float) {
         hue = h
-        generateBitmap(width, height)
-        invalidate()
+        if (width <= 0 || height <= 0) return
+        if (isGenerating) {
+            // Drop intermediate hues while busy, only keep the latest
+            pendingHue = h
+        } else {
+            generateBitmapAsync(h, width, height)
+        }
     }
 }

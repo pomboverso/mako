@@ -19,14 +19,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/activity_settings_label"
-                style="@style/H1" />
+                style="@style/H2" />
 
             <!--System-->
             <com.rama.mako.widgets.WdCollapsibleSection
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:key="SETTINGS_SECTION_SYSTEM"
-                app:header="@string/h2_system"
+                app:header="@string/h3_system"
                 app:defaultExpanded="true">
 
                 <com.rama.mako.widgets.WdCheckbox
@@ -54,7 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:key="SETTINGS_SECTION_GROUPS"
-                app:header="@string/h2_groups"
+                app:header="@string/h3_groups"
                 app:defaultExpanded="true">
 
                 <com.rama.mako.widgets.WdCheckbox
@@ -86,7 +86,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:key="SETTINGS_SECTION_THEMES"
-                app:header="@string/h2_themes"
+                app:header="@string/h3_themes"
                 app:defaultExpanded="true">
 
                 <RadioGroup
@@ -141,6 +141,11 @@
                         style="@style/VerticalListDivided_BG2">
 
                         <com.rama.mako.widgets.WdColorPicker
+                            android:id="@+id/h1"
+                            app:text="@string/colorpicker_theme_h1"
+                            style="@style/ColorPickerBtn" />
+                        
+                        <com.rama.mako.widgets.WdColorPicker
                             android:id="@+id/foreground"
                             app:text="@string/colorpicker_theme_foreground"
                             style="@style/ColorPickerBtn" />
@@ -148,11 +153,6 @@
                         <com.rama.mako.widgets.WdColorPicker
                             android:id="@+id/collapsible_header"
                             app:text="@string/colorpicker_theme_collapsible_header"
-                            style="@style/ColorPickerBtn" />
-
-                        <com.rama.mako.widgets.WdColorPicker
-                            android:id="@+id/clock"
-                            app:text="@string/colorpicker_theme_clock"
                             style="@style/ColorPickerBtn" />
 
                         <com.rama.mako.widgets.WdColorPicker
@@ -214,7 +214,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:key="SETTINGS_SECTION_BACKGROUND"
-                app:header="@string/h2_background"
+                app:header="@string/h3_background"
                 app:defaultExpanded="true">
 
                 <com.rama.mako.widgets.WdCheckbox
@@ -232,7 +232,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:key="SETTINGS_SECTION_ICONS"
-                app:header="@string/h2_icons"
+                app:header="@string/h3_icons"
                 app:defaultExpanded="true">
 
                 <RadioGroup
@@ -284,7 +284,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:key="SETTINGS_SECTION_FONTS"
-                app:header="@string/h2_fonts"
+                app:header="@string/h3_fonts"
                 app:defaultExpanded="true">
 
                 <RadioGroup
@@ -334,7 +334,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:key="SETTINGS_SECTION_CLOCK"
-                app:header="@string/h2_clock"
+                app:header="@string/h3_clock"
                 app:defaultExpanded="true">
 
                 <RadioGroup
@@ -372,7 +372,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:key="SETTINGS_SECTION_DATE"
-                app:header="@string/h2_date"
+                app:header="@string/h3_date"
                 app:defaultExpanded="true">
 
                 <com.rama.mako.widgets.WdCheckbox
@@ -390,7 +390,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:key="SETTINGS_SECTION_BATTERY"
-                app:header="@string/h2_battery"
+                app:header="@string/h3_battery"
                 app:defaultExpanded="true">
 
                 <com.rama.mako.widgets.WdCheckbox
@@ -414,7 +414,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:key="SETTINGS_SECTION_TEMPERATURE"
-                app:header="@string/h2_temperature"
+                app:header="@string/h3_temperature"
                 app:defaultExpanded="true">
 
                 <RadioGroup
@@ -442,7 +442,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:key="SETTINGS_SECTION_SEARCH"
-                app:header="@string/h2_search"
+                app:header="@string/h3_search"
                 app:defaultExpanded="true">
 
                 <com.rama.mako.widgets.WdCheckbox
@@ -460,7 +460,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:key="SETTINGS_SECTION_APPS"
-                app:header="@string/h2_apps"
+                app:header="@string/h3_apps"
                 app:defaultExpanded="true">
 
                 <com.rama.mako.widgets.WdCheckbox
@@ -474,7 +474,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:key="SETTINGS_SECTION_SECURITY"
-                app:header="@string/h2_security"
+                app:header="@string/h3_security"
                 app:defaultExpanded="true">
 
                 <com.rama.mako.widgets.WdCheckbox
@@ -503,7 +503,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:key="SETTINGS_SECTION_LANGUAGE"
-                app:header="@string/h2_language"
+                app:header="@string/h3_language"
                 app:defaultExpanded="true">
 
                 <RadioGroup
@@ -515,7 +515,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:key="SETTINGS_SECTION_DATA"
-                app:header="@string/h2_data"
+                app:header="@string/h3_data"
                 app:defaultExpanded="true">
 
                 <Button
